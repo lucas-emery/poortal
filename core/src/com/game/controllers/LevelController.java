@@ -1,8 +1,21 @@
 package com.game.controllers;
 
-/**
- * Created by juan on 24/10/16.
- */
-public class LevelController {
+import com.game.models.GameObject;
+import com.game.views.GameObjectView;
 
+import java.util.HashSet;
+
+
+public class LevelController { //Podria ser un service tambien
+
+    private HashSet<GameObject> levelObjects;
+    private HashSet<GameObjectView> levelObjectsViews;
+
+    public HashSet<GameObject> getLevelObjects() {
+        return (HashSet<GameObject>) levelObjects.clone();
+    }
+
+    public HashSet<GameObjectView> getLevelObjectsViews() {
+        return (HashSet<GameObjectView>) levelObjectsViews.clone();
+    }
 }
