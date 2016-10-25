@@ -11,6 +11,11 @@ public class LevelController { //Podria ser un service tambien
     private HashSet<GameObject> levelObjects;
     private HashSet<GameObjectView> levelObjectsViews;
 
+    public LevelController() {
+        levelObjects = new HashSet<GameObject>();
+        levelObjectsViews = new HashSet<GameObjectView>();
+    }
+
     public HashSet<GameObject> getLevelObjects() {
         return (HashSet<GameObject>) levelObjects.clone();
     }

@@ -26,7 +26,7 @@ public class View {
     public View(HashSet<GameObjectView> levelObjectsViews, PlayerView playerView) {
         this.levelObjectsViews = levelObjectsViews;
         this.playerView = playerView;
-
+        batch = new SpriteBatch();
         skeletonRenderer = new SkeletonRenderer();
     }
 
