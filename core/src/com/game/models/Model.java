@@ -1,7 +1,5 @@
 package com.game.models;
 
-import com.game.controllers.Controller;
-
 import java.util.HashSet;
 
 /**
@@ -9,10 +7,10 @@ import java.util.HashSet;
  */
 public class Model {
 
-    private HashSet<GameObject> levelObjects;
+    private HashSet<LevelObject> levelObjects;
     private Player player;
 
-    public Model (HashSet<GameObject> levelObjects, Player player) {
+    public Model (HashSet<LevelObject> levelObjects, Player player) {
         this.player = player;
         this.levelObjects = levelObjects;
     }

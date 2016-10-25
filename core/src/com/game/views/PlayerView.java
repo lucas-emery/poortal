@@ -12,9 +12,9 @@ public class PlayerView {
     Player player;
     Skeleton skeleton;
 
-    public PlayerView(Player player, AssetsService assetsService) {
+    public PlayerView(Player player) {
         this.player = player;
-        skeleton = new Skeleton(assetsService.getPlayerSkeletonData());
+        skeleton = new Skeleton(AssetsService.getPlayerSkeletonData());
     }
 
     public void render(SpriteBatch batch, SkeletonRenderer skeletonRenderer) {

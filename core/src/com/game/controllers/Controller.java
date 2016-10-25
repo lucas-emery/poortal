@@ -12,13 +12,11 @@ public class Controller extends ApplicationAdapter {
 	private Model model;
 	private View view;
 	private LevelController levelController;
-	private AssetsService assetsService; //Que sean static todos lo metodos del service?? (creo que no se puede hacer static)
 	
 	@Override
 	public void create () {
-		assetsService = new AssetsService();
 		Player player = new Player();
-		PlayerView playerView = new PlayerView(player, assetsService);
+		PlayerView playerView = new PlayerView(player);
 		levelController = new LevelController();
 		model = new Model(levelController.getLevelObjects(), player);
 		view = new View(levelController.getLevelObjectsViews(), playerView);

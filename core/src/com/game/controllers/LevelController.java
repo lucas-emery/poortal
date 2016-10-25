@@ -1,26 +1,40 @@
 package com.game.controllers;
 
-import com.game.models.GameObject;
-import com.game.views.GameObjectView;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
+import com.game.models.LevelObject;
+import com.game.views.LevelObjectView;
 
 import java.util.HashSet;
 
 
 public class LevelController { //Podria ser un service tambien
 
-    private HashSet<GameObject> levelObjects;
-    private HashSet<GameObjectView> levelObjectsViews;
+    private HashSet<LevelObject> levelObjects;
+    private HashSet<LevelObjectView> levelObjectsViews;
+    private World world;
 
     public LevelController() {
-        levelObjects = new HashSet<GameObject>();
-        levelObjectsViews = new HashSet<GameObjectView>();
+        levelObjects = new HashSet<LevelObject>();
+        levelObjectsViews = new HashSet<LevelObjectView>();
+
+        generateLevel();
     }
 
-    public HashSet<GameObject> getLevelObjects() {
-        return (HashSet<GameObject>) levelObjects.clone();
+    public HashSet<LevelObject> getLevelObjects() {
+        return (HashSet<LevelObject>) levelObjects.clone();
     }
 
-    public HashSet<GameObjectView> getLevelObjectsViews() {
-        return (HashSet<GameObjectView>) levelObjectsViews.clone();
+    public HashSet<LevelObjectView> getLevelObjectsViews() {
+        return (HashSet<LevelObjectView>) levelObjectsViews.clone();
+    }
+
+    private void generateLevel() {
+        world = new World(new Vector2(0, 9.8f), true);
+        LevelObject newObject = new LevelObject(LevelObject.Type.CUBE, new Vector2(100, 100));
+        levelObjects.add(newObject);
+        levelObjectsViews.add(new LevelObjectView(newObject));
+
+        //world.add(newObject.getbodypapa());
     }
 }

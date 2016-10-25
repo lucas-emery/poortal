@@ -20,10 +20,10 @@ public class View {
     private Camera camera;
     private Viewport viewport;
     private SkeletonRenderer skeletonRenderer;
-    private HashSet<GameObjectView> levelObjectsViews;
+    private HashSet<LevelObjectView> levelObjectsViews;
     private PlayerView playerView;
 
-    public View(HashSet<GameObjectView> levelObjectsViews, PlayerView playerView) {
+    public View(HashSet<LevelObjectView> levelObjectsViews, PlayerView playerView) {
         this.levelObjectsViews = levelObjectsViews;
         this.playerView = playerView;
         batch = new SpriteBatch();
@@ -36,7 +36,7 @@ public class View {
 
         batch.begin();
         playerView.render(batch, skeletonRenderer);
-        for(GameObjectView view : levelObjectsViews)
+        for(LevelObjectView view : levelObjectsViews)
             view.render(batch);
         batch.end();
     }
