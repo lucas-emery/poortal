@@ -32,9 +32,11 @@ public class LevelController { //Podria ser un service tambien
     private void generateLevel() {
         world = new World(new Vector2(0, 9.8f), true);
         LevelObject newObject = new LevelObject(LevelObject.Type.CUBE, new Vector2(100, 100));
+        newObject.setBody(world.createBody(newObject.getBodyDef()));
         levelObjects.add(newObject);
         levelObjectsViews.add(new LevelObjectView(newObject));
-
-        //world.add(newObject.getbodypapa());
+    }
+    public World getLevelWorld(){
+        return world;
     }
 }

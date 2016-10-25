@@ -17,6 +17,6 @@ public class LevelObjectView {
     }
 
     public void render(SpriteBatch batch) {
-
+        batch.draw(sprite.getTexture(), model.getBody().getPosition().x,model.getBody().getPosition().y);
     }
 }
