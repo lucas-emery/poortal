@@ -13,24 +13,25 @@ public class AssetsService {
 
     private static EnumMap<LevelObject.Type, Texture> textures = new EnumMap<LevelObject.Type, Texture>(LevelObject.Type.class);
 
-    public static SkeletonData getPlayerSkeletonData() { //TODO
+    public static SkeletonData getPlayerSkeletonData() {
         return new SkeletonData();
     }
 
 
     public static void initialize(){
 
-        Texture spriteTexture = new Texture(Gdx.files.internal("cube2.png"));
-        textures.put(LevelObject.Type.CUBE,spriteTexture);
+        Texture texture;
 
-        spriteTexture = new Texture(Gdx.files.internal("portal_blue.png"));
-        textures.put(LevelObject.Type.PORTAL_BLUE,spriteTexture);
+        texture = new Texture(Gdx.files.internal("cube2.png"));
+        textures.put(LevelObject.Type.CUBE, texture);
 
-        spriteTexture = new Texture(Gdx.files.internal("portal_orange.png"));
-        textures.put(LevelObject.Type.PORTAL_ORANGE,spriteTexture);
+        texture = new Texture(Gdx.files.internal("portal_blue.png"));
+        textures.put(LevelObject.Type.PORTAL_BLUE, texture);
+
+        texture = new Texture(Gdx.files.internal("portal_orange.png"));
+        textures.put(LevelObject.Type.PORTAL_ORANGE, texture);
     }
     public static Sprite getSprite(LevelObject.Type type) {
-       // return new Sprite();
 
         Sprite newSprite = new Sprite(textures.get(type));
         return newSprite;
