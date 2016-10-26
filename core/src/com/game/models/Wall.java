@@ -2,7 +2,8 @@ package com.game.models;
 import com.badlogic.gdx.math.Vector2;
 import com.game.services.BodyService;
 import com.badlogic.gdx.physics.box2d.*;
-import com.game.services.AssetsService;
+
+import static com.game.models.LevelObject.Type.*;
 
 /**
  * Created by Usuario on 26/10/2016.
@@ -12,11 +13,13 @@ public class Wall {
     private Body body;
     private BodyDef bodyDef;
     private Vector2 position;
+    private LevelObject.Type type;
 
     public Wall(Vector2 position) { //Concept
 
         this.position = position;
         createBodyDef();
+        type = WALL;
 
     }
 

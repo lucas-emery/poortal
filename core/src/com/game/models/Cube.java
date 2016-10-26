@@ -17,13 +17,12 @@ public class Cube extends LevelObject {
     }
 
     public void createFixtureDef(){
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(AssetsService.getSprite(type).getHeight()/2,AssetsService.getSprite(type).getWidth()/2);//getShape(type)???
+        Shape shape = BodyService.getShape(type);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
-        fixtureDef.density = 1f; //getDensity(type)
-        fixtureDef.restitution = 0.5f;
+        fixtureDef.density = BodyService.getDensity(type);
+        fixtureDef.restitution = BodyService.getRestitution(type);
 
         body.createFixture(fixtureDef);
         shape.dispose();
