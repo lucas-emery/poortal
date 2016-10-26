@@ -8,7 +8,7 @@ import com.game.services.BodyService;
 
 public class LevelObject {
     public enum Type {
-        CUBE, BUTTON, PORTAL_BLUE, PORTAL_ORANGE
+        CUBE, BUTTON, PORTAL_BLUE, PORTAL_ORANGE, WALL
     }
     private Type type;
     private Body body;
@@ -28,9 +28,11 @@ public class LevelObject {
 
         bodyDef.position.set(position.x, position.y);
     }
+
     public BodyDef getBodyDef(){
         return bodyDef;
     }
+
     public void setBody(Body body){
 
         this.body = body;
@@ -41,16 +43,25 @@ public class LevelObject {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density = 1f; //getDensity(type)
+        fixtureDef.restitution = 0.5f;
 
-        Fixture fixture = body.createFixture(fixtureDef);
+        body.createFixture(fixtureDef);
 
         shape.dispose();
     }
-    public Boolean isDynamic(Type type){
-        if(type.equals("Placeholder"))
-            return false;
-        return true;
+    public void setWall(Body wall, Vector2 beginning, Vector2 end){
+        this.body = wall;
+
+        EdgeShape shape = new EdgeShape();
+        shape.set(beginning,end);
+
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.shape = shape;
+        body.createFixture(fixtureDef);
+        shape.dispose();
+
     }
+
     public Body getBody(){
         return body;
     }
