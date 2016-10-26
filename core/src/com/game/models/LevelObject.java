@@ -6,20 +6,15 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.game.services.AssetsService;
 import com.game.services.BodyService;
 
-public class LevelObject {
+public abstract class LevelObject {
     public enum Type {
         CUBE, BUTTON, PORTAL_BLUE, PORTAL_ORANGE, WALL
     }
-    private Type type;
-    private Body body;
-    private BodyDef bodyDef;
-    private Vector2 position;
+    protected static Type type;
+    protected Body body;
+    protected BodyDef bodyDef;
+    protected Vector2 position;
 
-    public LevelObject(Type type, Vector2 position) { //Concept
-        this.type = type;
-        this.position = position;
-        createBodyDef(BodyService.isDynamic(type));
-    }
     public void createBodyDef(Boolean isDynamic) {
         bodyDef = new BodyDef();
 
@@ -37,30 +32,10 @@ public class LevelObject {
 
         this.body = body;
 
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(AssetsService.getSprite(type).getHeight()/2,AssetsService.getSprite(type).getWidth()/2);//getShape(type)???
-
-        FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.shape = shape;
-        fixtureDef.density = 1f; //getDensity(type)
-        fixtureDef.restitution = 0.5f;
-
-        body.createFixture(fixtureDef);
-
-        shape.dispose();
+        createFixtureDef();
     }
-    public void setWall(Body wall, Vector2 beginning, Vector2 end){
-        this.body = wall;
 
-        EdgeShape shape = new EdgeShape();
-        shape.set(beginning,end);
-
-        FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.shape = shape;
-        body.createFixture(fixtureDef);
-        shape.dispose();
-
-    }
+    public abstract void createFixtureDef();
 
     public Body getBody(){
         return body;
@@ -70,5 +45,8 @@ public class LevelObject {
         return type;
     }
 
+    public Vector2 getPosition() {
+        return body.getPosition();
+    }
 
 }

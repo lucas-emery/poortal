@@ -2,8 +2,10 @@ package com.game.controllers;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.game.models.Cube;
 import com.game.models.LevelObject;
 import com.game.models.Player;
+import com.game.models.Wall;
 import com.game.views.LevelObjectView;
 
 import java.util.HashSet;
@@ -14,11 +16,13 @@ public class LevelController {
     private Player player;
     private HashSet<LevelObject> levelObjects;
     private HashSet<LevelObjectView> levelObjectsViews;
+    private HashSet<Wall> walls;
     private World world;
 
     public LevelController() {
         levelObjects = new HashSet<LevelObject>();
         levelObjectsViews = new HashSet<LevelObjectView>();
+        walls = new HashSet<Wall>();
     }
 
     public HashSet<LevelObject> getLevelObjects() {
@@ -35,15 +39,16 @@ public class LevelController {
         player.setInitialPosition(new Vector2(400,100));
         player.setBody(world.createBody(player.getBodyDef()));
 
-        LevelObject newObject = new LevelObject(LevelObject.Type.CUBE, new Vector2(100, 500));
+        LevelObject newObject = new Cube(new Vector2(100, 500));
         newObject.setBody(world.createBody(newObject.getBodyDef()));
         levelObjects.add(newObject);
         levelObjectsViews.add(new LevelObjectView(newObject));
 
         //piso de testeo
-        LevelObject wall = new LevelObject(LevelObject.Type.WALL, new Vector2(0,0) );
+        Wall wall = new Wall(new Vector2(0,0) );
         wall.setWall(world.createBody(wall.getBodyDef()), new Vector2(0,0), new Vector2(800,0));
-        levelObjects.add(wall);
+        walls.add(wall);
+
 
     }
     public World getLevelWorld(){
