@@ -1,13 +1,15 @@
 package com.game.models;
 
 
-import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.esotericsoftware.spine.AnimationState;
-import com.esotericsoftware.spine.Skeleton;
 import com.game.services.AssetsService;
+import com.game.services.ConstantsService;
 
 public class Player {
 
@@ -46,5 +48,21 @@ public class Player {
 
     public void setBody(Body body) {
         this.body = body;
+
+        createFixture();
+    }
+
+    public void createFixture() {
+        PolygonShape shape = new PolygonShape();
+        Rectangle dimensions = AssetsService.getPlayerDimensions();
+        shape.setAsBox(dimensions.getWidth(), dimensions.getHeight());
+
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.shape = shape;
+        fixtureDef.restitution = 0.0f;
+
+        body.createFixture(fixtureDef);
+
+        shape.dispose();
     }
 }

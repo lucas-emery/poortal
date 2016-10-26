@@ -3,6 +3,7 @@ package com.game.services;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Rectangle;
 import com.esotericsoftware.spine.AnimationState;
 import com.esotericsoftware.spine.AnimationStateData;
 import com.esotericsoftware.spine.SkeletonData;
@@ -26,7 +27,7 @@ public class AssetsService {
         TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("stickman/skeleton.atlas"));
 
         SkeletonJson json = new SkeletonJson(atlas);
-        json.setScale(0.1f);
+        json.setScale(ConstantsService.PLAYER_SCALE);
 
         playerSkeletonData = json.readSkeletonData(Gdx.files.internal("stickman/skeleton.json"));
 
@@ -59,4 +60,6 @@ public class AssetsService {
     public static AnimationStateData getPlayerStateData() {
         return playerStateData;
     }
+
+    public static Rectangle getPlayerDimensions() { return new Rectangle(0, 0, 250*ConstantsService.PLAYER_SCALE, 525*ConstantsService.PLAYER_SCALE); }
 }

@@ -23,4 +23,8 @@ public class Model {
         world.step(deltaTime, 6, 2);
         player.update(deltaTime);
     }
+
+    public World getWorld() {
+        return world;
+    }
 }

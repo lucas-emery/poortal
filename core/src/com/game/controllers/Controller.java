@@ -23,7 +23,7 @@ public class Controller extends ApplicationAdapter {
 		levelController.setPlayer(player);
 		levelController.generateLevel();
 		model = new Model(levelController.getLevelObjects(), player, levelController.getLevelWorld());
-		view = new View(levelController.getLevelObjectsViews(), playerView);
+		view = new View(model, levelController.getLevelObjectsViews(), playerView);
 		Gdx.input.setInputProcessor(new InputController());
 	}
 
@@ -35,5 +35,10 @@ public class Controller extends ApplicationAdapter {
 	
 	@Override
 	public void dispose () {
+	}
+
+	@Override
+	public void resize(int width, int height) {
+		view.resize(width, height);
 	}
 }
