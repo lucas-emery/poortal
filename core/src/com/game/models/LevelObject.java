@@ -7,6 +7,9 @@ import com.game.services.AssetsService;
 import com.game.services.BodyService;
 
 public class LevelObject {
+    public enum Type {
+        CUBE, BUTTON, PORTAL_BLUE, PORTAL_ORANGE
+    }
     private Type type;
     private Body body;
     private BodyDef bodyDef;
@@ -56,7 +59,5 @@ public class LevelObject {
         return type;
     }
 
-    public enum Type {
-        CUBE, BUTTON
-    }
+
 }
