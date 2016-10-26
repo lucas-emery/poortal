@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -29,17 +30,19 @@ public class View {
     private Matrix4 debugMatrix;
     private HashSet<LevelObjectView> levelObjectsViews;
     private PlayerView playerView;
+    private Sprite levelBackgorund;
 
-    public View(Model model, HashSet<LevelObjectView> levelObjectsViews, PlayerView playerView) {
+    public View(Model model, HashSet<LevelObjectView> levelObjectsViews, PlayerView playerView, Sprite levelBackground) {
         this.model = model;
         this.levelObjectsViews = levelObjectsViews;
         this.playerView = playerView;
+        this.levelBackgorund = levelBackground;
         batch = new SpriteBatch();
         skeletonRenderer = new SkeletonRenderer();
         skeletonRenderer.setPremultipliedAlpha(true);
         debugRenderer = new Box2DDebugRenderer();
         camera = new OrthographicCamera();
-        viewport = new FitViewport(1366, 768, camera);
+        viewport = new FitViewport(977, 550, camera);
         viewport.apply();
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0);
     }
@@ -54,12 +57,13 @@ public class View {
         batch.setProjectionMatrix(camera.combined);
 
         batch.begin();
-        skeletonRenderer.draw(batch, playerView.getUpdatedSkeleton());
+        levelBackgorund.draw(batch);
         for(LevelObjectView view : levelObjectsViews)
             view.getUpdatedSprite().draw(batch);
+        skeletonRenderer.draw(batch, playerView.getUpdatedSkeleton());
         batch.end();
 
-        debugRenderer.render(model.getWorld(), camera.combined);
+        debugRenderer.render(model.getWorld(), camera.combined.scale(ConstantsService.METERS_TO_PIXELS, ConstantsService.METERS_TO_PIXELS, 0));
     }
 
     public void resize(int width, int height) {

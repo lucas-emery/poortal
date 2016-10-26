@@ -11,10 +11,13 @@ import com.esotericsoftware.spine.SkeletonJson;
 import com.game.models.LevelObject;
 import com.badlogic.gdx.graphics.Texture;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
 
 
 public class AssetsService {
+
+    private static ArrayList<Texture> levelBackgrounds = new ArrayList<Texture>();
 
     private static EnumMap<LevelObject.Type, Texture> textures = new EnumMap<LevelObject.Type, Texture>(LevelObject.Type.class);
 
@@ -23,6 +26,21 @@ public class AssetsService {
 
 
     public static void initialize(){
+
+        Texture texture;
+
+        texture = new Texture(Gdx.files.internal("mapa.png"));
+        levelBackgrounds.add(texture);
+
+        texture = new Texture(Gdx.files.internal("cube2.png"));
+        textures.put(LevelObject.Type.CUBE, texture);
+
+        texture = new Texture(Gdx.files.internal("portal_blue.png"));
+        textures.put(LevelObject.Type.PORTAL_BLUE, texture);
+
+        texture = new Texture(Gdx.files.internal("portal_orange.png"));
+        textures.put(LevelObject.Type.PORTAL_ORANGE, texture);
+
 
         TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("stickman/skeleton.atlas"));
 
@@ -33,18 +51,6 @@ public class AssetsService {
 
         playerStateData = new AnimationStateData(playerSkeletonData);
         //Set animation mixes if any
-
-
-        Texture texture;
-
-        texture = new Texture(Gdx.files.internal("cube2.png"));
-        textures.put(LevelObject.Type.CUBE, texture);
-
-        texture = new Texture(Gdx.files.internal("portal_blue.png"));
-        textures.put(LevelObject.Type.PORTAL_BLUE, texture);
-
-        texture = new Texture(Gdx.files.internal("portal_orange.png"));
-        textures.put(LevelObject.Type.PORTAL_ORANGE, texture);
     }
 
     public static Sprite getSprite(LevelObject.Type type) {
@@ -62,4 +68,8 @@ public class AssetsService {
     }
 
     public static Rectangle getPlayerDimensions() { return new Rectangle(0, 0, 250*ConstantsService.PLAYER_SCALE, 525*ConstantsService.PLAYER_SCALE); }
+
+    public static Sprite getLevelSprite(int index) {
+        return new Sprite(levelBackgrounds.get(index));
+    }
 }

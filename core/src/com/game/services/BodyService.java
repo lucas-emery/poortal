@@ -38,7 +38,8 @@ public class BodyService {
                 break;*/
             default:
                 PolygonShape shape = new PolygonShape();
-                shape.setAsBox(AssetsService.getSprite(type).getHeight()/2,AssetsService.getSprite(type).getWidth()/2);
+                shape.setAsBox( (AssetsService.getSprite(type).getHeight()/2) * ConstantsService.PIXELS_TO_METERS,
+                                (AssetsService.getSprite(type).getWidth()/2) * ConstantsService.PIXELS_TO_METERS );
 
                 return shape;
         }

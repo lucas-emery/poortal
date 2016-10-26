@@ -36,10 +36,10 @@ public class LevelController {
     public void generateLevel() {
         world = new World(new Vector2(0, -9.8f), true);
 
-        player.setInitialPosition(new Vector2(400,100));
+        player.setInitialPosition(new Vector2(10,3));
         player.setBody(world.createBody(player.getBodyDef()));
 
-        LevelObject newObject = new Cube(new Vector2(100, 500));
+        LevelObject newObject = new Cube(new Vector2(3, 7));
         newObject.setBody(world.createBody(newObject.getBodyDef()));
         levelObjects.add(newObject);
         levelObjectsViews.add(new LevelObjectView(newObject));

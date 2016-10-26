@@ -23,7 +23,7 @@ public class Controller extends ApplicationAdapter {
 		levelController.setPlayer(player);
 		levelController.generateLevel();
 		model = new Model(levelController.getLevelObjects(), player, levelController.getLevelWorld());
-		view = new View(model, levelController.getLevelObjectsViews(), playerView);
+		view = new View(model, levelController.getLevelObjectsViews(), playerView, AssetsService.getLevelSprite(0));
 		Gdx.input.setInputProcessor(new InputController());
 	}
 

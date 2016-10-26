@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.game.models.LevelObject;
 import com.game.services.AssetsService;
+import com.game.services.ConstantsService;
 
 
 public class LevelObjectView {
@@ -19,8 +20,8 @@ public class LevelObjectView {
 
     public Sprite getUpdatedSprite() {
         Vector2 position = model.getPosition();
-        position.add(-sprite.getWidth()/2, -sprite.getHeight()/2);
-        sprite.setPosition(position.x, position.y);
+        sprite.setPosition( (position.x * ConstantsService.METERS_TO_PIXELS) - sprite.getWidth()/2,
+                            (position.y * ConstantsService.METERS_TO_PIXELS) - sprite.getHeight()/2);
 
         return sprite;
     }
