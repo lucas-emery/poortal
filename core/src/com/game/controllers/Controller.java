@@ -1,6 +1,7 @@
 package com.game.controllers;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
 import com.game.models.Model;
 import com.game.models.Player;
 import com.game.services.AssetsService;
@@ -23,7 +24,7 @@ public class Controller extends ApplicationAdapter {
 		levelController.generateLevel();
 		model = new Model(levelController.getLevelObjects(), player, levelController.getLevelWorld());
 		view = new View(levelController.getLevelObjectsViews(), playerView);
-
+		Gdx.input.setInputProcessor(new InputController());
 	}
 
 	@Override
