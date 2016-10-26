@@ -1,0 +1,33 @@
+
+skeleton.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+arm
+  rotate: true
+  xy: 482, 138
+  size: 64, 208
+  orig: 128, 221
+  offset: 32, 5
+  index: -1
+head2
+  rotate: false
+  xy: 319, 41
+  size: 161, 161
+  orig: 200, 200
+  offset: 18, 19
+  index: -1
+leg2
+  rotate: true
+  xy: 2, 2
+  size: 81, 301
+  orig: 158, 322
+  offset: 41, 7
+  index: -1
+torso
+  rotate: true
+  xy: 2, 85
+  size: 117, 315
+  orig: 180, 360
+  offset: 32, 23
+  index: -1

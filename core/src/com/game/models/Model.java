@@ -5,9 +5,7 @@ import java.util.HashSet;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.World;
 
-/**
- * Created by juan on 24/10/16.
- */
+
 public class Model {
 
     private HashSet<LevelObject> levelObjects;
@@ -21,6 +19,8 @@ public class Model {
     }
 
     public void update() {
-        world.step(Gdx.graphics.getDeltaTime(), 6, 2);
+        float deltaTime = Gdx.graphics.getDeltaTime();
+        world.step(deltaTime, 6, 2);
+        player.update(deltaTime);
     }
 }

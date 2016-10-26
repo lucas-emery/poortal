@@ -28,6 +28,7 @@ public class View {
         this.playerView = playerView;
         batch = new SpriteBatch();
         skeletonRenderer = new SkeletonRenderer();
+        skeletonRenderer.setPremultipliedAlpha(true);
     }
 
     public void render(){
@@ -35,7 +36,7 @@ public class View {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        playerView.render(batch, skeletonRenderer);
+        skeletonRenderer.draw(batch, playerView.getUpdatedSkeleton());
         for(LevelObjectView view : levelObjectsViews)
             view.render(batch);
         batch.end();

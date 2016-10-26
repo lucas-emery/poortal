@@ -19,6 +19,8 @@ public class Controller extends ApplicationAdapter {
 		Player player = new Player();
 		PlayerView playerView = new PlayerView(player);
 		levelController = new LevelController();
+		levelController.setPlayer(player);
+		levelController.generateLevel();
 		model = new Model(levelController.getLevelObjects(), player, levelController.getLevelWorld());
 		view = new View(levelController.getLevelObjectsViews(), playerView);
 

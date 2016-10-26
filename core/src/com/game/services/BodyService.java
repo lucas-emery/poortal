@@ -4,7 +4,7 @@ import com.game.models.LevelObject;
 
 
 public class BodyService {
-    public static Boolean isDynamic(LevelObject.Type type){
+    public static boolean isDynamic(LevelObject.Type type){
         switch(type) {
             case CUBE:
                 return true;

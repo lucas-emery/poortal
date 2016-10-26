@@ -1,6 +1,8 @@
 package com.game.views;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.esotericsoftware.spine.AnimationState;
 import com.esotericsoftware.spine.Skeleton;
 import com.esotericsoftware.spine.SkeletonRenderer;
 import com.game.models.Player;
@@ -17,7 +19,12 @@ public class PlayerView {
         skeleton = new Skeleton(AssetsService.getPlayerSkeletonData());
     }
 
-    public void render(SpriteBatch batch, SkeletonRenderer skeletonRenderer) {
-        skeletonRenderer.draw(batch, skeleton);
+    public Skeleton getUpdatedSkeleton() {
+        Vector2 position = player.getPosition();
+        skeleton.setPosition(position.x, position.y);
+        player.getState().apply(skeleton);
+        skeleton.updateWorldTransform();
+
+        return skeleton;
     }
 }
