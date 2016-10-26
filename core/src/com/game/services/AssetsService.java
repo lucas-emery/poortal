@@ -23,6 +23,8 @@ public class AssetsService {
 
     private static SkeletonData playerSkeletonData;
     private static AnimationStateData playerStateData;
+    private static Rectangle playerTextureDimensions;
+    private static float playerScale;
 
 
     public static void initialize(){
@@ -43,9 +45,12 @@ public class AssetsService {
 
 
         TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("stickman/skeleton.atlas"));
+        playerTextureDimensions = new Rectangle(0, 0, 500, 1050);
+
+        playerScale = (ConstantsService.PLAYER_HEIGHT * ConstantsService.METERS_TO_PIXELS) / playerTextureDimensions.getHeight();
 
         SkeletonJson json = new SkeletonJson(atlas);
-        json.setScale(ConstantsService.PLAYER_SCALE);
+        json.setScale(playerScale);
 
         playerSkeletonData = json.readSkeletonData(Gdx.files.internal("stickman/skeleton.json"));
 
@@ -54,9 +59,7 @@ public class AssetsService {
     }
 
     public static Sprite getSprite(LevelObject.Type type) {
-
-        Sprite newSprite = new Sprite(textures.get(type));
-        return newSprite;
+        return new Sprite(textures.get(type));
     }
 
     public static SkeletonData getPlayerSkeletonData() {
@@ -67,7 +70,9 @@ public class AssetsService {
         return playerStateData;
     }
 
-    public static Rectangle getPlayerDimensions() { return new Rectangle(0, 0, 250*ConstantsService.PLAYER_SCALE, 525*ConstantsService.PLAYER_SCALE); }
+    public static Rectangle getPlayerDimensions() {
+        return new Rectangle(0, 0, playerTextureDimensions.getWidth() * playerScale, playerTextureDimensions.getHeight() * playerScale);
+    }
 
     public static Sprite getLevelSprite(int index) {
         return new Sprite(levelBackgrounds.get(index));

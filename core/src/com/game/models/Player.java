@@ -13,9 +13,9 @@ import com.game.services.ConstantsService;
 
 public class Player {
 
-    Body body;
-    BodyDef bodyDef;
-    AnimationState state;
+    private Body body;
+    private BodyDef bodyDef;
+    private AnimationState state;
 
     public Player() {
         state = new AnimationState(AssetsService.getPlayerStateData());
@@ -54,8 +54,7 @@ public class Player {
 
     public void createFixture() {
         PolygonShape shape = new PolygonShape();
-        Rectangle dimensions = AssetsService.getPlayerDimensions();
-        shape.setAsBox(1.9f * dimensions.getAspectRatio() /2, 1.9f /2);
+        shape.setAsBox(ConstantsService.PLAYER_HEIGHT * AssetsService.getPlayerDimensions().getAspectRatio() /2, ConstantsService.PLAYER_HEIGHT /2);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;

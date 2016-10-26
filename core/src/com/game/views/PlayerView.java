@@ -14,9 +14,9 @@ import com.game.services.ConstantsService;
 
 public class PlayerView {
 
-    Player player;
-    Skeleton skeleton;
-    Rectangle dimensions;
+    private Player player;
+    private Skeleton skeleton;
+    private Rectangle dimensions;
 
     public PlayerView(Player player) {
         this.player = player;
@@ -26,7 +26,7 @@ public class PlayerView {
 
     public Skeleton getUpdatedSkeleton() {
         Vector2 position = player.getPosition();
-        skeleton.setPosition(position.x / ConstantsService.PIXELS_TO_METERS, (position.y / ConstantsService.PIXELS_TO_METERS) - dimensions.getHeight());
+        skeleton.setPosition(position.x / ConstantsService.PIXELS_TO_METERS, (position.y / ConstantsService.PIXELS_TO_METERS) - dimensions.getHeight()/2);
         player.getState().apply(skeleton);
         skeleton.updateWorldTransform();
 
