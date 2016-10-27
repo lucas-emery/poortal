@@ -16,6 +16,7 @@ public class Cube extends LevelObject {
         createBodyDef(BodyService.isDynamic(type));
     }
 
+    @Override
     public void createFixtureDef(){
         Shape shape = BodyService.getShape(type);
 
