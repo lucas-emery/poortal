@@ -1,6 +1,7 @@
 package com.game.views;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.esotericsoftware.spine.SkeletonRenderer;
 import com.game.models.Model;
+import com.game.services.AssetsService;
 import com.game.services.ConstantsService;
 
 import java.util.HashSet;
@@ -31,6 +33,7 @@ public class View {
     private HashSet<LevelObjectView> levelObjectsViews;
     private PlayerView playerView;
     private Sprite levelBackgorund;
+    private Music theme;
 
     public View(Model model, HashSet<LevelObjectView> levelObjectsViews, PlayerView playerView, Sprite levelBackground) {
         this.model = model;
@@ -45,6 +48,10 @@ public class View {
         viewport = new FitViewport(977, 550, camera);
         viewport.apply();
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0);
+        //PlaceHolder theme
+        theme= AssetsService.getTheme();
+        theme.setLooping(true);
+        theme.play();
     }
 
     public void render(){

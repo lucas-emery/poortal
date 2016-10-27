@@ -49,6 +49,7 @@ public class Player {
     public BodyDef getBodyDef() {
         return bodyDef;
     }
+    public Body getBody(){ return body;}
 
     public void setBody(Body body) {
         this.body = body;
@@ -64,7 +65,9 @@ public class Player {
         fixtureDef.shape = shape;
         fixtureDef.restitution = 0.0f;
 
+
         body.createFixture(fixtureDef);
+
 
         shape.dispose();
     }

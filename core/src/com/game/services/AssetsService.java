@@ -10,6 +10,7 @@ import com.esotericsoftware.spine.SkeletonData;
 import com.esotericsoftware.spine.SkeletonJson;
 import com.game.models.LevelObject;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.audio.Music;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -25,6 +26,7 @@ public class AssetsService {
     private static AnimationStateData playerStateData;
     private static Rectangle playerTextureDimensions;
     private static float playerScale;
+    private static Music theme;
 
 
     public static void initialize(){
@@ -56,6 +58,9 @@ public class AssetsService {
 
         playerStateData = new AnimationStateData(playerSkeletonData);
         //Set animation mixes if any
+
+        //PLACEHOLDER THEME
+        theme = Gdx.audio.newMusic(Gdx.files.internal("Music/theme.mp3"));
     }
 
     public static Sprite getSprite(LevelObject.Type type) {
@@ -77,4 +82,6 @@ public class AssetsService {
     public static Sprite getLevelSprite(int index) {
         return new Sprite(levelBackgrounds.get(index));
     }
+
+    public static Music getTheme(){ return theme;}
 }

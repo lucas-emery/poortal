@@ -12,6 +12,8 @@ public class PlayerController {
     }
 
     protected void jump(){
+        //Esto es un poco nefasto porahi
+        if(player.getBody().getLinearVelocity().y==0)
         player.changeVelocity(0, ConstantsService.PLAYER_JUMP_VALUE);
     }
 

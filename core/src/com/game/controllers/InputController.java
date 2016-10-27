@@ -43,10 +43,13 @@ public class InputController implements InputProcessor{
         switch(keycode){
             case Input.Keys.W:
                 playerController.jump();
+                break;
             case Input.Keys.A:
                 playerController.moveLeft();
+                break;
             case Input.Keys.D:
                 playerController.moveRight();
+                break;
         }
         return false;
     }
