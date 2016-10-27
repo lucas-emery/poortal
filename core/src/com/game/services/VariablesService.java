@@ -5,9 +5,9 @@ package com.game.services;
  */
 public class VariablesService {
 
-    public static boolean SHOW_FULLSCREEN = true;
+    public static boolean SHOW_FULLSCREEN = true; // Toggle with F
 
-    public static boolean SHOW_FPS = true;
+    public static boolean SHOW_FPS = true; // Toggle with G
 
     public static int FPS;
 }
