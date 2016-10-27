@@ -1,11 +1,16 @@
 package com.game.controllers;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-
-import static com.game.controllers.PlayerController.*;
 
 
 public class InputController implements InputProcessor{
+
+    private PlayerController playerController;
+
+    public InputController(){
+        playerController = new PlayerController();
+    }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
@@ -14,7 +19,7 @@ public class InputController implements InputProcessor{
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        firePortal(button);
+        playerController.firePortal(button);
         return false;
     }
 
@@ -36,13 +41,12 @@ public class InputController implements InputProcessor{
     @Override
     public boolean keyDown(int keycode) {
         switch(keycode){
-            case 'w':
-                jump();
-                System.out.println("anda");
-            case 'a':
-                moveLeft();
-            case 'd':
-                moveRight();
+            case Input.Keys.W:
+                playerController.jump();
+            case Input.Keys.A:
+                playerController.moveLeft();
+            case Input.Keys.D:
+                playerController.moveRight();
         }
         return false;
     }

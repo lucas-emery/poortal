@@ -26,6 +26,10 @@ public class Player {
         bodyDef.position.set(0,0);
     }
 
+    public void changeVelocity(float dX, float dY){
+        body.setLinearVelocity(body.getLinearVelocity().x + dX, body.getLinearVelocity().y + dY);
+    }
+
     public void setInitialPosition(Vector2 position) {
         bodyDef.position.set(position.x, position.y);
     }
