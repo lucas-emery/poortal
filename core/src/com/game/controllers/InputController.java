@@ -39,16 +39,16 @@ public class InputController implements InputProcessor{
     }
 
     @Override
-    public boolean keyDown(int keycode) {
-        switch(keycode){
+    public boolean keyDown(int keycode){
+        switch (keycode){
             case Input.Keys.W:
                 playerController.jump();
                 break;
             case Input.Keys.A:
-                playerController.moveLeft();
+                playerController.moveHorizontal(-1.0f);
                 break;
             case Input.Keys.D:
-                playerController.moveRight();
+                playerController.moveHorizontal(1.0f);
                 break;
         }
         return false;

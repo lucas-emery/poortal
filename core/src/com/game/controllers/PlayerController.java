@@ -12,17 +12,12 @@ public class PlayerController {
     }
 
     protected void jump(){
-        //Esto es un poco nefasto porahi
         if(player.getBody().getLinearVelocity().y==0)
-        player.changeVelocity(0, ConstantsService.PLAYER_JUMP_VALUE);
+            player.changeVelocity(0, ConstantsService.PLAYER_JUMP_VALUE);
     }
 
-    protected void moveLeft(){
-        player.changeVelocity(-ConstantsService.PLAYER_MOVE_VALUE, 0);
-    }
-
-    protected void moveRight(){
-        player.changeVelocity(ConstantsService.PLAYER_MOVE_VALUE, 0);
+    protected void moveHorizontal(float directionScalar){
+        player.changeVelocity(directionScalar * ConstantsService.PLAYER_MOVE_VALUE, 0);
     }
 
     protected void firePortal(int button){
