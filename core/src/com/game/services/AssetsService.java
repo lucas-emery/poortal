@@ -64,7 +64,9 @@ public class AssetsService {
     }
 
     public static Sprite getSprite(LevelObject.Type type) {
-        return new Sprite(textures.get(type));
+        Sprite newSprite = new Sprite(textures.get(type));
+        newSprite.setSize(ConstantsService.getWidth(type)*ConstantsService.METERS_TO_PIXELS, ConstantsService.getHeight(type)*ConstantsService.METERS_TO_PIXELS);
+        return newSprite;
     }
 
     public static SkeletonData getPlayerSkeletonData() {

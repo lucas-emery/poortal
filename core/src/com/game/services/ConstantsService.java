@@ -1,7 +1,45 @@
 package com.game.services;
 
 
+import com.game.models.LevelObject;
+
 public class ConstantsService {
+
+    //put the width in meters and it will convert to pixels in getSprite()
+    public static Float getWidth(LevelObject.Type type) {
+        switch (type) {
+            case CUBE:
+                return 1f;
+            case BUTTON:
+                return 0.25f;
+            case PORTAL_BLUE:
+                return 1f;
+            case PORTAL_ORANGE:
+                return 1f;
+            /*case WALL:
+                break;*/
+            default:
+                return 1f;
+        }
+    }
+
+    //put the height in meters and it will convert to pixels in getSprite()
+    public static Float getHeight(LevelObject.Type type) {
+        switch (type) {
+            case CUBE:
+                return 1f;
+            case BUTTON:
+                return 0.25f;
+            case PORTAL_BLUE:
+                return 1f;
+            case PORTAL_ORANGE:
+                return 1f;
+            /*case WALL:
+                break;*/
+            default:
+                return 1f;
+        }
+    }
 
     public static final float METERS_TO_PIXELS = 25f;
 
