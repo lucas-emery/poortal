@@ -7,8 +7,8 @@ public class PlayerController {
 
     private Player player;
 
-    public PlayerController(){
-        player = new Player();
+    public PlayerController(Player player){
+        this.player = player;
     }
 
     protected void jump(){

@@ -19,12 +19,13 @@ public class Controller extends ApplicationAdapter {
 		AssetsService.initialize();
 		Player player = new Player();
 		PlayerView playerView = new PlayerView(player);
+		PlayerController playerController = new PlayerController(player);
 		levelController = new LevelController();
 		levelController.setPlayer(player);
 		levelController.generateLevel();
 		model = new Model(levelController.getLevelObjects(), player, levelController.getLevelWorld());
 		view = new View(model, levelController.getLevelObjectsViews(), playerView, AssetsService.getLevelSprite(0));
-		Gdx.input.setInputProcessor(new InputController());
+		Gdx.input.setInputProcessor(new InputController(playerController));
 	}
 
 	@Override

@@ -8,8 +8,8 @@ public class InputController implements InputProcessor{
 
     private PlayerController playerController;
 
-    public InputController(){
-        playerController = new PlayerController();
+    public InputController(PlayerController playerController){
+        this.playerController = playerController;
     }
 
     @Override
