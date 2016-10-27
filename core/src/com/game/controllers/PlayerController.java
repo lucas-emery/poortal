@@ -1,7 +1,9 @@
 package com.game.controllers;
 
+import com.badlogic.gdx.Gdx;
 import com.game.models.Player;
 import com.game.services.ConstantsService;
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
 public class PlayerController {
 
@@ -17,7 +19,14 @@ public class PlayerController {
     }
 
     protected void moveHorizontal(float directionScalar){
-        player.changeVelocity(directionScalar * ConstantsService.PLAYER_MOVE_VALUE, 0);
+        if (player.getBody().getLinearVelocity().y != 0)
+            directionScalar *= 0.5; // Aerial move damping
+
+        if (directionScalar > 0 && player.getVelocity().x < ConstantsService.PLAYER_RUN_CAP)
+            player.changeVelocity(directionScalar * ConstantsService.PLAYER_MOVE_VALUE, 0);
+
+        else if (directionScalar < 0 && player.getVelocity().x > -ConstantsService.PLAYER_RUN_CAP)
+            player.changeVelocity(directionScalar * ConstantsService.PLAYER_MOVE_VALUE, 0);
     }
 
     protected void firePortal(int button){

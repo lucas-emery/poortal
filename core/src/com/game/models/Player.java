@@ -30,6 +30,10 @@ public class Player {
         body.setLinearVelocity(body.getLinearVelocity().x + dX, body.getLinearVelocity().y + dY);
     }
 
+    public Vector2 getVelocity(){
+        return body.getLinearVelocity();
+    }
+
     public void setInitialPosition(Vector2 position) {
         bodyDef.position.set(position.x, position.y);
     }
@@ -49,11 +53,11 @@ public class Player {
     public BodyDef getBodyDef() {
         return bodyDef;
     }
+
     public Body getBody(){ return body;}
 
     public void setBody(Body body) {
         this.body = body;
-
         createFixture();
     }
 
@@ -65,9 +69,7 @@ public class Player {
         fixtureDef.shape = shape;
         fixtureDef.restitution = 0.0f;
 
-
         body.createFixture(fixtureDef);
-
 
         shape.dispose();
     }

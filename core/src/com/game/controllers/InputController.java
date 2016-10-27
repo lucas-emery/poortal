@@ -2,9 +2,13 @@ package com.game.controllers;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.game.services.VariablesService;
 
 
 public class InputController implements InputProcessor{
+
+    protected static boolean aIsPressed;
+    protected static boolean dIsPressed;
 
     private PlayerController playerController;
 
@@ -45,11 +49,15 @@ public class InputController implements InputProcessor{
                 playerController.jump();
                 break;
             case Input.Keys.A:
-                playerController.moveHorizontal(-1.0f);
+                aIsPressed = true;
                 break;
             case Input.Keys.D:
-                playerController.moveHorizontal(1.0f);
+                dIsPressed = true;
                 break;
+            case Input.Keys.G:
+                VariablesService.SHOW_FPS = !VariablesService.SHOW_FPS;
+            case Input.Keys.F:
+                VariablesService.SHOW_FULLSCREEN = !VariablesService.SHOW_FULLSCREEN;
         }
         return false;
     }
@@ -61,6 +69,12 @@ public class InputController implements InputProcessor{
 
     @Override
     public boolean keyUp(int keycode) {
+        switch (keycode){
+            case Input.Keys.A:
+                aIsPressed = false;
+            case Input.Keys.D:
+                dIsPressed = false;
+        }
         return false;
     }
 }

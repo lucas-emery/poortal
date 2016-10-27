@@ -13,16 +13,20 @@ public class Controller extends ApplicationAdapter {
 	private Model model;
 	private View view;
 	private LevelController levelController;
-	
+	PlayerController playerController;
+
 	@Override
 	public void create () {
+
 		AssetsService.initialize();
 		Player player = new Player();
 		PlayerView playerView = new PlayerView(player);
-		PlayerController playerController = new PlayerController(player);
+		playerController = new PlayerController(player);
+
 		levelController = new LevelController();
 		levelController.setPlayer(player);
 		levelController.generateLevel();
+
 		model = new Model(levelController.getLevelObjects(), player, levelController.getLevelWorld());
 		view = new View(model, levelController.getLevelObjectsViews(), playerView, AssetsService.getLevelSprite(0));
 		Gdx.input.setInputProcessor(new InputController(playerController));
@@ -31,6 +35,13 @@ public class Controller extends ApplicationAdapter {
 	@Override
 	public void render () {
 		model.update();
+
+		if (InputController.aIsPressed)
+			playerController.moveHorizontal(-1.0f);
+
+		if (InputController.dIsPressed)
+			playerController.moveHorizontal(1.0f);
+
 		view.render();
 	}
 	
