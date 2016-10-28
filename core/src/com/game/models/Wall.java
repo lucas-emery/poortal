@@ -24,11 +24,11 @@ public class Wall {
 
     }
 
-    public void setWall(Body wall, Vector2 beginning, Vector2 end){
+    public void setWall(Body wall, Vector2 end){
         this.body = wall;
 
         EdgeShape shape = new EdgeShape();
-        shape.set(beginning,end);
+        shape.set(new Vector2(0,0),end);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;

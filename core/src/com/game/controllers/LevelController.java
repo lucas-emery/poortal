@@ -6,6 +6,7 @@ import com.game.models.Cube;
 import com.game.models.LevelObject;
 import com.game.models.Player;
 import com.game.models.Wall;
+import com.game.services.ConstantsService;
 import com.game.views.LevelObjectView;
 
 import java.util.HashSet;
@@ -39,15 +40,22 @@ public class LevelController {
         player.setInitialPosition(new Vector2(10,3));
         player.setBody(world.createBody(player.getBodyDef()));
 
-        LevelObject newObject = new Cube(new Vector2(3, 7));
+        LevelObject newObject = new Cube(new Vector2(4, 7));
         newObject.setBody(world.createBody(newObject.getBodyDef()));
         levelObjects.add(newObject);
         levelObjectsViews.add(new LevelObjectView(newObject));
+        
+        Wall floor = new Wall(new Vector2(0,35* ConstantsService.PIXELS_TO_METERS) );
+        floor.setWall(world.createBody(floor.getBodyDef()), new Vector2(977* ConstantsService.PIXELS_TO_METERS,0));
+        walls.add(floor);
 
-        //piso de testeo
-        Wall wall = new Wall(new Vector2(0,0) );
-        wall.setWall(world.createBody(wall.getBodyDef()), new Vector2(0,0), new Vector2(800,0));
-        walls.add(wall);
+        Wall leftWall = new Wall(new Vector2(40* ConstantsService.PIXELS_TO_METERS,35* ConstantsService.PIXELS_TO_METERS) );
+        leftWall.setWall(world.createBody(leftWall.getBodyDef()), new Vector2(0,520* ConstantsService.PIXELS_TO_METERS));
+        walls.add(floor);
+
+        Wall rightWall = new Wall(new Vector2(925* ConstantsService.PIXELS_TO_METERS,35* ConstantsService.PIXELS_TO_METERS) );
+        rightWall.setWall(world.createBody(rightWall.getBodyDef()), new Vector2(0,520* ConstantsService.PIXELS_TO_METERS));
+        walls.add(floor);
 
 
     }
