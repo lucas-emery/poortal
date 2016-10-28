@@ -20,6 +20,8 @@ public class LevelObjectView {
 
     public Sprite getUpdatedSprite() {
         Vector2 position = model.getPosition();
+
+        sprite.setRotation((model.getBody().getAngle())*ConstantsService.RAD_TO_DEG);
         sprite.setPosition( (position.x * ConstantsService.METERS_TO_PIXELS) - sprite.getWidth()/2,
                             (position.y * ConstantsService.METERS_TO_PIXELS) - sprite.getHeight()/2);
 

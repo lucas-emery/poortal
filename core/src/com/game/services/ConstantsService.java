@@ -53,6 +53,8 @@ public class ConstantsService {
 
     public static final float PIXELS_TO_METERS = 1/METERS_TO_PIXELS;
 
+    public static final float RAD_TO_DEG = (float)(180/ Math.PI);
+
     public static final float PLAYER_HEIGHT = 1.9f;
 
 }
