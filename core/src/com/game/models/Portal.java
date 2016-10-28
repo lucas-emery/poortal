@@ -6,9 +6,8 @@ import com.badlogic.gdx.physics.box2d.Shape;
 import com.game.services.BodyService;
 
 
-/**
- * Created by Usuario on 27/10/2016.
- */
+
+
 public class Portal extends LevelObject{
 
     private String color;
