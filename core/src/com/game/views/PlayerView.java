@@ -28,6 +28,7 @@ public class PlayerView {
         Vector2 position = player.getPosition();
         skeleton.setPosition(position.x / ConstantsService.PIXELS_TO_METERS, (position.y / ConstantsService.PIXELS_TO_METERS) - dimensions.getHeight()/2);
         player.getState().apply(skeleton);
+        skeleton.setFlipX(player.isFlipped());
         skeleton.updateWorldTransform();
 
         return skeleton;

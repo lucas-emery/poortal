@@ -16,11 +16,11 @@ public class Player {
     private Body body;
     private BodyDef bodyDef;
     private AnimationState state;
+    private boolean running;
+    private boolean flip;
 
     public Player() {
         state = new AnimationState(AssetsService.getPlayerStateData());
-        state.setAnimation(0, "run", true);
-
         bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.position.set(0,0);
@@ -40,6 +40,21 @@ public class Player {
 
     public void update(float deltaTime) {
         state.update(deltaTime);
+        if(body.getLinearVelocity().x != 0 ){
+            if(body.getLinearVelocity().x < 0)
+                flip = true;
+            else
+                flip =false;
+
+            if(!running) {
+            state.setAnimation(0, "run", true);
+            running = true;
+            }
+        }
+        else{
+            state.clearTrack(0);
+            running = false;
+        }
     }
 
     public AnimationState getState() {
@@ -68,9 +83,14 @@ public class Player {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.restitution = 0.0f;
+        fixtureDef.friction = 1.0f;
 
         body.createFixture(fixtureDef);
 
         shape.dispose();
+    }
+
+    public boolean isFlipped(){
+        return flip;
     }
 }

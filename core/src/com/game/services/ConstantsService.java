@@ -45,7 +45,7 @@ public class ConstantsService {
 
     public static final float PLAYER_JUMP_VALUE = 6.0f;
 
-    public static final float PLAYER_MOVE_VALUE = 0.2f;
+    public static final float PLAYER_MOVE_VALUE = 1.0f;
 
     public static final float PLAYER_RUN_CAP = 6.0f;
 

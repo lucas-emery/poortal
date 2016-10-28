@@ -17,6 +17,7 @@ public class Wall {
 
     public Wall(Vector2 position) { //Concept
 
+
         this.position = position;
         createBodyDef();
         type = WALL;
