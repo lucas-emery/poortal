@@ -30,20 +30,6 @@ public class BodyService {
         }
     }
 
-    public static boolean isDynamic(LevelObject.Type type){
-        switch(type) {
-            case CUBE:
-                return true;
-            case BUTTON:
-                return false;
-            case PORTAL_BLUE:
-                return false;
-            case PORTAL_ORANGE:
-                return false;
-            default:
-                return true;
-        }
-    }
     public static FixtureDef getFixtureDef(LevelObject.Type type) {
         float friction,density,restitution;
 

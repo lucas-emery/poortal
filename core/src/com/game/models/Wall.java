@@ -62,4 +62,8 @@ public class Wall {
     public boolean equals(Fixture otherFixture){
         return fixture.equals(otherFixture);
     }
+
+    public boolean isPortable() {
+        return portable;
+    }
 }

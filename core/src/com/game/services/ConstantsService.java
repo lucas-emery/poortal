@@ -62,4 +62,6 @@ public class ConstantsService {
 
     public static final float PLAYER_HEIGHT = 1.9f;
 
+    public static final float WORLD_STEP = 1/60f;
+
 }

@@ -2,6 +2,9 @@ package com.game.controllers;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.math.Vector2;
+import com.game.models.LevelObject;
+import com.game.models.Portal;
 import com.game.services.VariablesService;
 
 
@@ -23,7 +26,15 @@ public class InputController implements InputProcessor{
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        playerController.firePortal(button);
+        Portal.Type portalType;
+        if(button == 0)
+            portalType = LevelObject.Type.PORTAL_BLUE;
+        else
+            portalType = LevelObject.Type.PORTAL_ORANGE;
+
+        System.out.println("Fire portal");
+
+        playerController.firePortal(new Vector2(screenX, screenY), portalType);
         return false;
     }
 
@@ -41,6 +52,7 @@ public class InputController implements InputProcessor{
     public boolean scrolled(int amount) {
         return false;
     }
+
     public void update(){
         if (InputController.aIsPressed)
             playerController.moveHorizontal(false);     // 	CAMBIAR BOOLEANO

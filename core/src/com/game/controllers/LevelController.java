@@ -34,6 +34,10 @@ public class LevelController {
         return (HashSet<LevelObjectView>) levelObjectsViews.clone();
     }
 
+    public HashSet<Wall> getWalls() {
+        return (HashSet<Wall>) walls.clone();
+    }
+
     public void generateLevel() {
         world = new World(new Vector2(0, -9.8f), true);
 
