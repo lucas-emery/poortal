@@ -26,7 +26,7 @@ public class Wall {
 
     }
 
-    public void setWall(Body wall, Vector2 end){
+    public void setWall(Body wall, Vector2 end, boolean floor){
         this.body = wall;
 
         EdgeShape shape = new EdgeShape();
@@ -34,7 +34,12 @@ public class Wall {
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
-        fixtureDef.friction=1.0f;
+
+        if(floor)
+            fixtureDef.friction = 1.5f;
+        else
+            fixtureDef.friction= 0;
+
         fixture = body.createFixture(fixtureDef);
         shape.dispose();
 
