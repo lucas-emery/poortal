@@ -2,6 +2,7 @@ package com.game.controllers;
 
 import com.badlogic.gdx.Gdx;
 import com.game.models.Player;
+import com.game.services.BodyService;
 import com.game.services.ConstantsService;
 import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
@@ -15,7 +16,7 @@ public class PlayerController {
 
     protected void jump(){
         if(player.isGrounded())
-            player.changeVelocity(0, ConstantsService.PLAYER_JUMP_VALUE);
+            player.applyForceToCenter(0, ConstantsService.FORCE* ConstantsService.JUMPCONSTANT, true);
     }
 
     protected void moveHorizontal(boolean positive) {

@@ -44,6 +44,8 @@ public class ConstantsService {
         }
     }
 
+    public static final float JUMPCONSTANT = 8f;
+
     public static final float METERS_TO_PIXELS = 25f;
 
     public static final float PLAYER_JUMP_VALUE = 6.0f;

@@ -26,6 +26,7 @@ public class Player {
         bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.position.set(0,0);
+        bodyDef.fixedRotation=true;
     }
 
     public void changeVelocity(float dX, float dY){
@@ -98,7 +99,7 @@ public class Player {
             return false;
     }
 
-    public void applyForceToCenter(float v, int i, boolean b) {
+    public void applyForceToCenter(float v, float i, boolean b) {
         body.applyForceToCenter(v, i, b);
     }
 

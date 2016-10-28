@@ -49,7 +49,7 @@ public class BodyService {
 
         switch(type) {
             case CUBE:
-                friction = 0f;  density = 0f;   restitution = 0f;
+                friction = 0.7f;  density = 0.5f;   restitution = 0.2f;
                 break;
             case BUTTON:
                 friction = 0f;  density = 0f;   restitution = 0f;
@@ -74,12 +74,11 @@ public class BodyService {
         shape.setAsBox(ConstantsService.PLAYER_HEIGHT * AssetsService.getPlayerDimensions().getAspectRatio() /2, ConstantsService.PLAYER_HEIGHT /2);
         return shape;
     }
-
     public static FixtureDef getPlayerFixtureDef() {
         FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.friction= 0f;
-        fixtureDef.density = 0f;
-        fixtureDef.restitution= 0f;
+        fixtureDef.friction= 0.7f;
+        fixtureDef.density = 0.4f;
+        fixtureDef.restitution= 0.1f;
         return fixtureDef;
     }
     public static BodyDef.BodyType getBodyType(LevelObject.Type type) {
