@@ -14,17 +14,19 @@ public class Wall {
     private BodyDef bodyDef;
     private Vector2 position;
     private LevelObject.Type type;
+    private Fixture fixture;
+    private boolean portable;
 
-    public Wall(Vector2 position) { //Concept
+    public Wall(Vector2 position,boolean portable) { //Concept
 
-
+        this.portable = portable;
         this.position = position;
         createBodyDef();
         type = WALL;
 
     }
 
-    public void setWall(Body wall, Vector2 end){
+    public void setWall(Body wall, Vector2 end, boolean floor){
         this.body = wall;
 
         EdgeShape shape = new EdgeShape();
@@ -32,8 +34,13 @@ public class Wall {
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
-        fixtureDef.friction=1.0f;
-        body.createFixture(fixtureDef);
+
+        if(floor)
+            fixtureDef.friction = 1.5f;
+        else
+            fixtureDef.friction= 0;
+
+        fixture = body.createFixture(fixtureDef);
         shape.dispose();
 
     }
@@ -49,5 +56,10 @@ public class Wall {
 
     public BodyDef getBodyDef(){
         return bodyDef;
+    }
+
+    //checkea por address
+    public boolean equals(Fixture otherFixture){
+        return fixture.equals(otherFixture);
     }
 }

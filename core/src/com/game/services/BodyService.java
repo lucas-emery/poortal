@@ -1,6 +1,7 @@
 package com.game.services;
 
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.game.models.LevelObject;
@@ -43,9 +44,9 @@ public class BodyService {
                 return true;
         }
     }
-
     public static FixtureDef getFixtureDef(LevelObject.Type type) {
         float friction,density,restitution;
+
         switch(type) {
             case CUBE:
                 friction = 0f;  density = 0f;   restitution = 0f;
@@ -58,7 +59,6 @@ public class BodyService {
                 break;
             case PORTAL_ORANGE:
                 friction = 0f;  density = 0f;   restitution = 0f;
-                break;
             default:
                 friction = 0f;  density = 0f;   restitution = 0f;
                 break;
@@ -81,5 +81,20 @@ public class BodyService {
         fixtureDef.density = 0f;
         fixtureDef.restitution= 0f;
         return fixtureDef;
+    }
+    public static BodyDef.BodyType getBodyType(LevelObject.Type type) {
+        switch (type) {
+            case CUBE:
+                return BodyDef.BodyType.DynamicBody;
+            case BUTTON:
+            case PORTAL_BLUE:
+            case PORTAL_ORANGE:
+            case WALL:
+                return BodyDef.BodyType.StaticBody;
+            case PLATFORM:
+                return BodyDef.BodyType.KinematicBody;
+            default:
+                return null;
+        }
     }
 }

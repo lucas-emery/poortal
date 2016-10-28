@@ -45,16 +45,16 @@ public class LevelController {
         levelObjects.add(newObject);
         levelObjectsViews.add(new LevelObjectView(newObject));
         
-        Wall floor = new Wall(new Vector2(0,35* ConstantsService.PIXELS_TO_METERS) );
-        floor.setWall(world.createBody(floor.getBodyDef()), new Vector2(977* ConstantsService.PIXELS_TO_METERS,0));
+        Wall floor = new Wall(new Vector2(0,35* ConstantsService.PIXELS_TO_METERS ), true);
+        floor.setWall(world.createBody(floor.getBodyDef()), new Vector2(977* ConstantsService.PIXELS_TO_METERS,0), true);
         walls.add(floor);
 
-        Wall leftWall = new Wall(new Vector2(40* ConstantsService.PIXELS_TO_METERS,35* ConstantsService.PIXELS_TO_METERS) );
-        leftWall.setWall(world.createBody(leftWall.getBodyDef()), new Vector2(0,520* ConstantsService.PIXELS_TO_METERS));
+        Wall leftWall = new Wall(new Vector2(40* ConstantsService.PIXELS_TO_METERS,35* ConstantsService.PIXELS_TO_METERS), true);
+        leftWall.setWall(world.createBody(leftWall.getBodyDef()), new Vector2(0,520* ConstantsService.PIXELS_TO_METERS), false);
         walls.add(floor);
 
-        Wall rightWall = new Wall(new Vector2(925* ConstantsService.PIXELS_TO_METERS,35* ConstantsService.PIXELS_TO_METERS) );
-        rightWall.setWall(world.createBody(rightWall.getBodyDef()), new Vector2(0,520* ConstantsService.PIXELS_TO_METERS));
+        Wall rightWall = new Wall(new Vector2(925* ConstantsService.PIXELS_TO_METERS,35* ConstantsService.PIXELS_TO_METERS), true);
+        rightWall.setWall(world.createBody(rightWall.getBodyDef()), new Vector2(0,520* ConstantsService.PIXELS_TO_METERS), false);
         walls.add(floor);
 
 

@@ -13,7 +13,7 @@ public class Cube extends LevelObject {
 
         this.position = position;
         this.type = Type.CUBE;
-        createBodyDef(BodyService.isDynamic(type));
+        createBodyDef();
     }
 
     @Override
