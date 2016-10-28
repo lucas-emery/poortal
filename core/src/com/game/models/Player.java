@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.esotericsoftware.spine.AnimationState;
 import com.game.services.AssetsService;
+import com.game.services.BodyService;
 import com.game.services.ConstantsService;
 
 public class Player {
@@ -18,6 +19,7 @@ public class Player {
     private AnimationState state;
     private boolean running;
     private boolean flip;
+    private LevelObject.Type type;
 
     public Player() {
         state = new AnimationState(AssetsService.getPlayerStateData());
@@ -40,7 +42,7 @@ public class Player {
 
     public void update(float deltaTime) {
         state.update(deltaTime);
-        if(body.getLinearVelocity().x != 0 ){
+        if(getLinearVelocity().x != 0 ){
             if(body.getLinearVelocity().x < 0)
                 flip = true;
             else
@@ -76,16 +78,12 @@ public class Player {
         createFixture();
     }
     public void createFixture() {
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(ConstantsService.PLAYER_HEIGHT * AssetsService.getPlayerDimensions().getAspectRatio() /2, ConstantsService.PLAYER_HEIGHT /2);
+        PolygonShape shape = BodyService.getPlayerShape();
 
-        FixtureDef fixtureDef = new FixtureDef();
+        FixtureDef fixtureDef = BodyService.getPlayerFixtureDef();
         fixtureDef.shape = shape;
-        fixtureDef.restitution = 0.0f;
-        fixtureDef.friction = 2.0f;
 
         body.createFixture(fixtureDef);
-
         shape.dispose();
     }
 

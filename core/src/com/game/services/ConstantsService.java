@@ -5,6 +5,7 @@ import com.game.models.LevelObject;
 
 public class ConstantsService {
 
+    public static final float FORCEINGROUND = 1;
     public static float FORCEINAIR = 0.2f;
 
     //put the width in meters and it will convert to pixels in getSprite()
@@ -47,15 +48,11 @@ public class ConstantsService {
 
     public static final float PLAYER_JUMP_VALUE = 6.0f;
 
-    public static final float PLAYER_MOVE_VALUE = 1.0f;
-
     public static final float PLAYER_RUN_CAP = 6.0f;
-
-    public static final float PLAYER_SCALE = 0.5f;
 
     public static final float FORCE = 50f;
 
-    public static final float SPEEDDELTA = 0.01f;
+    public static final float SPEEDDELTA = 0.025f;
 
     public static final float PIXELS_TO_METERS = 1/METERS_TO_PIXELS;
 

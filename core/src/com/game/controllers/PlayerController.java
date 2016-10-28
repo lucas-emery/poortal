@@ -19,7 +19,7 @@ public class PlayerController {
     }
 
     protected void moveHorizontal(boolean positive) {
-        float multiplier =1;
+        float multiplier =ConstantsService.FORCEINGROUND;
         if(!player.isGrounded()){
             multiplier=ConstantsService.FORCEINAIR;
         }

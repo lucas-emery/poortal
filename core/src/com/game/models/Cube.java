@@ -19,12 +19,8 @@ public class Cube extends LevelObject {
     @Override
     public void createFixtureDef(){
         Shape shape = BodyService.getShape(type);
-
-        FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.shape = shape;
-        fixtureDef.density = BodyService.getDensity(type);
-        fixtureDef.restitution = BodyService.getRestitution(type);
-
+        FixtureDef fixtureDef = BodyService.getFixtureDef(type);
+        fixtureDef.shape=shape;
         body.createFixture(fixtureDef);
         shape.dispose();
     }

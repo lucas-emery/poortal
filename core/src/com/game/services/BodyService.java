@@ -1,27 +1,13 @@
 package com.game.services;
 
+import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.game.models.LevelObject;
 
 
 public class BodyService {
-    public static Float getDensity(LevelObject.Type type){
-        switch (type){
-            case CUBE:
-                return 1f;
-            case BUTTON:
-                return 0f;
-            case PORTAL_BLUE:
-                return 0f;
-            case PORTAL_ORANGE:
-                return 0f;
-            case WALL:
-                return 10f;
-            default:
-                return 1f;
-        }
-    }
+
     public static Shape getShape(LevelObject.Type type){
         switch (type){
             /*case CUBE:
@@ -34,30 +20,12 @@ public class BodyService {
                 break;
             case PORTAL_ORANGE:
                 break;
-            case WALL:
-                break;*/
+              */
             default:
                 PolygonShape shape = new PolygonShape();
                 shape.setAsBox( (AssetsService.getSprite(type).getHeight()/2) * ConstantsService.PIXELS_TO_METERS,
                                 (AssetsService.getSprite(type).getWidth()/2) * ConstantsService.PIXELS_TO_METERS );
-
                 return shape;
-        }
-    }
-    public static Float getRestitution(LevelObject.Type type){
-        switch(type){
-            case CUBE:
-                return 0f;
-            case BUTTON:
-                return 0f;
-            case PORTAL_BLUE:
-                return 0f;
-            case PORTAL_ORANGE:
-                return 0f;
-            /*case WALL:
-                break;*/
-            default:
-                return 0f;
         }
     }
 
@@ -71,10 +39,47 @@ public class BodyService {
                 return false;
             case PORTAL_ORANGE:
                 return false;
-            /*case WALL:
-                break;*/
             default:
                 return true;
         }
+    }
+
+    public static FixtureDef getFixtureDef(LevelObject.Type type) {
+        float friction,density,restitution;
+        switch(type) {
+            case CUBE:
+                friction = 0f;  density = 0f;   restitution = 0f;
+                break;
+            case BUTTON:
+                friction = 0f;  density = 0f;   restitution = 0f;
+                break;
+            case PORTAL_BLUE:
+                friction = 0f;  density = 0f; restitution = 0f;
+                break;
+            case PORTAL_ORANGE:
+                friction = 0f;  density = 0f;   restitution = 0f;
+                break;
+            default:
+                friction = 0f;  density = 0f;   restitution = 0f;
+                break;
+        }
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.friction=friction;
+        fixtureDef.density=density;
+        fixtureDef.restitution=restitution;
+        return fixtureDef;
+    }
+    public static PolygonShape getPlayerShape(){
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(ConstantsService.PLAYER_HEIGHT * AssetsService.getPlayerDimensions().getAspectRatio() /2, ConstantsService.PLAYER_HEIGHT /2);
+        return shape;
+    }
+
+    public static FixtureDef getPlayerFixtureDef() {
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.friction= 0f;
+        fixtureDef.density = 0f;
+        fixtureDef.restitution= 0f;
+        return fixtureDef;
     }
 }
