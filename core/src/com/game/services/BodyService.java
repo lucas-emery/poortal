@@ -1,5 +1,6 @@
 package com.game.services;
 
+import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.game.models.LevelObject;
@@ -61,7 +62,7 @@ public class BodyService {
         }
     }
 
-    public static boolean isDynamic(LevelObject.Type type){
+    /*public static boolean isDynamic(LevelObject.Type type){
         switch(type) {
             case CUBE:
                 return true;
@@ -71,10 +72,26 @@ public class BodyService {
                 return false;
             case PORTAL_ORANGE:
                 return false;
-            /*case WALL:
-                break;*/
+            *//*case WALL:
+                break;*//*
             default:
                 return true;
+        }
+    }*/
+    public static BodyDef.BodyType getBodyType(LevelObject.Type type) {
+        switch (type) {
+            case CUBE:
+                return BodyDef.BodyType.DynamicBody;
+            case BUTTON:
+            case PORTAL_BLUE:
+            case PORTAL_ORANGE:
+            case WALL:
+
+                return BodyDef.BodyType.StaticBody;
+            case PLATFORM:
+                return BodyDef.BodyType.KinematicBody;
+            default:
+                return null;
         }
     }
 }

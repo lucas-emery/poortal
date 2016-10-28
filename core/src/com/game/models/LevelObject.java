@@ -8,18 +8,17 @@ import com.game.services.BodyService;
 
 public abstract class LevelObject {
     public enum Type {
-        CUBE, BUTTON, PORTAL_BLUE, PORTAL_ORANGE, WALL
+        CUBE, BUTTON, PORTAL_BLUE, PORTAL_ORANGE, WALL, PLATFORM
     }
     protected static Type type;
     protected Body body;
     protected BodyDef bodyDef;
     protected Vector2 position;
 
-    public void createBodyDef(Boolean isDynamic) {
+    public void createBodyDef() {
         bodyDef = new BodyDef();
 
-        if (isDynamic) bodyDef.type = BodyDef.BodyType.DynamicBody;
-        else bodyDef.type = BodyDef.BodyType.StaticBody;
+        bodyDef.type = BodyService.getBodyType(type);
 
         bodyDef.position.set(position.x, position.y);
     }

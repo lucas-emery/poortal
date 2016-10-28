@@ -1,6 +1,7 @@
 package com.game.models;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.game.services.BodyService;
@@ -24,7 +25,7 @@ public class Portal extends LevelObject{
             throw new IllegalArgumentException("Portal color must be either blue or orange");
 
         this.position = position;
-        this.createBodyDef(BodyService.isDynamic(type));
+        this.createBodyDef();
 
     }
 
