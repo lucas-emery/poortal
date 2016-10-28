@@ -13,6 +13,5 @@ public class DesktopLauncher {
 		config.height=550;
 		config.fullscreen = VariablesService.SHOW_FULLSCREEN;
 		new LwjglApplication(new Controller(), config);
-
 	}
 }

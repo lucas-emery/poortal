@@ -32,6 +32,7 @@ public class Wall {
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
+        fixtureDef.friction=1.0f;
         body.createFixture(fixtureDef);
         shape.dispose();
 

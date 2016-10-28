@@ -41,6 +41,12 @@ public class InputController implements InputProcessor{
     public boolean scrolled(int amount) {
         return false;
     }
+    public void update(){
+        if (InputController.aIsPressed)
+            playerController.moveHorizontal(false);     // 	CAMBIAR BOOLEANO
+        if (InputController.dIsPressed)					//  POR RIGHT AND LEFT
+            playerController.moveHorizontal(true);		// UBICADO EN ALGUN SERVICE
+    }
 
     @Override
     public boolean keyDown(int keycode){
@@ -56,8 +62,10 @@ public class InputController implements InputProcessor{
                 break;
             case Input.Keys.G:
                 VariablesService.SHOW_FPS = !VariablesService.SHOW_FPS;
+                break;
             case Input.Keys.F:
                 VariablesService.SHOW_FULLSCREEN = !VariablesService.SHOW_FULLSCREEN;
+                break;
         }
         return false;
     }

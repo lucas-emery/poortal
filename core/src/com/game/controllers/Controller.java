@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.game.models.Model;
 import com.game.models.Player;
 import com.game.services.AssetsService;
+import com.game.services.ConstantsService;
 import com.game.views.PlayerView;
 import com.game.views.View;
 
@@ -14,6 +15,7 @@ public class Controller extends ApplicationAdapter {
 	private View view;
 	private LevelController levelController;
 	PlayerController playerController;
+	private InputController inputController;
 
 	@Override
 	public void create () {
@@ -29,19 +31,14 @@ public class Controller extends ApplicationAdapter {
 
 		model = new Model(levelController.getLevelObjects(), player, levelController.getLevelWorld());
 		view = new View(model, levelController.getLevelObjectsViews(), playerView, AssetsService.getLevelSprite(0));
-		Gdx.input.setInputProcessor(new InputController(playerController));
+		inputController = new InputController(playerController);
+		Gdx.input.setInputProcessor(inputController);
 	}
 
 	@Override
 	public void render () {
 		model.update();
-
-		if (InputController.aIsPressed)
-			playerController.moveHorizontal(-1.0f);
-
-		if (InputController.dIsPressed)
-			playerController.moveHorizontal(1.0f);
-
+		inputController.update();
 		view.render();
 	}
 	

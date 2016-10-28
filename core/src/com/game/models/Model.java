@@ -20,7 +20,7 @@ public class Model {
 
     public void update() {
         float deltaTime = Gdx.graphics.getDeltaTime();
-        world.step(deltaTime, 6, 2);
+        world.step(deltaTime, 8, 3);
         player.update(deltaTime);
     }
 

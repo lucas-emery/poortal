@@ -14,19 +14,23 @@ public class PlayerController {
     }
 
     protected void jump(){
-        if(player.getBody().getLinearVelocity().y==0)
+        if(player.isGrounded())
             player.changeVelocity(0, ConstantsService.PLAYER_JUMP_VALUE);
     }
 
-    protected void moveHorizontal(float directionScalar){
-        if (player.getBody().getLinearVelocity().y != 0)
-            directionScalar *= 0.5; // Aerial move damping
-
-        if (directionScalar > 0 && player.getVelocity().x < ConstantsService.PLAYER_RUN_CAP)
-            player.changeVelocity(directionScalar * ConstantsService.PLAYER_MOVE_VALUE, 0);
-
-        else if (directionScalar < 0 && player.getVelocity().x > -ConstantsService.PLAYER_RUN_CAP)
-            player.changeVelocity(directionScalar * ConstantsService.PLAYER_MOVE_VALUE, 0);
+    protected void moveHorizontal(boolean positive) {
+        float multiplier =1;
+        if(!player.isGrounded()){
+            multiplier=ConstantsService.FORCEINAIR;
+        }
+        if (positive){
+            if ((player.getVelocity().x)< ConstantsService.PLAYER_RUN_CAP)
+                    player.applyForceToCenter(multiplier*ConstantsService.FORCE, 0, true);
+        }
+        else {
+            if (player.getVelocity().x > -ConstantsService.PLAYER_RUN_CAP)
+                player.applyForceToCenter(-(multiplier*ConstantsService.FORCE), 0, true);
+        }
     }
 
     protected void firePortal(int button){

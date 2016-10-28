@@ -75,7 +75,6 @@ public class Player {
         this.body = body;
         createFixture();
     }
-
     public void createFixture() {
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(ConstantsService.PLAYER_HEIGHT * AssetsService.getPlayerDimensions().getAspectRatio() /2, ConstantsService.PLAYER_HEIGHT /2);
@@ -83,7 +82,7 @@ public class Player {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.restitution = 0.0f;
-        fixtureDef.friction = 1.0f;
+        fixtureDef.friction = 2.0f;
 
         body.createFixture(fixtureDef);
 
@@ -92,5 +91,20 @@ public class Player {
 
     public boolean isFlipped(){
         return flip;
+    }
+
+    public boolean isGrounded() {
+        if(Math.abs((double) getLinearVelocity().y)<ConstantsService.SPEEDDELTA)
+            return true;
+        else
+            return false;
+    }
+
+    public void applyForceToCenter(float v, int i, boolean b) {
+        body.applyForceToCenter(v, i, b);
+    }
+
+    public Vector2 getLinearVelocity() {
+        return body.getLinearVelocity();
     }
 }
