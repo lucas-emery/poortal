@@ -94,6 +94,10 @@ public class View {
         debugRenderer.render(model.getWorld(), camera.combined.scale(ConstantsService.METERS_TO_PIXELS, ConstantsService.METERS_TO_PIXELS, 0));
     }
 
+    public void mouseMove(int x, int y){
+        playerView.updatePortalArm(x,y);
+    }
+
     public void resize(int width, int height) {
         viewport.update(width, height);
     }

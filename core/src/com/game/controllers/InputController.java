@@ -6,6 +6,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.game.models.LevelObject;
 import com.game.models.Portal;
 import com.game.services.VariablesService;
+import com.game.views.PlayerView;
+import com.game.views.View;
 
 
 public class InputController implements InputProcessor{
@@ -84,6 +86,7 @@ public class InputController implements InputProcessor{
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
+        playerController.movePortalArm(screenX,screenY);
         return false;
     }
 

@@ -42,7 +42,9 @@ public class Player {
     }
 
     public void update(float deltaTime) {
+
         state.update(deltaTime);
+
         if(getLinearVelocity().x != 0 ){
             if(body.getLinearVelocity().x < 0)
                 flip = true;

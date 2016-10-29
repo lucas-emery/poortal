@@ -6,14 +6,17 @@ import com.game.models.Player;
 import com.game.services.BodyService;
 import com.game.models.Portal;
 import com.game.services.ConstantsService;
+import com.game.views.PlayerView;
 import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
 public class PlayerController {
 
     private Player player;
+    private PlayerView playerView;
 
-    public PlayerController(Player player){
+    public PlayerController(Player player,PlayerView playerView){
         this.player = player;
+        this.playerView = playerView;
     }
 
     protected void jump(){
@@ -36,7 +39,11 @@ public class PlayerController {
         }
     }
 
-    public void firePortal(Vector2 clickPos, Portal.Type portalType){
+    protected void movePortalArm(int x, int y){
+        playerView.updatePortalArm(x,y);
+    }
+
+    public void firePortal(Vector2 clickPos, Portal.Type portalType) {
         PortalController.firePortal(player.getPosition().cpy(), clickPos.cpy(), portalType);
     }
 }

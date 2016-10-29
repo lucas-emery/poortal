@@ -25,7 +25,7 @@ public class Controller extends ApplicationAdapter {
 		AssetsService.initialize();
 		Player player = new Player();
 		PlayerView playerView = new PlayerView(player);
-		playerController = new PlayerController(player);
+		playerController = new PlayerController(player,playerView);
 
 		levelController = new LevelController();
 		levelController.setPlayer(player);

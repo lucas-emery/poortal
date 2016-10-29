@@ -401,29 +401,6 @@
             }
           ]
         },
-        "arm_right": {
-          "rotate": [
-            {
-              "time": 0,
-              "angle": 0
-            },
-            {
-              "time": 0.3333,
-              "angle": 12.38
-            },
-            {
-              "time": 0.5,
-              "angle": 16.63
-            }
-          ],
-          "translate": [
-            {
-              "time": 0,
-              "x": 0,
-              "y": 0
-            }
-          ]
-        },
         "head": {
           "rotate": [
             {
