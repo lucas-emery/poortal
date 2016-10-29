@@ -56,10 +56,17 @@ public class InputController implements InputProcessor{
     }
 
     public void update(){
-        if (InputController.aIsPressed)
+        boolean isPressed=false;
+        if (InputController.aIsPressed){
             playerController.moveHorizontal(false);     // 	CAMBIAR BOOLEANO
-        if (InputController.dIsPressed)					//  POR RIGHT AND LEFT
-            playerController.moveHorizontal(true);		// UBICADO EN ALGUN SERVICE
+            isPressed=true;
+        }
+        if (InputController.dIsPressed){
+            playerController.moveHorizontal(true);	   //  POR RIGHT AND LEFT
+            isPressed=true;
+        }
+        if (!isPressed)
+	       playerController.setAnimation(null);                                             // UBICADO EN ALGUN SERVICE
     }
 
     @Override

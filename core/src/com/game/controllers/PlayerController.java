@@ -32,11 +32,17 @@ public class PlayerController {
         if (positive){
             if ((player.getVelocity().x)< ConstantsService.PLAYER_RUN_CAP)
                     player.applyForceToCenter(multiplier*ConstantsService.FORCE, 0, true);
+            setAnimation("RIGHT");
         }
         else {
             if (player.getVelocity().x > -ConstantsService.PLAYER_RUN_CAP)
                 player.applyForceToCenter(-(multiplier*ConstantsService.FORCE), 0, true);
+            setAnimation("LEFT");
         }
+    }
+
+    public void setAnimation(String animation){
+        player.setAnimation(animation);
     }
 
     protected void movePortalArm(int x, int y){

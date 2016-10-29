@@ -20,6 +20,7 @@ public class Player {
     private boolean running;
     private boolean flip;
     private LevelObject.Type type;
+    private String animation;
 
     public Player() {
         state = new AnimationState(AssetsService.getPlayerStateData());
@@ -27,6 +28,7 @@ public class Player {
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.position.set(0,0);
         bodyDef.fixedRotation=true;
+        animation = null;
     }
 
     public void changeVelocity(float dX, float dY){
@@ -45,8 +47,8 @@ public class Player {
 
         state.update(deltaTime);
 
-        if(getLinearVelocity().x != 0 ){
-            if(body.getLinearVelocity().x < 0)
+        if(animation !=null ){
+            if(animation == "LEFT")
                 flip = true;
             else
                 flip =false;
@@ -107,5 +109,9 @@ public class Player {
 
     public Vector2 getLinearVelocity() {
         return body.getLinearVelocity();
+    }
+
+    public void setAnimation(String animation){
+        this.animation=animation;
     }
 }
