@@ -87,6 +87,9 @@ public class InputController implements InputProcessor{
             case Input.Keys.F:
                 VariablesService.SHOW_FULLSCREEN = !VariablesService.SHOW_FULLSCREEN;
                 break;
+            case Input.Keys.E:
+                playerController.interact();
+                break;
         }
         return false;
     }

@@ -2,6 +2,8 @@ package com.game.controllers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.game.models.LevelObject;
 import com.game.models.Player;
 import com.game.services.BodyService;
 import com.game.models.Portal;
@@ -53,8 +55,14 @@ public class PlayerController {
         PortalController.firePortal(player.getPosition().cpy(), clickPos.cpy(), portalType);
     }
 
-    public void updatePlayerCollisionState(boolean grounded, boolean vicinity) {
+    public void updatePlayerCollisionState(boolean grounded, Fixture vicinity) {
         player.setGrounded(grounded);
         player.setVicinity(vicinity);
+    }
+
+    public void interact() {
+        if(player.getVicinity()!=null){
+            System.out.println("interacted");
+        }
     }
 }

@@ -3,7 +3,9 @@ package com.game.controllers;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.RayCastCallback;
+import com.game.models.LevelObject;
 import com.game.models.Model;
 import com.game.models.Player;
 import com.game.services.AssetsService;
@@ -52,7 +54,7 @@ public class Controller extends ApplicationAdapter {
 
 	private void updatePlayerCollisionState() {
 		boolean grounded = levelController.getcollisionController().isPlayerOnGround();
-		boolean vicinity = levelController.getcollisionController().isInVicinityofLevelObject();
+		Fixture vicinity = levelController.getcollisionController().getVicinity();
 		playerController.updatePlayerCollisionState(grounded, vicinity);
 	}
 

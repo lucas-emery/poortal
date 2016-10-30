@@ -3,14 +3,12 @@ package com.game.models;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.*;
 import com.esotericsoftware.spine.AnimationState;
 import com.game.services.AssetsService;
 import com.game.services.BodyService;
 import com.game.services.ConstantsService;
+import com.sun.glass.ui.Window;
 
 public class Player {
 
@@ -22,7 +20,7 @@ public class Player {
     private LevelObject.Type type;
     private String animation;
     private boolean grounded;
-    private boolean vicinity;
+    private Fixture vicinity;
 
     public Player() {
         state = new AnimationState(AssetsService.getPlayerStateData());
@@ -31,12 +29,8 @@ public class Player {
         bodyDef.position.set(0,0);
         bodyDef.fixedRotation=true;
         animation = null;
+        vicinity = null;
     }
-
-    public void changeVelocity(float dX, float dY){
-        body.setLinearVelocity(body.getLinearVelocity().x + dX, body.getLinearVelocity().y + dY);
-    }
-
     public Vector2 getVelocity(){
         return body.getLinearVelocity();
     }
@@ -90,7 +84,7 @@ public class Player {
 
     public void createFixture() {
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(1.5f,1.5f);                                  // DITTO LO DE ABAJO
+        shape.setAsBox(1f,1.5f);                                  // DITTO LO DE ABAJO
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.isSensor=true;
         fixtureDef.shape=shape;
@@ -116,10 +110,10 @@ public class Player {
     public boolean isGrounded() {
         return grounded;
     }
-    public boolean isInVicinity(){
+    public Fixture getVicinity(){
         return vicinity;
     }
-    public void setVicinity(boolean vicinity){
+    public void setVicinity(Fixture vicinity){
         this.vicinity=vicinity;
     }
 
