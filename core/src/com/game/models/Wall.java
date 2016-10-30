@@ -40,7 +40,8 @@ public class Wall {
         else
             fixtureDef.friction= 0;
 
-        body.createFixture(fixtureDef).setUserData("FLOOR");
+        fixture = body.createFixture(fixtureDef);
+        fixture.setUserData("FLOOR");
         shape.dispose();
 
     }
@@ -63,7 +64,13 @@ public class Wall {
         return fixture.equals(otherFixture);
     }
 
+
+    public int hashCode(){
+        return fixture.hashCode();
+    }
+
     public boolean isPortable() {
+        System.out.println(portable);
         return portable;
     }
 }
