@@ -90,7 +90,7 @@ public class Player {
         fixtureDef.shape=shape;
         body.createFixture(fixtureDef).setUserData("Sensor");
 
-        shape.setAsBox(0.3f, 0.2f, new Vector2(0,-0.85f),0);        //DESPUES HAY QUE MOVER LOS MAGIC NUMBERS A SERVICES
+        shape.setAsBox(0.4f, 0.2f, new Vector2(0,-0.85f),0);        //DESPUES HAY QUE MOVER LOS MAGIC NUMBERS A SERVICES
         fixtureDef.shape=shape;                                     //LOS SETTEE ARBITRARIAMENTE, TIENEN QUE VER CON LA FORMA
         body.createFixture(fixtureDef).setUserData("FootSensor");   //DEL SPRITE DE PLAYER
 

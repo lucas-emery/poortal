@@ -40,7 +40,7 @@ public class Wall {
         else
             fixtureDef.friction= 0;
 
-        fixture = body.createFixture(fixtureDef);
+        body.createFixture(fixtureDef).setUserData("FLOOR");
         shape.dispose();
 
     }
