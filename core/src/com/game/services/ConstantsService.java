@@ -67,4 +67,8 @@ public class ConstantsService {
 
     public static final float WORLD_STEP = 1/60f;
 
+    public static final int GRAPHICS_HEIGHT = 550;
+
+    public static final int GRAPHICS_WIDTH = 977;
+
 }
