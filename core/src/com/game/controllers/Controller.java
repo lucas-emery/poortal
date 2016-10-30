@@ -18,6 +18,7 @@ public class Controller extends ApplicationAdapter {
 	private LevelController levelController;
 	PlayerController playerController;
 	private InputController inputController;
+	CollisionController collisionController;
 
 	@Override
 	public void create () {
@@ -27,7 +28,9 @@ public class Controller extends ApplicationAdapter {
 		PlayerView playerView = new PlayerView(player);
 		playerController = new PlayerController(player,playerView);
 
-		levelController = new LevelController();
+		collisionController = new CollisionController();
+
+		levelController = new LevelController(collisionController);
 		levelController.setPlayer(player);
 		levelController.generateLevel();
 
@@ -43,9 +46,16 @@ public class Controller extends ApplicationAdapter {
 	public void render () {
 		model.update();
 		inputController.update();
+		updatePlayerCollisionState();
 		view.render();
 	}
-	
+
+	private void updatePlayerCollisionState() {
+		boolean grounded = levelController.getcollisionController().isPlayerOnGround();
+		boolean vicinity = levelController.getcollisionController().isInVicinityofLevelObject();
+		playerController.updatePlayerCollisionState(grounded, vicinity);
+	}
+
 	@Override
 	public void dispose () {
 	}

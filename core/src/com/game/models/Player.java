@@ -21,6 +21,8 @@ public class Player {
     private boolean flip;
     private LevelObject.Type type;
     private String animation;
+    private boolean grounded;
+    private boolean vicinity;
 
     public Player() {
         state = new AnimationState(AssetsService.getPlayerStateData());
@@ -82,13 +84,28 @@ public class Player {
         this.body = body;
         createFixture();
     }
-    public void createFixture() {
-        PolygonShape shape = BodyService.getPlayerShape();
+    public void setGrounded(boolean grounded){
+        this.grounded=grounded;
+    }
 
-        FixtureDef fixtureDef = BodyService.getPlayerFixtureDef();
+    public void createFixture() {
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(1.5f,1.5f);                                  // DITTO LO DE ABAJO
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.isSensor=true;
+        fixtureDef.shape=shape;
+        body.createFixture(fixtureDef).setUserData("Sensor");
+
+        shape.setAsBox(0.3f, 0.2f, new Vector2(0,-0.85f),0);        //DESPUES HAY QUE MOVER LOS MAGIC NUMBERS A SERVICES
+        fixtureDef.shape=shape;                                     //LOS SETTEE ARBITRARIAMENTE, TIENEN QUE VER CON LA FORMA
+        body.createFixture(fixtureDef).setUserData("FootSensor");   //DEL SPRITE DE PLAYER
+
+        shape = BodyService.getPlayerShape();
+
+        fixtureDef = BodyService.getPlayerFixtureDef();
         fixtureDef.shape = shape;
 
-        body.createFixture(fixtureDef);
+        body.createFixture(fixtureDef).setUserData("Body");
         shape.dispose();
     }
 
@@ -97,10 +114,13 @@ public class Player {
     }
 
     public boolean isGrounded() {
-        if(Math.abs((double) getLinearVelocity().y)<ConstantsService.SPEEDDELTA)
-            return true;
-        else
-            return false;
+        return grounded;
+    }
+    public boolean isInVicinity(){
+        return vicinity;
+    }
+    public void setVicinity(boolean vicinity){
+        this.vicinity=vicinity;
     }
 
     public void applyForceToCenter(float v, float i, boolean b) {

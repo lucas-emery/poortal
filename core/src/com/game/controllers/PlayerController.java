@@ -52,4 +52,9 @@ public class PlayerController {
     public void firePortal(Vector2 clickPos, Portal.Type portalType) {
         PortalController.firePortal(player.getPosition().cpy(), clickPos.cpy(), portalType);
     }
+
+    public void updatePlayerCollisionState(boolean grounded, boolean vicinity) {
+        player.setGrounded(grounded);
+        player.setVicinity(vicinity);
+    }
 }

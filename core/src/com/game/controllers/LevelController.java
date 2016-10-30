@@ -19,11 +19,17 @@ public class LevelController {
     private HashSet<LevelObjectView> levelObjectsViews;
     private HashSet<Wall> walls;
     private World world;
+    private CollisionController collisionController;
 
-    public LevelController() {
+    public LevelController(CollisionController collisionController) {
         levelObjects = new HashSet<LevelObject>();
         levelObjectsViews = new HashSet<LevelObjectView>();
         walls = new HashSet<Wall>();
+        this.collisionController=collisionController;
+    }
+
+    public CollisionController getcollisionController(){
+        return collisionController;
     }
 
     public HashSet<LevelObject> getLevelObjects() {
@@ -40,6 +46,7 @@ public class LevelController {
 
     public void generateLevel() {
         world = new World(new Vector2(0, -9.8f), true);
+        world.setContactListener(collisionController);
 
         player.setInitialPosition(new Vector2(10,3));
         player.setBody(world.createBody(player.getBodyDef()));
