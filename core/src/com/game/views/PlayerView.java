@@ -19,7 +19,7 @@ public class PlayerView {
     private Player player;
     private Skeleton skeleton;
     private Rectangle dimensions;
-    private Vector2 mouseVector, playerVector, cartesianVersor, playerToMouseVector;
+    private Vector2 mouseVector, playerVector, playerToMouseVector;
     //private Vector2 screenConversionFactor, originalScreenResolution;
 
     public PlayerView(Player player) {
@@ -29,7 +29,6 @@ public class PlayerView {
 
         playerVector = new Vector2();
         mouseVector = new Vector2();
-        cartesianVersor = new Vector2();
         playerToMouseVector = new Vector2();
         //screenConversionFactor = new Vector2(1.0f,1.0f);
         //originalScreenResolution = new Vector2(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
@@ -46,15 +45,13 @@ public class PlayerView {
         mouseVector.x = x;
         mouseVector.y = Gdx.graphics.getHeight() - y; // Box2D and Libgdx use different origin coordinates
 
-        cartesianVersor.set(0.0f, 100.0f - playerVector.y);
-
         playerToMouseVector.set(mouseVector.x - playerVector.x, mouseVector.y - playerVector.y);
 
-        float theta = cartesianVersor.angle(playerToMouseVector);
+        float theta = ConstantsService.cartesianVersorY.angle(playerToMouseVector);
 
         if (player.isFlipped())
             theta *= -1.0f;
-        //System.out.println("------------\n" + theta + "  ,  " + mouseVector + "  ,  " + playerVector + "  ,  " + playerToMouseVector + "  ,  " + cartesianVersor + "  ,  " + screenConversionFactor);
+        //System.out.println("------------\n" + theta + "  ,  " + mouseVector + "  ,  " + playerVector + "  ,  " + playerToMouseVector + "  ,  " + cartesianVersor);
 
         skeleton.findBone("arm_right").setRotation(theta);
     }
