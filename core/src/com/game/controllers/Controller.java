@@ -70,4 +70,8 @@ public class Controller extends ApplicationAdapter {
 	public static void queryRayCast(RayCastCallback callback, Vector2 from, Vector2 to) {
 		model.queryRayCast(callback, from, to);
 	}
+
+	public static Vector2 getGraphicsCoords(Vector2 screenCoords) {
+		return view.getGraphicsCoords(screenCoords);
+	}
 }

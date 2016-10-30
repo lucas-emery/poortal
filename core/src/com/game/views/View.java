@@ -11,6 +11,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -100,5 +102,10 @@ public class View {
 
     public void resize(int width, int height) {
         viewport.update(width, height);
+    }
+
+    public Vector2 getGraphicsCoords(Vector2 screenCoords) {
+        Vector3 graphicsCoords = camera.unproject(new Vector3(screenCoords.x, screenCoords.y, 0), viewport.getLeftGutterWidth(), viewport.getBottomGutterHeight(), viewport.getWorldWidth(), viewport.getWorldHeight());
+        return new Vector2(graphicsCoords.x, graphicsCoords.y);
     }
 }
