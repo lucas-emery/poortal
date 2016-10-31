@@ -21,7 +21,7 @@ public class Cube extends LevelObject {
         Shape shape = BodyService.getShape(type);
         FixtureDef fixtureDef = BodyService.getFixtureDef(type);
         fixtureDef.shape=shape;
-        body.createFixture(fixtureDef).setUserData("INTERRACTABLE");
+        body.createFixture(fixtureDef).setUserData("CUBE");
         shape.dispose();
     }
 }

@@ -62,6 +62,16 @@ public class PlayerController {
 
     public void interact() {
         if(player.getVicinity()!=null){
+            if(player.getVicinity().getUserData().equals("CUBE")){
+                if(!player.isHolding()) {
+                    System.out.println("pickedup");
+                    player.setHolding(true);
+                }
+                else{
+                    System.out.println("letgo");
+                    player.setHolding(false);
+                }
+            }
             System.out.println("interacted");
         }
     }

@@ -21,6 +21,7 @@ public class Player {
     private String animation;
     private boolean grounded;
     private Fixture vicinity;
+    private boolean holding;
 
     public Player() {
         state = new AnimationState(AssetsService.getPlayerStateData());
@@ -30,6 +31,7 @@ public class Player {
         bodyDef.fixedRotation=true;
         animation = null;
         vicinity = null;
+        holding = false;
     }
     public Vector2 getVelocity(){
         return body.getLinearVelocity();
@@ -127,5 +129,13 @@ public class Player {
 
     public void setAnimation(String animation){
         this.animation=animation;
+    }
+
+    public void setHolding(boolean holding) {
+        this.holding = holding;
+    }
+
+    public boolean isHolding() {
+        return holding;
     }
 }
