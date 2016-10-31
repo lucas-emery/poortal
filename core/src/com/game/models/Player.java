@@ -90,16 +90,22 @@ public class Player {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.isSensor=true;
         fixtureDef.shape=shape;
+        fixtureDef.restitution = 0f;
+        fixtureDef.density = 0.2f;
         body.createFixture(fixtureDef).setUserData("Sensor");
 
         shape.setAsBox(0.4f, 0.2f, new Vector2(0,-0.85f),0);        //DESPUES HAY QUE MOVER LOS MAGIC NUMBERS A SERVICES
-        fixtureDef.shape=shape;                                     //LOS SETTEE ARBITRARIAMENTE, TIENEN QUE VER CON LA FORMA
+        fixtureDef.shape=shape;
+        fixtureDef.restitution = 0f;
+        fixtureDef.density = 0.2f;//LOS SETTEE ARBITRARIAMENTE, TIENEN QUE VER CON LA FORMA
         body.createFixture(fixtureDef).setUserData("FootSensor");   //DEL SPRITE DE PLAYER
 
         shape = BodyService.getPlayerShape();
 
         fixtureDef = BodyService.getPlayerFixtureDef();
         fixtureDef.shape = shape;
+        fixtureDef.restitution = 0f;
+        fixtureDef.density = 0.2f;
 
         body.createFixture(fixtureDef).setUserData("Body");
         shape.dispose();
