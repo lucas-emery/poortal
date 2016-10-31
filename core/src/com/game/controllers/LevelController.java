@@ -53,10 +53,6 @@ public class LevelController {
         player.setBody(world.createBody(player.getBodyDef()));
 
         levelObjects.add(new Cube(new Vector2(4, 7)));
-        levelObjects.add(new Cube(new Vector2(5, 7)));
-        levelObjects.add(new Cube(new Vector2(6, 7)));
-        levelObjects.add(new Cube(new Vector2(7, 7)));
-        levelObjects.add(new Cube(new Vector2(0.1f , 7)));
 
         for(LevelObject object : levelObjects) {
             object.setBody(world.createBody(object.getBodyDef()));
