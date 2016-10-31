@@ -35,7 +35,7 @@ public class BodyService {
 
         switch(type) {
             case CUBE:
-                friction = 0.7f;  density = 0.4f;   restitution = 0.2f;
+                friction = 0.7f;  density = 1f;   restitution = 0.2f;
                 break;
             case BUTTON:
                 friction = 0f;  density = 0f;   restitution = 0f;

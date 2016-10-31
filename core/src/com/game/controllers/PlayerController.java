@@ -3,6 +3,8 @@ package com.game.controllers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.joints.RevoluteJoint;
+import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
 import com.game.models.LevelObject;
 import com.game.models.Player;
 import com.game.services.BodyService;
@@ -64,15 +66,13 @@ public class PlayerController {
         if(player.getVicinity()!=null){
             if(player.getVicinity().getUserData().equals("CUBE")){
                 if(!player.isHolding()) {
-                    System.out.println("pickedup");
                     player.setHolding(true);
                 }
                 else{
-                    System.out.println("letgo");
                     player.setHolding(false);
                 }
             }
-            System.out.println("interacted");
         }
     }
+
 }

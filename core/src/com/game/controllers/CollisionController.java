@@ -35,7 +35,6 @@ public class CollisionController implements ContactListener {
         if(f1.getUserData()!= null && f1.getUserData().equals("FootSensor") ||f2.getUserData()!= null && f2.getUserData().equals("FootSensor")){
             contactnumber++;
             playerOnGround=true;
-            System.out.println("change to true");
         }
     }
 
@@ -58,7 +57,6 @@ public class CollisionController implements ContactListener {
             contactnumber--;
             if(contactnumber==0){
                 playerOnGround=false;
-                System.out.println("change to false");
             }
         }
 
