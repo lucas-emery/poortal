@@ -1,6 +1,7 @@
 package com.game.controllers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJoint;
@@ -13,10 +14,14 @@ import com.game.services.ConstantsService;
 import com.game.views.PlayerView;
 import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
+import java.math.MathContext;
+
 public class PlayerController {
 
     private Player player;
     private PlayerView playerView;
+    public static Vector2 ray = new Vector2(0,0);
+    public static Vector2 rayPos = new Vector2(0,0);
 
     public PlayerController(Player player,PlayerView playerView){
         this.player = player;
@@ -53,8 +58,18 @@ public class PlayerController {
         playerView.updatePortalArm(x,y);
     }
 
-    public void firePortal(Vector2 clickPos, Portal.Type portalType) {
-        PortalController.firePortal(player.getPosition().cpy(), clickPos.cpy(), portalType);
+    public void firePortal(Vector2 clickPos, Portal.Type portalType){
+        Vector2 playerPos = player.getPosition().cpy();
+
+        clickPos.scl(ConstantsService.PIXELS_TO_METERS);
+        clickPos.sub(playerPos);
+        clickPos.setLength2(ConstantsService.WORLD_HEIGHT * ConstantsService.WORLD_HEIGHT +
+                            ConstantsService.WORLD_WIDTH * ConstantsService.WORLD_WIDTH);
+        clickPos.add(playerPos);
+        ray = clickPos.cpy();
+        rayPos = playerPos.cpy();
+
+        PortalController.firePortal(playerPos, clickPos, portalType);
     }
 
     public void updatePlayerCollisionState(boolean grounded, Fixture vicinity) {

@@ -3,13 +3,11 @@ package com.game.views;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -17,6 +15,8 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.esotericsoftware.spine.SkeletonRenderer;
+import com.game.controllers.PlayerController;
+import com.game.models.LevelObject;
 import com.game.models.Model;
 import com.game.services.AssetsService;
 import com.game.services.ConstantsService;
@@ -41,6 +41,7 @@ public class View {
     private Sprite levelBackgorund;
     private Music theme;
     private BitmapFont font;
+    private ShapeRenderer shapeRenderer;
 
     public View(Model model, HashSet<LevelObjectView> levelObjectsViews, PlayerView playerView, Sprite levelBackground) {
 
@@ -57,6 +58,7 @@ public class View {
         skeletonRenderer = new SkeletonRenderer();
         skeletonRenderer.setPremultipliedAlpha(true);
         debugRenderer = new Box2DDebugRenderer();
+        shapeRenderer = new ShapeRenderer();
 
         camera = new OrthographicCamera();
         viewport = new FitViewport(977, 550, camera);
@@ -93,7 +95,13 @@ public class View {
 
         batch.end();
 
-        debugRenderer.render(model.getWorld(), camera.combined.scale(ConstantsService.METERS_TO_PIXELS, ConstantsService.METERS_TO_PIXELS, 0));
+        shapeRenderer.setProjectionMatrix(camera.combined.cpy().scale(ConstantsService.METERS_TO_PIXELS, ConstantsService.METERS_TO_PIXELS, 0));
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        shapeRenderer.setColor(Color.FIREBRICK);
+        shapeRenderer.line(PlayerController.rayPos, PlayerController.ray);
+        shapeRenderer.end();
+
+        debugRenderer.render(model.getWorld(), camera.combined.cpy().scale(ConstantsService.METERS_TO_PIXELS, ConstantsService.METERS_TO_PIXELS, 0));
     }
 
     public void mouseMove(int x, int y){
@@ -105,7 +113,15 @@ public class View {
     }
 
     public Vector2 getGraphicsCoords(Vector2 screenCoords) {
-        Vector3 graphicsCoords = camera.unproject(new Vector3(screenCoords.x, screenCoords.y, 0), viewport.getLeftGutterWidth(), viewport.getBottomGutterHeight(), viewport.getWorldWidth(), viewport.getWorldHeight());
+        Vector3 graphicsCoords = camera.unproject(new Vector3(screenCoords.x, screenCoords.y, 0), viewport.getLeftGutterWidth(), viewport.getBottomGutterHeight(), viewport.getScreenWidth(), viewport.getScreenHeight());
         return new Vector2(graphicsCoords.x, graphicsCoords.y);
+    }
+
+    public void addView(LevelObjectView view) {
+        levelObjectsViews.add(view);
+    }
+
+    public void removeView(LevelObjectView view) {
+        levelObjectsViews.remove(view);
     }
 }

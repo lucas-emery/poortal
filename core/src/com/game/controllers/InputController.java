@@ -34,9 +34,9 @@ public class InputController implements InputProcessor{
         else
             portalType = LevelObject.Type.PORTAL_ORANGE;
 
-        System.out.println("Fire portal");
+        Vector2 click = Controller.getGraphicsCoords(new Vector2(screenX, screenY));
 
-        playerController.firePortal(new Vector2(screenX, screenY), portalType);
+        playerController.firePortal(click, portalType);
         return false;
     }
 

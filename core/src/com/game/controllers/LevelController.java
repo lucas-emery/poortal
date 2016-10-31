@@ -52,10 +52,16 @@ public class LevelController {
         player.setInitialPosition(new Vector2(10,3));
         player.setBody(world.createBody(player.getBodyDef()));
 
-        LevelObject newObject = new Cube(new Vector2(4, 7));
-        newObject.setBody(world.createBody(newObject.getBodyDef()));
-        levelObjects.add(newObject);
-        levelObjectsViews.add(new LevelObjectView(newObject));
+        levelObjects.add(new Cube(new Vector2(4, 7)));
+        levelObjects.add(new Cube(new Vector2(5, 7)));
+        levelObjects.add(new Cube(new Vector2(6, 7)));
+        levelObjects.add(new Cube(new Vector2(7, 7)));
+        levelObjects.add(new Cube(new Vector2(0.1f , 7)));
+
+        for(LevelObject object : levelObjects) {
+            object.setBody(world.createBody(object.getBodyDef()));
+            levelObjectsViews.add(new LevelObjectView(object));
+        }
         
         Wall floor = new Wall(new Vector2(0,35* ConstantsService.PIXELS_TO_METERS ), true);
         floor.setWall(world.createBody(floor.getBodyDef()), new Vector2(977* ConstantsService.PIXELS_TO_METERS,0), true);
@@ -63,11 +69,11 @@ public class LevelController {
 
         Wall leftWall = new Wall(new Vector2(40* ConstantsService.PIXELS_TO_METERS,35* ConstantsService.PIXELS_TO_METERS), true);
         leftWall.setWall(world.createBody(leftWall.getBodyDef()), new Vector2(0,520* ConstantsService.PIXELS_TO_METERS), false);
-        walls.add(floor);
+        walls.add(leftWall);
 
-        Wall rightWall = new Wall(new Vector2(925* ConstantsService.PIXELS_TO_METERS,35* ConstantsService.PIXELS_TO_METERS), true);
+        Wall rightWall = new Wall(new Vector2(925,35).scl(ConstantsService.PIXELS_TO_METERS), true);
         rightWall.setWall(world.createBody(rightWall.getBodyDef()), new Vector2(0,520* ConstantsService.PIXELS_TO_METERS), false);
-        walls.add(floor);
+        walls.add(rightWall);
 
 
     }

@@ -16,12 +16,8 @@ public class WallController {
 
     public static Boolean isPortableWall(Fixture fixture) {
         for(Wall wall : walls) {
-            if(wall.equals(fixture)) {
-                if(wall.isPortable())
-                    return true;
-                else
-                    return false;
-            }
+            if(wall.equals(fixture))
+                return wall.isPortable();
         }
         return null;
     }

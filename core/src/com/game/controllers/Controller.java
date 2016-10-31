@@ -10,6 +10,7 @@ import com.game.models.Model;
 import com.game.models.Player;
 import com.game.services.AssetsService;
 import com.game.services.ConstantsService;
+import com.game.views.LevelObjectView;
 import com.game.views.PlayerView;
 import com.game.views.View;
 
@@ -73,5 +74,15 @@ public class Controller extends ApplicationAdapter {
 
 	public static Vector2 getGraphicsCoords(Vector2 screenCoords) {
 		return view.getGraphicsCoords(screenCoords);
+	}
+
+	public static  void addLevelObject(LevelObject object, LevelObjectView objectView) {
+		model.addObject(object);
+		view.addView(objectView);
+	}
+
+	public static void removeLevelObject(LevelObject object, LevelObjectView objectView) {
+		model.removeObject(object);
+		view.removeView(objectView);
 	}
 }

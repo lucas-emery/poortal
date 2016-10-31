@@ -52,8 +52,14 @@ public class Model {
         world.rayCast(callback, from, to);
     }
 
-    public Body createBody(BodyDef bodyDef) {
-        return world.createBody(bodyDef);
+    public void addObject(LevelObject object) {
+        levelObjects.add(object);
+        object.setBody(world.createBody(object.getBodyDef()));
+    }
+
+    public void removeObject(LevelObject object) {
+        levelObjects.remove(object);
+        world.destroyBody(object.getBody());
     }
 
     public void createJoint(){

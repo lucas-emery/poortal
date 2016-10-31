@@ -1,6 +1,7 @@
 package com.game.services;
 
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.game.models.LevelObject;
 
@@ -70,5 +71,9 @@ public class ConstantsService {
     public static final int GRAPHICS_HEIGHT = 550;
 
     public static final int GRAPHICS_WIDTH = 977;
+
+    public static final int WORLD_HEIGHT = MathUtils.ceil(GRAPHICS_HEIGHT * PIXELS_TO_METERS);
+
+    public static final int WORLD_WIDTH = MathUtils.ceil(GRAPHICS_WIDTH * PIXELS_TO_METERS);
 
 }

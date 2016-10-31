@@ -10,7 +10,7 @@ public abstract class LevelObject {
     public enum Type {
         CUBE, BUTTON, PORTAL_BLUE, PORTAL_ORANGE, WALL, PLATFORM
     }
-    protected static Type type;
+    protected Type type;
     protected Body body;
     protected BodyDef bodyDef;
     protected Vector2 position;

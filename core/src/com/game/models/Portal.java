@@ -11,38 +11,24 @@ import com.game.services.BodyService;
 
 public class Portal extends LevelObject{
 
-    private String color;
-    private LevelObject.Type type;
-    private Vector2 position;
+    private Vector2 normal;
 
-    public Portal(Vector2 position, String color){
-
-        if(color == "BLUE")
-            type = Type.PORTAL_BLUE;
-        else if(color == "ORANGE")
-            type = Type.PORTAL_ORANGE;
-        else
-            throw new IllegalArgumentException("Portal color must be either blue or orange");
-
+    public Portal(Vector2 position, Vector2 normal, LevelObject.Type type) {
         this.position = position;
-        this.createBodyDef();
+        this.normal = normal;
+        this.type = type;
 
+        createBodyDef();
+        bodyDef.angle = normal.angleRad();
     }
 
     @Override
     public void createFixtureDef() {
         Shape shape = BodyService.getShape(type);
-        FixtureDef fixtureDef = new FixtureDef();
-
+        FixtureDef fixtureDef = BodyService.getFixtureDef(type);
         fixtureDef.shape = shape;
+        fixtureDef.isSensor = true;
         body.createFixture(fixtureDef);
         shape.dispose();
-
-        
-    }
-
-
-    public String getColor(){
-        return color;
     }
 }
