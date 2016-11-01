@@ -28,7 +28,7 @@ public class Portal extends LevelObject{
         FixtureDef fixtureDef = BodyService.getFixtureDef(type);
         fixtureDef.shape = shape;
         fixtureDef.isSensor = true;
-        body.createFixture(fixtureDef);
+        body.createFixture(fixtureDef).setUserData("POORTAL");
         shape.dispose();
     }
 }

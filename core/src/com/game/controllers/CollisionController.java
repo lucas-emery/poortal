@@ -33,8 +33,10 @@ public class CollisionController implements ContactListener {
             }
         }
         if(f1.getUserData()!= null && f1.getUserData().equals("FootSensor") ||f2.getUserData()!= null && f2.getUserData().equals("FootSensor")){
-            contactnumber++;
-            playerOnGround=true;
+            if(!(f1.getUserData().equals("POORTAL")||f2.getUserData().equals("POORTAL"))) {
+                contactnumber++;
+                playerOnGround = true;
+            }
         }
     }
 
@@ -54,10 +56,13 @@ public class CollisionController implements ContactListener {
             }
         }
         if(f1.getUserData()!= null && f1.getUserData().equals("FootSensor") ||f2.getUserData()!= null && f2.getUserData().equals("FootSensor")){
-            contactnumber--;
-            if(contactnumber==0){
-                playerOnGround=false;
+            if(!(f1.getUserData().equals("POORTAL")||f2.getUserData().equals("POORTAL"))) {
+                contactnumber--;
+                if (contactnumber == 0) {
+                    playerOnGround = false;
+                }
             }
+            
         }
 
     }
