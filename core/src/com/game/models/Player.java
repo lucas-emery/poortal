@@ -8,7 +8,6 @@ import com.esotericsoftware.spine.AnimationState;
 import com.game.services.AssetsService;
 import com.game.services.BodyService;
 import com.game.services.ConstantsService;
-import com.sun.glass.ui.Window;
 
 public class Player {
 

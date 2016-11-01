@@ -2,7 +2,6 @@ package com.game.controllers;
 
 import com.badlogic.gdx.physics.box2d.*;
 import com.game.models.LevelObject;
-import com.sun.glass.ui.Window;
 
 /**
  * Created by juan on 24/10/16.
