@@ -63,18 +63,27 @@ public class Model {
     }
 
     public void createJoint(){
-        RevoluteJointDef rDef = new RevoluteJointDef();
+        RevoluteJointDef rDef;
+        rDef = new RevoluteJointDef();
         rDef.bodyA = player.getBody();
         rDef.bodyB = player.getVicinity().getBody();
         rDef.collideConnected = true;
-        rDef.localAnchorA.set(0.6f,0);          //HAY QUE MOVER ESTAS CONSTANTES
-        rDef.localAnchorB.set(0.6f,0);          // A ALGUN SERVICE
+
+        if (player.isFlipped())
+            rDef.localAnchorA.set(-1.5f,0.5f);
+        else
+            rDef.localAnchorA.set(1.5f,0.5f);   //HAY QUE MOVER ESTAS CONSTANTES
+
+        rDef.localAnchorB.set(0.0f,0);          // A ALGUN SERVICE (para juan no)
         joint = world.createJoint(rDef);
         joint.setUserData("Joint");
     }
     public void releaseJoint(){
-       // Body body = joint.getBodyB();
+        Body body = joint.getBodyB();
         world.destroyJoint(joint);
-       // body.applyForce();  LA IDEA ES APLICAR ALGUNA FUERZA PARA QUE SIMULE TIRAR EL BLOQUE
-    }  // TENDRIA QUE SER EN LA DIRECCION QUE MIRA EL PLAYER
+        if (player.isFlipped())
+            body.applyForceToCenter(-150.0f,150.0f,true);
+        else
+            body.applyForceToCenter(150.0f,150.0f,true);
+    }
 }
