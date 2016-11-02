@@ -76,4 +76,19 @@ public class ConstantsService {
 
     public static final int WORLD_WIDTH = MathUtils.ceil(GRAPHICS_WIDTH * PIXELS_TO_METERS);
 
+    public enum ColliderType {
+        CUBE(1<<0),
+        SENSOR(1<<1);
+
+        private int value;
+
+        private ColliderType(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
+    }
+
 }
