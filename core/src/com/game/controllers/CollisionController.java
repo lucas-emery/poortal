@@ -12,6 +12,10 @@ public class CollisionController implements ContactListener {
     private static Fixture vicinity=null;
     private static int contactNumber=0;
 
+    public static void setVicinity(Fixture vicinity) {
+        CollisionController.vicinity = vicinity;
+    }
+
     @Override
     public void beginContact(Contact contact) {
         Fixture f1 = contact.getFixtureA();

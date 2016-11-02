@@ -92,7 +92,9 @@ public class PlayerController {
                 }
                 else{
                     player.setHolding(false);
+                    CollisionController.setVicinity(null);
                 }
+
             }
         }
     }
