@@ -1,7 +1,7 @@
 package com.game.controllers;
 
 import com.badlogic.gdx.physics.box2d.*;
-import com.game.models.LevelObject;
+import com.game.services.ConstantsService.ColliderType;
 
 /**
  * Created by juan on 24/10/16.
@@ -17,47 +17,62 @@ public class CollisionController implements ContactListener {
         Fixture f1 = contact.getFixtureA();
         Fixture f2 = contact.getFixtureB();
 
-        if(f1.getUserData()!= null && f1.getUserData().equals("Sensor")){
-            if(isInteractable(f2)){
-                vicinity=f2;
+        int value = ((Integer)(f1.getUserData())+(Integer)(f2.getUserData()));
+        if(!PlayerController.getPlayer().isFlipped()) {
+            if ((value & ColliderType.PSENSORRIGHT.val()) == ColliderType.PSENSORRIGHT.val()) {
+                if ((value & ColliderType.BUTTON.val()) == ColliderType.BUTTON.val() || (value & ColliderType.CUBE.val()) == ColliderType.CUBE.val()) {
+                    if ((Integer) (f1.getUserData()) == ColliderType.PSENSORRIGHT.val())
+                        vicinity = f2;
+                    else
+                        vicinity = f1;
+                }
             }
         }
-        if(f2.getUserData()!=null && f2.getUserData().equals("Sensor")){
-            if(isInteractable(f1)){
-                vicinity=f1;
+        else{
+            if ((value & ColliderType.PSENSORLEFT.val() )== ColliderType.PSENSORLEFT.val()) {
+                if ((value & ColliderType.BUTTON.val())==ColliderType.BUTTON.val()||(value & ColliderType.CUBE.val())==ColliderType.CUBE.val()) {
+                    if((Integer)(f1.getUserData()) == ColliderType.PSENSORLEFT.val()) {
+                        vicinity = f2;
+                        System.out.println(f2);
+                    }
+                    else{
+                        vicinity = f1;
+                        System.out.println(f2);
+                    }
+                }
             }
         }
-        if(f1.getUserData()!= null && f1.getUserData().equals("FootSensor") ||f2.getUserData()!= null && f2.getUserData().equals("FootSensor")){
-            if(!(f1.getUserData().equals("POORTAL")||f2.getUserData().equals("POORTAL"))) {
-                contactNumber++;
-                playerOnGround = true;
-            }
+        if((value & (ColliderType.PORTAL.val()+ColliderType.PSENSORFOOT.val()))==ColliderType.PSENSORFOOT.val()){
+            contactNumber++;
+            playerOnGround = true;
         }
     }
 
     @Override
-    public void endContact(Contact contact) {
+    public void endContact (Contact contact) {
         Fixture f1 = contact.getFixtureA();
         Fixture f2 = contact.getFixtureB();
 
-        if(f1.getUserData()!= null && f1.getUserData().equals("Sensor")){
-            if(isInteractable(f2)){
-                vicinity=null;
+        int value = ((Integer)(f1.getUserData())+(Integer)(f2.getUserData()));
+
+        if ((value & ColliderType.PSENSORRIGHT.val()) == ColliderType.PSENSORRIGHT.val()) {
+            if ((value & ColliderType.BUTTON.val()) == ColliderType.BUTTON.val() || (value & ColliderType.CUBE.val()) == ColliderType.CUBE.val()) {
+                if(f1 == vicinity || f2 == vicinity)
+                    vicinity=null;
             }
         }
-        if(f2.getUserData()!=null && f2.getUserData().equals("Sensor")){
-            if(isInteractable(f1)){
-                vicinity=null;
+
+        if ((value & ColliderType.PSENSORLEFT.val() )== ColliderType.PSENSORLEFT.val()) {
+            if ((value & ColliderType.BUTTON.val())==ColliderType.BUTTON.val()||(value & ColliderType.CUBE.val())==ColliderType.CUBE.val()) {
+                if(f1 == vicinity || f2 == vicinity)
+                    vicinity=null;
             }
         }
-        if(f1.getUserData()!= null && f1.getUserData().equals("FootSensor") ||f2.getUserData()!= null && f2.getUserData().equals("FootSensor")){
-            if(!(f1.getUserData().equals("POORTAL")||f2.getUserData().equals("POORTAL"))) {
-                contactNumber--;
-                if (contactNumber == 0) {
-                    playerOnGround = false;
-                }
-            }
-            
+
+        if((value & (ColliderType.PORTAL.val()+ColliderType.PSENSORFOOT.val()))==ColliderType.PSENSORFOOT.val()){
+            contactNumber--;
+            if(contactNumber==0)
+                playerOnGround = false;
         }
 
     }
@@ -69,6 +84,7 @@ public class CollisionController implements ContactListener {
     }
 
     public static Fixture getVicinity() {
+        System.out.println(vicinity);
         return vicinity;
     }
 

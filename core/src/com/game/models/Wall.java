@@ -2,6 +2,7 @@ package com.game.models;
 import com.badlogic.gdx.math.Vector2;
 import com.game.services.BodyService;
 import com.badlogic.gdx.physics.box2d.*;
+import com.game.services.ConstantsService;
 
 import static com.game.models.LevelObject.Type.*;
 
@@ -41,7 +42,7 @@ public class Wall {
             fixtureDef.friction= 0;
 
         fixture = body.createFixture(fixtureDef);
-        fixture.setUserData("FLOOR");
+        fixture.setUserData(ConstantsService.ColliderType.WALL.val());
         shape.dispose();
 
     }

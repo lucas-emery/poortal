@@ -5,8 +5,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.game.services.BodyService;
-
-
+import com.game.services.ConstantsService;
 
 
 public class Portal extends LevelObject{
@@ -28,7 +27,7 @@ public class Portal extends LevelObject{
         FixtureDef fixtureDef = BodyService.getFixtureDef(type);
         fixtureDef.shape = shape;
         fixtureDef.isSensor = true;
-        body.createFixture(fixtureDef).setUserData("POORTAL");
+        body.createFixture(fixtureDef).setUserData(ConstantsService.ColliderType.PORTAL.val());
         shape.dispose();
     }
 }

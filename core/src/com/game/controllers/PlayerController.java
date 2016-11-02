@@ -23,6 +23,10 @@ public class PlayerController {
     private static PlayerView playerView;
     private static Player player;
 
+    public static Player getPlayer(){
+        return player;
+    }
+
     public static void setPlayerView(PlayerView receivedPlayerView){
         playerView = receivedPlayerView;
     }
@@ -43,7 +47,7 @@ public class PlayerController {
         }
         if (positive){
             if ((player.getVelocity().x)< ConstantsService.PLAYER_RUN_CAP)
-                    player.applyForceToCenter(multiplier*ConstantsService.FORCE, 0, true);
+                player.applyForceToCenter(multiplier*ConstantsService.FORCE, 0, true);
             setAnimation("RIGHT");
         }
         else {
@@ -67,7 +71,7 @@ public class PlayerController {
         clickPos.scl(ConstantsService.PIXELS_TO_METERS);
         clickPos.sub(playerPos);
         clickPos.setLength2(ConstantsService.WORLD_HEIGHT * ConstantsService.WORLD_HEIGHT +
-                            ConstantsService.WORLD_WIDTH * ConstantsService.WORLD_WIDTH);
+                ConstantsService.WORLD_WIDTH * ConstantsService.WORLD_WIDTH);
         clickPos.add(playerPos);
         ray = clickPos.cpy();
         rayPos = playerPos.cpy();
@@ -82,7 +86,7 @@ public class PlayerController {
 
     public static void interact() {
         if(player.getVicinity()!=null){
-            if(player.getVicinity().getUserData().equals("CUBE")){
+            if((Integer)(player.getVicinity().getUserData())==ConstantsService.ColliderType.CUBE.val()){
                 if(!player.isHolding()) {
                     player.setHolding(true);
                 }

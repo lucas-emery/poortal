@@ -52,13 +52,9 @@ public class ConstantsService {
 
     public static final float METERS_TO_PIXELS = 25f;
 
-    public static final float PLAYER_JUMP_VALUE = 6.0f;
-
     public static final float PLAYER_RUN_CAP = 6.0f;
 
     public static final float FORCE = 50f;
-
-    public static final float SPEEDDELTA = 0.025f;
 
     public static final float PIXELS_TO_METERS = 1/METERS_TO_PIXELS;
 
@@ -78,7 +74,15 @@ public class ConstantsService {
 
     public enum ColliderType {
         CUBE(1<<0),
-        SENSOR(1<<1);
+        PSENSORRIGHT(1<<1),
+        PSENSORLEFT(1<<2),
+        PSENSORFOOT(1<<3),
+        PSENSORBODY(1<<4),
+        BUTTON(1<<5),
+        PLATSENSOR(1<<6),
+        PLATBODY(1<<7),
+        PORTAL(1<<8),
+        WALL(1<<9);
 
         private int value;
 
@@ -86,7 +90,7 @@ public class ConstantsService {
             this.value = value;
         }
 
-        public int getValue() {
+        public int val() {
             return value;
         }
     }

@@ -51,8 +51,8 @@ public class Player {
                 flip =false;
 
             if(!running) {
-            state.setAnimation(0, "run", true);
-            running = true;
+                state.setAnimation(0, "run", true);
+                running = true;
             }
         }
         else{
@@ -84,23 +84,25 @@ public class Player {
     }
 
     public void createFixture() {
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(1f,1.5f);                                  // DITTO LO DE ABAJO
+        PolygonShape shape;
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.isSensor=true;
-        fixtureDef.shape=shape;
-        body.createFixture(fixtureDef).setUserData("Sensor");
 
-        shape.setAsBox(0.4f, 0.2f, new Vector2(0,-0.85f),0);        //DESPUES HAY QUE MOVER LOS MAGIC NUMBERS A SERVICES
-        fixtureDef.shape=shape;                                     //LOS SETTEE ARBITRARIAMENTE, TIENEN QUE VER CON LA FORMA
-        body.createFixture(fixtureDef).setUserData("FootSensor");   //DEL SPRITE DE PLAYER
+        fixtureDef.shape=(shape=BodyService.getPlayerSensorShape(true));
+        body.createFixture(fixtureDef).setUserData(ConstantsService.ColliderType.PSENSORRIGHT.val());
+        shape.dispose();
 
-        shape = BodyService.getPlayerShape();
+        fixtureDef.shape=(shape=BodyService.getPlayerSensorShape(false));
+        body.createFixture(fixtureDef).setUserData(ConstantsService.ColliderType.PSENSORLEFT.val());
+        shape.dispose();
+
+        fixtureDef.shape=(shape=BodyService.getPlayerFootSensor());
+        body.createFixture(fixtureDef).setUserData(ConstantsService.ColliderType.PSENSORFOOT.val());
+        shape.dispose();
 
         fixtureDef = BodyService.getPlayerFixtureDef();
-        fixtureDef.shape = shape;
-
-        body.createFixture(fixtureDef).setUserData("Body");
+        fixtureDef.shape = (shape = BodyService.getPlayerShape());
+        body.createFixture(fixtureDef).setUserData(ConstantsService.ColliderType.PSENSORBODY.val());
         shape.dispose();
     }
 
@@ -120,10 +122,6 @@ public class Player {
 
     public void applyForceToCenter(float v, float i, boolean b) {
         body.applyForceToCenter(v, i, b);
-    }
-
-    public Vector2 getLinearVelocity() {
-        return body.getLinearVelocity();
     }
 
     public void setAnimation(String animation){

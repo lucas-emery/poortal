@@ -1,5 +1,6 @@
 package com.game.services;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -82,5 +83,26 @@ public class BodyService {
             default:
                 return null;
         }
+    }
+
+    public static PolygonShape getPlayerSensorShape(boolean isRight) {
+        {
+            float body_x=0.5f, body_y=0.95f, constant=(isRight)?1.0f:-1.0f;
+            Vector2[] vec ={
+                    new Vector2(-body_x+constant*1f, -body_y),
+                    new Vector2(-body_x+constant*1f, body_y),
+                    new Vector2(body_x+constant*1f, -body_y),
+                    new Vector2(body_x+constant*1f, body_y)
+            };
+            PolygonShape shape = new PolygonShape();
+            shape.set(vec);
+            return shape;
+        }
+    }
+
+    public static PolygonShape getPlayerFootSensor() {
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(0.4f, 0.2f, new Vector2(0,-0.85f),0);
+        return shape;
     }
 }
