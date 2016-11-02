@@ -8,14 +8,10 @@ import com.game.models.LevelObject;
  */
 public class CollisionController implements ContactListener {
 
-    private boolean playerOnGround;
-    private Fixture vicinity;
-    private int contactnumber;
-    public CollisionController(){
-        playerOnGround=false;
-        contactnumber=0;
-        vicinity = null;
-    }
+    private static boolean playerOnGround = false;
+    private static Fixture vicinity=null;
+    private static int contactNumber=0;
+
     @Override
     public void beginContact(Contact contact) {
         Fixture f1 = contact.getFixtureA();
@@ -33,7 +29,7 @@ public class CollisionController implements ContactListener {
         }
         if(f1.getUserData()!= null && f1.getUserData().equals("FootSensor") ||f2.getUserData()!= null && f2.getUserData().equals("FootSensor")){
             if(!(f1.getUserData().equals("POORTAL")||f2.getUserData().equals("POORTAL"))) {
-                contactnumber++;
+                contactNumber++;
                 playerOnGround = true;
             }
         }
@@ -56,8 +52,8 @@ public class CollisionController implements ContactListener {
         }
         if(f1.getUserData()!= null && f1.getUserData().equals("FootSensor") ||f2.getUserData()!= null && f2.getUserData().equals("FootSensor")){
             if(!(f1.getUserData().equals("POORTAL")||f2.getUserData().equals("POORTAL"))) {
-                contactnumber--;
-                if (contactnumber == 0) {
+                contactNumber--;
+                if (contactNumber == 0) {
                     playerOnGround = false;
                 }
             }
@@ -65,14 +61,14 @@ public class CollisionController implements ContactListener {
         }
 
     }
-    private boolean isInteractable(Fixture fixture){
+    private static boolean isInteractable(Fixture fixture){
         return (fixture.getUserData()!=null && (fixture.getUserData().equals("CUBE")|| fixture.getUserData().equals("BUTTON")));
     }
-    public boolean isPlayerOnGround() {
+    public static boolean isPlayerOnGround() {
         return playerOnGround;
     }
 
-    public Fixture getVicinity() {
+    public static Fixture getVicinity() {
         return vicinity;
     }
 

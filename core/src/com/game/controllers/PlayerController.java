@@ -18,22 +18,25 @@ import java.math.MathContext;
 
 public class PlayerController {
 
-    private Player player;
-    private PlayerView playerView;
-    public static Vector2 ray = new Vector2(0,0);
-    public static Vector2 rayPos = new Vector2(0,0);
+    public static Vector2 ray = new Vector2(0,0);  // sacar esto -jg
+    public static Vector2 rayPos = new Vector2(0,0); // esto tmb
+    private static PlayerView playerView;
+    private static Player player;
 
-    public PlayerController(Player player,PlayerView playerView){
-        this.player = player;
-        this.playerView = playerView;
+    public static void setPlayerView(PlayerView receivedPlayerView){
+        playerView = receivedPlayerView;
     }
 
-    protected void jump(){
+    public static void setPlayer(Player receivedPlayer){
+        player = receivedPlayer;
+    }
+
+    protected static void jump(){
         if(player.isGrounded())
             player.applyForceToCenter(0, ConstantsService.FORCE* ConstantsService.JUMPCONSTANT, true);
     }
 
-    protected void moveHorizontal(boolean positive) {
+    protected static void moveHorizontal(boolean positive) {
         float multiplier =ConstantsService.FORCEINGROUND;
         if(!player.isGrounded()){
             multiplier=ConstantsService.FORCEINAIR;
@@ -50,15 +53,15 @@ public class PlayerController {
         }
     }
 
-    public void setAnimation(String animation){
+    public static void setAnimation(String animation){
         player.setAnimation(animation);
     }
 
-    protected void movePortalArm(int x, int y){
+    protected static void movePortalArm(int x, int y){
         playerView.updatePortalArm(x,y);
     }
 
-    public void firePortal(Vector2 clickPos, Portal.Type portalType){
+    public static void firePortal(Vector2 clickPos, Portal.Type portalType){
         Vector2 playerPos = player.getPosition().cpy();
 
         clickPos.scl(ConstantsService.PIXELS_TO_METERS);
@@ -72,12 +75,12 @@ public class PlayerController {
         PortalController.firePortal(playerPos, clickPos, portalType);
     }
 
-    public void updatePlayerCollisionState(boolean grounded, Fixture vicinity) {
+    public static void updatePlayerCollisionState(boolean grounded, Fixture vicinity) {
         player.setGrounded(grounded);
         player.setVicinity(vicinity);
     }
 
-    public void interact() {
+    public static void interact() {
         if(player.getVicinity()!=null){
             if(player.getVicinity().getUserData().equals("CUBE")){
                 if(!player.isHolding()) {

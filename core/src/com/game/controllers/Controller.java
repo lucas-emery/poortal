@@ -18,45 +18,38 @@ public class Controller extends ApplicationAdapter {
 
 	private static Model model;
 	private static View view;
-	private LevelController levelController;
-	PlayerController playerController;
-	private InputController inputController;
-	CollisionController collisionController;
 
 	@Override
 	public void create () {
-
 		AssetsService.initialize();
+
 		Player player = new Player();
 		PlayerView playerView = new PlayerView(player);
-		playerController = new PlayerController(player,playerView);
 
-		collisionController = new CollisionController();
+		LevelController.setPlayer(player);
+		LevelController.generateLevel();
 
-		levelController = new LevelController(collisionController);
-		levelController.setPlayer(player);
-		levelController.generateLevel();
+		model = new Model(LevelController.getLevelObjects(), player, LevelController.getLevelWorld());
+		view = new View(model, LevelController.getLevelObjectsViews(), playerView, AssetsService.getLevelSprite(0));
+		WallController.setWalls(LevelController.getWalls());
 
-		model = new Model(levelController.getLevelObjects(), player, levelController.getLevelWorld());
-		view = new View(model, levelController.getLevelObjectsViews(), playerView, AssetsService.getLevelSprite(0));
-		WallController.setWalls(levelController.getWalls());
-
-		inputController = new InputController(playerController);
-		Gdx.input.setInputProcessor(inputController);
+		PlayerController.setPlayer(player);
+		PlayerController.setPlayerView(playerView);
+		Gdx.input.setInputProcessor(new InputController());
 	}
 
 	@Override
 	public void render () {
 		model.update();
-		inputController.update();
+		InputController.update();
 		updatePlayerCollisionState();
 		view.render();
 	}
 
 	private void updatePlayerCollisionState() {
-		boolean grounded = levelController.getcollisionController().isPlayerOnGround();
-		Fixture vicinity = levelController.getcollisionController().getVicinity();
-		playerController.updatePlayerCollisionState(grounded, vicinity);
+		boolean grounded = CollisionController.isPlayerOnGround();
+		Fixture vicinity = CollisionController.getVicinity();
+		PlayerController.updatePlayerCollisionState(grounded, vicinity);
 	}
 
 	@Override

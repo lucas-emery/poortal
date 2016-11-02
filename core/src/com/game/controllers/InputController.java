@@ -15,12 +15,6 @@ public class InputController implements InputProcessor{
     protected static boolean aIsPressed;
     protected static boolean dIsPressed;
 
-    private PlayerController playerController;
-
-    public InputController(PlayerController playerController){
-        this.playerController = playerController;
-    }
-
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
         return false;
@@ -36,7 +30,7 @@ public class InputController implements InputProcessor{
 
         Vector2 click = Controller.getGraphicsCoords(new Vector2(screenX, screenY));
 
-        playerController.firePortal(click, portalType);
+        PlayerController.firePortal(click, portalType);
         return false;
     }
 
@@ -55,25 +49,25 @@ public class InputController implements InputProcessor{
         return false;
     }
 
-    public void update(){
+    public static void update(){
         boolean isPressed=false;
         if (InputController.aIsPressed){
-            playerController.moveHorizontal(false);     // 	CAMBIAR BOOLEANO
+            PlayerController.moveHorizontal(false);     // 	CAMBIAR BOOLEANO
             isPressed=true;
         }
         if (InputController.dIsPressed){
-            playerController.moveHorizontal(true);	   //  POR RIGHT AND LEFT
+            PlayerController.moveHorizontal(true);	   //  POR RIGHT AND LEFT
             isPressed=true;
         }
         if (!isPressed)
-	       playerController.setAnimation(null);                                             // UBICADO EN ALGUN SERVICE
+	       PlayerController.setAnimation(null);                                             // UBICADO EN ALGUN SERVICE
     }
 
     @Override
     public boolean keyDown(int keycode){
         switch (keycode){
             case Input.Keys.W:
-                playerController.jump();
+                PlayerController.jump();
                 break;
             case Input.Keys.A:
                 aIsPressed = true;
@@ -88,7 +82,7 @@ public class InputController implements InputProcessor{
                 VariablesService.SHOW_FULLSCREEN = !VariablesService.SHOW_FULLSCREEN;
                 break;
             case Input.Keys.E:
-                playerController.interact();
+                PlayerController.interact();
                 break;
         }
         return false;
@@ -96,7 +90,7 @@ public class InputController implements InputProcessor{
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
-        playerController.movePortalArm(screenX,screenY);
+        PlayerController.movePortalArm(screenX,screenY);
         return false;
     }
 

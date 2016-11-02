@@ -15,39 +15,27 @@ import java.util.HashSet;
 
 public class LevelController {
 
-    private Player player;
-    private HashSet<LevelObject> levelObjects;
-    private HashSet<LevelObjectView> levelObjectsViews;
-    private HashSet<Wall> walls;
-    private World world;
-    private CollisionController collisionController;
+    private static Player player;
+    private static HashSet<LevelObject> levelObjects = new HashSet<LevelObject>();
+    private static HashSet<LevelObjectView> levelObjectsViews = new HashSet<LevelObjectView>();
+    private static HashSet<Wall> walls = new HashSet<Wall>();
+    private static World world;
 
-    public LevelController(CollisionController collisionController) {
-        levelObjects = new HashSet<LevelObject>();
-        levelObjectsViews = new HashSet<LevelObjectView>();
-        walls = new HashSet<Wall>();
-        this.collisionController=collisionController;
-    }
-
-    public CollisionController getcollisionController(){
-        return collisionController;
-    }
-
-    public HashSet<LevelObject> getLevelObjects() {
+    public static HashSet<LevelObject> getLevelObjects() {
         return (HashSet<LevelObject>) levelObjects.clone();
     }
 
-    public HashSet<LevelObjectView> getLevelObjectsViews() {
+    public static HashSet<LevelObjectView> getLevelObjectsViews() {
         return (HashSet<LevelObjectView>) levelObjectsViews.clone();
     }
 
-    public HashSet<Wall> getWalls() {
+    public static HashSet<Wall> getWalls() {
         return (HashSet<Wall>) walls.clone();
     }
 
-    public void generateLevel() {
+    public static void generateLevel() {
         world = new World(new Vector2(0, -9.8f), true);
-        world.setContactListener(collisionController);
+        world.setContactListener(new CollisionController());
 
         player.setInitialPosition(new Vector2(10,3));
         player.setBody(world.createBody(player.getBodyDef()));
@@ -73,12 +61,12 @@ public class LevelController {
 
 
     }
-    public World getLevelWorld(){
+    public static World getLevelWorld(){
         return world;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
+    public static void setPlayer(Player recievedPlayer) {
+        player = recievedPlayer;
     }
 
 }
