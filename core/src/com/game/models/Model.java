@@ -72,9 +72,9 @@ public class Model {
         if (player.isFlipped())
             rDef.localAnchorA.set(-1.5f,0.5f);
         else
-            rDef.localAnchorA.set(1.5f,0.5f);   //HAY QUE MOVER ESTAS CONSTANTES
+            rDef.localAnchorA.set(1.5f,0.5f);
 
-        rDef.localAnchorB.set(0.0f,0);          // A ALGUN SERVICE (para juan no)
+        rDef.localAnchorB.set(0.0f,0);
         joint = world.createJoint(rDef);
         joint.setUserData("Joint");
     }

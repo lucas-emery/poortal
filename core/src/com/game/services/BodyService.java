@@ -10,24 +10,25 @@ import com.game.models.LevelObject;
 public class BodyService {
 
     public static Shape getShape(LevelObject.Type type){
+        PolygonShape shape = new PolygonShape();
+        float height;
+        float width;
         switch (type){
-            /*case CUBE:
-                PolygonShape shape = new PolygonShape();
-                shape.setAsBox(AssetsService.getSprite(type).getHeight()/2,AssetsService.getSprite(type).getWidth()/2);
-                return shape;
-            case case BUTTON:
+            case CUBE:
+                break;
+            case BUTTON:
                 break;
             case PORTAL_BLUE:
                 break;
             case PORTAL_ORANGE:
                 break;
-              */
             default:
-                PolygonShape shape = new PolygonShape();
-                shape.setAsBox( (AssetsService.getSprite(type).getHeight()/2) * ConstantsService.PIXELS_TO_METERS,
-                                (AssetsService.getSprite(type).getWidth()/2) * ConstantsService.PIXELS_TO_METERS );
-                return shape;
+                break;
+
         }
+        shape.setAsBox( (AssetsService.getSprite(type).getHeight()/2) * ConstantsService.PIXELS_TO_METERS,
+                (AssetsService.getSprite(type).getWidth()/2) * ConstantsService.PIXELS_TO_METERS );
+        return shape;
     }
 
     public static FixtureDef getFixtureDef(LevelObject.Type type) {
