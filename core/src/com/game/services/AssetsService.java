@@ -29,7 +29,7 @@ public class AssetsService {
     private static Music theme;
 
 
-    public static void initialize() {
+    public static void initialize(){
 
         Texture texture;
 
@@ -45,8 +45,6 @@ public class AssetsService {
         texture = new Texture(Gdx.files.internal("portal_orange.png"));
         textures.put(LevelObject.Type.PORTAL_ORANGE, texture);
 
-        texture = new Texture(Gdx.files.internal("door.png"));
-        textures.put(LevelObject.Type.DOOR, texture);
 
         TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("stickman-test/skeleton.atlas"));
         playerTextureDimensions = new Rectangle(0, 0, 500, 1050);

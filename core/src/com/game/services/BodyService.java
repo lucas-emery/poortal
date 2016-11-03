@@ -80,8 +80,6 @@ public class BodyService {
                 return BodyDef.BodyType.StaticBody;
             case PLATFORM:
                 return BodyDef.BodyType.KinematicBody;
-            case DOOR:
-                return BodyDef.BodyType.StaticBody;
             default:
                 return null;
         }
