@@ -8,7 +8,7 @@ import com.game.services.BodyService;
 
 public abstract class LevelObject {
     public enum Type {
-        CUBE, BUTTON, PORTAL_BLUE, PORTAL_ORANGE, WALL, PLATFORM
+        CUBE, BUTTON, PORTAL_BLUE, PORTAL_ORANGE, WALL, RIGHT_DOOR, LEFT_DOOR
     }
     protected Type type;
     protected Body body;

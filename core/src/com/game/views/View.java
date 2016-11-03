@@ -82,8 +82,10 @@ public class View {
         batch.begin();
         levelBackgorund.draw(batch);
 
-        for(LevelObjectView view : levelObjectsViews)
-            view.getUpdatedSprite().draw(batch);
+        for(LevelObjectView view : levelObjectsViews) {
+           if(view.getUpdatedSprite()!= null)
+                view.getUpdatedSprite().draw(batch);
+        }
 
         skeletonRenderer.draw(batch, playerView.getUpdatedSkeleton());
 
