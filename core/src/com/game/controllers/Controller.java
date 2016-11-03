@@ -43,7 +43,13 @@ public class Controller extends ApplicationAdapter {
 		model.update();
 		InputController.update();
 		updatePlayerCollisionState();
+		updateButtonCollisionState();
 		view.render();
+	}
+
+	private void updateButtonCollisionState() {
+		boolean isPressed = CollisionController.getButtonPressed();
+		//updateButtonCollisionState(isPressed);
 	}
 
 	private void updatePlayerCollisionState() {
