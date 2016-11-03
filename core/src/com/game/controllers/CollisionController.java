@@ -1,6 +1,7 @@
 package com.game.controllers;
 
 import com.badlogic.gdx.physics.box2d.*;
+import com.game.models.Player;
 import com.game.services.ConstantsService.ColliderType;
 
 /**
@@ -22,6 +23,7 @@ public class CollisionController implements ContactListener {
         Fixture f2 = contact.getFixtureB();
 
         int value = ((Integer)(f1.getUserData())+(Integer)(f2.getUserData()));
+
         if(!PlayerController.getPlayer().isLookingLeft()) {
             if ((value & ColliderType.PSENSORRIGHT.val()) == ColliderType.PSENSORRIGHT.val()) {
                 if ((value & ColliderType.BUTTON.val()) == ColliderType.BUTTON.val() || (value & ColliderType.CUBE.val()) == ColliderType.CUBE.val()) {
@@ -36,11 +38,13 @@ public class CollisionController implements ContactListener {
             if ((value & ColliderType.PSENSORLEFT.val() )== ColliderType.PSENSORLEFT.val()) {
                 if ((value & ColliderType.BUTTON.val())==ColliderType.BUTTON.val()||(value & ColliderType.CUBE.val())==ColliderType.CUBE.val()) {
                     if((Integer)(f1.getUserData()) == ColliderType.PSENSORLEFT.val()) {
-                        vicinity = f2;
+                        if(!PlayerController.getPlayer().isHolding())
+                            vicinity = f2;
                         //System.out.println(f2);
                     }
                     else{
-                        vicinity = f1;
+                        if(!PlayerController.getPlayer().isHolding())
+                            vicinity = f1;
                         //System.out.println(f2);
                     }
                 }
@@ -49,6 +53,11 @@ public class CollisionController implements ContactListener {
         if((value & (ColliderType.PORTAL.val()+ColliderType.PSENSORFOOT.val()))==ColliderType.PSENSORFOOT.val()){
             contactNumber++;
             playerOnGround = true;
+        }
+        if(((value & (ColliderType.BUTTONSENSOR.val()))==ColliderType.BUTTONSENSOR.val())){
+            if(value - ColliderType.BUTTONSENSOR.val()==ColliderType.PSENSORFOOT.val() || value - ColliderType.BUTTONSENSOR.val()==ColliderType.CUBE.val()){
+                System.out.println("Button Collision Detected");
+            }
         }
     }
 
@@ -77,6 +86,11 @@ public class CollisionController implements ContactListener {
             contactNumber--;
             if(contactNumber==0)
                 playerOnGround = false;
+        }
+        if(((value & (ColliderType.BUTTONSENSOR.val()))==ColliderType.BUTTONSENSOR.val())){
+            if(value - ColliderType.BUTTONSENSOR.val()==ColliderType.PSENSORFOOT.val() || value - ColliderType.BUTTONSENSOR.val()==ColliderType.CUBE.val()){
+                System.out.println("Button Collision Stopped");
+            }
         }
 
     }

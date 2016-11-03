@@ -101,7 +101,7 @@ public class View {
         shapeRenderer.line(PlayerController.rayPos, PlayerController.ray);
         shapeRenderer.end();
 
-        //debugRenderer.render(model.getWorld(), camera.combined.cpy().scale(ConstantsService.METERS_TO_PIXELS, ConstantsService.METERS_TO_PIXELS, 0));
+        debugRenderer.render(model.getWorld(), camera.combined.cpy().scale(ConstantsService.METERS_TO_PIXELS, ConstantsService.METERS_TO_PIXELS, 0));
     }
 
     public void mouseMove(int x, int y){

@@ -6,29 +6,21 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.game.models.LevelObject;
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
 
 public class BodyService {
 
     public static Shape getShape(LevelObject.Type type){
         PolygonShape shape = new PolygonShape();
-        float height;
-        float width;
-        switch (type){
-            case CUBE:
-                break;
-            case BUTTON:
-                break;
-            case PORTAL_BLUE:
-                break;
-            case PORTAL_ORANGE:
-                break;
-            default:
-                break;
-
-        }
         shape.setAsBox( (AssetsService.getSprite(type).getHeight()/2) * ConstantsService.PIXELS_TO_METERS,
                 (AssetsService.getSprite(type).getWidth()/2) * ConstantsService.PIXELS_TO_METERS );
+        return shape;
+    }
+
+    public static PolygonShape getButtonShape(){
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(ConstantsService.BUTTON_WIDTH , ConstantsService.BUTTON_HEIGHT );
         return shape;
     }
 
@@ -40,7 +32,7 @@ public class BodyService {
                 friction = 0.7f;  density = 1f;   restitution = 0.2f;
                 break;
             case BUTTON:
-                friction = 0f;  density = 0f;   restitution = 0f;
+                friction = 1f;  density = 0f;   restitution = 0f;
                 break;
             case PORTAL_BLUE:
                 friction = 0f;  density = 0f; restitution = 0f;
@@ -65,7 +57,7 @@ public class BodyService {
     public static FixtureDef getPlayerFixtureDef() {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.friction= 1f;
-        fixtureDef.density = 1f;
+        fixtureDef.density = 0.5f;
         fixtureDef.restitution= 0.3f;
         return fixtureDef;
     }
@@ -74,6 +66,7 @@ public class BodyService {
             case CUBE:
                 return BodyDef.BodyType.DynamicBody;
             case BUTTON:
+                return BodyDef.BodyType.StaticBody;
             case PORTAL_BLUE:
             case PORTAL_ORANGE:
             case WALL:
@@ -103,6 +96,12 @@ public class BodyService {
     public static PolygonShape getPlayerFootSensor() {
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(0.4f, 0.2f, new Vector2(0,-0.85f),0);
+        return shape;
+    }
+
+    public static PolygonShape getButtonSensorShape() {
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(ConstantsService.BUTTON_WIDTH, ConstantsService.BUTTON_HEIGHT, new Vector2(0,0.2f),0);
         return shape;
     }
 }

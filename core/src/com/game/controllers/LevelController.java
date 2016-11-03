@@ -3,10 +3,7 @@ package com.game.controllers;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
-import com.game.models.Cube;
-import com.game.models.LevelObject;
-import com.game.models.Player;
-import com.game.models.Wall;
+import com.game.models.*;
 import com.game.services.ConstantsService;
 import com.game.views.LevelObjectView;
 
@@ -42,6 +39,8 @@ public class LevelController {
 
         levelObjects.add(new Cube(new Vector2(4, 7)));
 
+        levelObjects.add(new Button(new Vector2(3,2)));
+
         for(LevelObject object : levelObjects) {
             object.setBody(world.createBody(object.getBodyDef()));
             levelObjectsViews.add(new LevelObjectView(object));
@@ -58,6 +57,7 @@ public class LevelController {
         Wall rightWall = new Wall(new Vector2(925,35).scl(ConstantsService.PIXELS_TO_METERS), true);
         rightWall.setWall(world.createBody(rightWall.getBodyDef()), new Vector2(0,520* ConstantsService.PIXELS_TO_METERS), false);
         walls.add(rightWall);
+
 
 
     }

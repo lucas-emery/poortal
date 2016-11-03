@@ -25,7 +25,9 @@ public class AssetsService {
     private static SkeletonData playerSkeletonData;
     private static AnimationStateData playerStateData;
     private static Rectangle playerTextureDimensions;
+    private static Rectangle buttonTextureDimensions;
     private static float playerScale;
+    private static float buttonScale;
     private static Music theme;
 
 
@@ -45,9 +47,14 @@ public class AssetsService {
         texture = new Texture(Gdx.files.internal("portal_orange.png"));
         textures.put(LevelObject.Type.PORTAL_ORANGE, texture);
 
+        texture = new Texture(Gdx.files.internal("placeholder.png"));
+        textures.put(LevelObject.Type.BUTTON, texture);
 
         TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("stickman-test/skeleton.atlas"));
         playerTextureDimensions = new Rectangle(0, 0, 500, 1050);
+
+        buttonTextureDimensions = new Rectangle(0,0, 20, 50);
+        buttonScale = (ConstantsService.BUTTON_HEIGHT * ConstantsService.METERS_TO_PIXELS)  / buttonTextureDimensions.getHeight();
 
         playerScale = (ConstantsService.PLAYER_HEIGHT * ConstantsService.METERS_TO_PIXELS) / playerTextureDimensions.getHeight();
 
@@ -80,6 +87,10 @@ public class AssetsService {
 
     public static Rectangle getPlayerDimensions() {
         return new Rectangle(0, 0, playerTextureDimensions.getWidth() * playerScale, playerTextureDimensions.getHeight() * playerScale);
+    }
+
+    public static Rectangle getButtonDimensions(){
+        return new Rectangle(0,0,buttonTextureDimensions.getWidth()*buttonScale, buttonTextureDimensions.getHeight()*buttonScale);
     }
 
     public static Sprite getLevelSprite(int index) {

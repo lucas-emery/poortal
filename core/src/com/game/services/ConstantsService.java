@@ -8,6 +8,7 @@ import com.game.models.LevelObject;
 public class ConstantsService {
 
     public static final float FORCEINGROUND = 1;
+
     public static float FORCEINAIR = 0.2f;
 
     //put the width in meters and it will convert to pixels in getSprite()
@@ -72,6 +73,10 @@ public class ConstantsService {
 
     public static final int WORLD_WIDTH = MathUtils.ceil(GRAPHICS_WIDTH * PIXELS_TO_METERS);
 
+    public static final float BUTTON_WIDTH = 1.0f;
+
+    public static final  float BUTTON_HEIGHT = 0.4f;
+
     public enum ColliderType {
         CUBE(1<<0),
         PSENSORRIGHT(1<<1),
@@ -82,7 +87,8 @@ public class ConstantsService {
         PLATSENSOR(1<<6),
         PLATBODY(1<<7),
         PORTAL(1<<8),
-        WALL(1<<9);
+        WALL(1<<9),
+        BUTTONSENSOR(1<<10);
 
         private int value;
 
