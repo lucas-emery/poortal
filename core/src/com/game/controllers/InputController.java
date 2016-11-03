@@ -90,7 +90,7 @@ public class InputController implements InputProcessor{
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
-        PlayerController.movePortalArm(screenX,screenY);
+        PlayerController.updateAiming(screenX,screenY);
         return false;
     }
 

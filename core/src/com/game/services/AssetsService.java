@@ -46,7 +46,7 @@ public class AssetsService {
         textures.put(LevelObject.Type.PORTAL_ORANGE, texture);
 
 
-        TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("stickman/skeleton.atlas"));
+        TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("stickman-test/skeleton.atlas"));
         playerTextureDimensions = new Rectangle(0, 0, 500, 1050);
 
         playerScale = (ConstantsService.PLAYER_HEIGHT * ConstantsService.METERS_TO_PIXELS) / playerTextureDimensions.getHeight();
@@ -54,10 +54,10 @@ public class AssetsService {
         SkeletonJson json = new SkeletonJson(atlas);
         json.setScale(playerScale);
 
-        playerSkeletonData = json.readSkeletonData(Gdx.files.internal("stickman/skeleton.json"));
+        playerSkeletonData = json.readSkeletonData(Gdx.files.internal("stickman-test/skeleton.json"));
 
         playerStateData = new AnimationStateData(playerSkeletonData);
-        //Set animation mixes if any
+        playerStateData.setDefaultMix(0.2f);
 
         //PLACEHOLDER THEME
         theme = Gdx.audio.newMusic(Gdx.files.internal("Music/theme.mp3"));

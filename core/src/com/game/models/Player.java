@@ -14,8 +14,8 @@ public class Player {
     private Body body;
     private BodyDef bodyDef;
     private AnimationState state;
-    private boolean running;
-    private boolean flip;
+    private String oldState;
+    private boolean lookingLeft;
     private LevelObject.Type type;
     private String animation;
     private boolean grounded;
@@ -24,6 +24,7 @@ public class Player {
 
     public Player() {
         state = new AnimationState(AssetsService.getPlayerStateData());
+        state.setTimeScale(1.5f);
         bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.position.set(0,0);
@@ -43,21 +44,21 @@ public class Player {
     public void update(float deltaTime) {
 
         state.update(deltaTime);
-
-        if(animation !=null ){
-            if(animation == "LEFT")
-                flip = true;
+        if(animation != null ){
+            String newState;
+            if((animation.equals("LEFT") && lookingLeft) || (animation.equals("RIGHT") && !lookingLeft))
+                newState = "run";
             else
-                flip =false;
+                newState = "runback";
 
-            if(!running) {
-                state.setAnimation(0, "run", true);
-                running = true;
+            if(!oldState.equals(newState)) {
+                state.setAnimation(0, newState, true);
+                oldState = newState;
             }
         }
         else{
-            state.clearTrack(0);
-            running = false;
+            state.setAnimation(0, "idle", false);
+            oldState = "idle";
         }
     }
 
@@ -106,8 +107,8 @@ public class Player {
         shape.dispose();
     }
 
-    public boolean isFlipped(){
-        return flip;
+    public boolean isLookingLeft(){
+        return lookingLeft;
     }
 
     public boolean isGrounded() {
@@ -126,6 +127,10 @@ public class Player {
 
     public void setAnimation(String animation){
         this.animation=animation;
+    }
+
+    public void setLookingLeft(boolean lookingLeft) {
+        this.lookingLeft = lookingLeft;
     }
 
     public void setHolding(boolean holding) {

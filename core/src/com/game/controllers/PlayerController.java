@@ -61,8 +61,13 @@ public class PlayerController {
         player.setAnimation(animation);
     }
 
-    protected static void movePortalArm(int x, int y){
-        playerView.updatePortalArm(x,y);
+    public static void update(float deltaTime) {
+        playerView.updateAimingPose();
+        player.update(deltaTime);
+    }
+
+    protected static void updateAiming(int x, int y){
+        playerView.updateAimingPoint(x,y);
     }
 
     public static void firePortal(Vector2 clickPos, Portal.Type portalType){

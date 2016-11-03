@@ -37,7 +37,7 @@ public class Wall {
         fixtureDef.shape = shape;
 
         if(floor)
-            fixtureDef.friction = 0.7f;
+            fixtureDef.friction = 2f;
         else
             fixtureDef.friction= 0;
 

@@ -64,8 +64,8 @@ public class BodyService {
     }
     public static FixtureDef getPlayerFixtureDef() {
         FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.friction= 0.3f;
-        fixtureDef.density = 0.5f;
+        fixtureDef.friction= 1f;
+        fixtureDef.density = 1f;
         fixtureDef.restitution= 0.3f;
         return fixtureDef;
     }

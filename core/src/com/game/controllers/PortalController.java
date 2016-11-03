@@ -58,8 +58,10 @@ public class PortalController {
 
         @Override
         public float reportRayFixture(Fixture fixture, Vector2 point, Vector2 normal, float fraction) {
+            System.out.println("Fixture found at: "+ point);
             Boolean isPortableWall = WallController.isPortableWall(fixture);
             if(isPortableWall != null && fraction < nearestWallFraction) {
+                System.out.println("Wall");
                 nearestWallFraction = fraction;
                 wallIsPortable = isPortableWall;
                 wallPoint = point.cpy();

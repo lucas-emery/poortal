@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
+import com.game.controllers.PlayerController;
 import com.game.services.ConstantsService;
 
 
@@ -41,7 +42,7 @@ public class Model {
                 releaseJoint();
             }
         }
-        player.update(deltaTime);
+        PlayerController.update(deltaTime);
     }
 
     public World getWorld() {
@@ -69,7 +70,7 @@ public class Model {
         rDef.bodyB = player.getVicinity().getBody();
         rDef.collideConnected = true;
 
-        if (player.isFlipped())
+        if (player.isLookingLeft())
             rDef.localAnchorA.set(-1.5f,0.5f);
         else
             rDef.localAnchorA.set(1.5f,0.5f);
@@ -81,7 +82,7 @@ public class Model {
     public void releaseJoint(){
         Body body = joint.getBodyB();
         world.destroyJoint(joint);
-        if (player.isFlipped())
+        if (player.isLookingLeft())
             body.applyForceToCenter(-150.0f,150.0f,true);
         else
             body.applyForceToCenter(150.0f,150.0f,true);

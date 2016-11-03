@@ -22,7 +22,7 @@ public class CollisionController implements ContactListener {
         Fixture f2 = contact.getFixtureB();
 
         int value = ((Integer)(f1.getUserData())+(Integer)(f2.getUserData()));
-        if(!PlayerController.getPlayer().isFlipped()) {
+        if(!PlayerController.getPlayer().isLookingLeft()) {
             if ((value & ColliderType.PSENSORRIGHT.val()) == ColliderType.PSENSORRIGHT.val()) {
                 if ((value & ColliderType.BUTTON.val()) == ColliderType.BUTTON.val() || (value & ColliderType.CUBE.val()) == ColliderType.CUBE.val()) {
                     if ((Integer) (f1.getUserData()) == ColliderType.PSENSORRIGHT.val())
@@ -37,11 +37,11 @@ public class CollisionController implements ContactListener {
                 if ((value & ColliderType.BUTTON.val())==ColliderType.BUTTON.val()||(value & ColliderType.CUBE.val())==ColliderType.CUBE.val()) {
                     if((Integer)(f1.getUserData()) == ColliderType.PSENSORLEFT.val()) {
                         vicinity = f2;
-                        System.out.println(f2);
+                        //System.out.println(f2);
                     }
                     else{
                         vicinity = f1;
-                        System.out.println(f2);
+                        //System.out.println(f2);
                     }
                 }
             }
@@ -88,7 +88,7 @@ public class CollisionController implements ContactListener {
     }
 
     public static Fixture getVicinity() {
-        System.out.println(vicinity);
+        //System.out.println(vicinity);
         return vicinity;
     }
 
