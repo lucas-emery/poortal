@@ -82,7 +82,8 @@ public class ConstantsService {
         PLATSENSOR(1<<6),
         PLATBODY(1<<7),
         PORTAL(1<<8),
-        WALL(1<<9);
+        WALL(1<<9),
+        DOOR(1<<10);
 
         private int value;
 
