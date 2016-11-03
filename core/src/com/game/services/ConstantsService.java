@@ -22,6 +22,9 @@ public class ConstantsService {
                 return 1f;
             case PORTAL_ORANGE:
                 return 1f;
+            case LEFT_DOOR:
+            case RIGHT_DOOR:
+                return 1.6f;
             /*case WALL:
                 break;*/
             default:
@@ -40,6 +43,9 @@ public class ConstantsService {
                 return 1f;
             case PORTAL_ORANGE:
                 return 1f;
+            case LEFT_DOOR:
+            case RIGHT_DOOR:
+                return 3.4f;
             /*case WALL:
                 break;*/
             default:
@@ -76,6 +82,9 @@ public class ConstantsService {
     public static final float BUTTON_WIDTH = 1.0f;
 
     public static final  float BUTTON_HEIGHT = 0.4f;
+
+    public static final float DOOR_WIDTH = 40f;
+    public static final float DOOR_HEIGHT = 1.0f;
 
     public enum ColliderType {
         CUBE(1<<0),

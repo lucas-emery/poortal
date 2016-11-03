@@ -47,6 +47,12 @@ public class AssetsService {
         texture = new Texture(Gdx.files.internal("portal_orange.png"));
         textures.put(LevelObject.Type.PORTAL_ORANGE, texture);
 
+        texture = new Texture(Gdx.files.internal("closed_door_right.png"));
+        textures.put(LevelObject.Type.RIGHT_DOOR, texture);
+
+        texture = new Texture(Gdx.files.internal("closed_door_left.png"));
+        textures.put(LevelObject.Type.LEFT_DOOR, texture);
+
         texture = new Texture(Gdx.files.internal("placeholder.png"));
         textures.put(LevelObject.Type.BUTTON, texture);
 

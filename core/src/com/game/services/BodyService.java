@@ -1,10 +1,7 @@
 package com.game.services;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.Shape;
+import com.badlogic.gdx.physics.box2d.*;
 import com.game.models.LevelObject;
 import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
@@ -12,10 +9,18 @@ import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 public class BodyService {
 
     public static Shape getShape(LevelObject.Type type){
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox( (AssetsService.getSprite(type).getHeight()/2) * ConstantsService.PIXELS_TO_METERS,
-                (AssetsService.getSprite(type).getWidth()/2) * ConstantsService.PIXELS_TO_METERS );
-        return shape;
+        if(type == LevelObject.Type.LEFT_DOOR || type == LevelObject.Type.RIGHT_DOOR){
+            EdgeShape shape = new EdgeShape();
+            shape.set(new Vector2(-3*ConstantsService.PIXELS_TO_METERS,-(AssetsService.getSprite(type).getHeight()/2) * ConstantsService.PIXELS_TO_METERS),
+                    new Vector2(-3*ConstantsService.PIXELS_TO_METERS,(AssetsService.getSprite(type).getHeight()/2) * ConstantsService.PIXELS_TO_METERS) ); //Estos magic numbers son para que quede exactamente sobre la pared.
+            return shape;
+        }
+        else {
+            PolygonShape shape = new PolygonShape();
+            shape.setAsBox((AssetsService.getSprite(type).getHeight() / 2) * ConstantsService.PIXELS_TO_METERS,
+                    (AssetsService.getSprite(type).getWidth() / 2) * ConstantsService.PIXELS_TO_METERS);
+            return shape;
+        }
     }
 
     public static PolygonShape getButtonShape(){
@@ -70,9 +75,11 @@ public class BodyService {
             case PORTAL_BLUE:
             case PORTAL_ORANGE:
             case WALL:
+            case LEFT_DOOR:
+            case RIGHT_DOOR:
                 return BodyDef.BodyType.StaticBody;
-            case PLATFORM:
-                return BodyDef.BodyType.KinematicBody;
+            //case PLATFORM:
+            //    return BodyDef.BodyType.KinematicBody;
             default:
                 return null;
         }
