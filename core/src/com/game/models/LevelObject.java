@@ -76,7 +76,7 @@ public abstract class LevelObject {
      * @return Vector2 two dimensional vector with the objects coordinates
      */
     public Vector2 getPosition() {
-        return body.getPosition();
+        return body.getPosition().cpy();
     }
 
 }

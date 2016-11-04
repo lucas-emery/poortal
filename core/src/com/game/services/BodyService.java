@@ -11,14 +11,14 @@ public class BodyService {
     public static Shape getShape(LevelObject.Type type){
         if(type == LevelObject.Type.LEFT_DOOR || type == LevelObject.Type.RIGHT_DOOR){
             EdgeShape shape = new EdgeShape();
-            shape.set(new Vector2(-3*ConstantsService.PIXELS_TO_METERS,-(AssetsService.getSprite(type).getHeight()/2) * ConstantsService.PIXELS_TO_METERS),
-                    new Vector2(-3*ConstantsService.PIXELS_TO_METERS,(AssetsService.getSprite(type).getHeight()/2) * ConstantsService.PIXELS_TO_METERS) ); //Estos magic numbers son para que quede exactamente sobre la pared.
+            shape.set(new Vector2(-3*ConstantsService.PIXELS_TO_METERS,-(AssetsService.getAnimatedSprites(type).get(0).getHeight()/2) * ConstantsService.PIXELS_TO_METERS),
+                    new Vector2(-3*ConstantsService.PIXELS_TO_METERS,(AssetsService.getAnimatedSprites(type).get(0).getHeight()/2) * ConstantsService.PIXELS_TO_METERS) ); //Estos magic numbers son para que quede exactamente sobre la pared.
             return shape;
         }
         else {
             PolygonShape shape = new PolygonShape();
-            shape.setAsBox((AssetsService.getSprite(type).getHeight() / 2) * ConstantsService.PIXELS_TO_METERS,
-                    (AssetsService.getSprite(type).getWidth() / 2) * ConstantsService.PIXELS_TO_METERS);
+            shape.setAsBox((AssetsService.getStaticSprite(type).getHeight() / 2) * ConstantsService.PIXELS_TO_METERS,
+                    (AssetsService.getStaticSprite(type).getWidth() / 2) * ConstantsService.PIXELS_TO_METERS);
             return shape;
         }
     }
