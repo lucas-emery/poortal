@@ -3,7 +3,7 @@ package com.game.controllers;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.RayCastCallback;
-import com.game.models.LevelObject;
+import com.game.models.LevelObject.Type;
 import com.game.models.Portal;
 import com.game.views.LevelObjectView;
 
@@ -15,11 +15,11 @@ public class PortalController {
     private static LevelObjectView orangePortalView;
 
 
-    private static void spawnPortal(Vector2 point, Vector2 normal, LevelObject.Type portalType) {
+    private static void spawnPortal(Vector2 point, Vector2 normal, Type portalType) {
         Portal newPortal = new Portal(point, normal, portalType);
         LevelObjectView newView = new LevelObjectView(newPortal);
         Controller.addLevelObject(newPortal, newView);
-        if(portalType == LevelObject.Type.PORTAL_BLUE) {
+        if(portalType == Type.PORTAL_BLUE) {
             if(bluePortal != null)
                 Controller.removeLevelObject(bluePortal, bluePortalView);
             bluePortal = newPortal;
@@ -40,16 +40,32 @@ public class PortalController {
             spawnPortal(callback.getWallPoint(), callback.getWallNormal(), portalType);
     }
 
+    public static Type getPortalType(Fixture fixture) {
+        if(bluePortal.compareFixture(fixture))
+            return Type.PORTAL_BLUE;
+        if(orangePortal.compareFixture(fixture))
+            return Type.PORTAL_ORANGE;
+
+        return null;
+    }
+
+    public static Portal getOtherPortal(Type portalType) {
+        if(portalType.equals(Type.PORTAL_BLUE))
+            return orangePortal;
+        else
+            return bluePortal;
+    }
+
     private static class PortalRayCastCallback implements RayCastCallback {
 
-        private LevelObject.Type portalType;
+        private Type portalType;
         private float nearestWallFraction;
         private Vector2 wallPoint;
         private Vector2 wallNormal;
         private boolean wallIsPortable;
 
-        public PortalRayCastCallback(LevelObject.Type portalType) {
-            if(portalType != LevelObject.Type.PORTAL_BLUE && portalType != LevelObject.Type.PORTAL_ORANGE)
+        public PortalRayCastCallback(Type portalType) {
+            if(portalType != Type.PORTAL_BLUE && portalType != Type.PORTAL_ORANGE)
                 throw new IllegalArgumentException("LevelObject.Type is not a portal type");
 
             this.portalType = portalType;

@@ -41,10 +41,10 @@ public class AssetsService {
         texture = new Texture(Gdx.files.internal("cube2.png"));
         textures.put(LevelObject.Type.CUBE, texture);
 
-        texture = new Texture(Gdx.files.internal("portal_blue.png"));
+        texture = new Texture(Gdx.files.internal("portal_blue_vectors.png"));
         textures.put(LevelObject.Type.PORTAL_BLUE, texture);
 
-        texture = new Texture(Gdx.files.internal("portal_orange.png"));
+        texture = new Texture(Gdx.files.internal("portal_orange_vectors.png"));
         textures.put(LevelObject.Type.PORTAL_ORANGE, texture);
 
         texture = new Texture(Gdx.files.internal("closed_door_right.png"));

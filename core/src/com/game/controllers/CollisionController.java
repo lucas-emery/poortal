@@ -1,8 +1,12 @@
 package com.game.controllers;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.game.models.Collider;
+import com.game.models.Collider.Type;
 import com.game.models.Player;
-import com.game.services.ConstantsService.ColliderType;
+import com.game.models.Teleportation;
+import com.game.services.DebugService;
 
 /**
  * Created by juan on 24/10/16.
@@ -23,12 +27,12 @@ public class CollisionController implements ContactListener {
         Fixture f1 = contact.getFixtureA();
         Fixture f2 = contact.getFixtureB();
 
-        int value = ((Integer)(f1.getUserData())+(Integer)(f2.getUserData()));
+        int value = ((Collider)(f1.getUserData())).val()+((Collider)(f2.getUserData())).val();
 
         if(!PlayerController.getPlayer().isLookingLeft()) {
-            if ((value & ColliderType.PSENSORRIGHT.val()) == ColliderType.PSENSORRIGHT.val()) {
-                if ((value & ColliderType.CUBE.val()) == ColliderType.CUBE.val()) {
-                    if ((Integer) (f1.getUserData()) == ColliderType.PSENSORRIGHT.val())
+            if ((value & Type.PSENSORRIGHT.val()) == Type.PSENSORRIGHT.val()) {
+                if ((value & Type.CUBE.val()) == Type.CUBE.val()) {
+                    if (((Collider)f1.getUserData()).val() == Type.PSENSORRIGHT.val())
                         vicinity = f2;
                     else
                         vicinity = f1;
@@ -36,9 +40,9 @@ public class CollisionController implements ContactListener {
             }
         }
         else{
-            if ((value & ColliderType.PSENSORLEFT.val() )== ColliderType.PSENSORLEFT.val()) {
-                if ((value & ColliderType.CUBE.val())==ColliderType.CUBE.val()) {
-                    if((Integer)(f1.getUserData()) == ColliderType.PSENSORLEFT.val()) {
+            if ((value & Type.PSENSORLEFT.val() )== Type.PSENSORLEFT.val()) {
+                if ((value & Type.CUBE.val())==Type.CUBE.val()) {
+                    if(((Collider)f1.getUserData()).val() == Type.PSENSORLEFT.val()) {
                         if(!PlayerController.getPlayer().isHolding())
                             vicinity = f2;
                     }
@@ -49,14 +53,34 @@ public class CollisionController implements ContactListener {
                 }
             }
         }
-        if((value & (ColliderType.PORTAL.val()+ColliderType.PSENSORFOOT.val()))==ColliderType.PSENSORFOOT.val()){
+        if((value & (Type.PORTAL.val()+Type.PSENSORFOOT.val()))==Type.PSENSORFOOT.val()){
             contactNumber++;
             playerOnGround = true;
         }
-        if(((value & (ColliderType.BUTTONSENSOR.val()))==ColliderType.BUTTONSENSOR.val())){
-            if(value - ColliderType.BUTTONSENSOR.val()==ColliderType.PSENSORFOOT.val() || value - ColliderType.BUTTONSENSOR.val()==ColliderType.CUBE.val()){
+        if(((value & (Type.BUTTONSENSOR.val()))==Type.BUTTONSENSOR.val())){
+            if(value - Type.BUTTONSENSOR.val()==Type.PSENSORFOOT.val() || value - Type.BUTTONSENSOR.val()==Type.CUBE.val()){
                 System.out.println("Button Collision Detected");
                 buttonPresssed(true);
+            }
+        }
+        if((value & Type.PORTAL.val()) == Type.PORTAL.val()) {
+            Fixture portal, object;
+            if(((Collider)f1.getUserData()).val() == Type.PORTAL.val()) {
+                portal = f1;
+                object = f2;
+            }
+            else {
+                portal = f2;
+                object = f1;
+            }
+            if(!object.isSensor()) {
+                TeleportationController.addTeleportation(new Teleportation(portal, object));
+                Vector2 portalPos = portal.getBody().getPosition().cpy();
+                Vector2 portalPrimary = new Vector2(0,1).rotateRad(portal.getBody().getAngle());
+                ((Collider)object.getUserData()).disableContactFromVector(portalPos, portalPrimary);
+//                DebugService.rays.add(portalPos);
+//                DebugService.rays.add(portalPrimary.add(portalPos));
+                System.out.println("Add tele");
             }
         }
     }
@@ -66,34 +90,47 @@ public class CollisionController implements ContactListener {
         Fixture f1 = contact.getFixtureA();
         Fixture f2 = contact.getFixtureB();
 
-        int value = ((Integer)(f1.getUserData())+(Integer)(f2.getUserData()));
+        int value = ((Collider)(f1.getUserData())).val()+((Collider)(f2.getUserData())).val();
 
-        if ((value & ColliderType.PSENSORRIGHT.val()) == ColliderType.PSENSORRIGHT.val()) {
-            if ( (value & ColliderType.CUBE.val()) == ColliderType.CUBE.val()) {
+        if ((value & Collider.Type.PSENSORRIGHT.val()) == Type.PSENSORRIGHT.val()) {
+            if ( (value & Type.CUBE.val()) == Type.CUBE.val()) {
                 if(f1 == vicinity || f2 == vicinity)
                     vicinity=null;
             }
         }
 
-        if ((value & ColliderType.PSENSORLEFT.val() )== ColliderType.PSENSORLEFT.val()) {
-            if ((value & ColliderType.CUBE.val())==ColliderType.CUBE.val()) {
+        if ((value & Type.PSENSORLEFT.val() )== Type.PSENSORLEFT.val()) {
+            if ((value & Type.CUBE.val())==Type.CUBE.val()) {
                 if(f1 == vicinity || f2 == vicinity)
                     vicinity=null;
             }
         }
 
-        if((value & (ColliderType.PORTAL.val()+ColliderType.PSENSORFOOT.val()))==ColliderType.PSENSORFOOT.val()){
+        if((value & (Type.PORTAL.val()+Type.PSENSORFOOT.val()))==Type.PSENSORFOOT.val()){
             contactNumber--;
             if(contactNumber==0)
                 playerOnGround = false;
         }
-        if(((value & (ColliderType.BUTTONSENSOR.val()))==ColliderType.BUTTONSENSOR.val())){
-            if(value - ColliderType.BUTTONSENSOR.val()==ColliderType.PSENSORFOOT.val() || value - ColliderType.BUTTONSENSOR.val()==ColliderType.CUBE.val()){
+        if(((value & (Type.BUTTONSENSOR.val()))==Type.BUTTONSENSOR.val())){
+            if(value - Type.BUTTONSENSOR.val()==Type.PSENSORFOOT.val() || value - Type.BUTTONSENSOR.val()==Type.CUBE.val()){
                 System.out.println("Button Collision Stopped");
                 buttonPresssed(false);
             }
         }
-
+        if((value & Type.PORTAL.val()) == Type.PORTAL.val()) {
+            Fixture portal, object;
+            if(((Collider)f1.getUserData()).val() == Type.PORTAL.val()) {
+                portal = f1;
+                object = f2;
+            }
+            else {
+                portal = f2;
+                object = f1;
+            }
+            if(!object.isSensor()) {
+                TeleportationController.removeTeleportation(new Teleportation(portal, object));
+            }
+        }
     }
 
     public static void buttonPresssed(boolean pressed) {

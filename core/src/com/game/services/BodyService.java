@@ -3,7 +3,6 @@ package com.game.services;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.game.models.LevelObject;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
 
 public class BodyService {
@@ -17,8 +16,8 @@ public class BodyService {
         }
         else {
             PolygonShape shape = new PolygonShape();
-            shape.setAsBox((AssetsService.getSprite(type).getHeight() / 2) * ConstantsService.PIXELS_TO_METERS,
-                    (AssetsService.getSprite(type).getWidth() / 2) * ConstantsService.PIXELS_TO_METERS);
+            shape.setAsBox( ConstantsService.getWidth(type) / 2,
+                            ConstantsService.getHeight(type) / 2);
             return shape;
         }
     }
@@ -40,8 +39,6 @@ public class BodyService {
                 friction = 1f;  density = 0f;   restitution = 0f;
                 break;
             case PORTAL_BLUE:
-                friction = 0f;  density = 0f; restitution = 0f;
-                break;
             case PORTAL_ORANGE:
                 friction = 0f;  density = 0f;   restitution = 0f;
             default:
@@ -63,7 +60,7 @@ public class BodyService {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.friction= 1f;
         fixtureDef.density = 0.5f;
-        fixtureDef.restitution= 0.3f;
+        fixtureDef.restitution= 0f;
         return fixtureDef;
     }
     public static BodyDef.BodyType getBodyType(LevelObject.Type type) {

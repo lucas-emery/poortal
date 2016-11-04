@@ -26,12 +26,12 @@ public class Button extends LevelObject{
         fixtureDef.isSensor=true;
 
         fixtureDef.shape=(shape=BodyService.getButtonSensorShape());
-        body.createFixture(fixtureDef).setUserData(ConstantsService.ColliderType.BUTTONSENSOR.val());
+        body.createFixture(fixtureDef).setUserData(new Collider(Collider.Type.BUTTONSENSOR));
         shape.dispose();
 
         fixtureDef = BodyService.getFixtureDef(type);
         fixtureDef.shape=(shape = BodyService.getButtonShape());
-        body.createFixture(fixtureDef).setUserData(ConstantsService.ColliderType.BUTTON.val());
+        body.createFixture(fixtureDef).setUserData(new Collider(Collider.Type.BUTTON));
         shape.dispose();
 
 

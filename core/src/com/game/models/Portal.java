@@ -1,9 +1,7 @@
 package com.game.models;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.Shape;
+import com.badlogic.gdx.physics.box2d.*;
 import com.game.services.BodyService;
 import com.game.services.ConstantsService;
 
@@ -11,10 +9,14 @@ import com.game.services.ConstantsService;
 public class Portal extends LevelObject{
 
     private Vector2 normal;
+    private Vector2 primary;
+    private Fixture fixture;
+
 
     public Portal(Vector2 position, Vector2 normal, LevelObject.Type type) {
         this.position = position;
         this.normal = normal;
+        this.primary = normal.cpy().rotate90(1); //Counter-clockwise
         this.type = type;
 
         createBodyDef();
@@ -27,7 +29,34 @@ public class Portal extends LevelObject{
         FixtureDef fixtureDef = BodyService.getFixtureDef(type);
         fixtureDef.shape = shape;
         fixtureDef.isSensor = true;
-        body.createFixture(fixtureDef).setUserData(ConstantsService.ColliderType.PORTAL.val());
+        fixture = body.createFixture(fixtureDef);
+        fixture.setUserData(new Collider(Collider.Type.PORTAL));
         shape.dispose();
+
+        fixtureDef.isSensor = false;
+        CircleShape rim = new CircleShape();
+        rim.setRadius(0.2f);
+        fixtureDef.shape = rim;
+
+        rim.setPosition(new Vector2(0, ConstantsService.getHeight(type) /2));
+        body.createFixture(fixtureDef).setUserData(new Collider(Collider.Type.PORTALRIM));
+
+        rim.setPosition(new Vector2(0, - ConstantsService.getHeight(type) /2));
+        body.createFixture(fixtureDef).setUserData(new Collider(Collider.Type.PORTALRIM));
+
+        rim.dispose();
+
+    }
+
+    public boolean compareFixture(Fixture otherFixture) {
+        return fixture.equals(otherFixture);
+    }
+
+    public Vector2 getNormal() {
+        return normal.cpy();
+    }
+
+    public Vector2 getPrimary() {
+        return primary.cpy();
     }
 }

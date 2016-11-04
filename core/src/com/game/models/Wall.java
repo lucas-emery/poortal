@@ -42,7 +42,7 @@ public class Wall {
             fixtureDef.friction= 0;
 
         fixture = body.createFixture(fixtureDef);
-        fixture.setUserData(ConstantsService.ColliderType.WALL.val());
+        fixture.setUserData(new Collider(Collider.Type.WALL));
         shape.dispose();
 
     }

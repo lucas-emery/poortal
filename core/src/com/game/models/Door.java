@@ -30,7 +30,7 @@ public class Door extends LevelObject {
         Shape shape = BodyService.getShape(type);
         FixtureDef fixtureDef = BodyService.getFixtureDef(type);
         fixtureDef.shape=shape;
-        body.createFixture(fixtureDef).setUserData(ConstantsService.ColliderType.CUBE.val());
+        body.createFixture(fixtureDef).setUserData(new Collider(Collider.Type.CUBE));
         shape.dispose();
     }
     public boolean isClosed(){

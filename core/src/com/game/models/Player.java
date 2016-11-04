@@ -1,7 +1,6 @@
 package com.game.models;
 
 
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.esotericsoftware.spine.AnimationState;
@@ -9,7 +8,7 @@ import com.game.services.AssetsService;
 import com.game.services.BodyService;
 import com.game.services.ConstantsService;
 
-public class Player {
+public class Player implements Teleportable {
 
     private Body body;
     private BodyDef bodyDef;
@@ -21,6 +20,7 @@ public class Player {
     private boolean grounded;
     private Fixture vicinity;
     private boolean holding;
+    private boolean contactDisabled;
 
     public Player() {
         state = new AnimationState(AssetsService.getPlayerStateData());
@@ -67,7 +67,7 @@ public class Player {
     }
 
     public Vector2 getPosition() {
-        return body.getPosition();
+        return body.getPosition().cpy();
     }
 
     public BodyDef getBodyDef() {
@@ -90,20 +90,20 @@ public class Player {
         fixtureDef.isSensor=true;
 
         fixtureDef.shape=(shape=BodyService.getPlayerSensorShape(true));
-        body.createFixture(fixtureDef).setUserData(ConstantsService.ColliderType.PSENSORRIGHT.val());
+        body.createFixture(fixtureDef).setUserData(new Collider(Collider.Type.PSENSORRIGHT));
         shape.dispose();
 
         fixtureDef.shape=(shape=BodyService.getPlayerSensorShape(false));
-        body.createFixture(fixtureDef).setUserData(ConstantsService.ColliderType.PSENSORLEFT.val());
+        body.createFixture(fixtureDef).setUserData(new Collider(Collider.Type.PSENSORLEFT));
         shape.dispose();
 
         fixtureDef.shape=(shape=BodyService.getPlayerFootSensor());
-        body.createFixture(fixtureDef).setUserData(ConstantsService.ColliderType.PSENSORFOOT.val());
+        body.createFixture(fixtureDef).setUserData(new Collider(Collider.Type.PSENSORFOOT));
         shape.dispose();
 
         fixtureDef = BodyService.getPlayerFixtureDef();
         fixtureDef.shape = (shape = BodyService.getPlayerShape());
-        body.createFixture(fixtureDef).setUserData(ConstantsService.ColliderType.PSENSORBODY.val());
+        body.createFixture(fixtureDef).setUserData(new Collider(Collider.Type.PLAYER));
         shape.dispose();
     }
 
@@ -139,5 +139,9 @@ public class Player {
 
     public boolean isHolding() {
         return holding;
+    }
+
+    public void setTransform(Vector2 position, float angle) {
+        body.setTransform(position, angle);
     }
 }

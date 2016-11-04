@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.RayCastCallback;
 import com.game.models.LevelObject;
 import com.game.models.Model;
 import com.game.models.Player;
+import com.game.models.Teleportation;
 import com.game.services.AssetsService;
 import com.game.services.ConstantsService;
 import com.game.views.LevelObjectView;
@@ -42,6 +43,7 @@ public class Controller extends ApplicationAdapter {
 	public void render () {
 		model.update();
 		InputController.update();
+		TeleportationController.update();
 		updatePlayerCollisionState();
 		updateButtonCollisionState();
 		view.render();
