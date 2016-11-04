@@ -7,7 +7,8 @@ import com.game.services.ConstantsService;
 import static com.game.models.LevelObject.Type.*;
 
 /**
- * Created by Usuario on 26/10/2016.
+ * Class representing a physical wall in the level
+ * @author Francisco Delgado
  */
 public class Wall {
 
@@ -18,6 +19,11 @@ public class Wall {
     private Fixture fixture;
     private boolean portable;
 
+    /**
+     * Constructor for the wall, sets portable attribute and position within the level
+     * @param position Vector2 with position coordinates
+     * @param portable Boolean value for portable attribute
+     */
     public Wall(Vector2 position,boolean portable) { //Concept
 
         this.portable = portable;
@@ -27,6 +33,12 @@ public class Wall {
 
     }
 
+    /**
+     * Method which sets fixture properties for the Wall object
+     * @param wall Body for the LevelObject
+     * @param end  Vector2 stating placing position relative to the previous position of the object
+     * @param floor Boolean value representing if the Wall object is a floor
+     */
     public void setWall(Body wall, Vector2 end, boolean floor){
         this.body = wall;
 
@@ -47,6 +59,9 @@ public class Wall {
 
     }
 
+    /**
+     * Method which creates the bodyDef for the Wall object
+     */
     public void createBodyDef() {
         bodyDef = new BodyDef();
 
@@ -55,21 +70,35 @@ public class Wall {
         bodyDef.position.set(position.x, position.y);
     }
 
-
+    /**
+     * Method which gets the bodyDef of the Wall object
+     * @return BodyDef bodyDef attribute
+     */
     public BodyDef getBodyDef(){
         return bodyDef;
     }
 
-    //checkea por address
+    /**
+     * Method which checks received fixture by address with Wall Object
+     * @param otherFixture fixture for wall to be compared with
+     * @return boolean value which states if the received fixture is in contact with the walls fixture
+     */
     public boolean equals(Fixture otherFixture){
         return fixture.equals(otherFixture);
     }
 
-
+    /**
+     * hashcode generator for wall fixture
+     * @return int hashcode for the wall fixture
+     */
     public int hashCode(){
         return fixture.hashCode();
     }
 
+    /**
+     * Method which gets portable attribute for the wall
+     * @return boolean value of portable attribute
+     */
     public boolean isPortable() {
         System.out.println(portable);
         return portable;

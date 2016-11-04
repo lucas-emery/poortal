@@ -8,12 +8,19 @@ import com.game.services.BodyService;
 import com.game.services.ConstantsService;
 
 /**
+ * Class which represents the physical portal object
  * @author Lucas Emery
  */
 public class Portal extends LevelObject{
 
     private Vector2 normal;
 
+    /**
+     * Constructor for the Portal LevelObject, sets position, normal vector and type
+     * @param position Vector2 representing the position of the portal in the level
+     * @param normal Vector2 normal(90°) vector to the portal orientation
+     * @param type Type enum value representing the Portal LevelObject
+     */
     public Portal(Vector2 position, Vector2 normal, LevelObject.Type type) {
         this.position = position;
         this.normal = normal;
@@ -23,6 +30,9 @@ public class Portal extends LevelObject{
         bodyDef.angle = normal.angleRad();
     }
 
+    /**
+     * Method which creates fixture for the Portal LevelObject
+     */
     @Override
     public void createFixtureDef() {
         Shape shape = BodyService.getShape(type);
