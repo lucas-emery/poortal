@@ -22,12 +22,10 @@ public class Door extends LevelObject implements AnimatedObject {
      * By default Door is initialized as closed.
      * @param position Vector2 which represents the physical
      *                 position of the LevelObject
-     * @param pointsRight Boolean which represents the direction
-     *                    in which the door is facing
      */
     public Door(Vector2 position){
         this.position = position;
-        isclosed = true;
+        isClosed = true;
         type = Type.RIGHT_DOOR;
         createBodyDef();
     }
@@ -44,8 +42,9 @@ public class Door extends LevelObject implements AnimatedObject {
         shape.dispose();
     }
     @Override
-    public boolean isActive(){
-        return !isclosed;
+    public boolean isActive() {
+        return !isClosed;
+    }
 
     /**
      * Method which is used to get isClosed
