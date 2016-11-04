@@ -49,7 +49,7 @@ public class Teleportation {
 
         //Espejar por vector normal
 
-        //float newAngle = object.getAngle() + portal.getAngle() - primary.angleRad();
+        float newAngle = portal.getAngle() - primary.angleRad();
 
         object.setTransform(newPosition, object.getAngle());
     }

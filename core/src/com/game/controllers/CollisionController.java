@@ -129,6 +129,7 @@ public class CollisionController implements ContactListener {
             }
             if(!object.isSensor()) {
                 TeleportationController.removeTeleportation(new Teleportation(portal, object));
+                ((Collider)object.getUserData()).enableContact();
             }
         }
     }
@@ -153,7 +154,28 @@ public class CollisionController implements ContactListener {
 
     @Override
     public void preSolve(Contact contact, Manifold oldManifold) {
+        Fixture f1 = contact.getFixtureA();
+        Fixture f2 = contact.getFixtureB();
+        Collider c1 = (Collider) f1.getUserData();
+        Collider c2 = (Collider) f2.getUserData();
 
+        if(((c1.val() | c2.val()) & Type.PORTALRIM.val()) != Type.PORTALRIM.val()) {
+            WorldManifold worldManifold = contact.getWorldManifold();
+            int size = worldManifold.getNumberOfContactPoints();
+            Vector2[] contactPoints = worldManifold.getPoints();
+            boolean attendContact = true;
+            System.out.println(size);
+
+            for (int i = 0; i < size; i++) {
+                if (!c1.attendContact(contactPoints[i]) || !c2.attendContact(contactPoints[i])) {
+                    System.out.println("ignore");
+                    attendContact = false;
+                    break;
+                }
+            }
+
+            contact.setEnabled(attendContact);
+        }
     }
     @Override
     public void postSolve(Contact contact, ContactImpulse impulse) {

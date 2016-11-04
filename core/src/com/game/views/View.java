@@ -100,15 +100,15 @@ public class View {
 
         batch.end();
 
-        debugRenderer.render(model.getWorld(), camera.combined.cpy().scale(ConstantsService.METERS_TO_PIXELS, ConstantsService.METERS_TO_PIXELS, 0));
+        //debugRenderer.render(model.getWorld(), camera.combined.cpy().scale(ConstantsService.METERS_TO_PIXELS, ConstantsService.METERS_TO_PIXELS, 0));
 
-        shapeRenderer.setProjectionMatrix(camera.combined.cpy().scale(ConstantsService.METERS_TO_PIXELS, ConstantsService.METERS_TO_PIXELS, 0));
+        /*shapeRenderer.setProjectionMatrix(camera.combined.cpy().scale(ConstantsService.METERS_TO_PIXELS, ConstantsService.METERS_TO_PIXELS, 0));
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         shapeRenderer.setColor(Color.BLUE);
         Iterator i = DebugService.rays.descendingIterator();
         while(i.hasNext())
             shapeRenderer.line((Vector2) i.next(),(Vector2) i.next());
-        shapeRenderer.end();
+        shapeRenderer.end();*/
     }
 
     public void mouseMove(int x, int y){
