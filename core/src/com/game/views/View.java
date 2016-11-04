@@ -23,6 +23,7 @@ import com.game.services.ConstantsService;
 import com.game.services.VariablesService;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 /**
  * Created by juan on 24/10/16.
@@ -36,14 +37,14 @@ public class View {
     private SkeletonRenderer skeletonRenderer;
     private Box2DDebugRenderer debugRenderer;
     private Matrix4 debugMatrix;
-    private HashSet<LevelObjectView> levelObjectsViews;
+    private LinkedHashSet<LevelObjectView> levelObjectsViews;
     private PlayerView playerView;
     private Sprite levelBackgorund;
     private Music theme;
     private BitmapFont font;
     private ShapeRenderer shapeRenderer;
 
-    public View(Model model, HashSet<LevelObjectView> levelObjectsViews, PlayerView playerView, Sprite levelBackground) {
+    public View(Model model, LinkedHashSet<LevelObjectView> levelObjectsViews, PlayerView playerView, Sprite levelBackground) {
 
         font = new BitmapFont();
         font.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);

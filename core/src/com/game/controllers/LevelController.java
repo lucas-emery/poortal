@@ -8,13 +8,14 @@ import com.game.services.ConstantsService;
 import com.game.views.LevelObjectView;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 
 public class LevelController {
 
     private static Player player;
-    private static HashSet<LevelObject> levelObjects = new HashSet<LevelObject>();
-    private static HashSet<LevelObjectView> levelObjectsViews = new HashSet<LevelObjectView>();
+    private static LinkedHashSet<LevelObject> levelObjects = new LinkedHashSet<LevelObject>();
+    private static HashSet<LevelObjectView> levelObjectsViews = new LinkedHashSet<LevelObjectView>();
     private static HashSet<Wall> walls = new HashSet<Wall>();
     private static World world;
 
@@ -22,8 +23,8 @@ public class LevelController {
         return (HashSet<LevelObject>) levelObjects.clone();
     }
 
-    public static HashSet<LevelObjectView> getLevelObjectsViews() {
-        return (HashSet<LevelObjectView>) levelObjectsViews.clone();
+    public static LinkedHashSet<LevelObjectView> getLevelObjectsViews() {
+        return (LinkedHashSet<LevelObjectView>) levelObjectsViews.clone();
     }
 
     public static HashSet<Wall> getWalls() {
@@ -37,8 +38,8 @@ public class LevelController {
         player.setInitialPosition(new Vector2(10,3));
         player.setBody(world.createBody(player.getBodyDef()));
 
-        levelObjects.add(new Cube(new Vector2(4, 7)));
         levelObjects.add(new Door(new Vector2(928* ConstantsService.PIXELS_TO_METERS,68*ConstantsService.PIXELS_TO_METERS),false));
+        levelObjects.add(new Cube(new Vector2(4, 7)));
         levelObjects.add(new Button(new Vector2(3,2)));
 
         for(LevelObject object : levelObjects) {
