@@ -53,6 +53,20 @@ public class ConstantsService {
         }
     }
 
+    public static int getCantSprites(LevelObject.Type type){
+        switch (type) {
+            case BUTTON:
+            case LEFT_DOOR:
+            case RIGHT_DOOR:
+                return 1;
+            //case PLATFORM:
+            //    return BodyDef.BodyType.KinematicBody;
+            default:
+                return 1;
+        }
+
+    }
+
     public static final Vector2 cartesianVersorY = new Vector2(0, 1);
 
     public static final float JUMPCONSTANT = 8f;

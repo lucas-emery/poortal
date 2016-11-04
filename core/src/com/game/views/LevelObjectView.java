@@ -9,27 +9,10 @@ import com.game.services.AssetsService;
 import com.game.services.ConstantsService;
 
 
-public class LevelObjectView {
+public abstract class LevelObjectView {
 
-    private LevelObject model;
-    private Sprite sprite;
+    protected LevelObject model;
 
-    public LevelObjectView(LevelObject model) {
-        this.model = model;
-        this.sprite = AssetsService.getSprite(model.getType());
-    }
+    public abstract Sprite getUpdatedSprite();
 
-    public Sprite getUpdatedSprite() {
-        if(model.getType() == LevelObject.Type.LEFT_DOOR || (model.getType() == LevelObject.Type.RIGHT_DOOR)){
-            if(!((Door)model).isClosed())
-                return null;
-        }
-        Vector2 position = model.getPosition();
-
-        sprite.setRotation((model.getBody().getAngle())*ConstantsService.RAD_TO_DEG);
-        sprite.setPosition( (position.x * ConstantsService.METERS_TO_PIXELS) - sprite.getWidth()/2,
-                            (position.y * ConstantsService.METERS_TO_PIXELS) - sprite.getHeight()/2);
-
-        return sprite;
-    }
 }

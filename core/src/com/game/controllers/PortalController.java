@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.RayCastCallback;
 import com.game.models.LevelObject;
 import com.game.models.Portal;
 import com.game.views.LevelObjectView;
+import com.game.views.StaticLevelObjectView;
 
 
 public class PortalController {
@@ -17,7 +18,7 @@ public class PortalController {
 
     private static void spawnPortal(Vector2 point, Vector2 normal, LevelObject.Type portalType) {
         Portal newPortal = new Portal(point, normal, portalType);
-        LevelObjectView newView = new LevelObjectView(newPortal);
+        LevelObjectView newView = new StaticLevelObjectView(newPortal);
         Controller.addLevelObject(newPortal, newView);
         if(portalType == LevelObject.Type.PORTAL_BLUE) {
             if(bluePortal != null)
