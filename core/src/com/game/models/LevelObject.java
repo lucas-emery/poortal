@@ -36,6 +36,7 @@ public abstract class LevelObject {
 
     public abstract void createFixtureDef();
 
+
     public Body getBody(){
         return body;
     }
@@ -45,7 +46,7 @@ public abstract class LevelObject {
     }
 
     public Vector2 getPosition() {
-        return body.getPosition();
+        return body.getPosition().cpy();
     }
 
 }

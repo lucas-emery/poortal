@@ -9,20 +9,16 @@ import com.game.services.ConstantsService;
 /**
  * Created by Usuario on 03/11/2016.
  */
-public class Door extends LevelObject {
+public class Door extends LevelObject implements AnimatedObject {
 
-    private Integer spriteN;
+    private boolean isclosed;
     /**
      * By default Door is initialised as closed
      */
-    public Door(Vector2 position,boolean pointsRight){
+    public Door(Vector2 position){
         this.position = position;
-        spriteN= 0;
-        if(pointsRight)
-            type = Type.RIGHT_DOOR;
-        else
-            type = Type.LEFT_DOOR;
-
+        isclosed = true;
+        type = Type.RIGHT_DOOR;
         createBodyDef();
     }
 
@@ -33,18 +29,12 @@ public class Door extends LevelObject {
         body.createFixture(fixtureDef).setUserData(ConstantsService.ColliderType.CUBE.val());
         shape.dispose();
     }
-    public int drawSpriteN(){
-        return spriteN;
+    @Override
+    public boolean isActive(){
+        return !isclosed;
     }
+
     public void setClosed(boolean value){
-
-        if(value)
-            spriteN = 0;
-        else
-            spriteN = null;
-    }
-
-    public Integer getSpriteN(){
-        return spriteN;
+        isclosed = value;
     }
 }

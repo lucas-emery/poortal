@@ -35,7 +35,7 @@ public class AssetsService {
     public static void initialize(){
 
         Texture texture;
-        ArrayList<Texture> textures = new ArrayList<Texture>();
+        ArrayList<Texture> textures;
 
         texture = new Texture(Gdx.files.internal("mapa.png"));
         levelBackgrounds.add(texture);
@@ -49,15 +49,15 @@ public class AssetsService {
         texture = new Texture(Gdx.files.internal("portal_orange.png"));
         staticTextures.put(LevelObject.Type.PORTAL_ORANGE, texture);
 
+        textures = new ArrayList<Texture>();
         texture = new Texture(Gdx.files.internal("closed_door_right.png"));
-        textures.add(texture);
+        textures.add(0,texture);
         animatedTextures.put(LevelObject.Type.RIGHT_DOOR,textures);
-        textures.clear();
 
+        textures = new ArrayList<Texture>();
         texture = new Texture(Gdx.files.internal("closed_door_left.png"));
-        textures.add(texture);
+        textures.add(0,texture);
         animatedTextures.put(LevelObject.Type.LEFT_DOOR, textures);
-        textures.clear();
 
         texture = new Texture(Gdx.files.internal("placeholder.png"));
         staticTextures.put(LevelObject.Type.BUTTON, texture);
@@ -100,8 +100,10 @@ public class AssetsService {
             sprites.add(newSprite);
         }
 
+        return sprites;
 
     }
+
 
     public static SkeletonData getPlayerSkeletonData() {
         return playerSkeletonData;

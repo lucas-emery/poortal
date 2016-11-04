@@ -5,7 +5,9 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
 import com.game.models.*;
 import com.game.services.ConstantsService;
+import com.game.views.AnimatedLevelObjectView;
 import com.game.views.LevelObjectView;
+import com.game.views.StaticLevelObjectView;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -38,13 +40,19 @@ public class LevelController {
         player.setInitialPosition(new Vector2(10,3));
         player.setBody(world.createBody(player.getBodyDef()));
 
-        levelObjects.add(new Door(new Vector2(928* ConstantsService.PIXELS_TO_METERS,68*ConstantsService.PIXELS_TO_METERS),false));
+        //levelObjects.add(new Door(new Vector2(928* ConstantsService.PIXELS_TO_METERS,68*ConstantsService.PIXELS_TO_METERS)));
         levelObjects.add(new Cube(new Vector2(4, 7)));
         levelObjects.add(new Button(new Vector2(3,2)));
 
         for(LevelObject object : levelObjects) {
             object.setBody(world.createBody(object.getBodyDef()));
-            levelObjectsViews.add(new LevelObjectView(object));
+
+            if( object instanceof AnimatedObject) {
+                levelObjectsViews.add(new AnimatedLevelObjectView(object));
+            }
+            else{
+                levelObjectsViews.add(new StaticLevelObjectView(object));
+            }
         }
         
         Wall floor = new Wall(new Vector2(0,35* ConstantsService.PIXELS_TO_METERS ), true);
