@@ -11,13 +11,13 @@ import com.game.services.ConstantsService;
  */
 public class Door extends LevelObject {
 
-    private boolean isclosed;
+    private Integer spriteN;
     /**
      * By default Door is initialised as closed
      */
     public Door(Vector2 position,boolean pointsRight){
         this.position = position;
-        isclosed = true;
+        spriteN= 0;
         if(pointsRight)
             type = Type.RIGHT_DOOR;
         else
@@ -33,11 +33,18 @@ public class Door extends LevelObject {
         body.createFixture(fixtureDef).setUserData(ConstantsService.ColliderType.CUBE.val());
         shape.dispose();
     }
-    public boolean isClosed(){
-        return isclosed;
+    public int drawSpriteN(){
+        return spriteN;
     }
     public void setClosed(boolean value){
-        isclosed = value;
+
+        if(value)
+            spriteN = 0;
+        else
+            spriteN = null;
     }
 
+    public Integer getSpriteN(){
+        return spriteN;
+    }
 }
