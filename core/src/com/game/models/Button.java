@@ -10,7 +10,7 @@ import com.game.services.ConstantsService;
 /**
  * Button is a class in which the physical
  * information of the LevelObject button
- * is created
+ * is created and stored.
  * @author Pablo Radnic
  */
 public class Button extends LevelObject{

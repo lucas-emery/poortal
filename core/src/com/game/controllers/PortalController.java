@@ -8,14 +8,22 @@ import com.game.models.Portal;
 import com.game.views.LevelObjectView;
 import com.game.views.StaticLevelObjectView;
 
-
+/**
+ *
+ */
 public class PortalController {
     private static Portal bluePortal;
     private static LevelObjectView bluePortalView;
     private static Portal orangePortal;
     private static LevelObjectView orangePortalView;
 
-
+    /**
+     * This method will store a portal's information within the controller when a successful
+     * portal fire is executed @see firePortal
+     * @param point this is the position where the portal is currently
+     * @param normal this is a vector which is notmal to the wall with which the portal collided
+     * @param portalType the color of the portal that was successfully fired
+     */
     private static void spawnPortal(Vector2 point, Vector2 normal, LevelObject.Type portalType) {
         Portal newPortal = new Portal(point, normal, portalType);
         LevelObjectView newView = new StaticLevelObjectView(newPortal);
@@ -34,6 +42,12 @@ public class PortalController {
         }
     }
 
+    /**
+     *
+     * @param playerPos
+     * @param clickPos
+     * @param portalType
+     */
     public static void firePortal(Vector2 playerPos, Vector2 clickPos, Portal.Type portalType){
         PortalRayCastCallback callback = new PortalRayCastCallback(portalType);
         Controller.queryRayCast(callback, playerPos, clickPos);
@@ -41,6 +55,9 @@ public class PortalController {
             spawnPortal(callback.getWallPoint(), callback.getWallNormal(), portalType);
     }
 
+    /**
+     *
+     */
     private static class PortalRayCastCallback implements RayCastCallback {
 
         private LevelObject.Type portalType;
@@ -57,6 +74,14 @@ public class PortalController {
             nearestWallFraction = 2;
         }
 
+        /**
+         *
+         * @param fixture
+         * @param point
+         * @param normal
+         * @param fraction
+         * @return
+         */
         @Override
         public float reportRayFixture(Fixture fixture, Vector2 point, Vector2 normal, float fraction) {
             System.out.println("Fixture found at: "+ point);
@@ -71,14 +96,26 @@ public class PortalController {
             return 1;
         }
 
+        /**
+         *
+         * @return
+         */
         public Vector2 getWallPoint() {
             return wallPoint;
         }
 
+        /**
+         *
+         * @return
+         */
         public Vector2 getWallNormal() {
             return wallNormal;
         }
 
+        /**
+         *
+         * @return
+         */
         public boolean isWallPortable() {
             return wallIsPortable;
         }

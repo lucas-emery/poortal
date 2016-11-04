@@ -11,7 +11,12 @@ import com.game.views.StaticLevelObjectView;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
-
+/**
+ * LevelController is a class which handles
+ * the initialisation of a level and stores
+ * the physics world for the level
+ *
+ * */
 
 public class LevelController {
 
@@ -21,18 +26,35 @@ public class LevelController {
     private static HashSet<Wall> walls = new HashSet<Wall>();
     private static World world;
 
+    /**
+     * Method that returns a clone of the
+     * HashSet of the LevelController's LevelObjects
+     * @return HashSet of LevelObjects
+     */
     public static HashSet<LevelObject> getLevelObjects() {
         return (HashSet<LevelObject>) levelObjects.clone();
     }
-
+    /**
+     * Method that returns a clone of the
+     * LinkedHashSet of the LevelController's LevelObjectViews
+     * @return LinkedHashSet of LevelObjectViews
+     */
     public static LinkedHashSet<LevelObjectView> getLevelObjectsViews() {
         return (LinkedHashSet<LevelObjectView>) levelObjectsViews.clone();
     }
-
+    /**
+     * Method that returns a clone of the
+     * HashSet of the LevelController's walls
+     */
     public static HashSet<Wall> getWalls() {
         return (HashSet<Wall>) walls.clone();
     }
 
+    /**
+     * The generateLevel method will instance the physics world,
+     * set the level object's initial position and insert them
+     * into the world also instancing the level's walls.
+     */
     public static void generateLevel() {
         world = new World(new Vector2(0, -9.8f), true);
         world.setContactListener(new CollisionController());
@@ -70,10 +92,19 @@ public class LevelController {
 
 
     }
+
+    /**
+     * A method which returns the level's physics world.
+     * @return the level's physics world.
+     */
     public static World getLevelWorld(){
         return world;
     }
 
+    /**
+     * This method will set the current level player.
+     * @param recievedPlayer Player object to be set in the level
+     */
     public static void setPlayer(Player recievedPlayer) {
         player = recievedPlayer;
     }

@@ -14,11 +14,20 @@ import com.game.views.LevelObjectView;
 import com.game.views.PlayerView;
 import com.game.views.View;
 
+/**
+ *The controller is a class which handles all of the input
+ * within the program and interacts both with the model and
+ * view updating the model's state and also sends messages
+ * every frame to the view to render itself.
+ */
 public class Controller extends ApplicationAdapter {
 
 	private static Model model;
 	private static View view;
 
+	/**
+	 *
+     */
 	@Override
 	public void create () {
 		AssetsService.initialize();
@@ -38,6 +47,9 @@ public class Controller extends ApplicationAdapter {
 		Gdx.input.setInputProcessor(new InputController());
 	}
 
+	/**
+	 *
+     */
 	@Override
 	public void render () {
 		model.update();
@@ -47,39 +59,74 @@ public class Controller extends ApplicationAdapter {
 		view.render();
 	}
 
+	/**
+	 *
+     */
 	private void updateButtonCollisionState() {
 		boolean isPressed = CollisionController.getButtonPressed();
 		//updateButtonCollisionState(isPressed);
 	}
 
+	/**
+	 *
+     */
 	private void updatePlayerCollisionState() {
 		boolean grounded = CollisionController.isPlayerOnGround();
 		Fixture vicinity = CollisionController.getVicinity();
 		PlayerController.updatePlayerCollisionState(grounded, vicinity);
 	}
 
+	/**
+	 *
+     */
 	@Override
 	public void dispose () {
 	}
 
+	/**
+	 *Method which
+	 * @param width
+	 * @param height
+     */
 	@Override
 	public void resize(int width, int height) {
 		view.resize(width, height);
 	}
 
+	/**
+	 *
+	 * @param callback
+	 * @param from
+     * @param to
+     */
 	public static void queryRayCast(RayCastCallback callback, Vector2 from, Vector2 to) {
 		model.queryRayCast(callback, from, to);
 	}
 
+	/**
+	 *
+	 * @param screenCoords
+     * @return
+     */
 	public static Vector2 getGraphicsCoords(Vector2 screenCoords) {
 		return view.getGraphicsCoords(screenCoords);
 	}
 
+	/**
+	 *
+	 * @param object
+	 * @param objectView
+     */
 	public static  void addLevelObject(LevelObject object, LevelObjectView objectView) {
 		model.addObject(object);
 		view.addView(objectView);
 	}
 
+	/**
+	 *
+	 * @param object
+	 * @param objectView
+     */
 	public static void removeLevelObject(LevelObject object, LevelObjectView objectView) {
 		model.removeObject(object);
 		view.removeView(objectView);

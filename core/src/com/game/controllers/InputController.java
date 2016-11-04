@@ -10,6 +10,8 @@ import com.game.views.PlayerView;
 import com.game.views.View;
 
 /**
+ * The InputController class is tasked with handling the keyboard/mouse
+ * inputs and sends messages to other classes in order to react to the events.
  * @author Juan Godfrid
  */
 
@@ -18,11 +20,26 @@ public class InputController implements InputProcessor{
     protected static boolean aIsPressed;
     protected static boolean dIsPressed;
 
+    /**
+     /**
+     * This method is required due to the implementation of the ImputProcessor
+     * interface
+     * @return false since it is not used for the program.
+     */
     @Override
+
     public boolean touchDragged(int screenX, int screenY, int pointer) {
         return false;
     }
 
+    /**
+     *
+     * @param screenX
+     * @param screenY
+     * @param pointer
+     * @param button
+     * @return
+     */
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         Portal.Type portalType;
@@ -37,21 +54,42 @@ public class InputController implements InputProcessor{
         return false;
     }
 
+    /**
+     *
+     * @param screenX
+     * @param screenY
+     * @param pointer
+     * @param button
+     * @return
+     */
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         return false;
     }
 
+    /**
+     *
+     * @param character
+     * @return
+     */
     @Override
     public boolean keyTyped(char character) {
         return false;
     }
 
+    /**
+     *
+     * @param amount
+     * @return
+     */
     @Override
     public boolean scrolled(int amount) {
         return false;
     }
 
+    /**
+     *
+     */
     public static void update(){
         boolean isPressed=false;
         if (InputController.aIsPressed){
@@ -66,6 +104,11 @@ public class InputController implements InputProcessor{
 	       PlayerController.setAnimation(null);                                             // UBICADO EN ALGUN SERVICE
     }
 
+    /**
+     *
+     * @param keycode
+     * @return
+     */
     @Override
     public boolean keyDown(int keycode){
         switch (keycode){
