@@ -8,16 +8,30 @@ import com.game.services.BodyService;
 import com.game.services.ConstantsService;
 
 /**
- * Created by pradnic on 03/11/16.
+ * Button is a class in which the physical
+ * information of the LevelObject button
+ * is created
+ * @author Pablo Radnic
  */
 public class Button extends LevelObject{
 
+    /**
+     * Constructor which assigns the position Vector and
+     * type to the LevelObject, also creates BodyDef
+     * @param position Vector2 representing the physical
+     *                 position of the Button
+     */
     public Button(Vector2 position) { //Concept
 
         this.position = position;
         this.type = Type.BUTTON;
         createBodyDef();
     }
+
+    /**
+     * Method which creates fixture and userdata
+     * for the LevelObject
+     */
     @Override
     public void createFixtureDef() {
 

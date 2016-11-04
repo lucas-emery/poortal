@@ -9,6 +9,9 @@ import com.game.services.VariablesService;
 import com.game.views.PlayerView;
 import com.game.views.View;
 
+/**
+ * @author Juan Godfrid
+ */
 
 public class InputController implements InputProcessor{
 

@@ -6,10 +6,18 @@ import com.game.services.AssetsService;
 import com.game.services.ConstantsService;
 
 /**
- * Created by Usuario on 26/10/2016.
+ * Cube is a class in which the physical properties of the
+ * Cube LevelObject are set
+ * @author Francisco Delgado
  */
 public class Cube extends LevelObject {
 
+    /**
+     * Constructor which assigns the position Vector and
+     * type to the LevelObject, also creates BodyDef
+     * @param position Vector2 representing the physical
+     *                 position of the Cube
+     */
     public Cube(Vector2 position) { //Concept
 
         this.position = position;
@@ -17,6 +25,10 @@ public class Cube extends LevelObject {
         createBodyDef();
     }
 
+    /**
+     * Method which creates fixture and userdata
+     * for the LevelObject
+     */
     @Override
     public void createFixtureDef(){
         Shape shape = BodyService.getShape(type);

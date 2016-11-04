@@ -7,17 +7,27 @@ import com.game.services.BodyService;
 import com.game.services.ConstantsService;
 
 /**
- * Created by Usuario on 03/11/2016.
+ * Button is a class in which the physical
+ * information of the LevelObject Door
+ * is created
+ * @author Francisco Delgado
  */
 public class Door extends LevelObject {
 
-    private boolean isclosed;
+    private boolean isClosed;
+
     /**
-     * By default Door is initialised as closed
+     * Constructor which assigns the position Vector and
+     * type to the LevelObject, also creates BodyDef.
+     * By default Door is initialized as closed.
+     * @param position Vector2 which represents the physical
+     *                 position of the LevelObject
+     * @param pointsRight Boolean which represents the direction
+     *                    in which the door is facing
      */
     public Door(Vector2 position,boolean pointsRight){
         this.position = position;
-        isclosed = true;
+        isClosed = true;
         if(pointsRight)
             type = Type.RIGHT_DOOR;
         else
@@ -26,6 +36,10 @@ public class Door extends LevelObject {
         createBodyDef();
     }
 
+    /**
+     * Method which creates fixture and userdata
+     * for the LevelObject
+     */
     public void createFixtureDef(){
         Shape shape = BodyService.getShape(type);
         FixtureDef fixtureDef = BodyService.getFixtureDef(type);
@@ -33,11 +47,21 @@ public class Door extends LevelObject {
         body.createFixture(fixtureDef).setUserData(ConstantsService.ColliderType.CUBE.val());
         shape.dispose();
     }
+
+    /**
+     * Method which is used to get isClosed
+     * @return Boolean which represents the open state of the door
+     */
     public boolean isClosed(){
-        return isclosed;
+        return isClosed;
     }
+
+    /**
+     * Method which sets isClosed value
+     * @param value Boolean to set isClosed to
+     */
     public void setClosed(boolean value){
-        isclosed = value;
+        isClosed = value;
     }
 
 }

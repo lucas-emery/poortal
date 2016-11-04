@@ -7,7 +7,9 @@ import com.badlogic.gdx.physics.box2d.Shape;
 import com.game.services.BodyService;
 import com.game.services.ConstantsService;
 
-
+/**
+ * @author Lucas Emery
+ */
 public class Portal extends LevelObject{
 
     private Vector2 normal;

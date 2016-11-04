@@ -9,6 +9,10 @@ import com.game.services.AssetsService;
 import com.game.services.BodyService;
 import com.game.services.ConstantsService;
 
+/**
+ * Player is a model type class which handles the physical rules which the player abides to
+ * @author Juan Godfrid
+ */
 public class Player {
 
     private Body body;
