@@ -12,8 +12,7 @@ public class Collider{
 
     public enum Type {
         CUBE(1<<0),
-        PSENSORRIGHT(1<<1),
-        PSENSORLEFT(1<<2),
+        PSENSOR(1<<1),
         PSENSORFOOT(1<<3),
         PLAYER(1<<4),
         BUTTON(1<<5),

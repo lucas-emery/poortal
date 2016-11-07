@@ -138,12 +138,8 @@ public class Player {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.isSensor=true;
 
-        fixtureDef.shape=(shape=BodyService.getPlayerSensorShape(true));
-        body.createFixture(fixtureDef).setUserData(new Collider(Collider.Type.PSENSORRIGHT));
-        shape.dispose();
-
-        fixtureDef.shape=(shape=BodyService.getPlayerSensorShape(false));
-        body.createFixture(fixtureDef).setUserData(new Collider(Collider.Type.PSENSORLEFT));
+        fixtureDef.shape=(shape=BodyService.getPlayerSensorShape());
+        body.createFixture(fixtureDef).setUserData(new Collider(Collider.Type.PSENSOR));
         shape.dispose();
 
         fixtureDef.shape=(shape=BodyService.getPlayerFootSensor());
@@ -224,5 +220,19 @@ public class Player {
      */
     public boolean isHolding() {
         return holding;
+    }
+
+    public boolean isFacingCube() {
+        if(isLookingLeft()){
+            if(vicinity.getBody().getPosition().x<body.getPosition().x) {
+                return true;
+            }
+        }
+        else{
+            if(vicinity.getBody().getPosition().x>body.getPosition().x){
+                return true;
+            }
+        }
+        return false;
     }
 }

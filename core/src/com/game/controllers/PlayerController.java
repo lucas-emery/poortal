@@ -141,18 +141,14 @@ public class PlayerController {
      *
      */
     public static void interact() {
-        if(player.getVicinity()!=null){
-            if(((Collider)player.getVicinity().getUserData()).val()==Collider.Type.CUBE.val()){
-                if(!player.isHolding()) {
+        if(!player.isHolding()){
+            if(player.getVicinity()!=null){
+                if(player.isFacingCube()) {
                     player.setHolding(true);
                 }
-                else{
-                    player.setHolding(false);
-                    CollisionController.setVicinity(null);
-                }
-
             }
         }
+        else
+            player.setHolding(false);
     }
-
 }

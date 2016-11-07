@@ -49,6 +49,7 @@ public class Model {
             accumulatedTime -= ConstantsService.WORLD_STEP;
         }
         if(player.isHolding()!=lastframe){
+            System.out.println(player.isHolding());
             lastframe=player.isHolding();
             if(player.isHolding()){
                 createJoint();

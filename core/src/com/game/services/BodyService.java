@@ -82,14 +82,14 @@ public class BodyService {
         }
     }
 
-    public static PolygonShape getPlayerSensorShape(boolean isRight) {
+    public static PolygonShape getPlayerSensorShape() {
         {
-            float body_x=0.5f, body_y=0.95f, constant=(isRight)?1.0f:-1.0f;
+            float body_x=0.5f, body_y=0.95f;
             Vector2[] vec ={
-                    new Vector2(-body_x+constant*1f, -body_y),
-                    new Vector2(-body_x+constant*1f, body_y),
-                    new Vector2(body_x+constant*1f, -body_y),
-                    new Vector2(body_x+constant*1f, body_y)
+                    new Vector2(-body_x-1f, -body_y),
+                    new Vector2(-body_x-1f, body_y),
+                    new Vector2(body_x+1f, -body_y),
+                    new Vector2(body_x+1f, body_y)
             };
             PolygonShape shape = new PolygonShape();
             shape.set(vec);

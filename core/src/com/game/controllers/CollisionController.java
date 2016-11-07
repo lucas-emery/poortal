@@ -6,6 +6,7 @@ import com.game.models.Collider;
 import com.game.models.Collider.Type;
 import com.game.models.Player;
 import com.game.models.Teleportation;
+import com.game.services.ConstantsService;
 import com.game.services.DebugService;
 
 /**
@@ -40,33 +41,23 @@ public class CollisionController implements ContactListener {
     public void beginContact(Contact contact) {
         Fixture f1 = contact.getFixtureA();
         Fixture f2 = contact.getFixtureB();
+        Collider c1 = (Collider)f1.getUserData();
+        Collider c2 = (Collider)f2.getUserData();
 
-        int value = ((Collider)(f1.getUserData())).val()+((Collider)(f2.getUserData())).val();
+        int value = c1.val()+c2.val();
 
-        if(!PlayerController.getPlayer().isLookingLeft()) {
-            if ((value & Type.PSENSORRIGHT.val()) == Type.PSENSORRIGHT.val()) {
-                if ((value & Type.CUBE.val()) == Type.CUBE.val()) {
-                    if (((Collider)f1.getUserData()).val() == Type.PSENSORRIGHT.val())
-                        vicinity = f2;
-                    else
-                        vicinity = f1;
+        if(value == Type.PSENSOR.val()+Type.CUBE.val()) {
+            if (!PlayerController.getPlayer().isHolding()) {
+                if((c1.val()== Type.CUBE.val())) {
+                    vicinity = f1;
+                }
+                else {
+                    vicinity = f2;
                 }
             }
         }
-        else{
-            if ((value & Type.PSENSORLEFT.val() )== Type.PSENSORLEFT.val()) {
-                if ((value & Type.CUBE.val())==Type.CUBE.val()) {
-                    if(((Collider)f1.getUserData()).val() == Type.PSENSORLEFT.val()) {
-                        if(!PlayerController.getPlayer().isHolding())
-                            vicinity = f2;
-                    }
-                    else{
-                        if(!PlayerController.getPlayer().isHolding())
-                            vicinity = f1;
-                    }
-                }
-            }
-        }
+
+
         if((value & (Type.PORTAL.val()+Type.PSENSORFOOT.val()))==Type.PSENSORFOOT.val()){
             contactNumber++;
             playerOnGround = true;
@@ -94,6 +85,7 @@ public class CollisionController implements ContactListener {
                 ((Collider)object.getUserData()).disableContactFromVector(portalPos, portalPrimary);
 //                DebugService.rays.add(portalPos);
 //                DebugService.rays.add(portalPrimary.add(portalPos));
+                System.out.println("Add tele");
             }
         }
     }
@@ -108,20 +100,14 @@ public class CollisionController implements ContactListener {
     public void endContact (Contact contact) {
         Fixture f1 = contact.getFixtureA();
         Fixture f2 = contact.getFixtureB();
+        Collider c1 = (Collider)f1.getUserData();
+        Collider c2 = (Collider)f2.getUserData();
 
-        int value = ((Collider)(f1.getUserData())).val()+((Collider)(f2.getUserData())).val();
+        int value = c1.val()+c2.val();
 
-        if ((value & Collider.Type.PSENSORRIGHT.val()) == Type.PSENSORRIGHT.val()) {
-            if ( (value & Type.CUBE.val()) == Type.CUBE.val()) {
-                if(f1 == vicinity || f2 == vicinity)
-                    vicinity=null;
-            }
-        }
-
-        if ((value & Type.PSENSORLEFT.val() )== Type.PSENSORLEFT.val()) {
-            if ((value & Type.CUBE.val())==Type.CUBE.val()) {
-                if(f1 == vicinity || f2 == vicinity)
-                    vicinity=null;
+        if(value == Type.PSENSOR.val()+Type.CUBE.val()) {
+            if (!PlayerController.getPlayer().isHolding()) {
+                vicinity=null;
             }
         }
 
