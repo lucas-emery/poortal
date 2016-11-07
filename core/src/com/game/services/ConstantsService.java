@@ -51,7 +51,7 @@ public class ConstantsService {
         }
     }
 
-    public static final Vector2 cartesianVersorY = new Vector2(0, 1);
+    public static final Vector2 CARTESIAN_VERSOR_Y = new Vector2(0, 1);
 
     public static final float JUMPCONSTANT = 8f;
 

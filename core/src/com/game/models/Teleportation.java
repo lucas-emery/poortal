@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.game.controllers.PortalController;
+import com.game.services.ConstantsService;
 import com.game.services.DebugService;
 
 /**
@@ -47,11 +48,22 @@ public class Teleportation {
         relative.rotate(relativeAngle);
         Vector2 newPosition = relative.add(position);
 
-        //Espejar por vector normal
+        float thisPrimaryAngle = portal.getAngle() + (float)Math.PI/2;
+        float otherPrimaryAngle = primary.angleRad();
 
-        float newAngle = portal.getAngle() - primary.angleRad();
+        float diff = otherPrimaryAngle - thisPrimaryAngle;
+
+        float newAngle = (float)Math.PI;
+        if(Math.abs(diff % (2*Math.PI)) < 0.1f ) {
+            Vector2 thisPrimary = ConstantsService.CARTESIAN_VERSOR_Y.cpy().setAngleRad(thisPrimaryAngle);
+            relativeAngle = object.getLinearVelocity().angleRad(thisPrimary);
+            newAngle = relativeAngle * 2;
+        }
+        newAngle += diff;
 
         object.setTransform(newPosition, object.getAngle());
+        object.setLinearVelocity(object.getLinearVelocity().rotateRad(newAngle));
+
     }
 
     @Override

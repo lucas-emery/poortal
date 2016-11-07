@@ -164,11 +164,11 @@ public class CollisionController implements ContactListener {
             int size = worldManifold.getNumberOfContactPoints();
             Vector2[] contactPoints = worldManifold.getPoints();
             boolean attendContact = true;
-            System.out.println(size);
+//            System.out.println(size);
 
             for (int i = 0; i < size; i++) {
                 if (!c1.attendContact(contactPoints[i]) || !c2.attendContact(contactPoints[i])) {
-                    System.out.println("ignore");
+//                    System.out.println("ignore");
                     attendContact = false;
                     break;
                 }

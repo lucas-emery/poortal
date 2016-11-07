@@ -44,7 +44,7 @@ public class PlayerView {
 
         playerToMouseVector.set(mouseVector.x - playerVector.x, mouseVector.y - playerVector.y);
 
-        float theta = ConstantsService.cartesianVersorY.angle(playerToMouseVector);
+        float theta = ConstantsService.CARTESIAN_VERSOR_Y.angle(playerToMouseVector);
 
         if(theta > 0){
             player.setLookingLeft(true);

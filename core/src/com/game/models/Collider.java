@@ -58,9 +58,9 @@ public class Collider{
     public boolean attendContact(Vector2 contact) {
         if(contactDisablePoint != null) {
             Vector2 relativeContact = contact.cpy().sub(contactDisablePoint);
-            System.out.println(relativeContact);
+//            System.out.println(relativeContact);
             if (relativeContact.crs(contactDisableVector) < 0.01f) {
-                System.out.println(relativeContact);
+//                System.out.println(relativeContact);
                 return false;
             }
         }
