@@ -1,5 +1,6 @@
 package com.game.controllers;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
@@ -8,7 +9,14 @@ import com.game.services.ConstantsService;
 import com.game.views.AnimatedLevelObjectView;
 import com.game.views.LevelObjectView;
 import com.game.views.StaticLevelObjectView;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.*;
+import org.json.simple.parser.ParseException;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.CharBuffer;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 /**
@@ -55,7 +63,21 @@ public class LevelController {
      * set the level object's initial position and insert them
      * into the world also instancing the level's walls.
      */
-    public static void generateLevel() {
+    public static void generateLevel(Integer level) {
+
+        String file = "level"+level.toString()+".json";
+
+        try {
+            JSONObject levelData = (JSONObject) new JSONParser().parse(new FileReader("levels/"+file));
+
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
         world = new World(new Vector2(0, -9.8f), false);
         world.setContactListener(new CollisionController());
 
@@ -64,6 +86,15 @@ public class LevelController {
 
         //levelObjects.add(new Door(new Vector2(928* ConstantsService.PIXELS_TO_METERS,68*ConstantsService.PIXELS_TO_METERS)));
         levelObjects.add(new Cube(new Vector2(4, 7)));
+        levelObjects.add(new Cube(new Vector2(8, 3)));
+        levelObjects.add(new Cube(new Vector2(8, 4)));
+        levelObjects.add(new Cube(new Vector2(8, 5)));
+        levelObjects.add(new Cube(new Vector2(8, 6)));
+        levelObjects.add(new Cube(new Vector2(8, 7)));
+        levelObjects.add(new Cube(new Vector2(8, 8)));
+        levelObjects.add(new Cube(new Vector2(8, 9)));
+        levelObjects.add(new Cube(new Vector2(8, 10)));
+        levelObjects.add(new Cube(new Vector2(8, 11)));
         levelObjects.add(new Button(new Vector2(3,2)));
 
         for(LevelObject object : levelObjects) {
