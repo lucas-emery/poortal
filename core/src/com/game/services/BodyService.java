@@ -84,7 +84,7 @@ public class BodyService {
 
     public static PolygonShape getPlayerSensorShape() {
         {
-            float body_x=0.5f, body_y=0.95f;
+            float body_x=ConstantsService.PLAYER_WIDTH/2*0.8f, body_y=ConstantsService.PLAYER_HEIGHT/2;
             Vector2[] vec ={
                     new Vector2(-body_x-1f, -body_y),
                     new Vector2(-body_x-1f, body_y),

@@ -21,7 +21,7 @@ public class Model {
     private Player player;
     private World world;
     private float accumulatedTime;
-    private boolean lastframe;
+    private boolean wasHolding;
     private Joint joint;
 
     /**
@@ -34,7 +34,7 @@ public class Model {
         this.player = player;
         this.levelObjects = levelObjects;
         this.world = world;
-        lastframe = false;
+        wasHolding = false;
     }
 
     /**
@@ -48,9 +48,8 @@ public class Model {
             world.step(ConstantsService.WORLD_STEP, 8, 3);
             accumulatedTime -= ConstantsService.WORLD_STEP;
         }
-        if(player.isHolding()!=lastframe){
-            System.out.println(player.isHolding());
-            lastframe=player.isHolding();
+        if(player.isHolding()!= wasHolding ){
+            wasHolding = player.isHolding();
             if(player.isHolding()){
                 createJoint();
             }
