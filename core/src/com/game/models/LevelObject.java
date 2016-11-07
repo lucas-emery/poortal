@@ -14,7 +14,7 @@ import com.game.services.BodyService;
 
 public abstract class LevelObject {
     public enum Type {
-        CUBE, BUTTON, PORTAL_BLUE, PORTAL_ORANGE, WALL, RIGHT_DOOR, LEFT_DOOR
+        CUBE, BUTTON, PORTAL_BLUE, PORTAL_ORANGE, WALL, CLOSED_DOOR, OPENED_DOOR
     }
     protected Type type;
     protected Body body;

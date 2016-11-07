@@ -22,8 +22,8 @@ public class ConstantsService {
                 return 1f;
             case PORTAL_ORANGE:
                 return 1f;
-            case LEFT_DOOR:
-            case RIGHT_DOOR:
+            case OPENED_DOOR:
+            case CLOSED_DOOR:
                 return 1.6f;
             /*case WALL:
                 break;*/
@@ -43,8 +43,8 @@ public class ConstantsService {
                 return 1f;
             case PORTAL_ORANGE:
                 return 1f;
-            case LEFT_DOOR:
-            case RIGHT_DOOR:
+            case OPENED_DOOR:
+            case CLOSED_DOOR:
                 return 3.4f;
             /*case WALL:
                 break;*/
@@ -56,8 +56,8 @@ public class ConstantsService {
     public static int getCantSprites(LevelObject.Type type){
         switch (type) {
             case BUTTON:
-            case LEFT_DOOR:
-            case RIGHT_DOOR:
+            case OPENED_DOOR:
+            case CLOSED_DOOR:
                 return 1;
             //case PLATFORM:
             //    return BodyDef.BodyType.KinematicBody;

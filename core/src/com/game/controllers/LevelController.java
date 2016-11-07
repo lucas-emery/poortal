@@ -62,7 +62,7 @@ public class LevelController {
         player.setInitialPosition(new Vector2(10,3));
         player.setBody(world.createBody(player.getBodyDef()));
 
-        //levelObjects.add(new Door(new Vector2(928* ConstantsService.PIXELS_TO_METERS,68*ConstantsService.PIXELS_TO_METERS)));
+        levelObjects.add(new Door(new Vector2(928* ConstantsService.PIXELS_TO_METERS,68*ConstantsService.PIXELS_TO_METERS)));
         levelObjects.add(new Cube(new Vector2(4, 7)));
         levelObjects.add(new Button(new Vector2(3,2)));
 

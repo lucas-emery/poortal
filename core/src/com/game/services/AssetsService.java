@@ -52,12 +52,12 @@ public class AssetsService {
         textures = new ArrayList<Texture>();
         texture = new Texture(Gdx.files.internal("closed_door_right.png"));
         textures.add(0,texture);
-        animatedTextures.put(LevelObject.Type.RIGHT_DOOR,textures);
+        animatedTextures.put(LevelObject.Type.OPENED_DOOR,textures);
 
         textures = new ArrayList<Texture>();
         texture = new Texture(Gdx.files.internal("closed_door_left.png"));
         textures.add(0,texture);
-        animatedTextures.put(LevelObject.Type.LEFT_DOOR, textures);
+        animatedTextures.put(LevelObject.Type.CLOSED_DOOR, textures);
 
         texture = new Texture(Gdx.files.internal("placeholder.png"));
         staticTextures.put(LevelObject.Type.BUTTON, texture);
