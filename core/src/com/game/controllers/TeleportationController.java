@@ -22,13 +22,12 @@ public class TeleportationController {
                 Portal portal = PortalController.getOtherPortal(tele.getPortalType());
                 if(portal != null) {
                     tele.teleportObject(portal.getPosition(), portal.getPrimary(), portal.getNormal());
-                    //teleports.remove(tele);
                 }
             }
         }
     }
 
     public static void removeTeleportation(Teleportation teleportation) {
-        System.out.println("Rem tele: " + teleports.remove(teleportation));
+        teleports.remove(teleportation);
     }
 }

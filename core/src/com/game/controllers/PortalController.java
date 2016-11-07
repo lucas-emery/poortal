@@ -3,6 +3,7 @@ package com.game.controllers;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.RayCastCallback;
+import com.game.models.LevelObject;
 import com.game.models.LevelObject.Type;
 import com.game.models.Portal;
 import com.game.views.LevelObjectView;
@@ -48,7 +49,7 @@ public class PortalController {
      * @param clickPos
      * @param portalType
      */
-    public static void firePortal(Vector2 playerPos, Vector2 clickPos, Portal.Type portalType){
+    public static void firePortal(Vector2 playerPos, Vector2 clickPos, LevelObject.Type portalType){
         PortalRayCastCallback callback = new PortalRayCastCallback(portalType);
         Controller.queryRayCast(callback, playerPos, clickPos);
         if(callback.isWallPortable())

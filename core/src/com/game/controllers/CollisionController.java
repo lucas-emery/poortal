@@ -94,7 +94,6 @@ public class CollisionController implements ContactListener {
                 ((Collider)object.getUserData()).disableContactFromVector(portalPos, portalPrimary);
 //                DebugService.rays.add(portalPos);
 //                DebugService.rays.add(portalPrimary.add(portalPos));
-                System.out.println("Add tele");
             }
         }
     }
