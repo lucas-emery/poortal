@@ -25,6 +25,7 @@ public class LevelController {
     private static HashSet<LevelObjectView> levelObjectsViews = new LinkedHashSet<LevelObjectView>();
     private static HashSet<Wall> walls = new HashSet<Wall>();
     private static World world;
+    private static Door door;
 
     /**
      * Method that returns a clone of the
@@ -62,7 +63,9 @@ public class LevelController {
         player.setInitialPosition(new Vector2(10,3));
         player.setBody(world.createBody(player.getBodyDef()));
 
-        levelObjects.add(new Door(new Vector2(928* ConstantsService.PIXELS_TO_METERS,68*ConstantsService.PIXELS_TO_METERS)));
+        door = new Door(new Vector2(928* ConstantsService.PIXELS_TO_METERS,68*ConstantsService.PIXELS_TO_METERS));
+        System.out.println("door was defined");
+        door.setBody(world.createBody(door.getBodyDef()));
         levelObjects.add(new Cube(new Vector2(4, 7)));
         levelObjects.add(new Button(new Vector2(3,2)));
 

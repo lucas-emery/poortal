@@ -26,7 +26,7 @@ public class Door extends LevelObject implements AnimatedObject {
     public Door(Vector2 position){
         this.position = position;
         isClosed = true;
-        type = Type.CLOSED_DOOR;
+        type = Type.DOOR;
         createBodyDef();
     }
 
@@ -35,18 +35,18 @@ public class Door extends LevelObject implements AnimatedObject {
      * for the LevelObject
      */
     public void createFixtureDef(){
-            Shape closedShape = BodyService.getShape(type);
-        FixtureDef closedFixtureDef = BodyService.getFixtureDef(type);
-        closedFixtureDef.shape=closedShape;
+        Shape closedShape = BodyService.getShape(Type.CLOSED_DOOR);
+        FixtureDef closedFixtureDef = BodyService.getFixtureDef(type.CLOSED_DOOR);
+        closedFixtureDef.shape = closedShape;
         body.createFixture(closedFixtureDef).setUserData(ConstantsService.ColliderType.CUBE.val());
         closedShape.dispose();
 
-        Shape shape = BodyService.getShape(Type.OPENED_DOOR);
+        Shape openedShape = BodyService.getShape(Type.OPENED_DOOR);
         FixtureDef openedFixtureDef = BodyService.getFixtureDef(Type.OPENED_DOOR);
         openedFixtureDef.isSensor = true;
-        openedFixtureDef.shape=shape;
+        openedFixtureDef.shape = openedShape;
         body.createFixture(openedFixtureDef).setUserData(ConstantsService.ColliderType.CUBE.val());
-        shape.dispose();
+        openedShape.dispose();
 
     }
     @Override

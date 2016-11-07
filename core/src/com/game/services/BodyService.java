@@ -15,12 +15,15 @@ public class BodyService {
                 shape.setAsBox((AssetsService.getAnimatedSprites(type).get(0).getHeight() / 2) * ConstantsService.PIXELS_TO_METERS,
                         (AssetsService.getAnimatedSprites(type).get(0).getWidth() / 2) * ConstantsService.PIXELS_TO_METERS);
                 //get(0) por que 0 es el sprite opened door
+                return shape;
+
             case CLOSED_DOOR:
                 shape.setAsBox((AssetsService.getAnimatedSprites(type).get(1).getHeight() / 2) * ConstantsService.PIXELS_TO_METERS,
                         (AssetsService.getAnimatedSprites(type).get(1).getWidth() / 2) * ConstantsService.PIXELS_TO_METERS);
                 //get(1) por que 0 es el sprite opened door
 
                 return shape;
+
             default:
                 shape.setAsBox((AssetsService.getStaticSprite(type).getHeight() / 2) * ConstantsService.PIXELS_TO_METERS,
                         (AssetsService.getStaticSprite(type).getWidth() / 2) * ConstantsService.PIXELS_TO_METERS);
