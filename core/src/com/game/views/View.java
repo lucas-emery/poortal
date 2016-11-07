@@ -20,9 +20,11 @@ import com.game.models.LevelObject;
 import com.game.models.Model;
 import com.game.services.AssetsService;
 import com.game.services.ConstantsService;
+import com.game.services.DebugService;
 import com.game.services.VariablesService;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 
 /**
@@ -98,13 +100,15 @@ public class View {
 
         batch.end();
 
-        shapeRenderer.setProjectionMatrix(camera.combined.cpy().scale(ConstantsService.METERS_TO_PIXELS, ConstantsService.METERS_TO_PIXELS, 0));
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.setColor(Color.FIREBRICK);
-        shapeRenderer.line(PlayerController.rayPos, PlayerController.ray);
-        shapeRenderer.end();
+        //debugRenderer.render(model.getWorld(), camera.combined.cpy().scale(ConstantsService.METERS_TO_PIXELS, ConstantsService.METERS_TO_PIXELS, 0));
 
-        debugRenderer.render(model.getWorld(), camera.combined.cpy().scale(ConstantsService.METERS_TO_PIXELS, ConstantsService.METERS_TO_PIXELS, 0));
+        /*shapeRenderer.setProjectionMatrix(camera.combined.cpy().scale(ConstantsService.METERS_TO_PIXELS, ConstantsService.METERS_TO_PIXELS, 0));
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        shapeRenderer.setColor(Color.BLUE);
+        Iterator i = DebugService.rays.descendingIterator();
+        while(i.hasNext())
+            shapeRenderer.line((Vector2) i.next(),(Vector2) i.next());
+        shapeRenderer.end();*/
     }
 
     public void mouseMove(int x, int y){

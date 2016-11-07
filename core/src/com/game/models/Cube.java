@@ -10,7 +10,7 @@ import com.game.services.ConstantsService;
  * Cube LevelObject are set
  * @author Francisco Delgado
  */
-public class Cube extends LevelObject {
+public class Cube extends LevelObject implements Teleportable{
 
     /**
      * Constructor which assigns the position Vector and
@@ -34,7 +34,12 @@ public class Cube extends LevelObject {
         Shape shape = BodyService.getShape(type);
         FixtureDef fixtureDef = BodyService.getFixtureDef(type);
         fixtureDef.shape=shape;
-        body.createFixture(fixtureDef).setUserData(ConstantsService.ColliderType.CUBE.val());
+        body.createFixture(fixtureDef).setUserData(new Collider(Collider.Type.CUBE));
         shape.dispose();
+    }
+
+    @Override
+    public void setTransform(Vector2 position, float angle) {
+        body.setTransform(position, angle);
     }
 }

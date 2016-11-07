@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJoint;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
+import com.game.models.Collider;
 import com.game.models.LevelObject;
 import com.game.models.Player;
 import com.game.services.BodyService;
@@ -141,7 +142,7 @@ public class PlayerController {
      */
     public static void interact() {
         if(player.getVicinity()!=null){
-            if((Integer)(player.getVicinity().getUserData())==ConstantsService.ColliderType.CUBE.val()){
+            if(((Collider)player.getVicinity().getUserData()).val()==Collider.Type.CUBE.val()){
                 if(!player.isHolding()) {
                     player.setHolding(true);
                 }

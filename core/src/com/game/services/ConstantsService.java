@@ -9,7 +9,7 @@ public class ConstantsService {
 
     public static final float FORCEINGROUND = 1;
 
-    public static float FORCEINAIR = 0.2f;
+    public static float FORCEINAIR = 0.1f;
 
     //put the width in meters and it will convert to pixels in getSprite()
     public static Float getWidth(LevelObject.Type type) {
@@ -19,9 +19,8 @@ public class ConstantsService {
             case BUTTON:
                 return 0.25f;
             case PORTAL_BLUE:
-                return 1f;
             case PORTAL_ORANGE:
-                return 1f;
+                return 2.5f;
             case LEFT_DOOR:
             case RIGHT_DOOR:
                 return 1.6f;
@@ -40,9 +39,8 @@ public class ConstantsService {
             case BUTTON:
                 return 0.25f;
             case PORTAL_BLUE:
-                return 1f;
             case PORTAL_ORANGE:
-                return 1f;
+                return 2.5f;
             case LEFT_DOOR:
             case RIGHT_DOOR:
                 return 3.4f;
@@ -67,7 +65,7 @@ public class ConstantsService {
 
     }
 
-    public static final Vector2 cartesianVersorY = new Vector2(0, 1);
+    public static final Vector2 CARTESIAN_VERSOR_Y = new Vector2(0, 1);
 
     public static final float JUMPCONSTANT = 8f;
 
@@ -105,13 +103,14 @@ public class ConstantsService {
         PSENSORRIGHT(1<<1),
         PSENSORLEFT(1<<2),
         PSENSORFOOT(1<<3),
-        PSENSORBODY(1<<4),
+        PLAYER(1<<4),
         BUTTON(1<<5),
         PLATSENSOR(1<<6),
         PLATBODY(1<<7),
         PORTAL(1<<8),
         WALL(1<<9),
-        BUTTONSENSOR(1<<10);
+        BUTTONSENSOR(1<<10),
+        PORTALRIM(1<<11);
 
         private int value;
 
