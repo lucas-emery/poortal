@@ -12,7 +12,7 @@ import com.game.services.ConstantsService;
  * Player is a model type class which handles the physical rules which the player abides to
  * @author Juan Godfrid
  */
-public class Player implements Teleportable {
+public class Player {
 
     private Body body;
     private BodyDef bodyDef;
@@ -224,9 +224,5 @@ public class Player implements Teleportable {
      */
     public boolean isHolding() {
         return holding;
-    }
-
-    public void setTransform(Vector2 position, float angle) {
-        body.setTransform(position, angle);
     }
 }

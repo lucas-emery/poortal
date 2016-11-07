@@ -2,6 +2,7 @@ package com.game.models;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.game.controllers.PortalController;
 import com.game.services.ConstantsService;
 
 /**
@@ -57,7 +58,7 @@ public class Collider{
     }
 
     public boolean attendContact(Vector2 contact) {
-        if(contactDisablePoint != null) {
+        if(contactDisablePoint != null && PortalController.bothPortalsExist()) {
             Vector2 relativeContact = contact.cpy().sub(contactDisablePoint);
 //            System.out.println(relativeContact);
             if (relativeContact.len() <= ConstantsService.getHeight(LevelObject.Type.PORTAL_BLUE)/2 && relativeContact.crs(contactDisableVector) < 0.01f) {

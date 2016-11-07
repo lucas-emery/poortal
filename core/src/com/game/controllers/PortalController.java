@@ -56,9 +56,9 @@ public class PortalController {
     }
 
     public static Type getPortalType(Fixture fixture) {
-        if(bluePortal.compareFixture(fixture))
+        if(bluePortal != null && bluePortal.compareFixture(fixture))
             return Type.PORTAL_BLUE;
-        if(orangePortal.compareFixture(fixture))
+        if(orangePortal != null && orangePortal.compareFixture(fixture))
             return Type.PORTAL_ORANGE;
 
         return null;
@@ -69,6 +69,10 @@ public class PortalController {
             return orangePortal;
         else
             return bluePortal;
+    }
+
+    public static boolean bothPortalsExist() {
+        return bluePortal != null && orangePortal != null;
     }
 
     private static class PortalRayCastCallback implements RayCastCallback {

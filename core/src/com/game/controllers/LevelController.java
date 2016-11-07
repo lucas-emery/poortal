@@ -56,7 +56,7 @@ public class LevelController {
      * into the world also instancing the level's walls.
      */
     public static void generateLevel() {
-        world = new World(new Vector2(0, -9.8f), true);
+        world = new World(new Vector2(0, -9.8f), false);
         world.setContactListener(new CollisionController());
 
         player.setInitialPosition(new Vector2(10,3));
