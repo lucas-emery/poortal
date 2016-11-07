@@ -2,6 +2,7 @@ package com.game.models;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.game.services.ConstantsService;
 
 /**
  * Created by lemery on 04/11/16.
@@ -59,7 +60,7 @@ public class Collider{
         if(contactDisablePoint != null) {
             Vector2 relativeContact = contact.cpy().sub(contactDisablePoint);
 //            System.out.println(relativeContact);
-            if (relativeContact.crs(contactDisableVector) < 0.01f) {
+            if (relativeContact.len() <= ConstantsService.getHeight(LevelObject.Type.PORTAL_BLUE)/2 && relativeContact.crs(contactDisableVector) < 0.01f) {
 //                System.out.println(relativeContact);
                 return false;
             }
