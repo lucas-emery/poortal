@@ -18,6 +18,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.CharBuffer;
 import java.util.HashSet;
+import java.util.IllegalFormatException;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 /**
  * LevelController is a class which handles
@@ -65,37 +67,82 @@ public class LevelController {
      */
     public static void generateLevel(Integer level) {
 
-        String file = "level"+level.toString()+".json";
+        String file = "levels/level"+level.toString()+".json";
 
         try {
-            JSONObject levelData = (JSONObject) new JSONParser().parse(new FileReader("levels/"+file));
+            JSONObject levelData = (JSONObject) new JSONParser().parse(new FileReader(file));
+
+            JSONArray gravityData = (JSONArray) levelData.get("gravity");
+
+            if(gravityData.size() != 2)
+                throw new IllegalArgumentException("gravity in "+file+" represents a 2D vector and must have 2 values");
+
+            Vector2 gravity = new Vector2(((Double)gravityData.get(0)).floatValue(), ((Double)gravityData.get(1)).floatValue());
+
+            world = new World(gravity, false);
+            world.setContactListener(new CollisionController());
 
             
+            JSONArray playerData = (JSONArray) levelData.get("player");
+            
+            if(playerData.size() != 2)
+                throw new IllegalArgumentException("player in "+file+" represents a 2D vector and must have 2 values");
+            
+            Vector2 playerPosition = new Vector2(((Double)playerData.get(0)).floatValue(), ((Double)playerData.get(1)).floatValue()).scl(ConstantsService.PIXELS_TO_METERS);
+            
+            player.setInitialPosition(playerPosition);
+            player.setBody(world.createBody(player.getBodyDef()));
+
+
+            JSONArray levelObjectsData = (JSONArray) levelData.get("levelObjects");
+
+            Iterator<JSONObject> levelObjectsDataIt = levelObjectsData.iterator();
+
+            int index = 0;
+            while(levelObjectsDataIt.hasNext()) {
+                JSONObject levelObjectData = levelObjectsDataIt.next();
+                index++;
+                
+                JSONArray positionData = (JSONArray) levelObjectData.get("position");
+                
+                if(positionData.size() != 2)
+                    throw new IllegalArgumentException("position in "+file+" at levelObject n° "+index+" represents a 2D vector and must have 2 values");
+
+                Vector2 position = new Vector2(((Double)positionData.get(0)).floatValue(), ((Double)positionData.get(1)).floatValue()).scl(ConstantsService.PIXELS_TO_METERS);
+
+                String type = (String) levelObjectData.get("type");
+                if(type.equals("CUBE"))
+                    levelObjects.add(new Cube(position));
+                else if(type.equals("BUTTON"))
+                    levelObjects.add(new Button(position));
+
+            }
+            
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
+//        world = new World(new Vector2(0, -9.8f), false);
+//        world.setContactListener(new CollisionController());
 
-        world = new World(new Vector2(0, -9.8f), false);
-        world.setContactListener(new CollisionController());
-
-        player.setInitialPosition(new Vector2(10,3));
-        player.setBody(world.createBody(player.getBodyDef()));
+//        player.setInitialPosition(new Vector2(10,3));
+//        player.setBody(world.createBody(player.getBodyDef()));
 
         //levelObjects.add(new Door(new Vector2(928* ConstantsService.PIXELS_TO_METERS,68*ConstantsService.PIXELS_TO_METERS)));
-        levelObjects.add(new Cube(new Vector2(4, 7)));
-        levelObjects.add(new Cube(new Vector2(8, 3)));
-        levelObjects.add(new Cube(new Vector2(8, 4)));
-        levelObjects.add(new Cube(new Vector2(8, 5)));
-        levelObjects.add(new Cube(new Vector2(8, 6)));
-        levelObjects.add(new Cube(new Vector2(8, 7)));
-        levelObjects.add(new Cube(new Vector2(8, 8)));
-        levelObjects.add(new Cube(new Vector2(8, 9)));
-        levelObjects.add(new Cube(new Vector2(8, 10)));
-        levelObjects.add(new Cube(new Vector2(8, 11)));
-        levelObjects.add(new Button(new Vector2(3,2)));
+//        levelObjects.add(new Cube(new Vector2(4, 7)));
+//        levelObjects.add(new Cube(new Vector2(8, 3)));
+//        levelObjects.add(new Cube(new Vector2(8, 4)));
+//        levelObjects.add(new Cube(new Vector2(8, 5)));
+//        levelObjects.add(new Cube(new Vector2(8, 6)));
+//        levelObjects.add(new Cube(new Vector2(8, 7)));
+//        levelObjects.add(new Cube(new Vector2(8, 8)));
+//        levelObjects.add(new Cube(new Vector2(8, 9)));
+//        levelObjects.add(new Cube(new Vector2(8, 10)));
+//        levelObjects.add(new Cube(new Vector2(8, 11)));
+//        levelObjects.add(new Button(new Vector2(3,2)));
 
         for(LevelObject object : levelObjects) {
             object.setBody(world.createBody(object.getBodyDef()));

@@ -1,1 +1,46 @@
-pepe
+{
+  "gravity" : [
+    0.0, -9.8
+  ],
+
+  "player" : [
+    250.0, 75.0
+  ],
+
+  "levelObjects" : [
+    {
+      "type" : "CUBE",
+      "position" : [
+        100.0, 175.0
+      ]
+    },
+    {
+      "type" : "CUBE",
+      "position" : [
+        200.0, 75.0
+      ]
+    },
+    {
+      "type" : "CUBE",
+      "position" : [
+        200.0, 100.0
+      ]
+    },{
+      "type" : "CUBE",
+      "position" : [
+        200.0, 125.0
+      ]
+    },{
+      "type" : "CUBE",
+      "position" : [
+        200.0, 150.0
+      ]
+    },
+    {
+      "type" : "BUTTON",
+      "position" : [
+        75.0, 50.0
+      ]
+    }
+  ]
+}
