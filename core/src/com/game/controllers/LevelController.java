@@ -115,7 +115,49 @@ public class LevelController {
                     levelObjects.add(new Cube(position));
                 else if(type.equals("BUTTON"))
                     levelObjects.add(new Button(position));
+                else if(type.equals("DOOR"))
+                    levelObjects.add(new Door(position));
+                else
+                    throw new IllegalArgumentException("type in "+file+" at levelObject n° "+index+" is not a valid type. Possible types: CUBE, BUTTON, DOOR.");
 
+            }
+            
+            JSONArray wallsData = (JSONArray) levelData.get("walls");
+            
+            Iterator<JSONObject> wallsDataIt = wallsData.iterator();
+            
+            index = 0;
+            while(wallsDataIt.hasNext()) {
+                JSONObject wallData = wallsDataIt.next();
+                index++;
+                
+                JSONArray originData, endData;
+                Vector2 origin, end;
+                
+                originData = (JSONArray) wallData.get("origin");
+
+                if(originData.size() != 2)
+                    throw new IllegalArgumentException("origin in "+file+" at wall n° "+index+" represents a 2D vector and must have 2 values");
+
+                origin = new Vector2(((Double)originData.get(0)).floatValue(), ((Double)originData.get(1)).floatValue()).scl(ConstantsService.PIXELS_TO_METERS);
+
+
+                endData = (JSONArray) wallData.get("end");
+
+                if(endData.size() != 2)
+                    throw new IllegalArgumentException("end in "+file+" at wall n° "+index+" represents a 2D vector and must have 2 values");
+
+                end = new Vector2(((Double)endData.get(0)).floatValue(), ((Double)endData.get(1)).floatValue()).scl(ConstantsService.PIXELS_TO_METERS);
+
+
+                Boolean floor = (Boolean) wallData.get("floor");
+
+                Boolean portable = (Boolean) wallData.get("portable");
+
+                Wall newWall = new Wall(origin, portable);
+                newWall.setWall(world.createBody(newWall.getBodyDef()), end, floor);
+                walls.add(newWall);
+                
             }
             
 
@@ -155,7 +197,7 @@ public class LevelController {
             }
         }
         
-        Wall floor = new Wall(new Vector2(0,35* ConstantsService.PIXELS_TO_METERS ), true);
+        /*Wall floor = new Wall(new Vector2(0,35* ConstantsService.PIXELS_TO_METERS ), true);
         floor.setWall(world.createBody(floor.getBodyDef()), new Vector2(977* ConstantsService.PIXELS_TO_METERS,0), true);
         walls.add(floor);
 
@@ -169,7 +211,7 @@ public class LevelController {
 
         Wall roof = new Wall(new Vector2(0,500).scl(ConstantsService.PIXELS_TO_METERS), true);
         roof.setWall(world.createBody(roof.getBodyDef()), new Vector2(977* ConstantsService.PIXELS_TO_METERS,0), false);
-        walls.add(roof);
+        walls.add(roof);*/
 
 
     }
