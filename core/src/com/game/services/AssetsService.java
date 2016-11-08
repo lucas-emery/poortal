@@ -121,8 +121,13 @@ public class AssetsService {
         return new Rectangle(0,0,buttonTextureDimensions.getWidth()*buttonScale, buttonTextureDimensions.getHeight()*buttonScale);
     }
 
-    public static Sprite getLevelSprite(int index) {
-        return new Sprite(levelBackgrounds.get(index));
+    public static Sprite getLevelSprite(int level) {
+        if(level > 0) {
+            level--;
+            return new Sprite(levelBackgrounds.get(level));
+        }
+
+        throw new IllegalArgumentException(level+" is not a valid level");
     }
 
     public static Music getTheme(){ return theme;}
