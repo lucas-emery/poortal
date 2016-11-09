@@ -7,25 +7,19 @@ import com.game.models.LevelObject;
 
 public class BodyService {
 
-    public static Shape getShape(LevelObject.Type type){
-        if(type == LevelObject.Type.LEFT_DOOR || type == LevelObject.Type.RIGHT_DOOR){
+    public static Shape getShape(LevelObject.Type type) {
+        if (type == LevelObject.Type.LEFT_DOOR || type == LevelObject.Type.RIGHT_DOOR) {
             EdgeShape shape = new EdgeShape();
-            shape.set(new Vector2(-3*ConstantsService.PIXELS_TO_METERS,-(AssetsService.getAnimatedSprites(type).get(0).getHeight()/2) * ConstantsService.PIXELS_TO_METERS),
-                    new Vector2(-3*ConstantsService.PIXELS_TO_METERS,(AssetsService.getAnimatedSprites(type).get(0).getHeight()/2) * ConstantsService.PIXELS_TO_METERS) ); //Estos magic numbers son para que quede exactamente sobre la pared.
+            shape.set(new Vector2(-3 * ConstantsService.PIXELS_TO_METERS, -(AssetsService.getAnimatedSprites(type).get(0).getHeight() / 2) * ConstantsService.PIXELS_TO_METERS),
+                    new Vector2(-3 * ConstantsService.PIXELS_TO_METERS, (AssetsService.getAnimatedSprites(type).get(0).getHeight() / 2) * ConstantsService.PIXELS_TO_METERS)); //Estos magic numbers son para que quede exactamente sobre la pared.
             return shape;
         }
         else {
             PolygonShape shape = new PolygonShape();
-            shape.setAsBox( ConstantsService.getWidth(type) / 2,
-                            ConstantsService.getHeight(type) / 2);
+            shape.setAsBox( ConstantsService.getWidth(type) /2,
+                            ConstantsService.getHeight(type)/2 );
             return shape;
         }
-    }
-
-    public static PolygonShape getButtonShape(){
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(ConstantsService.BUTTON_WIDTH , ConstantsService.BUTTON_HEIGHT );
-        return shape;
     }
 
     public static FixtureDef getFixtureDef(LevelObject.Type type) {
@@ -68,7 +62,6 @@ public class BodyService {
             case CUBE:
                 return BodyDef.BodyType.DynamicBody;
             case BUTTON:
-                return BodyDef.BodyType.StaticBody;
             case PORTAL_BLUE:
             case PORTAL_ORANGE:
             case WALL:
@@ -99,13 +92,13 @@ public class BodyService {
 
     public static PolygonShape getPlayerFootSensor() {
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(0.4f, 0.2f, new Vector2(0,-0.85f),0);
+        shape.setAsBox(0.435f, 0.2f, new Vector2(0,-0.85f),0); //el numero 0.435 es clave para que no crashee, no lo toquen.
         return shape;
     }
 
     public static PolygonShape getButtonSensorShape() {
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(ConstantsService.BUTTON_WIDTH, ConstantsService.BUTTON_HEIGHT, new Vector2(0,0.2f),0);
+        shape.setAsBox(ConstantsService.getWidth(LevelObject.Type.BUTTON)/2, ConstantsService.getHeight(LevelObject.Type.BUTTON)/2, new Vector2(0,0.2f),0);
         return shape;
     }
 }

@@ -29,7 +29,7 @@ public class AnimatedLevelObjectView extends LevelObjectView{
             int currentSprite = 0;
             int cantSprites = sprites.size();
 
-            if(((AnimatedObject) model).isActive()|| currentSprite < cantSprites-1){
+            if(((AnimatedObject) model).isActive() && currentSprite < cantSprites-1){
                 currentSprite++;
             }
             else{
@@ -37,8 +37,12 @@ public class AnimatedLevelObjectView extends LevelObjectView{
                 currentSprite--;
             }
             Sprite sprite =sprites.get(currentSprite);
+
             Vector2 position = model.getPosition().scl(ConstantsService.METERS_TO_PIXELS);
-            sprite.setPosition(position.x, position.y);
+
+            sprite.setRotation((model.getBody().getAngle())* ConstantsService.RAD_TO_DEG);
+            sprite.setPosition( (position.x - sprite.getWidth()/2),
+                    (position.y - sprite.getHeight()/2));
             return sprite;
         }
 

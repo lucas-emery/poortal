@@ -17,7 +17,7 @@ public class ConstantsService {
             case CUBE:
                 return 1f;
             case BUTTON:
-                return 0.25f;
+                return 2.5f;
             case PORTAL_BLUE:
             case PORTAL_ORANGE:
                 return 2.5f;
@@ -37,7 +37,7 @@ public class ConstantsService {
             case CUBE:
                 return 1f;
             case BUTTON:
-                return 0.25f;
+                return 0.3f;
             case PORTAL_BLUE:
             case PORTAL_ORANGE:
                 return 2.5f;

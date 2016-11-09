@@ -2,6 +2,7 @@ package com.game.controllers;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.game.models.Button;
 import com.game.models.Collider;
 import com.game.models.Collider.Type;
 import com.game.models.Player;
@@ -19,7 +20,7 @@ public class CollisionController implements ContactListener {
     private static boolean playerOnGround = false;
     private static Fixture vicinity=null;
     private static int contactNumber=0;
-    private static boolean isButtonPressed = false;
+    private static int pressers=0;
 
     /**
      *
@@ -64,13 +65,14 @@ public class CollisionController implements ContactListener {
         }
         if(((value & (Type.BUTTONSENSOR.val()))==Type.BUTTONSENSOR.val())){
             if(value - Type.BUTTONSENSOR.val()==Type.PSENSORFOOT.val() || value - Type.BUTTONSENSOR.val()==Type.CUBE.val()){
-                System.out.println("Button Collision Detected");
-                buttonPresssed(true);
+                pressers++;
+                Button button = ButtonController.findButton((((Collider)f1.getUserData()).val()==Type.BUTTONSENSOR.val())?f1:f2);
+                button.setActive(true);
             }
         }
         if((value & Type.PORTAL.val()) == Type.PORTAL.val()) {
             Fixture portal, object;
-            if(((Collider)f1.getUserData()).val() == Type.PORTAL.val()) {
+            if(c1.val() == Type.PORTAL.val()) {
                 portal = f1;
                 object = f2;
             }
@@ -111,17 +113,22 @@ public class CollisionController implements ContactListener {
             }
         }
 
-        if((value & (Type.PORTAL.val()+Type.PSENSORFOOT.val()))==Type.PSENSORFOOT.val()){
+        if((value & Type.PSENSORFOOT.val())==Type.PSENSORFOOT.val()){
             contactNumber--;
             if(contactNumber==0)
                 playerOnGround = false;
         }
+
         if(((value & (Type.BUTTONSENSOR.val()))==Type.BUTTONSENSOR.val())){
             if(value - Type.BUTTONSENSOR.val()==Type.PSENSORFOOT.val() || value - Type.BUTTONSENSOR.val()==Type.CUBE.val()){
-                System.out.println("Button Collision Stopped");
-                buttonPresssed(false);
+                pressers--;
+                if(pressers==0){
+                    Button button = ButtonController.findButton((((Collider)f1.getUserData()).val()==Type.BUTTONSENSOR.val())?f1:f2);
+                    button.setActive(false);
+                }
             }
         }
+
         if((value & Type.PORTAL.val()) == Type.PORTAL.val()) {
             Fixture portal, object;
             if(((Collider)f1.getUserData()).val() == Type.PORTAL.val()) {
@@ -137,22 +144,6 @@ public class CollisionController implements ContactListener {
                 ((Collider)object.getUserData()).enableContact();
             }
         }
-    }
-
-    /**
-     *
-     * @param pressed
-     */
-    public static void buttonPresssed(boolean pressed) {
-        isButtonPressed=pressed;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public static boolean getButtonPressed(){
-        return isButtonPressed;
     }
 
     /**

@@ -24,6 +24,7 @@ public class LevelController {
     private static LinkedHashSet<LevelObject> levelObjects = new LinkedHashSet<LevelObject>();
     private static HashSet<LevelObjectView> levelObjectsViews = new LinkedHashSet<LevelObjectView>();
     private static HashSet<Wall> walls = new HashSet<Wall>();
+    private static HashSet<Button> buttons = new HashSet<Button>();
     private static World world;
 
     /**
@@ -63,12 +64,20 @@ public class LevelController {
         player.setBody(world.createBody(player.getBodyDef()));
 
         //levelObjects.add(new Door(new Vector2(928* ConstantsService.PIXELS_TO_METERS,68*ConstantsService.PIXELS_TO_METERS)));
-        levelObjects.add(new Cube(new Vector2(4, 7)));
-        levelObjects.add(new Button(new Vector2(3,2)));
+        LevelObject newObject;
+
+        //PLACEHOLDER
+        newObject = new Cube(new Vector2(4, 7));
+        newObject.setBody(world.createBody(newObject.getBodyDef()));
+        levelObjects.add(newObject);
+        newObject = new Button(new Vector2(8,1.5f));
+        newObject.setBody(world.createBody(newObject.getBodyDef()));
+        levelObjects.add(newObject);
 
         for(LevelObject object : levelObjects) {
-            object.setBody(world.createBody(object.getBodyDef()));
-
+            if(object instanceof Button){
+                buttons.add((Button)object);
+            }
             if( object instanceof AnimatedObject) {
                 levelObjectsViews.add(new AnimatedLevelObjectView(object));
             }
@@ -112,4 +121,7 @@ public class LevelController {
         player = recievedPlayer;
     }
 
+    public static HashSet<Button> getButtons() {
+        return buttons;
+    }
 }

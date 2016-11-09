@@ -59,8 +59,10 @@ public class AssetsService {
         textures.add(0,texture);
         animatedTextures.put(LevelObject.Type.LEFT_DOOR, textures);
 
-        texture = new Texture(Gdx.files.internal("placeholder.png"));
-        staticTextures.put(LevelObject.Type.BUTTON, texture);
+        textures = new ArrayList<Texture>();
+        texture = new Texture(Gdx.files.internal("button.png"));
+        textures.add(0, texture);
+        animatedTextures.put(LevelObject.Type.BUTTON, textures);
 
         TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("stickman-test/skeleton.atlas"));
         playerTextureDimensions = new Rectangle(0, 0, 500, 1050);

@@ -7,7 +7,7 @@ import com.game.services.BodyService;
 import com.game.services.ConstantsService;
 
 /**
- * Button is a class in which the physical
+ * Door is a class in which the physical
  * information of the LevelObject Door
  * is created
  * @author Francisco Delgado

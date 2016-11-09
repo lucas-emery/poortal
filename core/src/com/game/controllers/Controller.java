@@ -42,6 +42,7 @@ public class Controller extends ApplicationAdapter {
 		model = new Model(LevelController.getLevelObjects(), player, LevelController.getLevelWorld());
 		view = new View(model, LevelController.getLevelObjectsViews(), playerView, AssetsService.getLevelSprite(0));
 		WallController.setWalls(LevelController.getWalls());
+		ButtonController.setButtons(LevelController.getButtons());
 
 		PlayerController.setPlayer(player);
 		PlayerController.setPlayerView(playerView);
@@ -57,16 +58,7 @@ public class Controller extends ApplicationAdapter {
 		InputController.update();
 		TeleportationController.update();
 		updatePlayerCollisionState();
-		updateButtonCollisionState();
 		view.render();
-	}
-
-	/**
-	 *
-     */
-	private void updateButtonCollisionState() {
-		boolean isPressed = CollisionController.getButtonPressed();
-		//updateButtonCollisionState(isPressed);
 	}
 
 	/**
