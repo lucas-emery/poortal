@@ -22,7 +22,8 @@ public class Collider{
         PORTAL(1<<8),
         WALL(1<<9),
         BUTTONSENSOR(1<<10),
-        PORTALRIM(1<<11);
+        PORTALRIM(1<<11),
+        FINISH(1<<12);
 
         private int value;
 

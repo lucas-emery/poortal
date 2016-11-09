@@ -21,6 +21,8 @@ import java.util.HashSet;
 import java.util.IllegalFormatException;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.zip.CheckedOutputStream;
+
 /**
  * LevelController is a class which handles
  * the initialisation of a level and stores
@@ -35,6 +37,8 @@ public class LevelController {
     private static HashSet<LevelObjectView> levelObjectsViews = new LinkedHashSet<LevelObjectView>();
     private static HashSet<Wall> walls = new HashSet<Wall>();
     private static World world;
+    private static Finish finish;
+    private static int level;
 
     /**
      * Method that returns a clone of the
@@ -67,10 +71,16 @@ public class LevelController {
      */
     public static void generateLevel(Integer level) {
 
+        if(level <= 0 || level > ConstantsService.MAX_LEVEL)
+            throw new IllegalArgumentException("Level cannot be negative or greater than "+ConstantsService.MAX_LEVEL+". Value: "+level);
+
+        LevelController.level = level;
+
         String file = "levels/level"+level.toString()+".json";
 
         try {
             JSONObject levelData = (JSONObject) new JSONParser().parse(new FileReader(file));
+
 
             JSONArray gravityData = (JSONArray) levelData.get("gravity");
 
@@ -110,17 +120,22 @@ public class LevelController {
 
                 Vector2 position = new Vector2(((Double)positionData.get(0)).floatValue(), ((Double)positionData.get(1)).floatValue()).scl(ConstantsService.PIXELS_TO_METERS);
 
+                LevelObject newObject;
                 String type = (String) levelObjectData.get("type");
                 if(type.equals("CUBE"))
-                    levelObjects.add(new Cube(position));
+                    newObject = new Cube(position);
                 else if(type.equals("BUTTON"))
-                    levelObjects.add(new Button(position));
+                    newObject = new Button(position);
                 else if(type.equals("DOOR"))
-                    levelObjects.add(new Door(position));
+                    newObject = new Door(position);
                 else
                     throw new IllegalArgumentException("type in "+file+" at levelObject n° "+index+" is not a valid type. Possible types: CUBE, BUTTON, DOOR.");
 
+                newObject.setBody(world.createBody(newObject.getBodyDef()));
+                
+                levelObjects.add(newObject);
             }
+
             
             JSONArray wallsData = (JSONArray) levelData.get("walls");
             
@@ -157,9 +172,19 @@ public class LevelController {
                 Wall newWall = new Wall(origin, portable);
                 newWall.setWall(world.createBody(newWall.getBodyDef()), end, floor);
                 walls.add(newWall);
-                
             }
+
             
+            JSONArray finishData = (JSONArray) levelData.get("finish");
+            
+            if(finishData.size() != 2)
+                throw new IllegalArgumentException("finish in "+file+" represents a 2D vector and must have 2 values");
+
+            Vector2 finishPosition = new Vector2(((Double)finishData.get(0)).floatValue(), ((Double)finishData.get(1)).floatValue()).scl(ConstantsService.PIXELS_TO_METERS);
+
+            finish = new Finish(finishPosition);
+
+            finish.setBody(world.createBody(finish.getBodyDef()));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -167,28 +192,7 @@ public class LevelController {
             e.printStackTrace();
         }
 
-//        world = new World(new Vector2(0, -9.8f), false);
-//        world.setContactListener(new CollisionController());
-
-//        player.setInitialPosition(new Vector2(10,3));
-//        player.setBody(world.createBody(player.getBodyDef()));
-
-        //levelObjects.add(new Door(new Vector2(928* ConstantsService.PIXELS_TO_METERS,68*ConstantsService.PIXELS_TO_METERS)));
-//        levelObjects.add(new Cube(new Vector2(4, 7)));
-//        levelObjects.add(new Cube(new Vector2(8, 3)));
-//        levelObjects.add(new Cube(new Vector2(8, 4)));
-//        levelObjects.add(new Cube(new Vector2(8, 5)));
-//        levelObjects.add(new Cube(new Vector2(8, 6)));
-//        levelObjects.add(new Cube(new Vector2(8, 7)));
-//        levelObjects.add(new Cube(new Vector2(8, 8)));
-//        levelObjects.add(new Cube(new Vector2(8, 9)));
-//        levelObjects.add(new Cube(new Vector2(8, 10)));
-//        levelObjects.add(new Cube(new Vector2(8, 11)));
-//        levelObjects.add(new Button(new Vector2(3,2)));
-
         for(LevelObject object : levelObjects) {
-            object.setBody(world.createBody(object.getBodyDef()));
-
             if( object instanceof AnimatedObject) {
                 levelObjectsViews.add(new AnimatedLevelObjectView(object));
             }
@@ -196,24 +200,6 @@ public class LevelController {
                 levelObjectsViews.add(new StaticLevelObjectView(object));
             }
         }
-        
-        /*Wall floor = new Wall(new Vector2(0,35* ConstantsService.PIXELS_TO_METERS ), true);
-        floor.setWall(world.createBody(floor.getBodyDef()), new Vector2(977* ConstantsService.PIXELS_TO_METERS,0), true);
-        walls.add(floor);
-
-        Wall leftWall = new Wall(new Vector2(40* ConstantsService.PIXELS_TO_METERS,35* ConstantsService.PIXELS_TO_METERS), true);
-        leftWall.setWall(world.createBody(leftWall.getBodyDef()), new Vector2(0,520* ConstantsService.PIXELS_TO_METERS), false);
-        walls.add(leftWall);
-
-        Wall rightWall = new Wall(new Vector2(925,35).scl(ConstantsService.PIXELS_TO_METERS), true);
-        rightWall.setWall(world.createBody(rightWall.getBodyDef()), new Vector2(0,520* ConstantsService.PIXELS_TO_METERS), false);
-        walls.add(rightWall);
-
-        Wall roof = new Wall(new Vector2(0,500).scl(ConstantsService.PIXELS_TO_METERS), true);
-        roof.setWall(world.createBody(roof.getBodyDef()), new Vector2(977* ConstantsService.PIXELS_TO_METERS,0), false);
-        walls.add(roof);*/
-
-
     }
 
     /**
@@ -232,4 +218,7 @@ public class LevelController {
         player = recievedPlayer;
     }
 
+    public static int getLevel() {
+        return level;
+    }
 }

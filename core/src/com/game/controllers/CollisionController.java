@@ -96,6 +96,10 @@ public class CollisionController implements ContactListener {
 //                DebugService.rays.add(portalPrimary.add(portalPos));
             }
         }
+
+        if(value == (Type.PLAYER.val() & Type.FINISH.val())) {
+            Controller.nextLevel();
+        }
     }
 
     /**

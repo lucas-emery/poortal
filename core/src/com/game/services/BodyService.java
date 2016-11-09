@@ -68,12 +68,12 @@ public class BodyService {
             case CUBE:
                 return BodyDef.BodyType.DynamicBody;
             case BUTTON:
-                return BodyDef.BodyType.StaticBody;
             case PORTAL_BLUE:
             case PORTAL_ORANGE:
             case WALL:
             case LEFT_DOOR:
             case RIGHT_DOOR:
+            case FINISH:
                 return BodyDef.BodyType.StaticBody;
             //case PLATFORM:
             //    return BodyDef.BodyType.KinematicBody;

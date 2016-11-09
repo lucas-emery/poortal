@@ -36,6 +36,14 @@ public class PlayerController {
     }
 
     /**
+     *This method returns the playerView in PlayerController.
+     * @return the player from PlayerController
+     */
+    public static PlayerView getPlayerView() {
+        return playerView;
+    }
+
+    /**
      *This method sets the player view associated with the player
      * into the PlayerController
      * @param receivedPlayerView is the PlayerView which will be set.

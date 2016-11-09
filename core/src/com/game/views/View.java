@@ -1,7 +1,6 @@
 package com.game.views;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -15,16 +14,13 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.esotericsoftware.spine.SkeletonRenderer;
+import com.game.controllers.LevelController;
 import com.game.controllers.PlayerController;
-import com.game.models.LevelObject;
 import com.game.models.Model;
 import com.game.services.AssetsService;
 import com.game.services.ConstantsService;
-import com.game.services.DebugService;
 import com.game.services.VariablesService;
 
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedHashSet;
 
 /**
@@ -41,21 +37,23 @@ public class View {
     private Matrix4 debugMatrix;
     private LinkedHashSet<LevelObjectView> levelObjectsViews;
     private PlayerView playerView;
-    private Sprite levelBackgorund;
+    private Sprite levelBackground;
+    private Sprite levelForeground;
     private Music theme;
     private BitmapFont font;
     private ShapeRenderer shapeRenderer;
 
-    public View(Model model, LinkedHashSet<LevelObjectView> levelObjectsViews, PlayerView playerView, Sprite levelBackground) {
+    public View(Model model)/*LinkedHashSet<LevelObjectView> levelObjectsViews, PlayerView playerView, Sprite levelBackground)*/ {
 
         font = new BitmapFont();
         font.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         font.setColor(1,1,0,0);
 
         this.model = model;
-        this.levelObjectsViews = levelObjectsViews;
-        this.playerView = playerView;
-        this.levelBackgorund = levelBackground;
+        this.levelObjectsViews = LevelController.getLevelObjectsViews();
+        this.playerView = PlayerController.getPlayerView();
+        this.levelBackground = AssetsService.getLevelBackground();
+        this.levelForeground = AssetsService.getLevelForeground();
 
         batch = new SpriteBatch();
         skeletonRenderer = new SkeletonRenderer();
@@ -83,7 +81,7 @@ public class View {
         batch.setProjectionMatrix(camera.combined);
 
         batch.begin();
-        levelBackgorund.draw(batch);
+        levelBackground.draw(batch);
 
         for(LevelObjectView view : levelObjectsViews) {
            if(view.getUpdatedSprite()!= null)
@@ -98,6 +96,7 @@ public class View {
             font.draw(batch, VariablesService.FPS + "fps", 70, 545);
         }
 
+        levelForeground.draw(batch);
         batch.end();
 
         debugRenderer.render(model.getWorld(), camera.combined.cpy().scale(ConstantsService.METERS_TO_PIXELS, ConstantsService.METERS_TO_PIXELS, 0));

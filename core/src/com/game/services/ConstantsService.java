@@ -24,8 +24,8 @@ public class ConstantsService {
             case LEFT_DOOR:
             case RIGHT_DOOR:
                 return 1.6f;
-            /*case WALL:
-                break;*/
+            case FINISH:
+                return 0.5f;
             default:
                 return 1f;
         }
@@ -44,8 +44,8 @@ public class ConstantsService {
             case LEFT_DOOR:
             case RIGHT_DOOR:
                 return 3.4f;
-            /*case WALL:
-                break;*/
+            case FINISH:
+                return 2.2f;
             default:
                 return 1f;
         }
@@ -98,29 +98,6 @@ public class ConstantsService {
     public static final float DOOR_WIDTH = 40f;
     public static final float DOOR_HEIGHT = 1.0f;
 
-    public enum ColliderType {
-        CUBE(1<<0),
-        PSENSORRIGHT(1<<1),
-        PSENSORLEFT(1<<2),
-        PSENSORFOOT(1<<3),
-        PLAYER(1<<4),
-        BUTTON(1<<5),
-        PLATSENSOR(1<<6),
-        PLATBODY(1<<7),
-        PORTAL(1<<8),
-        WALL(1<<9),
-        BUTTONSENSOR(1<<10),
-        PORTALRIM(1<<11);
-
-        private int value;
-
-        private ColliderType(int value) {
-            this.value = value;
-        }
-
-        public int val() {
-            return value;
-        }
-    }
+    public static final int MAX_LEVEL = 1;
 
 }

@@ -35,16 +35,16 @@ public class Controller extends ApplicationAdapter {
 
 		Player player = new Player();
 		PlayerView playerView = new PlayerView(player);
+		PlayerController.setPlayer(player);
+		PlayerController.setPlayerView(playerView);
 
 		LevelController.setPlayer(player);
 		LevelController.generateLevel(1);
 
 		model = new Model(LevelController.getLevelObjects(), player, LevelController.getLevelWorld());
-		view = new View(model, LevelController.getLevelObjectsViews(), playerView, AssetsService.getLevelSprite(0));
+		view = new View(model);
 		WallController.setWalls(LevelController.getWalls());
 
-		PlayerController.setPlayer(player);
-		PlayerController.setPlayerView(playerView);
 		Gdx.input.setInputProcessor(new InputController());
 	}
 
@@ -132,5 +132,9 @@ public class Controller extends ApplicationAdapter {
 	public static void removeLevelObject(LevelObject object, LevelObjectView objectView) {
 		model.removeObject(object);
 		view.removeView(objectView);
+	}
+
+	public static void nextLevel() {
+		System.out.println("nextLevel");
 	}
 }
