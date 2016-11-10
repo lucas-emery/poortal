@@ -26,11 +26,14 @@ public class Button extends LevelObject implements AnimatedObject{
     private boolean active;
     Fixture fixture;
     Door door;
+    public float timer;
+
     public Button(Vector2 position /*Door door*/) { //Concept
 
         this.position = position;
         this.type = Type.BUTTON;
         this.active=false;
+        this.timer=0;
         this.door=door;
         createBodyDef();
     }
@@ -44,6 +47,12 @@ public class Button extends LevelObject implements AnimatedObject{
 
         Shape shape;
         FixtureDef fixtureDef = new FixtureDef();
+
+        fixtureDef.shape=(shape=BodyService.getButtonSensorShape2());
+        fixtureDef.isSensor=true;
+        fixture = body.createFixture(fixtureDef);
+        fixture.setUserData(new Collider(Collider.Type.BUTTONSENSOR2));
+        shape.dispose();
 
         fixtureDef.shape=(shape=BodyService.getButtonSensorShape());
         fixture = body.createFixture(fixtureDef);
@@ -70,6 +79,12 @@ public class Button extends LevelObject implements AnimatedObject{
         active=isActive;
         isPressed(active);
 //        door.setClosed(!isActive);
+    }
+    public void setTimer(float time){
+        timer=time;
+    }
+    public float getTimer(){
+        return timer;
     }
 
     /**

@@ -21,6 +21,7 @@ public class CollisionController implements ContactListener {
     private static Fixture vicinity=null;
     private static int contactNumber=0;
     private static int pressers=0;
+    private static boolean playerproximity= false;
 
     /**
      *
@@ -57,6 +58,9 @@ public class CollisionController implements ContactListener {
                 }
             }
         }
+        if(value== Type.PLAYER.val()+Type.BUTTONSENSOR2.val()){
+            playerproximity=true;
+        }
 
 
         if((value & (Type.PORTAL.val()+Type.PSENSORFOOT.val()))==Type.PSENSORFOOT.val()){
@@ -65,9 +69,11 @@ public class CollisionController implements ContactListener {
         }
         if(((value & (Type.BUTTONSENSOR.val()))==Type.BUTTONSENSOR.val())){
             if(value - Type.BUTTONSENSOR.val()==Type.PSENSORFOOT.val() || value - Type.BUTTONSENSOR.val()==Type.CUBE.val()){
+//                System.out.println(c1.val() +"  "+ c2.val()+ "enters");
                 pressers++;
                 Button button = ButtonController.findButton((((Collider)f1.getUserData()).val()==Type.BUTTONSENSOR.val())?f1:f2);
                 button.setActive(true);
+                ButtonController.stopTimer(button);
             }
         }
         if((value & Type.PORTAL.val()) == Type.PORTAL.val()) {
@@ -113,6 +119,10 @@ public class CollisionController implements ContactListener {
             }
         }
 
+        if(value== Type.PLAYER.val()+Type.BUTTONSENSOR2.val()){
+            playerproximity=false;
+        }
+
         if((value & (Type.PORTAL.val()+Type.PSENSORFOOT.val()))==Type.PSENSORFOOT.val()){
             contactNumber--;
             if(contactNumber==0)
@@ -121,10 +131,11 @@ public class CollisionController implements ContactListener {
 
         if(((value & (Type.BUTTONSENSOR.val()))==Type.BUTTONSENSOR.val())){
             if(value - Type.BUTTONSENSOR.val()==Type.PSENSORFOOT.val() || value - Type.BUTTONSENSOR.val()==Type.CUBE.val()){
+                System.out.println(c1.val() +"  "+ c2.val() + "exits");
                 pressers--;
                 if(pressers==0){
                     Button button = ButtonController.findButton((((Collider)f1.getUserData()).val()==Type.BUTTONSENSOR.val())?f1:f2);
-                    button.setActive(false);
+                    ButtonController.startTimer(button);
                 }
             }
         }

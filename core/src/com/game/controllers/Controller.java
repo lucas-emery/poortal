@@ -58,7 +58,12 @@ public class Controller extends ApplicationAdapter {
 		InputController.update();
 		TeleportationController.update();
 		updatePlayerCollisionState();
+		updateButtonState();
 		view.render();
+	}
+
+	private void updateButtonState() {
+		ButtonController.updateTimer(Gdx.graphics.getDeltaTime());
 	}
 
 	/**
