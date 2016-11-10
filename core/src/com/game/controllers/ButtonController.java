@@ -28,7 +28,7 @@ public class ButtonController {
     }
 
     public static void startTimer(Button button) {
-        button.timer=5;
+        button.timer=1;
     }
 
     public static void stopTimer(Button button) {
