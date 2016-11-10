@@ -71,7 +71,7 @@ public class View {
         //PlaceHolder theme
         theme = AssetsService.getTheme();
         theme.setLooping(true);
-        //theme.play();
+        theme.play();
     }
 
     public void render(){

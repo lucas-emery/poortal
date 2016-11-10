@@ -113,7 +113,7 @@ public class CollisionController implements ContactListener {
             }
         }
 
-        if((value & Type.PSENSORFOOT.val())==Type.PSENSORFOOT.val()){
+        if((value & (Type.PORTAL.val()+Type.PSENSORFOOT.val()))==Type.PSENSORFOOT.val()){
             contactNumber--;
             if(contactNumber==0)
                 playerOnGround = false;
