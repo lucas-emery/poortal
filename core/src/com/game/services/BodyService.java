@@ -6,28 +6,25 @@ import com.game.models.LevelObject;
 
 
 public class BodyService {
-
-        PolygonShape shape = new PolygonShape();
-        switch (type) {
-            case OPENED_DOOR:
-                shape.setAsBox((AssetsService.getAnimatedSprites(LevelObject.Type.DOOR).get(0).getHeight() / 2) * ConstantsService.PIXELS_TO_METERS,
-                        (AssetsService.getAnimatedSprites(LevelObject.Type.DOOR).get(0).getWidth() / 2) * ConstantsService.PIXELS_TO_METERS);
-                //get(0) por que 0 es el sprite opened door
-                return shape;
-
-            case CLOSED_DOOR:
-                shape.setAsBox((AssetsService.getAnimatedSprites(LevelObject.Type.DOOR).get(1).getHeight() / 2) * ConstantsService.PIXELS_TO_METERS,
-                        (AssetsService.getAnimatedSprites(LevelObject.Type.DOOR).get(1).getWidth() / 2) * ConstantsService.PIXELS_TO_METERS);
-                //get(1) por que 0 es el sprite opened door
-                return shape;
-
-
-            default:
-        }
+        public static Shape getShape(LevelObject.Type type){
             PolygonShape shape = new PolygonShape();
-            shape.setAsBox( ConstantsService.getWidth(type) /2,
-                            ConstantsService.getHeight(type)/2 );
-            return shape;
+            switch (type){
+                case OPENED_DOOR:
+                    shape.setAsBox((AssetsService.getAnimatedSprites(LevelObject.Type.DOOR).get(0).getHeight() / 2) * ConstantsService.PIXELS_TO_METERS,
+                    (AssetsService.getAnimatedSprites(LevelObject.Type.DOOR).get(0).getWidth() / 2) * ConstantsService.PIXELS_TO_METERS);
+                    //get(0) por que 0 es el sprite opened door
+                    return shape;
+                case CLOSED_DOOR:
+                    shape.setAsBox((AssetsService.getAnimatedSprites(LevelObject.Type.DOOR).get(1).getHeight() / 2) * ConstantsService.PIXELS_TO_METERS,
+                            (AssetsService.getAnimatedSprites(LevelObject.Type.DOOR).get(1).getWidth() / 2) * ConstantsService.PIXELS_TO_METERS);
+                //get(1) por que 0 es el sprite opened door
+                    return shape;
+            default:
+                shape = new PolygonShape();
+                shape.setAsBox(ConstantsService.getWidth(type) / 2,
+                ConstantsService.getHeight(type) / 2);
+                return shape;
+        }
     }
 
     public static FixtureDef getFixtureDef(LevelObject.Type type) {

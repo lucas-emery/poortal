@@ -65,9 +65,9 @@ public class LevelController {
         player.setBody(world.createBody(player.getBodyDef()));
 
         LevelObject newObject;
+        door = new Door(new Vector2(928* ConstantsService.PIXELS_TO_METERS,68*ConstantsService.PIXELS_TO_METERS));
         door.setBody(world.createBody(door.getBodyDef()));
         System.out.println("door was defined");
-        door = new Door(new Vector2(928* ConstantsService.PIXELS_TO_METERS,68*ConstantsService.PIXELS_TO_METERS));
 
         //PLACEHOLDER
         newObject = new Cube(new Vector2(4, 7));
