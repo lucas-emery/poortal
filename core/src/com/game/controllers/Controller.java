@@ -56,7 +56,7 @@ public class Controller extends ApplicationAdapter {
 	public void render () {
 		model.update();
 		InputController.update();
-		TeleportationController.update();
+		TeleportationController.update(model);
 		updatePlayerCollisionState();
 		updateButtonState();
 		view.render();

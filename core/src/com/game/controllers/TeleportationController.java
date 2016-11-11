@@ -1,5 +1,7 @@
 package com.game.controllers;
 
+import com.badlogic.gdx.physics.box2d.World;
+import com.game.models.Model;
 import com.game.models.Portal;
 import com.game.models.Teleportation;
 
@@ -16,16 +18,21 @@ public class TeleportationController {
         teleports.add(teleportation);
     }
 
-    public static void update() {
+    public static void update(Model model) {
         for(Teleportation tele : teleports) {
             if(tele.hasToTeleport()) {
                 Portal portal = PortalController.getOtherPortal(tele.getPortalType());
                 if(portal != null) {
+                    if(model.getJoint()!=null && (tele.getObject()==model.getPlayer().getBody() || tele.getObject()==model.getPlayer().getVicinity().getBody())){
+                        model.releaseJoint();
+                        model.resetHolding(false);
+                    }
                     tele.teleportObject(portal.getPosition(), portal.getPrimary(), portal.getNormal());
                 }
             }
         }
     }
+
 
     public static void removeTeleportation(Teleportation teleportation) {
         teleports.remove(teleportation);

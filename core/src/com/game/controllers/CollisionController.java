@@ -21,7 +21,6 @@ public class CollisionController implements ContactListener {
     private static Fixture vicinity=null;
     private static int contactNumber=0;
     private static int pressers=0;
-    private static boolean playerproximity= false;
 
     /**
      *
@@ -58,10 +57,6 @@ public class CollisionController implements ContactListener {
                 }
             }
         }
-        if(value== Type.PLAYER.val()+Type.BUTTONSENSOR2.val()){
-            playerproximity=true;
-        }
-
 
         if((value & (Type.PORTAL.val()+Type.PSENSORFOOT.val()))==Type.PSENSORFOOT.val()){
             contactNumber++;
@@ -117,10 +112,6 @@ public class CollisionController implements ContactListener {
             if (!PlayerController.getPlayer().isHolding()) {
                 vicinity=null;
             }
-        }
-
-        if(value== Type.PLAYER.val()+Type.BUTTONSENSOR2.val()){
-            playerproximity=false;
         }
 
         if((value & (Type.PORTAL.val()+Type.PSENSORFOOT.val()))==Type.PSENSORFOOT.val()){
