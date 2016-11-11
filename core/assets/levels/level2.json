@@ -4,7 +4,7 @@
   ],
 
   "player" : [
-    250.0, 75.0
+    15.0, 60.0
   ],
 
   "levelObjects" : [
@@ -13,39 +13,11 @@
       "position" : [
         100.0, 175.0
       ]
-    },
-    {
-      "type" : "CUBE",
-      "position" : [
-        200.0, 75.0
-      ]
-    },
-    {
-      "type" : "CUBE",
-      "position" : [
-        200.0, 100.0
-      ]
-    },{
-      "type" : "CUBE",
-      "position" : [
-        200.0, 125.0
-      ]
-    },{
-      "type" : "CUBE",
-      "position" : [
-        200.0, 150.0
-      ]
-    },
-    {
-      "type" : "BUTTON",
-      "position" : [
-        75.0, 50.0
-      ]
     }
   ],
 
   "finish" : [
-    950.0, 63.0
+    972.0, 164.0
   ],
 
   "walls" : [
@@ -54,80 +26,250 @@
         0.0, 35.0
       ],
       "end" : [
-        977.0, 0.0
+        222.0, 35.0
+      ],
+      "floor" : true,
+      "portable" : false
+    },
+    {
+      "origin" : [
+        222.0, 35.0
+      ],
+      "end" : [
+        222.0, 173.0
       ],
       "floor" : true,
       "portable" : true
     },
     {
       "origin" : [
-        40.0, 35.0
+        222.0, 173.0
       ],
       "end" : [
-        0.0, 520.0
-      ],
-      "floor" : false,
-      "portable" : true
-    },
-    {
-      "origin" : [
-        925.0, 555.0
-      ],
-      "end" : [
-        0.0, -465.0
-      ],
-      "floor" : false,
-      "portable" : true
-    },
-    {
-      "origin" : [
-        925.0, 90.0
-      ],
-      "end" : [
-        52.0, 0.0
-      ],
-      "floor" : false,
-      "portable" : true
-    },
-    {
-      "origin" : [
-        0.0, 510.0
-      ],
-      "end" : [
-        977.0, 0.0
-      ],
-      "floor" : false,
-      "portable" : true
-    },
-    {
-      "origin" : [
-        270.0, 35.0
-      ],
-      "end" : [
-        0.0, 250.0
-      ],
-      "floor" : false,
-      "portable" : true
-    },
-    {
-      "origin" : [
-        270.0, 285.0
-      ],
-      "end" : [
-        415.0, 0.0
+        355.0, 173.0
       ],
       "floor" : true,
       "portable" : true
     },
     {
       "origin" : [
-        685.0, 35.0
+        355.0, 173.0
       ],
       "end" : [
-        0.0, 250.0
+        355.0, 376.0
+      ],
+      "floor" : true,
+      "portable" : true
+    },
+    {
+      "origin" : [
+        355.0, 376.0
+      ],
+      "end" : [
+        560.0, 376.0
+      ],
+      "floor" : true,
+      "portable" : true
+    },
+    {
+      "origin" : [
+        560.0, 376.0
+      ],
+      "end" : [
+        560.0, 35.0
+      ],
+      "floor" : true,
+      "portable" : true
+    },
+    {
+      "origin" : [
+        560.0, 35.0
+      ],
+      "end" : [
+        745.0, 35.0
+      ],
+      "floor" : true,
+      "portable" : true
+    },
+    {
+      "origin" : [
+        745.0, 35.0
+      ],
+      "end" : [
+        745.0, 136.0
+      ],
+      "floor" : true,
+      "portable" : false
+    },
+    {
+      "origin" : [
+        745.0, 136.0
+      ],
+      "end" : [
+        977.0, 136.0
+      ],
+      "floor" : true,
+      "portable" : false
+    },
+    {
+      "origin" : [
+        0.0, 35.0
+      ],
+      "end" : [
+        0.0, 87.0
+      ],
+      "floor" : false,
+      "portable" : false
+    },
+    {
+      "origin" : [
+        0.0, 87.0
+      ],
+      "end" : [
+        44.0, 87.0
+      ],
+      "floor" : false,
+      "portable" : false
+    },
+    {
+      "origin" : [
+        44.0, 87.0
+      ],
+      "end" : [
+        44.0, 313.0
+      ],
+      "floor" : false,
+      "portable" : false
+    },
+    {
+      "origin" : [
+        44.0, 313.0
+      ],
+      "end" : [
+        155.0, 313.0
+      ],
+      "floor" : false,
+      "portable" : false
+    },
+    {
+      "origin" : [
+        155.0, 313.0
+      ],
+      "end" : [
+        260.0, 313.0
       ],
       "floor" : false,
       "portable" : true
+    },
+    {
+      "origin" : [
+        260.0, 313.0
+      ],
+      "end" : [
+        260.0, 475.0
+      ],
+      "floor" : false,
+      "portable" : true
+    },
+    {
+      "origin" : [
+        260.0, 475.0
+      ],
+      "end" : [
+        260.0, 511.0
+      ],
+      "floor" : false,
+      "portable" : false
+    },
+    {
+      "origin" : [
+        260.0, 511.0
+      ],
+      "end" : [
+        682.0, 511.0
+      ],
+      "floor" : false,
+      "portable" : false
+    },
+    {
+      "origin" : [
+        682.0, 511.0
+      ],
+      "end" : [
+        682.0, 470.0
+      ],
+      "floor" : false,
+      "portable" : false
+    },
+    {
+      "origin" : [
+        682.0, 470.0
+      ],
+      "end" : [
+        682.0, 339.0
+      ],
+      "floor" : false,
+      "portable" : true
+    },
+    {
+      "origin" : [
+        682.0, 339.0
+      ],
+      "end" : [
+        682.0, 286.0
+      ],
+      "floor" : false,
+      "portable" : false
+    },
+    {
+      "origin" : [
+        682.0, 286.0
+      ],
+      "end" : [
+        727.0, 286.0
+      ],
+      "floor" : false,
+      "portable" : false
+    },
+    {
+      "origin" : [
+        727.0, 286.0
+      ],
+      "end" : [
+        834.0, 286.0
+      ],
+      "floor" : false,
+      "portable" : true
+    },
+    {
+      "origin" : [
+        834.0, 286.0
+      ],
+      "end" : [
+        924.0, 286.0
+      ],
+      "floor" : false,
+      "portable" : false
+    },
+    {
+      "origin" : [
+        924.0, 286.0
+      ],
+      "end" : [
+        924.0, 190.0
+      ],
+      "floor" : false,
+      "portable" : false
+    },
+    {
+      "origin" : [
+        924.0, 190.0
+      ],
+      "end" : [
+        977.0, 190.0
+      ],
+      "floor" : false,
+      "portable" : false
     }
   ]
 }

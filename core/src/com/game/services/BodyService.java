@@ -21,8 +21,8 @@ public class BodyService {
                     return shape;
             default:
                 shape = new PolygonShape();
-                shape.setAsBox(ConstantsService.getWidth(type) / 2,
-                ConstantsService.getHeight(type) / 2);
+                shape.setAsBox( ConstantsService.getWidth(type) / 2,
+                                ConstantsService.getHeight(type) / 2);
                 return shape;
         }
     }

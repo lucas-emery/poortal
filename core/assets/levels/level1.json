@@ -11,41 +11,37 @@
     {
       "type" : "CUBE",
       "position" : [
-        100.0, 175.0
+        150.0, 175.0
       ]
     },
     {
       "type" : "CUBE",
       "position" : [
-        200.0, 75.0
+        400.0, 300.0
       ]
     },
     {
       "type" : "CUBE",
       "position" : [
-        200.0, 100.0
-      ]
-    },{
-      "type" : "CUBE",
-      "position" : [
-        200.0, 125.0
-      ]
-    },{
-      "type" : "CUBE",
-      "position" : [
-        200.0, 150.0
+        600.0, 300.0
       ]
     },
     {
       "type" : "BUTTON",
       "position" : [
-        75.0, 50.0
+        500.0, 300.0
+      ]
+    },
+    {
+      "type" : "DOOR",
+      "position" : [
+        928.0, 68.0
       ]
     }
   ],
 
   "finish" : [
-    950.0, 63.0
+    972.0, 63.0
   ],
 
   "walls" : [
@@ -54,17 +50,37 @@
         0.0, 35.0
       ],
       "end" : [
-        977.0, 0.0
+        977.0, 35.0
       ],
       "floor" : true,
       "portable" : true
     },
     {
       "origin" : [
-        40.0, 35.0
+        0.0, 35.0
       ],
       "end" : [
-        0.0, 520.0
+        0.0, 87.0
+      ],
+      "floor" : false,
+      "portable" : false
+    },
+    {
+      "origin" : [
+        0.0, 87.0
+      ],
+      "end" : [
+        40.0, 87.0
+      ],
+      "floor" : false,
+      "portable" : false
+    },
+    {
+      "origin" : [
+        40.0, 87.0
+      ],
+      "end" : [
+        40.0, 555.0
       ],
       "floor" : false,
       "portable" : true
@@ -74,7 +90,7 @@
         925.0, 555.0
       ],
       "end" : [
-        0.0, -465.0
+        925.0, 90.0
       ],
       "floor" : false,
       "portable" : true
@@ -84,7 +100,7 @@
         925.0, 90.0
       ],
       "end" : [
-        52.0, 0.0
+        977.0, 90.0
       ],
       "floor" : false,
       "portable" : true
@@ -94,7 +110,7 @@
         0.0, 510.0
       ],
       "end" : [
-        977.0, 0.0
+        977.0, 510.0
       ],
       "floor" : false,
       "portable" : true
@@ -104,7 +120,7 @@
         270.0, 35.0
       ],
       "end" : [
-        0.0, 250.0
+        270.0, 285.0
       ],
       "floor" : false,
       "portable" : true
@@ -114,7 +130,7 @@
         270.0, 285.0
       ],
       "end" : [
-        415.0, 0.0
+        685.0, 285.0
       ],
       "floor" : true,
       "portable" : true
@@ -124,7 +140,7 @@
         685.0, 35.0
       ],
       "end" : [
-        0.0, 250.0
+        685.0, 285.0
       ],
       "floor" : false,
       "portable" : true

@@ -81,7 +81,6 @@ public class LevelController {
 //        LevelObject newObject;
 //        door = new Door(new Vector2(928* ConstantsService.PIXELS_TO_METERS,68*ConstantsService.PIXELS_TO_METERS));
 //        door.setBody(world.createBody(door.getBodyDef()));
-//        System.out.println("door was defined");
 
         if(level <= 0 || level > ConstantsService.MAX_LEVEL)
             throw new IllegalArgumentException("Level cannot be negative or greater than "+ConstantsService.MAX_LEVEL+". Value: "+level);
@@ -136,16 +135,19 @@ public class LevelController {
                 String type = (String) levelObjectData.get("type");
                 if(type.equals("CUBE"))
                     newObject = new Cube(position);
-                else if(type.equals("BUTTON"))
-                    newObject = new Button(position);
                 else if(type.equals("DOOR"))
                     newObject = new Door(position);
+                else if(type.equals("BUTTON"))
+                    newObject = new Button(position);
                 else
                     throw new IllegalArgumentException("type in "+file+" at levelObject n° "+index+" is not a valid type. Possible types: CUBE, BUTTON, DOOR.");
 
                 newObject.setBody(world.createBody(newObject.getBodyDef()));
                 
                 levelObjects.add(newObject);
+
+                if(newObject instanceof Button)
+                    buttons.add((Button) newObject);
             }
 
             
@@ -176,13 +178,14 @@ public class LevelController {
 
                 end = new Vector2(((Double)endData.get(0)).floatValue(), ((Double)endData.get(1)).floatValue()).scl(ConstantsService.PIXELS_TO_METERS);
 
+                Vector2 size = end.sub(origin);
 
                 Boolean floor = (Boolean) wallData.get("floor");
 
                 Boolean portable = (Boolean) wallData.get("portable");
 
                 Wall newWall = new Wall(origin, portable);
-                newWall.setWall(world.createBody(newWall.getBodyDef()), end, floor);
+                newWall.setWall(world.createBody(newWall.getBodyDef()), size, floor);
                 walls.add(newWall);
             }
 
@@ -205,9 +208,6 @@ public class LevelController {
         }
 
         for(LevelObject object : levelObjects) {
-            if(object instanceof Button){
-                buttons.add((Button)object);
-            }
             if( object instanceof AnimatedObject) {
                 levelObjectsViews.add(new AnimatedLevelObjectView(object));
             }
