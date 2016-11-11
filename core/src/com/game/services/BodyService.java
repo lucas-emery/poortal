@@ -7,19 +7,27 @@ import com.game.models.LevelObject;
 
 public class BodyService {
 
-    public static Shape getShape(LevelObject.Type type) {
-        if (type == LevelObject.Type.LEFT_DOOR || type == LevelObject.Type.RIGHT_DOOR) {
-            EdgeShape shape = new EdgeShape();
-            shape.set(new Vector2(-3 * ConstantsService.PIXELS_TO_METERS, -(AssetsService.getAnimatedSprites(type).get(0).getHeight() / 2) * ConstantsService.PIXELS_TO_METERS),
-                    new Vector2(-3 * ConstantsService.PIXELS_TO_METERS, (AssetsService.getAnimatedSprites(type).get(0).getHeight() / 2) * ConstantsService.PIXELS_TO_METERS)); //Estos magic numbers son para que quede exactamente sobre la pared.
-            return shape;
+        PolygonShape shape = new PolygonShape();
+        switch (type) {
+            case OPENED_DOOR:
+                shape.setAsBox((AssetsService.getAnimatedSprites(LevelObject.Type.DOOR).get(0).getHeight() / 2) * ConstantsService.PIXELS_TO_METERS,
+                        (AssetsService.getAnimatedSprites(LevelObject.Type.DOOR).get(0).getWidth() / 2) * ConstantsService.PIXELS_TO_METERS);
+                //get(0) por que 0 es el sprite opened door
+                return shape;
+
+            case CLOSED_DOOR:
+                shape.setAsBox((AssetsService.getAnimatedSprites(LevelObject.Type.DOOR).get(1).getHeight() / 2) * ConstantsService.PIXELS_TO_METERS,
+                        (AssetsService.getAnimatedSprites(LevelObject.Type.DOOR).get(1).getWidth() / 2) * ConstantsService.PIXELS_TO_METERS);
+                //get(1) por que 0 es el sprite opened door
+                return shape;
+
+
+            default:
         }
-        else {
             PolygonShape shape = new PolygonShape();
             shape.setAsBox( ConstantsService.getWidth(type) /2,
                             ConstantsService.getHeight(type)/2 );
             return shape;
-        }
     }
 
     public static FixtureDef getFixtureDef(LevelObject.Type type) {
@@ -65,8 +73,9 @@ public class BodyService {
             case PORTAL_BLUE:
             case PORTAL_ORANGE:
             case WALL:
-            case LEFT_DOOR:
-            case RIGHT_DOOR:
+            case OPENED_DOOR:
+            case CLOSED_DOOR:
+            case DOOR:
                 return BodyDef.BodyType.StaticBody;
             //case PLATFORM:
             //    return BodyDef.BodyType.KinematicBody;
