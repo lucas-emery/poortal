@@ -61,6 +61,14 @@ public class Model {
     }
 
     /**
+     * Method which gets size of Level Objects set
+     * @return integer with size
+     */
+    public int sizeOfLevelObjectsSet(){
+        return levelObjects.size();
+    }
+
+    /**
      * Method which gets World Object from attribute world
      * @return World world
      */

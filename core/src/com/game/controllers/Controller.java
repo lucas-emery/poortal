@@ -83,6 +83,15 @@ public class Controller extends ApplicationAdapter {
 	}
 
 	/**
+	 * This method returns the Model object in Controller,
+	 * used for testing purposes
+	 * @return Model object
+	 */
+	public static Model getModel(){
+		return model;
+	}
+
+	/**
 	 *Method which
 	 * @param width
 	 * @param height
