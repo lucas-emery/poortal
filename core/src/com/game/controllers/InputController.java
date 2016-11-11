@@ -150,4 +150,9 @@ public class InputController implements InputProcessor{
         }
         return false;
     }
+
+    public static void reset() {
+        aIsPressed = false;
+        dIsPressed = false;
+    }
 }

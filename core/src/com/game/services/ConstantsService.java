@@ -98,6 +98,6 @@ public class ConstantsService {
     public static final float DOOR_WIDTH = 40f;
     public static final float DOOR_HEIGHT = 1.0f;
 
-    public static final int MAX_LEVEL = 1;
+    public static final int MAX_LEVEL = 2;
 
 }

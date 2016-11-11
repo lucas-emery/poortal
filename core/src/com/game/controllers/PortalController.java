@@ -72,6 +72,13 @@ public class PortalController {
             return bluePortal;
     }
 
+    public static void reset() {
+        bluePortal = null;
+        bluePortalView = null;
+        orangePortal = null;
+        orangePortalView = null;
+    }
+
     public static boolean bothPortalsExist() {
         return bluePortal != null && orangePortal != null;
     }

@@ -33,9 +33,9 @@ import java.util.zip.CheckedOutputStream;
 public class LevelController {
 
     private static Player player;
-    private static LinkedHashSet<LevelObject> levelObjects = new LinkedHashSet<LevelObject>();
-    private static HashSet<LevelObjectView> levelObjectsViews = new LinkedHashSet<LevelObjectView>();
-    private static HashSet<Wall> walls = new HashSet<Wall>();
+    private static LinkedHashSet<LevelObject> levelObjects;
+    private static HashSet<LevelObjectView> levelObjectsViews;
+    private static HashSet<Wall> walls;
     private static World world;
     private static Finish finish;
     private static int level;
@@ -70,6 +70,11 @@ public class LevelController {
      * into the world also instancing the level's walls.
      */
     public static void generateLevel(Integer level) {
+
+        levelObjects = new LinkedHashSet<LevelObject>();
+        levelObjectsViews = new LinkedHashSet<LevelObjectView>();
+        walls = new HashSet<Wall>();
+
 
         if(level <= 0 || level > ConstantsService.MAX_LEVEL)
             throw new IllegalArgumentException("Level cannot be negative or greater than "+ConstantsService.MAX_LEVEL+". Value: "+level);
@@ -200,6 +205,8 @@ public class LevelController {
                 levelObjectsViews.add(new StaticLevelObjectView(object));
             }
         }
+
+        WallController.reset();
     }
 
     /**
@@ -212,10 +219,9 @@ public class LevelController {
 
     /**
      * This method will set the current level player.
-     * @param recievedPlayer Player object to be set in the level
      */
-    public static void setPlayer(Player recievedPlayer) {
-        player = recievedPlayer;
+    public static void initialize() {
+        player = PlayerController.getPlayer();
     }
 
     public static int getLevel() {

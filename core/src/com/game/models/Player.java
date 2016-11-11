@@ -19,12 +19,12 @@ public class Player {
     private AnimationState state;
     private String oldState;
     private boolean lookingLeft;
-    private LevelObject.Type type;
     private String animation;
     private boolean grounded;
     private Fixture vicinity;
     private boolean holding;
-    private boolean contactDisabled;
+
+    //TODO RESET PLAYER STATUS
 
     /**
      * Constructor which initializes player body and sets its world coordinates
@@ -224,5 +224,11 @@ public class Player {
      */
     public boolean isHolding() {
         return holding;
+    }
+
+    public void resetState() {
+        animation = null;
+        vicinity = null;
+        holding = false;
     }
 }

@@ -130,4 +130,12 @@ public class View {
     public void removeView(LevelObjectView view) {
         levelObjectsViews.remove(view);
     }
+
+    public void reset(Model model) {
+        this.model = model;
+        this.levelObjectsViews = LevelController.getLevelObjectsViews();
+        this.playerView = PlayerController.getPlayerView();
+        this.levelBackground = AssetsService.getLevelBackground();
+        this.levelForeground = AssetsService.getLevelForeground();
+    }
 }

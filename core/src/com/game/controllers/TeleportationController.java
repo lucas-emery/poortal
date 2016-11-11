@@ -30,4 +30,8 @@ public class TeleportationController {
     public static void removeTeleportation(Teleportation teleportation) {
         teleports.remove(teleportation);
     }
+
+    public static void reset() {
+        teleports = new HashSet<Teleportation>();
+    }
 }

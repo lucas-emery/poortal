@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
+import com.game.controllers.LevelController;
 import com.game.controllers.PlayerController;
 import com.game.services.ConstantsService;
 
@@ -26,14 +27,11 @@ public class Model {
 
     /**
      * Constructor which sets the player, world and the HashSet levelobjects
-     * @param levelObjects HashSet with LevelObjects contained in the level
-     * @param player Model which handles the physicality of the player
-     * @param world Model which handles the physicality of the world
      */
-    public Model (HashSet<LevelObject> levelObjects, Player player, World world) {
-        this.player = player;
-        this.levelObjects = levelObjects;
-        this.world = world;
+    public Model () {
+        this.player = PlayerController.getPlayer();
+        this.levelObjects = LevelController.getLevelObjects();
+        this.world = LevelController.getLevelWorld();
         lastframe = false;
     }
 

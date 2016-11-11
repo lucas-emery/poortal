@@ -25,27 +25,25 @@ public class Controller extends ApplicationAdapter {
 
 	private static Model model;
 	private static View view;
+	private static int level;
 
 	/**
 	 *
      */
 	@Override
 	public void create () {
+		level = 1;
+
 		AssetsService.initialize();
-
-		Player player = new Player();
-		PlayerView playerView = new PlayerView(player);
-		PlayerController.setPlayer(player);
-		PlayerController.setPlayerView(playerView);
-
-		LevelController.setPlayer(player);
-		LevelController.generateLevel(1);
-
-		model = new Model(LevelController.getLevelObjects(), player, LevelController.getLevelWorld());
-		view = new View(model);
-		WallController.setWalls(LevelController.getWalls());
+		PlayerController.initialize();
+		LevelController.initialize();
 
 		Gdx.input.setInputProcessor(new InputController());
+
+		LevelController.generateLevel(level);
+
+		model = new Model();
+		view = new View(model);
 	}
 
 	/**
@@ -135,6 +133,17 @@ public class Controller extends ApplicationAdapter {
 	}
 
 	public static void nextLevel() {
-		System.out.println("nextLevel");
+		level++;
+
+		CollisionController.reset();
+		TeleportationController.reset();
+		InputController.reset();
+		PortalController.reset();
+		PlayerController.reset();
+
+		LevelController.generateLevel(level);
+
+		model = new Model();
+		view.reset(model);
 	}
 }

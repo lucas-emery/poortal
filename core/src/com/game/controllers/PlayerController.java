@@ -27,6 +27,16 @@ public class PlayerController {
     private static PlayerView playerView;
     private static Player player;
 
+
+    public static void initialize() {
+        player = new Player();
+        playerView = new PlayerView(player);
+    }
+
+    public static void reset() {
+        player.resetState();
+    }
+
     /**
      *This method returns the player in PlayerController.
      * @return the player from PlayerController
@@ -41,23 +51,6 @@ public class PlayerController {
      */
     public static PlayerView getPlayerView() {
         return playerView;
-    }
-
-    /**
-     *This method sets the player view associated with the player
-     * into the PlayerController
-     * @param receivedPlayerView is the PlayerView which will be set.
-     */
-    public static void setPlayerView(PlayerView receivedPlayerView){
-        playerView = receivedPlayerView;
-    }
-
-    /**
-     *This method will set the player into the PlayerController
-     * @param receivedPlayer the Player which will be set.
-     */
-    public static void setPlayer(Player receivedPlayer){
-        player = receivedPlayer;
     }
 
     /**

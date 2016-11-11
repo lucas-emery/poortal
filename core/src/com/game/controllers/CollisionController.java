@@ -15,10 +15,17 @@ import com.game.services.DebugService;
  */
 public class CollisionController implements ContactListener {
 
-    private static boolean playerOnGround = false;
-    private static Fixture vicinity=null;
-    private static int contactNumber=0;
-    private static boolean isButtonPressed = false;
+    private static boolean playerOnGround;
+    private static Fixture vicinity;
+    private static int contactNumber;
+    private static boolean isButtonPressed;
+
+    public static void reset() {
+        playerOnGround = false;
+        isButtonPressed = false;
+        contactNumber = 0;
+        vicinity = null;
+    }
 
     /**
      *
@@ -97,7 +104,7 @@ public class CollisionController implements ContactListener {
             }
         }
 
-        if(value == (Type.PLAYER.val() & Type.FINISH.val())) {
+        if(value == (Type.PLAYER.val() | Type.FINISH.val())) {
             Controller.nextLevel();
         }
     }
