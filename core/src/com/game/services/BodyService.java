@@ -12,14 +12,14 @@ public class BodyService {
         PolygonShape shape = new PolygonShape();
         switch (type) {
             case OPENED_DOOR:
-                shape.setAsBox((AssetsService.getAnimatedSprites(type).get(0).getHeight() / 2) * ConstantsService.PIXELS_TO_METERS,
-                        (AssetsService.getAnimatedSprites(type).get(0).getWidth() / 2) * ConstantsService.PIXELS_TO_METERS);
+                shape.setAsBox((AssetsService.getAnimatedSprites(LevelObject.Type.DOOR).get(0).getHeight() / 2) * ConstantsService.PIXELS_TO_METERS,
+                        (AssetsService.getAnimatedSprites(LevelObject.Type.DOOR).get(0).getWidth() / 2) * ConstantsService.PIXELS_TO_METERS);
                 //get(0) por que 0 es el sprite opened door
                 return shape;
 
             case CLOSED_DOOR:
-                shape.setAsBox((AssetsService.getAnimatedSprites(type).get(1).getHeight() / 2) * ConstantsService.PIXELS_TO_METERS,
-                        (AssetsService.getAnimatedSprites(type).get(1).getWidth() / 2) * ConstantsService.PIXELS_TO_METERS);
+                shape.setAsBox((AssetsService.getAnimatedSprites(LevelObject.Type.DOOR).get(1).getHeight() / 2) * ConstantsService.PIXELS_TO_METERS,
+                        (AssetsService.getAnimatedSprites(LevelObject.Type.DOOR).get(1).getWidth() / 2) * ConstantsService.PIXELS_TO_METERS);
                 //get(1) por que 0 es el sprite opened door
 
                 return shape;
