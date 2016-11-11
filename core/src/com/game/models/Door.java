@@ -38,14 +38,14 @@ public class Door extends LevelObject implements AnimatedObject {
         Shape closedShape = BodyService.getShape(Type.CLOSED_DOOR);
         FixtureDef closedFixtureDef = BodyService.getFixtureDef(type.CLOSED_DOOR);
         closedFixtureDef.shape = closedShape;
-        body.createFixture(closedFixtureDef).setUserData(ConstantsService.ColliderType.CUBE.val());
+        body.createFixture(closedFixtureDef).setUserData(new Collider(Collider.Type.DOOR));
         closedShape.dispose();
 
         Shape openedShape = BodyService.getShape(Type.OPENED_DOOR);
         FixtureDef openedFixtureDef = BodyService.getFixtureDef(Type.OPENED_DOOR);
         openedFixtureDef.isSensor = true;
         openedFixtureDef.shape = openedShape;
-        body.createFixture(openedFixtureDef).setUserData(ConstantsService.ColliderType.CUBE.val());
+        body.createFixture(openedFixtureDef).setUserData(new Collider(Collider.Type.DOOR));
         openedShape.dispose();
 
     }

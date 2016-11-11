@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.esotericsoftware.spine.AnimationStateData;
 import com.esotericsoftware.spine.SkeletonData;
 import com.esotericsoftware.spine.SkeletonJson;
+import com.game.controllers.LevelController;
 import com.game.models.LevelObject;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.audio.Music;
@@ -18,6 +19,7 @@ import java.util.EnumMap;
 public class AssetsService {
 
     private static ArrayList<Texture> levelBackgrounds = new ArrayList<Texture>();
+    private static ArrayList<Texture> levelForegrounds = new ArrayList<Texture>();
 
     private static EnumMap<LevelObject.Type, Texture> staticTextures = new EnumMap<LevelObject.Type, Texture>(LevelObject.Type.class);
     private static EnumMap<LevelObject.Type,ArrayList<Texture>> animatedTextures =
@@ -37,8 +39,12 @@ public class AssetsService {
         Texture texture;
         ArrayList<Texture> textures;
 
-        texture = new Texture(Gdx.files.internal("mapa.png"));
-        levelBackgrounds.add(texture);
+        for(int i = 1; i <= ConstantsService.MAX_LEVEL; i++) {
+            texture = new Texture(Gdx.files.internal("levels/level"+i+"-bg.png"));
+            levelBackgrounds.add(texture);
+            texture = new Texture(Gdx.files.internal("levels/level"+i+"-fg.png"));
+            levelForegrounds.add(texture);
+        }
 
         texture = new Texture(Gdx.files.internal("cube2.png"));
         staticTextures.put(LevelObject.Type.CUBE, texture);
@@ -121,8 +127,22 @@ public class AssetsService {
         return new Rectangle(0,0,buttonTextureDimensions.getWidth()*buttonScale, buttonTextureDimensions.getHeight()*buttonScale);
     }
 
-    public static Sprite getLevelSprite(int index) {
-        return new Sprite(levelBackgrounds.get(index));
+    public static Sprite getLevelBackground() {
+        int level = LevelController.getLevel();
+        if(level <= 0 || level > ConstantsService.MAX_LEVEL)
+            throw new IllegalArgumentException("Level cannot be negative or greater than "+ConstantsService.MAX_LEVEL+". Value: "+level);
+
+
+        return new Sprite(levelBackgrounds.get(level-1));
+    }
+    
+    public static Sprite getLevelForeground() {
+        int level = LevelController.getLevel();
+        if(level <= 0 || level > ConstantsService.MAX_LEVEL)
+            throw new IllegalArgumentException("Level cannot be negative or greater than "+ConstantsService.MAX_LEVEL+". Value: "+level);
+
+
+        return new Sprite(levelForegrounds.get(level-1));
     }
 
     public static Music getTheme(){ return theme;}

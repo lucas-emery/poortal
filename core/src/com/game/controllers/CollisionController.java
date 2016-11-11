@@ -17,10 +17,19 @@ import com.game.services.DebugService;
  */
 public class CollisionController implements ContactListener {
 
-    private static boolean playerOnGround = false;
-    private static Fixture vicinity=null;
-    private static int contactNumber=0;
-    private static int pressers=0;
+    private static boolean playerOnGround;
+    private static Fixture vicinity;
+    private static int contactNumber;
+    private static boolean isButtonPressed;
+    private static int pressers;
+
+    public static void reset() {
+        playerOnGround = false;
+        isButtonPressed = false;
+        contactNumber = 0;
+        vicinity = null;
+        pressers = 0;
+    }
 
     /**
      *
@@ -90,6 +99,10 @@ public class CollisionController implements ContactListener {
 //                DebugService.rays.add(portalPrimary.add(portalPos));
                 System.out.println("Add tele");
             }
+        }
+
+        if(value == (Type.PLAYER.val() | Type.FINISH.val())) {
+            Controller.nextLevel();
         }
     }
 

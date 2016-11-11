@@ -73,6 +73,7 @@ public class BodyService {
             case OPENED_DOOR:
             case CLOSED_DOOR:
             case DOOR:
+            case FINISH:
                 return BodyDef.BodyType.StaticBody;
             //case PLATFORM:
             //    return BodyDef.BodyType.KinematicBody;

@@ -1,5 +1,6 @@
 package com.game.controllers;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
@@ -8,9 +9,20 @@ import com.game.services.ConstantsService;
 import com.game.views.AnimatedLevelObjectView;
 import com.game.views.LevelObjectView;
 import com.game.views.StaticLevelObjectView;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.*;
+import org.json.simple.parser.ParseException;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.CharBuffer;
 import java.util.HashSet;
+import java.util.IllegalFormatException;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.zip.CheckedOutputStream;
+
 /**
  * LevelController is a class which handles
  * the initialisation of a level and stores
@@ -21,12 +33,14 @@ import java.util.LinkedHashSet;
 public class LevelController {
 
     private static Player player;
-    private static LinkedHashSet<LevelObject> levelObjects = new LinkedHashSet<LevelObject>();
-    private static HashSet<LevelObjectView> levelObjectsViews = new LinkedHashSet<LevelObjectView>();
-    private static HashSet<Wall> walls = new HashSet<Wall>();
-    private static HashSet<Button> buttons = new HashSet<Button>();
+    private static LinkedHashSet<LevelObject> levelObjects;
+    private static HashSet<LevelObjectView> levelObjectsViews;
+    private static HashSet<Wall> walls;
+    private static HashSet<Button> buttons;
     private static World world;
     private static Door door;
+    private static Finish finish;
+    private static int level;
 
     /**
      * Method that returns a clone of the
@@ -57,25 +71,138 @@ public class LevelController {
      * set the level object's initial position and insert them
      * into the world also instancing the level's walls.
      */
-    public static void generateLevel() {
-        world = new World(new Vector2(0, -9.8f), false);
-        world.setContactListener(new CollisionController());
+    public static void generateLevel(Integer level) {
 
-        player.setInitialPosition(new Vector2(10,3));
-        player.setBody(world.createBody(player.getBodyDef()));
+        levelObjects = new LinkedHashSet<LevelObject>();
+        levelObjectsViews = new LinkedHashSet<LevelObjectView>();
+        walls = new HashSet<Wall>();
+        buttons = new HashSet<Button>();
 
-        LevelObject newObject;
-        door = new Door(new Vector2(928* ConstantsService.PIXELS_TO_METERS,68*ConstantsService.PIXELS_TO_METERS));
-        door.setBody(world.createBody(door.getBodyDef()));
-        System.out.println("door was defined");
+//        LevelObject newObject;
+//        door = new Door(new Vector2(928* ConstantsService.PIXELS_TO_METERS,68*ConstantsService.PIXELS_TO_METERS));
+//        door.setBody(world.createBody(door.getBodyDef()));
+//        System.out.println("door was defined");
 
-        //PLACEHOLDER
-        newObject = new Cube(new Vector2(4, 7));
-        newObject.setBody(world.createBody(newObject.getBodyDef()));
-        levelObjects.add(newObject);
-        newObject = new Button(new Vector2(8,1.5f));
-        newObject.setBody(world.createBody(newObject.getBodyDef()));
-        levelObjects.add(newObject);
+        if(level <= 0 || level > ConstantsService.MAX_LEVEL)
+            throw new IllegalArgumentException("Level cannot be negative or greater than "+ConstantsService.MAX_LEVEL+". Value: "+level);
+
+        LevelController.level = level;
+
+        String file = "levels/level"+level.toString()+".json";
+
+        try {
+            JSONObject levelData = (JSONObject) new JSONParser().parse(new FileReader(file));
+
+
+            JSONArray gravityData = (JSONArray) levelData.get("gravity");
+
+            if(gravityData.size() != 2)
+                throw new IllegalArgumentException("gravity in "+file+" represents a 2D vector and must have 2 values");
+
+            Vector2 gravity = new Vector2(((Double)gravityData.get(0)).floatValue(), ((Double)gravityData.get(1)).floatValue());
+
+            world = new World(gravity, false);
+            world.setContactListener(new CollisionController());
+
+            
+            JSONArray playerData = (JSONArray) levelData.get("player");
+            
+            if(playerData.size() != 2)
+                throw new IllegalArgumentException("player in "+file+" represents a 2D vector and must have 2 values");
+            
+            Vector2 playerPosition = new Vector2(((Double)playerData.get(0)).floatValue(), ((Double)playerData.get(1)).floatValue()).scl(ConstantsService.PIXELS_TO_METERS);
+            
+            player.setInitialPosition(playerPosition);
+            player.setBody(world.createBody(player.getBodyDef()));
+
+
+            JSONArray levelObjectsData = (JSONArray) levelData.get("levelObjects");
+
+            Iterator<JSONObject> levelObjectsDataIt = levelObjectsData.iterator();
+
+            int index = 0;
+            while(levelObjectsDataIt.hasNext()) {
+                JSONObject levelObjectData = levelObjectsDataIt.next();
+                index++;
+                
+                JSONArray positionData = (JSONArray) levelObjectData.get("position");
+                
+                if(positionData.size() != 2)
+                    throw new IllegalArgumentException("position in "+file+" at levelObject n° "+index+" represents a 2D vector and must have 2 values");
+
+                Vector2 position = new Vector2(((Double)positionData.get(0)).floatValue(), ((Double)positionData.get(1)).floatValue()).scl(ConstantsService.PIXELS_TO_METERS);
+
+                LevelObject newObject;
+                String type = (String) levelObjectData.get("type");
+                if(type.equals("CUBE"))
+                    newObject = new Cube(position);
+                else if(type.equals("BUTTON"))
+                    newObject = new Button(position);
+                else if(type.equals("DOOR"))
+                    newObject = new Door(position);
+                else
+                    throw new IllegalArgumentException("type in "+file+" at levelObject n° "+index+" is not a valid type. Possible types: CUBE, BUTTON, DOOR.");
+
+                newObject.setBody(world.createBody(newObject.getBodyDef()));
+                
+                levelObjects.add(newObject);
+            }
+
+            
+            JSONArray wallsData = (JSONArray) levelData.get("walls");
+            
+            Iterator<JSONObject> wallsDataIt = wallsData.iterator();
+            
+            index = 0;
+            while(wallsDataIt.hasNext()) {
+                JSONObject wallData = wallsDataIt.next();
+                index++;
+                
+                JSONArray originData, endData;
+                Vector2 origin, end;
+                
+                originData = (JSONArray) wallData.get("origin");
+
+                if(originData.size() != 2)
+                    throw new IllegalArgumentException("origin in "+file+" at wall n° "+index+" represents a 2D vector and must have 2 values");
+
+                origin = new Vector2(((Double)originData.get(0)).floatValue(), ((Double)originData.get(1)).floatValue()).scl(ConstantsService.PIXELS_TO_METERS);
+
+
+                endData = (JSONArray) wallData.get("end");
+
+                if(endData.size() != 2)
+                    throw new IllegalArgumentException("end in "+file+" at wall n° "+index+" represents a 2D vector and must have 2 values");
+
+                end = new Vector2(((Double)endData.get(0)).floatValue(), ((Double)endData.get(1)).floatValue()).scl(ConstantsService.PIXELS_TO_METERS);
+
+
+                Boolean floor = (Boolean) wallData.get("floor");
+
+                Boolean portable = (Boolean) wallData.get("portable");
+
+                Wall newWall = new Wall(origin, portable);
+                newWall.setWall(world.createBody(newWall.getBodyDef()), end, floor);
+                walls.add(newWall);
+            }
+
+            
+            JSONArray finishData = (JSONArray) levelData.get("finish");
+            
+            if(finishData.size() != 2)
+                throw new IllegalArgumentException("finish in "+file+" represents a 2D vector and must have 2 values");
+
+            Vector2 finishPosition = new Vector2(((Double)finishData.get(0)).floatValue(), ((Double)finishData.get(1)).floatValue()).scl(ConstantsService.PIXELS_TO_METERS);
+
+            finish = new Finish(finishPosition);
+
+            finish.setBody(world.createBody(finish.getBodyDef()));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         for(LevelObject object : levelObjects) {
             if(object instanceof Button){
@@ -88,24 +215,9 @@ public class LevelController {
                 levelObjectsViews.add(new StaticLevelObjectView(object));
             }
         }
-        
-        Wall floor = new Wall(new Vector2(0,35* ConstantsService.PIXELS_TO_METERS ), true);
-        floor.setWall(world.createBody(floor.getBodyDef()), new Vector2(977* ConstantsService.PIXELS_TO_METERS,0), true);
-        walls.add(floor);
 
-        Wall leftWall = new Wall(new Vector2(40* ConstantsService.PIXELS_TO_METERS,35* ConstantsService.PIXELS_TO_METERS), true);
-        leftWall.setWall(world.createBody(leftWall.getBodyDef()), new Vector2(0,520* ConstantsService.PIXELS_TO_METERS), false);
-        walls.add(leftWall);
-
-        Wall rightWall = new Wall(new Vector2(925,35).scl(ConstantsService.PIXELS_TO_METERS), true);
-        rightWall.setWall(world.createBody(rightWall.getBodyDef()), new Vector2(0,520* ConstantsService.PIXELS_TO_METERS), false);
-        walls.add(rightWall);
-
-        Wall roof = new Wall(new Vector2(0,500).scl(ConstantsService.PIXELS_TO_METERS), true);
-        roof.setWall(world.createBody(roof.getBodyDef()), new Vector2(977* ConstantsService.PIXELS_TO_METERS,0), false);
-        walls.add(roof);
-
-
+        WallController.reset();
+        ButtonController.reset();
     }
 
     /**
@@ -118,13 +230,16 @@ public class LevelController {
 
     /**
      * This method will set the current level player.
-     * @param recievedPlayer Player object to be set in the level
      */
-    public static void setPlayer(Player recievedPlayer) {
-        player = recievedPlayer;
+    public static void initialize() {
+        player = PlayerController.getPlayer();
+    }
+
+    public static int getLevel() {
+        return level;
     }
 
     public static HashSet<Button> getButtons() {
-        return buttons;
+        return (HashSet<Button>) buttons.clone();
     }
 }

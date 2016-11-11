@@ -14,8 +14,8 @@ public class WallController {
 
     private static HashSet<Wall> walls;
 
-    public static void setWalls(HashSet<Wall> levelWalls) {
-        walls = levelWalls;
+    public static void reset() {
+        walls = LevelController.getWalls();
     }
 
     public static Boolean isPortableWall(Fixture fixture) {

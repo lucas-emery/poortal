@@ -15,8 +15,8 @@ public class ButtonController {
 
     private static HashSet<Button> buttons;
 
-    public static void setButtons(HashSet<Button> levelButtons) {
-        buttons = levelButtons;
+    public static void reset() {
+        buttons = LevelController.getButtons();
     }
 
     public static Button findButton(Fixture fixture) {
