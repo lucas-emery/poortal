@@ -37,6 +37,10 @@ public class Model {
         wasHolding = false;
     }
 
+    public Player getPlayer(){
+        return player;
+    }
+
     /**
      * Method which is called every render frame, updates player isHolding state and
      * the accumulated game time
@@ -59,7 +63,10 @@ public class Model {
         }
         PlayerController.update(deltaTime);
     }
-
+    public void resetHolding(boolean isholding){
+        player.setHolding(isholding);
+        wasHolding=isholding;
+    }
     /**
      * Method which gets World Object from attribute world
      * @return World world
@@ -127,5 +134,10 @@ public class Model {
             body.applyForceToCenter(-150.0f,150.0f,true);
         else
             body.applyForceToCenter(150.0f,150.0f,true);
+        joint=null;
+    }
+
+    public Joint getJoint() {
+        return joint;
     }
 }

@@ -28,11 +28,11 @@ public class ButtonController {
     }
 
     public static void startTimer(Button button) {
-        button.timer=1;
+        button.setTimer(1);
     }
 
     public static void stopTimer(Button button) {
-        button.timer=-1;
+        button.setTimer(-1);
     }
 
     public static void updateTimer(float time){

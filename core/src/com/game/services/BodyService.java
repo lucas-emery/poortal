@@ -101,10 +101,4 @@ public class BodyService {
         shape.setAsBox(ConstantsService.getWidth(LevelObject.Type.BUTTON)/2, ConstantsService.getHeight(LevelObject.Type.BUTTON)/2, new Vector2(0,0.2f),0);
         return shape;
     }
-
-    public static Shape getButtonSensorShape2() {
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox((ConstantsService.getWidth(LevelObject.Type.BUTTON)+1)/2, (ConstantsService.getHeight(LevelObject.Type.BUTTON)+1)/2, new Vector2(0,0.2f),0);
-        return shape;
-    }
 }
