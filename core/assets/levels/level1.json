@@ -27,15 +27,15 @@
       ]
     },
     {
-      "type" : "BUTTON",
-      "position" : [
-        500.0, 300.0
-      ]
-    },
-    {
       "type" : "DOOR",
       "position" : [
         928.0, 68.0
+      ]
+    },
+    {
+      "type" : "BUTTON",
+      "position" : [
+        500.0, 300.0
       ]
     }
   ],

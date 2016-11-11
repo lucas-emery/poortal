@@ -135,10 +135,12 @@ public class LevelController {
                 String type = (String) levelObjectData.get("type");
                 if(type.equals("CUBE"))
                     newObject = new Cube(position);
-                else if(type.equals("DOOR"))
+                else if(type.equals("DOOR")) {
                     newObject = new Door(position);
+                    door = (Door) newObject;
+                }
                 else if(type.equals("BUTTON"))
-                    newObject = new Button(position);
+                    newObject = new Button(position, door);
                 else
                     throw new IllegalArgumentException("type in "+file+" at levelObject n° "+index+" is not a valid type. Possible types: CUBE, BUTTON, DOOR.");
 

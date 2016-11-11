@@ -28,7 +28,7 @@ public class Button extends LevelObject implements AnimatedObject{
     Door door;
     public float timer;
 
-    public Button(Vector2 position /*Door door*/) { //Concept
+    public Button(Vector2 position, Door door) { //Concept
 
         this.position = position;
         this.type = Type.BUTTON;
@@ -72,7 +72,7 @@ public class Button extends LevelObject implements AnimatedObject{
     public void setActive(boolean isActive){
         active=isActive;
         isPressed(active);
-//        door.setClosed(!isActive);
+        door.setClosed(!isActive);
     }
     public void setTimer(float time){
         timer=time;
