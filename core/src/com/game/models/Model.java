@@ -138,10 +138,6 @@ public class Model {
     public void releaseJoint(){
         Body body = joint.getBodyB();
         world.destroyJoint(joint);
-        if (player.isLookingLeft())
-            body.applyForceToCenter(-150.0f,150.0f,true);
-        else
-            body.applyForceToCenter(150.0f,150.0f,true);
         joint=null;
     }
 
