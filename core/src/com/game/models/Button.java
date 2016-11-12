@@ -48,7 +48,7 @@ public class Button extends LevelObject implements AnimatedObject{
         Shape shape;
         FixtureDef fixtureDef = new FixtureDef();
 
-        fixtureDef.shape=(shape=BodyService.getButtonSensorShape());
+        fixtureDef.shape=(shape = BodyService.getButtonSensorShape());
         fixture = body.createFixture(fixtureDef);
         fixture.setUserData(new Collider(Collider.Type.BUTTONSENSOR));
         shape.dispose();

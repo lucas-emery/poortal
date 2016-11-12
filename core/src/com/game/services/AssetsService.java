@@ -64,8 +64,10 @@ public class AssetsService {
         animatedTextures.put(LevelObject.Type.DOOR, textures);
 
         textures = new ArrayList<Texture>();
-        texture = new Texture(Gdx.files.internal("button.png"));
+        texture = new Texture(Gdx.files.internal("button_idle.png"));
         textures.add(0, texture);
+        texture = new Texture(Gdx.files.internal("button_active.png"));
+        textures.add(1, texture);
         animatedTextures.put(LevelObject.Type.BUTTON, textures);
 
         TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("stickman-test/skeleton.atlas"));

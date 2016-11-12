@@ -19,12 +19,23 @@ public class BodyService {
                             (AssetsService.getAnimatedSprites(LevelObject.Type.DOOR).get(1).getWidth() / 2) * ConstantsService.PIXELS_TO_METERS);
                 //get(1) por que 0 es el sprite opened door
                     return shape;
+                case BUTTON:
+                    shape = new PolygonShape();
+                    shape.setAsBox( ConstantsService.getWidth(type) / 2,
+                            ConstantsService.getHeight(type) / 3f);
+                    return shape;
             default:
                 shape = new PolygonShape();
                 shape.setAsBox( ConstantsService.getWidth(type) / 2,
                                 ConstantsService.getHeight(type) / 2);
                 return shape;
         }
+    }
+    public static Shape getButtonSensorShape() {
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox( ConstantsService.getWidth(LevelObject.Type.BUTTON) / 2.5f,
+                ConstantsService.getHeight(LevelObject.Type.BUTTON) / 2.5f);
+        return shape;
     }
 
     public static FixtureDef getFixtureDef(LevelObject.Type type) {
@@ -35,7 +46,7 @@ public class BodyService {
                 friction = 0.7f;  density = 1f;   restitution = 0.2f;
                 break;
             case BUTTON:
-                friction = 1f;  density = 0f;   restitution = 0f;
+                friction = 1f;  density = 100f;   restitution = 0f;
                 break;
             case PORTAL_BLUE:
             case PORTAL_ORANGE:
@@ -65,8 +76,8 @@ public class BodyService {
     public static BodyDef.BodyType getBodyType(LevelObject.Type type) {
         switch (type) {
             case CUBE:
-                return BodyDef.BodyType.DynamicBody;
             case BUTTON:
+                return BodyDef.BodyType.DynamicBody;
             case PORTAL_BLUE:
             case PORTAL_ORANGE:
             case WALL:
@@ -99,13 +110,9 @@ public class BodyService {
 
     public static PolygonShape getPlayerFootSensor() {
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(0.435f, 0.2f, new Vector2(0,-0.85f),0); //el numero 0.435 es clave para que no crashee, no lo toquen.
+        shape.setAsBox(0.435f, 0.2f, new Vector2(0,-0.75f),0); //el numero 0.435 es clave para que no crashee, no lo toquen.
         return shape;
     }
 
-    public static PolygonShape getButtonSensorShape() {
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(ConstantsService.getWidth(LevelObject.Type.BUTTON)/2, ConstantsService.getHeight(LevelObject.Type.BUTTON)/2, new Vector2(0,0.2f),0);
-        return shape;
-    }
+
 }
