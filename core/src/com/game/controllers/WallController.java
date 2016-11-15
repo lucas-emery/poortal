@@ -18,12 +18,12 @@ public class WallController {
         walls = LevelController.getWalls();
     }
 
-    public static Boolean isPortableWall(Fixture fixture) {
+    public static boolean isPortableWall(Fixture fixture) {
         for(Wall wall : walls) {
             if(wall.equals(fixture))
                 return wall.isPortable();
         }
-        return null;
+        return false;
     }
 
 }

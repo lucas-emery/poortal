@@ -51,7 +51,6 @@ public class Door extends LevelObject implements AnimatedObject {
         openedFixtureDef.shape = openedShape;
         openedFixture = body.createFixture(openedFixtureDef);
         openedFixture.setUserData(new Collider(Collider.Type.DOOR));
-        ((Collider)openedFixture.getUserData()).ignore(true);
         openedShape.dispose();
 
     }
@@ -85,7 +84,7 @@ public class Door extends LevelObject implements AnimatedObject {
             if(value == true){
                 closedFixture.setSensor(false);
                 openedFixture.setSensor(true);
-                ((Collider)openedFixture.getUserData()).ignore(true);
+                ((Collider)closedFixture.getUserData()).ignore(false);
             }
         }
     }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.RayCastCallback;
+import com.game.models.Collider;
 import com.game.models.LevelObject;
 import com.game.models.LevelObject.Type;
 import com.game.models.Portal;
@@ -106,9 +107,12 @@ public class PortalController {
          */
         @Override
         public float reportRayFixture(Fixture fixture, Vector2 point, Vector2 normal, float fraction) {
-            System.out.println("Fixture found at: "+ point);
-            Boolean isPortableWall = WallController.isPortableWall(fixture);
-            if(isPortableWall != null && fraction < nearestWallFraction) {
+
+            Collider collider = ((Collider) fixture.getUserData());
+            int type = collider.val();
+            System.out.println("Fixture found at "+point+" of type "+type);
+
+            if(type == Collider.Type.WALL.val() && fraction < nearestWallFraction) {
                 Vector2 x = fixture.getBody().getPosition();
                 Vector2 size = new Vector2();
                 ((EdgeShape)fixture.getShape()).getVertex2(size);
@@ -125,10 +129,14 @@ public class PortalController {
                 }
 
                 nearestWallFraction = fraction;
-                wallIsPortable = isPortableWall;
+                wallIsPortable = WallController.isPortableWall(fixture);
                 wallPoint = newPoint;
                 wallNormal = normal.cpy();
             }
+            else if((type & (Collider.Type.CUBE.val() | Collider.Type.PORTAL.val() | Collider.Type.PORTALRIM.val())) == 0 && fraction < nearestWallFraction)
+                if(type != Collider.Type.DOOR.val() || !collider.ignore())
+                    wallIsPortable = false;
+
             return 1;
         }
 
