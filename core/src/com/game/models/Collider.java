@@ -40,10 +40,18 @@ public class Collider{
     private Type type;
     private Vector2 contactDisablePoint;
     private Vector2 contactDisableVector;
-
+    boolean ignore;
 
     public Collider(Type type) {
         this.type = type;
+    }
+
+    public boolean ignore(){
+        return ignore;
+    }
+
+    public void ignore(boolean value){
+        ignore =value;
     }
 
     public Type getType() {

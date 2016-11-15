@@ -1,6 +1,7 @@
 package com.game.models;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.game.services.BodyService;
@@ -14,6 +15,8 @@ import com.game.services.ConstantsService;
  */
 public class Door extends LevelObject implements AnimatedObject {
 
+    private Fixture closedFixture;
+    private Fixture openedFixture;
     private boolean isClosed;
 
     /**
@@ -38,14 +41,17 @@ public class Door extends LevelObject implements AnimatedObject {
         Shape closedShape = BodyService.getShape(Type.CLOSED_DOOR);
         FixtureDef closedFixtureDef = BodyService.getFixtureDef(type.CLOSED_DOOR);
         closedFixtureDef.shape = closedShape;
-        body.createFixture(closedFixtureDef).setUserData(new Collider(Collider.Type.DOOR));
+        closedFixture = body.createFixture(closedFixtureDef);
+        closedFixture.setUserData(new Collider(Collider.Type.DOOR));
         closedShape.dispose();
 
         Shape openedShape = BodyService.getShape(Type.OPENED_DOOR);
         FixtureDef openedFixtureDef = BodyService.getFixtureDef(Type.OPENED_DOOR);
         openedFixtureDef.isSensor = true;
         openedFixtureDef.shape = openedShape;
-        body.createFixture(openedFixtureDef).setUserData(new Collider(Collider.Type.DOOR));
+        openedFixture = body.createFixture(openedFixtureDef);
+        openedFixture.setUserData(new Collider(Collider.Type.DOOR));
+        ((Collider)openedFixture.getUserData()).ignore(true);
         openedShape.dispose();
 
     }
@@ -69,15 +75,17 @@ public class Door extends LevelObject implements AnimatedObject {
     public void setClosed(boolean value){
         if(isClosed != value){
            isClosed = value;
-            if(value == true){
+            if(value == false){
 
-                body.getFixtureList().get(0).setSensor(true);
-                body.getFixtureList().get(1).setSensor(false);
+                closedFixture.setSensor(true);
+                ((Collider)closedFixture.getUserData()).ignore(true);
+                openedFixture.setSensor(false);
 
             }
-            if(value == false){
-                body.getFixtureList().get(0).setSensor(false);
-                body.getFixtureList().get(1).setSensor(true);
+            if(value == true){
+                closedFixture.setSensor(false);
+                openedFixture.setSensor(true);
+                ((Collider)openedFixture.getUserData()).ignore(true);
             }
         }
     }

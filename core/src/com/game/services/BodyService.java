@@ -10,14 +10,23 @@ public class BodyService {
             PolygonShape shape = new PolygonShape();
             switch (type){
                 case OPENED_DOOR:
-                    shape.setAsBox((AssetsService.getAnimatedSprites(LevelObject.Type.DOOR).get(0).getHeight() / 2) * ConstantsService.PIXELS_TO_METERS,
-                    (AssetsService.getAnimatedSprites(LevelObject.Type.DOOR).get(0).getWidth() / 2) * ConstantsService.PIXELS_TO_METERS);
-                    //get(0) por que 0 es el sprite opened door
+
+                    float body_x=ConstantsService.OPENED_DOOR_HEIGHT/2, body_y=ConstantsService.OPENED_DOOR_HEIGHT;
+                    Vector2[] vec ={
+                            new Vector2(-body_x, -body_y + ConstantsService.CLOSED_DOOR_HEIGHT/2),
+                            new Vector2(-body_x,  ConstantsService.CLOSED_DOOR_HEIGHT/2),
+                            new Vector2(body_x, -body_y + ConstantsService.CLOSED_DOOR_HEIGHT/2),
+                            new Vector2(body_x, ConstantsService.CLOSED_DOOR_HEIGHT/2)
+                    };
+
+                    shape.set(vec);
+
                     return shape;
                 case CLOSED_DOOR:
-                    shape.setAsBox((AssetsService.getAnimatedSprites(LevelObject.Type.DOOR).get(1).getHeight() / 2) * ConstantsService.PIXELS_TO_METERS,
-                            (AssetsService.getAnimatedSprites(LevelObject.Type.DOOR).get(1).getWidth() / 2) * ConstantsService.PIXELS_TO_METERS);
-                //get(1) por que 0 es el sprite opened door
+
+                    shape.setAsBox(ConstantsService.CLOSED_DOOR_WIDTH/2,
+                            ConstantsService.CLOSED_DOOR_HEIGHT/2);
+
                     return shape;
                 case BUTTON:
                     shape = new PolygonShape();

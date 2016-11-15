@@ -101,6 +101,9 @@ public class AssetsService {
     public static ArrayList<Sprite> getAnimatedSprites(LevelObject.Type type){
         ArrayList<Sprite> sprites = new ArrayList<Sprite>();
         for(Texture texture: animatedTextures.get(type)){
+            if(type == LevelObject.Type.DOOR){
+
+            }
             Sprite newSprite = new Sprite(texture);
             newSprite.setSize(ConstantsService.getWidth(type)*ConstantsService.METERS_TO_PIXELS,
                     ConstantsService.getHeight(type)*ConstantsService.METERS_TO_PIXELS);
