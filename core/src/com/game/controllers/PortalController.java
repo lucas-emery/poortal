@@ -1,11 +1,13 @@
 package com.game.controllers;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.RayCastCallback;
 import com.game.models.LevelObject;
 import com.game.models.LevelObject.Type;
 import com.game.models.Portal;
+import com.game.services.ConstantsService;
 import com.game.views.LevelObjectView;
 import com.game.views.StaticLevelObjectView;
 
@@ -50,7 +52,7 @@ public class PortalController {
      * @param portalType
      */
     public static void firePortal(Vector2 playerPos, Vector2 clickPos, LevelObject.Type portalType){
-        PortalRayCastCallback callback = new PortalRayCastCallback(portalType);
+        PortalRayCastCallback callback = new PortalRayCastCallback();
         Controller.queryRayCast(callback, playerPos, clickPos);
         if(callback.isWallPortable())
             spawnPortal(callback.getWallPoint(), callback.getWallNormal(), portalType);
@@ -85,17 +87,12 @@ public class PortalController {
 
     private static class PortalRayCastCallback implements RayCastCallback {
 
-        private Type portalType;
         private float nearestWallFraction;
         private Vector2 wallPoint;
         private Vector2 wallNormal;
         private boolean wallIsPortable;
 
-        public PortalRayCastCallback(Type portalType) {
-            if(portalType != Type.PORTAL_BLUE && portalType != Type.PORTAL_ORANGE)
-                throw new IllegalArgumentException("LevelObject.Type is not a portal type");
-
-            this.portalType = portalType;
+        public PortalRayCastCallback() {
             nearestWallFraction = 2;
         }
 
@@ -112,10 +109,24 @@ public class PortalController {
             System.out.println("Fixture found at: "+ point);
             Boolean isPortableWall = WallController.isPortableWall(fixture);
             if(isPortableWall != null && fraction < nearestWallFraction) {
-                System.out.println("Wall");
+                Vector2 x = fixture.getBody().getPosition();
+                Vector2 size = new Vector2();
+                ((EdgeShape)fixture.getShape()).getVertex2(size);
+                Vector2 space1 = x.cpy().add(size).sub(point);
+                Vector2 space2 = x.cpy().sub(point);
+                float portalWidth = ConstantsService.getHeight(Type.PORTAL_ORANGE);
+
+                Vector2 newPoint =  point.cpy();
+                if(space1.len() < portalWidth/2) {
+                    newPoint = space2.cpy().setLength(portalWidth/2).add(x).add(size);
+                }
+                else if(space2.len() < portalWidth/2) {
+                    newPoint = space1.cpy().setLength(portalWidth/2).add(x);
+                }
+
                 nearestWallFraction = fraction;
                 wallIsPortable = isPortableWall;
-                wallPoint = point.cpy();
+                wallPoint = newPoint;
                 wallNormal = normal.cpy();
             }
             return 1;
