@@ -52,7 +52,7 @@ public class BodyService {
 
         switch(type) {
             case CUBE:
-                friction = 0.7f;  density = 1f;   restitution = 0.2f;
+                friction = 0.7f;  density = 0.01f;   restitution = 0.2f;
                 break;
             case BUTTON:
                 friction = 1f;  density = 100f;   restitution = 0f;
@@ -85,8 +85,8 @@ public class BodyService {
     public static BodyDef.BodyType getBodyType(LevelObject.Type type) {
         switch (type) {
             case CUBE:
-            case BUTTON:
                 return BodyDef.BodyType.DynamicBody;
+            case BUTTON:
             case PORTAL_BLUE:
             case PORTAL_ORANGE:
             case WALL:

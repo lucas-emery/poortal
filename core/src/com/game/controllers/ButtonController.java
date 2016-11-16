@@ -46,11 +46,4 @@ public class ButtonController {
             }
         }
     }
-
-    public static void printTimer(){
-        for(Button button: buttons){
-            System.out.println(button.getTimer());
-            System.out.println(button.isActive());
-        }
-    }
 }
