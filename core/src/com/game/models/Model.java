@@ -114,20 +114,27 @@ public class Model {
      * Method which creates Box2D joint for the player and the held object
      */
     public void createJoint(){
+        float degtorad=0.0174533f;
         RevoluteJointDef rDef;
         rDef = new RevoluteJointDef();
         rDef.bodyA = player.getBody();
         rDef.bodyB = player.getVicinity().getBody();
-        rDef.collideConnected = true;
+        rDef.collideConnected = false;
+        rDef.enableLimit=true;
+        rDef.lowerAngle=40*degtorad;
+        rDef.upperAngle=180*degtorad;
 
         if (player.isLookingLeft())
-            rDef.localAnchorA.set(-1.5f,0.5f);
+            rDef.localAnchorB.set(-1.5f,0.5f);
         else
-            rDef.localAnchorA.set(1.5f,0.5f);
+            rDef.localAnchorB.set(1.5f,0.5f);
 
-        rDef.localAnchorB.set(0.0f,0);
+        rDef.localAnchorA.set(0.0f,0);
         joint = world.createJoint(rDef);
         joint.setUserData("Joint");
+    }
+    public void applyForce(){
+        joint.getBodyB().applyForceToCenter(0,50,true);
     }
 
     /**
