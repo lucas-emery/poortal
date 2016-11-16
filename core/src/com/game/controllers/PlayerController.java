@@ -152,4 +152,13 @@ public class PlayerController {
         else
             player.setHolding(false);
     }
+
+    public static float getAimingAngle() {
+        Vector2 gunPos = player.getPosition().add(0, ConstantsService.PLAYER_GUN_OFFSET).scl(ConstantsService.METERS_TO_PIXELS);
+        Vector2 aimingPoint = playerView.getAimingPoint();
+
+        Vector2 aimingVector = new Vector2(aimingPoint.x - gunPos.x, aimingPoint.y - gunPos.y);
+
+        return aimingVector.angleRad(ConstantsService.CARTESIAN_VERSOR_Y);
+    }
 }

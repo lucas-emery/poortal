@@ -81,6 +81,8 @@ public class ConstantsService {
 
     public static final float PLAYER_WIDTH = 1f;
 
+    public static final float PLAYER_GUN_OFFSET = 0.2f;
+
     public static final float WORLD_STEP = 1/60f;
 
     public static final int GRAPHICS_HEIGHT = 550;
