@@ -116,8 +116,6 @@ public class Model {
      * Method which creates Box2D joint for the player and the held object
      */
     public void createJoint(){
-        float degtorad=0.0174533f;
-
         Body playerBody = player.getBody();
         Body cubeBody = player.getVicinity().getBody();
 
@@ -126,14 +124,14 @@ public class Model {
         rDef.bodyA = playerBody;
         rDef.bodyB = cubeBody;
         rDef.collideConnected = false;
-        rDef.enableLimit=false;
+        rDef.enableLimit=true;
+        rDef.lowerAngle=-90*ConstantsService.DEG_TO_RAD;
+        rDef.upperAngle=90*ConstantsService.DEG_TO_RAD;
 
         Vector2 gunPos = playerBody.getPosition().add(0, ConstantsService.PLAYER_GUN_OFFSET);
         Vector2 cubePos = cubeBody.getPosition();
         Vector2 jointVec = new Vector2(cubePos.x - gunPos.x, cubePos.y - gunPos.y);
         rDef.referenceAngle = jointVec.angleRad(ConstantsService.CARTESIAN_VERSOR_Y);
-//        rDef.lowerAngle=-120*degtorad;
-//        rDef.upperAngle=120*degtorad;
         rDef.enableMotor = true;
         rDef.maxMotorTorque = 10;
         rDef.motorSpeed = 0;
@@ -148,9 +146,6 @@ public class Model {
         rDef.localAnchorA.set(0,ConstantsService.PLAYER_GUN_OFFSET);
         joint = (RevoluteJoint) world.createJoint(rDef);
         joint.setUserData("Joint");
-    }
-    public void applyForce(){
-        joint.getBodyB().applyForceToCenter(0,50,true);
     }
 
     /**
