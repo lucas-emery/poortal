@@ -67,7 +67,7 @@ public class View {
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0);
 
         //PlaceHolder theme
-        theme = AssetsService.getTheme();
+        theme = LevelController.getTheme();
         theme.setLooping(true);
         theme.play();
     }
@@ -133,9 +133,16 @@ public class View {
 
     public void reset(Model model) {
         this.model = model;
+        resetMusic();
         this.levelObjectsViews = LevelController.getLevelObjectsViews();
         this.playerView = PlayerController.getPlayerView();
         this.levelBackground = AssetsService.getLevelBackground();
         this.levelForeground = AssetsService.getLevelForeground();
+    }
+    public void resetMusic(){
+        theme.stop();
+        this.theme = LevelController.getTheme();
+        theme.setLooping(true);
+        theme.play();
     }
 }

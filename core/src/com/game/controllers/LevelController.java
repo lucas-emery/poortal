@@ -1,6 +1,7 @@
 package com.game.controllers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
@@ -41,6 +42,7 @@ public class LevelController {
     private static Door door;
     private static Finish finish;
     private static int level;
+    private static Music theme;
 
     /**
      * Method that returns a clone of the
@@ -91,6 +93,15 @@ public class LevelController {
 
         try {
             JSONObject levelData = (JSONObject) new JSONParser().parse(new FileReader(file));
+
+            JSONArray themeData = (JSONArray) levelData.get("theme");
+
+            if (themeData.size() != 1){
+                System.out.println(themeData.size());
+            throw new IllegalArgumentException("theme in " + file + " is not a String");
+            }
+
+            SetTheme((String)themeData.get(0));
 
 
             JSONArray gravityData = (JSONArray) levelData.get("gravity");
@@ -222,6 +233,10 @@ public class LevelController {
         ButtonController.reset();
     }
 
+    private static void SetTheme(String location) {
+        theme = Gdx.audio.newMusic(Gdx.files.internal(location));
+    }
+
     /**
      * A method which returns the level's physics world.
      * @return the level's physics world.
@@ -243,5 +258,9 @@ public class LevelController {
 
     public static HashSet<Button> getButtons() {
         return (HashSet<Button>) buttons.clone();
+    }
+
+    public static Music getTheme() {
+        return theme;
     }
 }
