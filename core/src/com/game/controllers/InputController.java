@@ -19,6 +19,7 @@ public class InputController implements InputProcessor{
 
     protected static boolean aIsPressed;
     protected static boolean dIsPressed;
+    public static boolean spaceispressed=false;
 
     /**
      /**
@@ -130,6 +131,9 @@ public class InputController implements InputProcessor{
             case Input.Keys.E:
                 PlayerController.interact();
                 break;
+            case Input.Keys.SPACE:
+                spaceispressed=true;
+                break;
         }
         return false;
     }
@@ -147,6 +151,10 @@ public class InputController implements InputProcessor{
                 aIsPressed = false;
             case Input.Keys.D:
                 dIsPressed = false;
+                break;
+            case Input.Keys.SPACE:
+                spaceispressed=false;
+                break;
         }
         return false;
     }

@@ -51,12 +51,14 @@ public class Controller extends ApplicationAdapter {
      */
 	@Override
 	public void render () {
-		model.update();
-		InputController.update();
-		TeleportationController.update(model);
-		updatePlayerCollisionState();
-		updateButtonState();
-		view.render();
+       // if(InputController.spaceispressed) {
+			model.update();
+		//}
+			InputController.update();
+			TeleportationController.update(model);
+			updatePlayerCollisionState();
+			updateButtonState();
+			view.render();
 	}
 
 	private void updateButtonState() {
