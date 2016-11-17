@@ -130,9 +130,6 @@ public class InputController implements InputProcessor{
             case Input.Keys.E:
                 PlayerController.interact();
                 break;
-            case Input.Keys.J:
-              //  ButtonController.printTimer();
-                break;
         }
         return false;
     }

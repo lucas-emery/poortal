@@ -106,4 +106,8 @@ public class PlayerView {
 
         return skeleton;
     }
+
+    public Vector2 getAimingPoint() {
+        return mouseVector.cpy();
+    }
 }

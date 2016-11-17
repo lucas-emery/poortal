@@ -5,6 +5,7 @@ import java.util.HashSet;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.joints.RevoluteJoint;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
 import com.game.controllers.LevelController;
 import com.game.controllers.PlayerController;
@@ -23,7 +24,7 @@ public class Model {
     private World world;
     private float accumulatedTime;
     private boolean wasHolding;
-    private Joint joint;
+    private RevoluteJoint joint;
 
     /**
      * Constructor which sets the player, world and the HashSet levelobjects
@@ -60,6 +61,7 @@ public class Model {
             }
         }
         PlayerController.update(deltaTime);
+        updateJoint();
     }
     public void resetHolding(boolean isholding){
         player.setHolding(isholding);
@@ -114,19 +116,35 @@ public class Model {
      * Method which creates Box2D joint for the player and the held object
      */
     public void createJoint(){
+        Body playerBody = player.getBody();
+        Body cubeBody = player.getVicinity().getBody();
+
         RevoluteJointDef rDef;
         rDef = new RevoluteJointDef();
-        rDef.bodyA = player.getBody();
-        rDef.bodyB = player.getVicinity().getBody();
-        rDef.collideConnected = true;
+        rDef.bodyA = playerBody;
+        rDef.bodyB = cubeBody;
+        rDef.collideConnected = false;
+        rDef.enableLimit=true;
+        rDef.lowerAngle=-90*ConstantsService.DEG_TO_RAD;
+        rDef.upperAngle=90*ConstantsService.DEG_TO_RAD;
 
-        if (player.isLookingLeft())
-            rDef.localAnchorA.set(-1.5f,0.5f);
+        Vector2 gunPos = playerBody.getPosition().add(0, ConstantsService.PLAYER_GUN_OFFSET);
+        Vector2 cubePos = cubeBody.getPosition();
+        Vector2 jointVec = new Vector2(cubePos.x - gunPos.x, cubePos.y - gunPos.y);
+        rDef.referenceAngle = jointVec.angleRad(ConstantsService.CARTESIAN_VERSOR_Y);
+        rDef.enableMotor = true;
+        rDef.maxMotorTorque = 10;
+        rDef.motorSpeed = 0;
+
+        jointVec.rotate(180).setLength(1.7f);
+        rDef.localAnchorB.set(jointVec);
+        /*if (player.isLookingLeft())
+            rDef.localAnchorB.set(-1.5f,0.5f);
         else
-            rDef.localAnchorA.set(1.5f,0.5f);
+            rDef.localAnchorB.set(1.5f,0.5f);*/
 
-        rDef.localAnchorB.set(0.0f,0);
-        joint = world.createJoint(rDef);
+        rDef.localAnchorA.set(0,ConstantsService.PLAYER_GUN_OFFSET);
+        joint = (RevoluteJoint) world.createJoint(rDef);
         joint.setUserData("Joint");
     }
 
@@ -141,5 +159,14 @@ public class Model {
 
     public Joint getJoint() {
         return joint;
+    }
+
+    public void updateJoint() {
+        float targetAngle = -PlayerController.getAimingAngle();
+        if(joint != null) {
+            float angle = joint.getJointAngle();
+            float vel = (targetAngle - angle)*10;
+            joint.setMotorSpeed(vel);
+        }
     }
 }

@@ -77,9 +77,13 @@ public class ConstantsService {
 
     public static final float RAD_TO_DEG = (float)(180/ Math.PI);
 
+    public static final float DEG_TO_RAD = (float)(1/(RAD_TO_DEG));
+
     public static final float PLAYER_HEIGHT = 1.9f;
 
     public static final float PLAYER_WIDTH = 1f;
+
+    public static final float PLAYER_GUN_OFFSET = 0.2f;
 
     public static final float WORLD_STEP = 1/60f;
 
