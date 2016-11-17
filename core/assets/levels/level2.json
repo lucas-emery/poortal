@@ -8,12 +8,6 @@
   ],
 
   "levelObjects" : [
-    {
-      "type" : "CUBE",
-      "position" : [
-        100.0, 175.0
-      ]
-    }
   ],
 
   "finish" : [
