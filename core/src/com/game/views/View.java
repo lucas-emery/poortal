@@ -79,7 +79,7 @@ public class View {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.setProjectionMatrix(camera.combined);
-
+        Gdx.gl.glEnable(GL20.GL_BLEND);
         batch.begin();
         levelBackground.draw(batch);
 

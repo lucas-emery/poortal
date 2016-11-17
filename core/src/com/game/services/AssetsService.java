@@ -56,10 +56,10 @@ public class AssetsService {
         staticTextures.put(LevelObject.Type.PORTAL_ORANGE, texture);
 
         textures = new ArrayList<Texture>();
-        texture = new Texture(Gdx.files.internal("closed_door_right.png"));
+        texture = new Texture(Gdx.files.internal("closed_door.png"));
         textures.add(texture);
 
-        texture = new Texture(Gdx.files.internal("closed_door_left.png"));
+        texture = new Texture(Gdx.files.internal("opened_door.png"));
         textures.add(texture);
         animatedTextures.put(LevelObject.Type.DOOR, textures);
 
@@ -101,14 +101,13 @@ public class AssetsService {
     public static ArrayList<Sprite> getAnimatedSprites(LevelObject.Type type){
         ArrayList<Sprite> sprites = new ArrayList<Sprite>();
         for(Texture texture: animatedTextures.get(type)){
-            if(type == LevelObject.Type.DOOR){
-
-            }
             Sprite newSprite = new Sprite(texture);
             newSprite.setSize(ConstantsService.getWidth(type)*ConstantsService.METERS_TO_PIXELS,
                     ConstantsService.getHeight(type)*ConstantsService.METERS_TO_PIXELS);
             newSprite.setOriginCenter();
+
             sprites.add(newSprite);
+
         }
 
         return sprites;
