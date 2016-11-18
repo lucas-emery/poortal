@@ -48,10 +48,11 @@ public class PortalController {
     }
 
     /**
-     *
-     * @param playerPos
-     * @param clickPos
-     * @param portalType
+     * This method will spawn a portal on a portable wall if
+     * the wall with which the rayCast collided is portable.
+     * @param playerPos the position vector of the player.
+     * @param clickPos the position vector of the click.
+     * @param portalType the type of portal that is being fired.
      */
     public static void firePortal(Vector2 playerPos, Vector2 clickPos, LevelObject.Type portalType){
         PortalRayCastCallback callback = new PortalRayCastCallback();

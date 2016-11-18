@@ -10,7 +10,8 @@ import com.game.views.PlayerView;
 import java.math.MathContext;
 
 /**
- *
+ * The InputController class is tasked with handling the Player model-view
+ * interactions and sends messages to other classes in order to react to the events.
  */
 public class PlayerController {
 
@@ -79,15 +80,16 @@ public class PlayerController {
     }
 
     /**
-     *
-     * @param animation
+     * Sets an animation state for the player.
+     * @param animation the animation state string
+     *                  representation to be set.
      */
     public static void setAnimation(String animation){
         player.setAnimation(animation);
     }
 
     /**
-     *
+     * Updates the player's model and view
      * @param deltaTime
      */
     public static void update(float deltaTime) {
@@ -96,7 +98,8 @@ public class PlayerController {
     }
 
     /**
-     *
+     * This method will update the point to
+     * which the player's view is aiming.
      * @param x
      * @param y
      */
@@ -105,9 +108,10 @@ public class PlayerController {
     }
 
     /**
-     *
-     * @param clickPos
-     * @param portalType
+     *Method which the player calls to fire a portal and then the
+     * portalController is tasked with handling the portal.
+     * @param clickPos The vector of the click position.
+     * @param portalType either an orange or blue portal.
      */
     public static void firePortal(Vector2 clickPos, Portal.Type portalType){
         Vector2 playerPos = player.getPosition().cpy();

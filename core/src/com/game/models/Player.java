@@ -167,6 +167,7 @@ public class Player {
     public boolean isGrounded() {
         return grounded;
     }
+
     public Fixture getVicinity(){
         return vicinity;
     }
