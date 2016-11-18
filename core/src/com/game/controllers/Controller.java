@@ -73,7 +73,9 @@ public class Controller extends ApplicationAdapter {
 	}
 
 	/**
-	 *
+	 * This method is used by the application to dispose
+     * the loaded assets. it calls the dispose method
+     * from AssetsService.
      */
 	@Override
 	public void dispose () {

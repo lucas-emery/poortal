@@ -31,11 +31,14 @@ public class InputController implements InputProcessor{
     }
 
     /**
-     *
-     * @param screenX
-     * @param screenY
-     * @param pointer
-     * @param button
+     * This method listens for clicks and then calls the firePortal
+     * method from playerController with either a blue or orange
+     * portal and the vector indicating the position of the mouse
+     * cursor.
+     * @param screenX libgdx data
+     * @param screenY libgdx data
+     * @param pointer libgdx data
+     * @param button libgdx data
      * @return
      */
     @Override

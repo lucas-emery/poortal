@@ -13,7 +13,8 @@ import com.game.views.LevelObjectView;
 import com.game.views.StaticLevelObjectView;
 
 /**
- *
+ *The PortalController is in charge of managing the interaction between the two
+ * linked portals.
  */
 public class PortalController {
     private static Portal bluePortal;
@@ -59,6 +60,12 @@ public class PortalController {
             spawnPortal(callback.getWallPoint(), callback.getWallNormal(), portalType);
     }
 
+    /**
+     * returns the type of portal in question or null if
+     * the object is not a portal.
+     * @param fixture the portal to query
+     * @return
+     */
     public static Type getPortalType(Fixture fixture) {
         if(bluePortal != null && bluePortal.compareFixture(fixture))
             return Type.PORTAL_BLUE;
@@ -68,6 +75,12 @@ public class PortalController {
         return null;
     }
 
+    /**
+     * This method will return the other portal which is linked with
+     * the portal in question
+     * @param portalType the type of portal
+     * @return
+     */
     public static Portal getOtherPortal(Type portalType) {
         if(portalType.equals(Type.PORTAL_BLUE))
             return orangePortal;
@@ -75,6 +88,9 @@ public class PortalController {
             return bluePortal;
     }
 
+    /**
+     * This method resets all portal's models and views.
+     */
     public static void reset() {
         bluePortal = null;
         bluePortalView = null;

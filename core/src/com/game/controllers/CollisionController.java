@@ -160,7 +160,7 @@ public class CollisionController implements ContactListener {
     }
 
     /**
-     *FALTA DOCUMENTACION ASDFASDFJASDJFLÑ1!!!
+     *
      * @param contact
      * @param oldManifold
      */
