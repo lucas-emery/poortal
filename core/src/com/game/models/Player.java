@@ -222,12 +222,19 @@ public class Player {
         return holding;
     }
 
+    /**
+     * Method which resets the state of the player's model
+     */
     public void resetState() {
         animation = null;
         vicinity = null;
         holding = false;
     }
 
+    /**
+     * method which indicates weather the player is facing a cube or not.
+     * @return true if the player is facing a cube, false otherwise
+     */
     public boolean isFacingCube() {
         if(isLookingLeft()){
             if(vicinity.getBody().getPosition().x<body.getPosition().x) {

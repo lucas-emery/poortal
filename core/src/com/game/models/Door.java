@@ -60,14 +60,6 @@ public class Door extends LevelObject implements AnimatedObject {
     }
 
     /**
-     * Method which is used to get isClosed
-     * @return Boolean which represents the open state of the door
-     */
-    public boolean isClosed(){
-        return isClosed;
-    }
-
-    /**
      * Method which sets isClosed value
      * @param value Boolean to set isClosed to
      */

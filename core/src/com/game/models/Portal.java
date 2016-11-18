@@ -60,6 +60,11 @@ public class Portal extends LevelObject{
 
     }
 
+    /**
+     * method which indicates weather two fixtures are equal.
+     * @param otherFixture the fixture to which self compares to
+     * @return true if they are equal, false otherwise
+     */
     public boolean compareFixture(Fixture otherFixture) {
         return fixture.equals(otherFixture);
     }

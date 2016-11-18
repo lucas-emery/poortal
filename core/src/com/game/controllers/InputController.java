@@ -23,8 +23,8 @@ public class InputController implements InputProcessor{
 
     /**
      /**
-     * This method is required due to the implementation of the ImputProcessor
-     * interface
+     * This method is required due to the implementation of the InputProcessor
+     * interface.
      * @return false since it is not used for the program.
      */
     @Override
@@ -56,12 +56,13 @@ public class InputController implements InputProcessor{
     }
 
     /**
-     *
+     *This method is required due to the implementation of the InputProcessor
+     * interface.
      * @param screenX
      * @param screenY
      * @param pointer
      * @param button
-     * @return
+     * @return false since it is not used for the program.
      */
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
@@ -69,9 +70,10 @@ public class InputController implements InputProcessor{
     }
 
     /**
-     *
+     *This method is required due to the implementation of the InputProcessor
+     * interface
      * @param character
-     * @return
+     * @return false since it is not used for the program.
      */
     @Override
     public boolean keyTyped(char character) {
@@ -79,9 +81,10 @@ public class InputController implements InputProcessor{
     }
 
     /**
-     *
+     *This method is required due to the implementation of the InputProcessor
+     * interface.
      * @param amount
-     * @return
+     * @return false since it is not used for the program.
      */
     @Override
     public boolean scrolled(int amount) {
@@ -89,24 +92,26 @@ public class InputController implements InputProcessor{
     }
 
     /**
-     *
+     *This method updates the player's movement according to
+     * which key is being pressed at the moment
      */
     public static void update(){
         boolean isPressed=false;
         if (InputController.aIsPressed){
-            PlayerController.moveHorizontal(false);     // 	CAMBIAR BOOLEANO
+            PlayerController.moveHorizontal(false);
             isPressed=true;
         }
         if (InputController.dIsPressed){
-            PlayerController.moveHorizontal(true);	   //  POR RIGHT AND LEFT
+            PlayerController.moveHorizontal(true);
             isPressed=true;
         }
         if (!isPressed)
-	       PlayerController.setAnimation(null);                                             // UBICADO EN ALGUN SERVICE
+	       PlayerController.setAnimation(null);
     }
 
     /**
-     *
+     * This method listens for whenever a key is pressed and sets the conditions
+     * with which the key press corresponds.
      * @param keycode
      * @return
      */
@@ -138,12 +143,25 @@ public class InputController implements InputProcessor{
         return false;
     }
 
+    /**
+     * This method listens for the mouse input and updates
+     * the aiming position of the player.
+     * @param screenX
+     * @param screenY
+     * @return
+     */
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
         PlayerController.updateAiming(screenX,screenY);
         return false;
     }
 
+    /**
+     * This method listens for whenever a key is released
+     * and sets the corresponding variable's value.
+     * @param keycode
+     * @return
+     */
     @Override
     public boolean keyUp(int keycode) {
         switch (keycode){
@@ -159,6 +177,9 @@ public class InputController implements InputProcessor{
         return false;
     }
 
+    /**
+     * This method resets the status of the keys.
+     */
     public static void reset() {
         aIsPressed = false;
         dIsPressed = false;

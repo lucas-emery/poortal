@@ -47,7 +47,7 @@ public class Controller extends ApplicationAdapter {
 	}
 
 	/**
-	 *
+	 * This method is in charge of updating the state of the game
      */
 	@Override
 	public void render () {
@@ -66,7 +66,8 @@ public class Controller extends ApplicationAdapter {
 	}
 
 	/**
-	 *
+	 * this method will update the player's physical state
+	 * within the game
      */
 	private void updatePlayerCollisionState() {
 		boolean grounded = CollisionController.isPlayerOnGround();
@@ -120,9 +121,10 @@ public class Controller extends ApplicationAdapter {
 	}
 
 	/**
-	 *
-	 * @param object
-	 * @param objectView
+	 * This method will add the respective LevelObject to the model
+	 * and the view contained within the controller
+	 * @param object model of the LevelObject to add
+	 * @param objectView view of the LevelObject to add
      */
 	public static  void addLevelObject(LevelObject object, LevelObjectView objectView) {
 		model.addObject(object);
@@ -130,15 +132,20 @@ public class Controller extends ApplicationAdapter {
 	}
 
 	/**
-	 *
-	 * @param object
-	 * @param objectView
+	 * This method will remove the LevelObject from the model
+	 * and the view within the Controller
+	 * @param object the model of the LevelObject to remove
+	 * @param objectView the view of the LevelObject to remove
      */
 	public static void removeLevelObject(LevelObject object, LevelObjectView objectView) {
 		model.removeObject(object);
 		view.removeView(objectView);
 	}
 
+	/**
+	 * This method will advance the game to the next level so
+	 * it can continue
+     */
 	public static void nextLevel() {
 		level++;
 

@@ -53,6 +53,10 @@ public abstract class LevelObject {
         createFixtureDef();
     }
 
+    /**
+     * Abstract method implemented by each subclass which will
+     * define how the fixture is created.
+     */
     public abstract void createFixtureDef();
 
     /**

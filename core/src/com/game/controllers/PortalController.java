@@ -82,10 +82,18 @@ public class PortalController {
         orangePortalView = null;
     }
 
+    /**
+     * This method which indicates weather both portals
+     * are currently set or not in the wold.
+     * @return
+     */
     public static boolean bothPortalsExist() {
         return bluePortal != null && orangePortal != null;
     }
 
+    /**
+     *
+     */
     private static class PortalRayCastCallback implements RayCastCallback {
 
         private float nearestWallFraction;
@@ -140,25 +148,19 @@ public class PortalController {
             return 1;
         }
 
-        /**
-         *
-         * @return
-         */
         public Vector2 getWallPoint() {
             return wallPoint;
         }
 
-        /**
-         *
-         * @return
-         */
         public Vector2 getWallNormal() {
             return wallNormal;
         }
 
         /**
-         *
-         * @return
+         * method which indicates weather the wall in question
+         * supports portals or not.
+         * @return false if the wall is not portable, otherwise
+         *          true.
          */
         public boolean isWallPortable() {
             return wallIsPortable;

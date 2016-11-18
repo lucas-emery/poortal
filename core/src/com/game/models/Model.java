@@ -161,6 +161,9 @@ public class Model {
         return joint;
     }
 
+    /**
+     *
+     */
     public void updateJoint() {
         float targetAngle = -PlayerController.getAimingAngle();
         if(joint != null) {

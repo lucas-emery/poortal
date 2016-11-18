@@ -242,6 +242,10 @@ public class LevelController {
         ButtonController.reset();
     }
 
+    /**
+     * This method fetches and then sets the theme of the game.
+     * @param location
+     */
     private static void SetTheme(String location) {
         theme = Gdx.audio.newMusic(Gdx.files.internal(location));
     }

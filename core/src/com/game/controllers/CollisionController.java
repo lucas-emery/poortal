@@ -12,7 +12,7 @@ import com.game.services.DebugService;
 
 /**
  * This controller is in charge of managing
- * all of the collisions that are occurring in the game
+ * all of the collisions that are occurring in the game.
  * Created by juan on 24/10/16.
  */
 public class CollisionController implements ContactListener {
@@ -45,7 +45,7 @@ public class CollisionController implements ContactListener {
      * objects are in contact.
      *
      * @param contact the object which describes the contact
-     *                managed by the physics engine
+     *                managed by the physics engine.
      */
     @Override
     public void beginContact(Contact contact) {
@@ -107,9 +107,9 @@ public class CollisionController implements ContactListener {
     }
 
     /**
-     *This method is called wheneaver two fixtures stop colliding
-     * with each other handling the events wheneaver two objects
-     * stop being in contact
+     *This method is called whenever two fixtures stop colliding
+     * with each other handling the events whenever two objects
+     * stop being in contact.
      * @param contact
      */
     @Override
@@ -163,7 +163,7 @@ public class CollisionController implements ContactListener {
 
     /**
      *
-     * @return
+     * @return weather the player is on the ground or not
      */
     public static boolean isPlayerOnGround() {
         return playerOnGround;

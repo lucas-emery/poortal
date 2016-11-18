@@ -33,6 +33,9 @@ public class PlayerController {
         playerView = new PlayerView(player);
     }
 
+    /**
+     * This method will reset the state of the player.
+     */
     public static void reset() {
         player.resetState();
     }
@@ -55,7 +58,7 @@ public class PlayerController {
 
     /**
      *Method which if the player is grounded it will allow
-     * it to jump by apliyng a force
+     * it to jump by applying a force
      */
     protected static void jump(){
         if(player.isGrounded())
@@ -63,8 +66,10 @@ public class PlayerController {
     }
 
     /**
-     *
-     * @param positive
+     *This method will move the player horizontally depending
+     * on if he is currently on the ground or not.
+     * @param positive the direction of motion on our axis,
+     *                 right is positive and left is negative.
      */
     protected static void moveHorizontal(boolean positive) {
         float multiplier =ConstantsService.FORCEINGROUND;

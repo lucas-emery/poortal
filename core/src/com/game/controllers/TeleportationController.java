@@ -38,6 +38,9 @@ public class TeleportationController {
         teleports.remove(teleportation);
     }
 
+    /**
+     * This method will reset the teleports.
+     */
     public static void reset() {
         teleports = new HashSet<Teleportation>();
     }

@@ -27,7 +27,7 @@ public class Cube extends LevelObject{
 
     /**
      * Method which creates fixture and userdata
-     * for the LevelObject
+     * for the LevelObject.
      */
     @Override
     public void createFixtureDef(){
