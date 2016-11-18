@@ -41,10 +41,6 @@ public class Teleportation {
         Vector2 portalPrimary = new Vector2(0,1);
         portalPrimary.rotateRad(portal.getAngle());
         Vector2 objectRelative = object.getPosition().cpy().sub(portal.getPosition());
-        /*DebugService.rays.add(portal.getPosition());
-        DebugService.rays.add(objectRelative.cpy().add(portal.getPosition()));
-        DebugService.rays.add(portal.getPosition());
-        DebugService.rays.add(portalPrimary.cpy().add(portal.getPosition()));*/
 
         if(objectRelative.crs(portalPrimary) < 0)
             return true;

@@ -153,7 +153,7 @@ public class CollisionController implements ContactListener {
 
     /**
      *
-     * @return
+     * @return The player's current interractable cube.
      */
     public static Fixture getVicinity() {
         return vicinity;

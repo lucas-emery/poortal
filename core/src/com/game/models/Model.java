@@ -156,7 +156,7 @@ public class Model {
     }
 
     /**
-     *
+     * Updates the Joint angle to the MousePosition angle
      */
     public void updateJoint() {
         float targetAngle = -PlayerController.getAimingAngle();
