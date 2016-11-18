@@ -21,9 +21,10 @@ public class AssetsService {
     private static ArrayList<Texture> levelBackgrounds = new ArrayList<Texture>();
     private static ArrayList<Texture> levelForegrounds = new ArrayList<Texture>();
 
-    private static EnumMap<LevelObject.Type, Texture> staticTextures = new EnumMap<LevelObject.Type, Texture>(LevelObject.Type.class);
-    private static EnumMap<LevelObject.Type,ArrayList<Texture>> animatedTextures =
-            new EnumMap<LevelObject.Type,ArrayList<Texture>>(LevelObject.Type.class);
+    private static EnumMap<LevelObject.Type, Texture> staticTextures =
+            new EnumMap<LevelObject.Type, Texture>(LevelObject.Type.class);
+    private static EnumMap<LevelObject.Type, ArrayList<Texture>> animatedTextures =
+            new EnumMap<LevelObject.Type, ArrayList<Texture>>(LevelObject.Type.class);
 
     private static SkeletonData playerSkeletonData;
     private static AnimationStateData playerStateData;
@@ -34,15 +35,15 @@ public class AssetsService {
     private static Music theme;
 
 
-    public static void initialize(){
+    public static void initialize() {
 
         Texture texture;
         ArrayList<Texture> textures;
 
-        for(int i = 1; i <= ConstantsService.MAX_LEVEL; i++) {
-            texture = new Texture(Gdx.files.internal("levels/level"+i+"-bg.png"));
+        for (int i = 1; i <= ConstantsService.MAX_LEVEL; i++) {
+            texture = new Texture(Gdx.files.internal("levels/level" + i + "-bg.png"));
             levelBackgrounds.add(texture);
-            texture = new Texture(Gdx.files.internal("levels/level"+i+"-fg.png"));
+            texture = new Texture(Gdx.files.internal("levels/level" + i + "-fg.png"));
             levelForegrounds.add(texture);
         }
 
@@ -73,8 +74,8 @@ public class AssetsService {
         TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("stickman-test/skeleton.atlas"));
         playerTextureDimensions = new Rectangle(0, 0, 500, 1050);
 
-        buttonTextureDimensions = new Rectangle(0,0, 20, 50);
-        buttonScale = (ConstantsService.BUTTON_HEIGHT * ConstantsService.METERS_TO_PIXELS)  / buttonTextureDimensions.getHeight();
+        buttonTextureDimensions = new Rectangle(0, 0, 20, 50);
+        buttonScale = (ConstantsService.BUTTON_HEIGHT * ConstantsService.METERS_TO_PIXELS) / buttonTextureDimensions.getHeight();
 
         playerScale = (ConstantsService.PLAYER_HEIGHT * ConstantsService.METERS_TO_PIXELS) / playerTextureDimensions.getHeight();
 
@@ -91,18 +92,18 @@ public class AssetsService {
 
     public static Sprite getStaticSprite(LevelObject.Type type) {
         Sprite newSprite = new Sprite(staticTextures.get(type));
-        newSprite.setSize(ConstantsService.getWidth(type)*ConstantsService.METERS_TO_PIXELS,
-                ConstantsService.getHeight(type)*ConstantsService.METERS_TO_PIXELS);
+        newSprite.setSize(ConstantsService.getWidth(type) * ConstantsService.METERS_TO_PIXELS,
+                ConstantsService.getHeight(type) * ConstantsService.METERS_TO_PIXELS);
         newSprite.setOriginCenter();
         return newSprite;
     }
 
-    public static ArrayList<Sprite> getAnimatedSprites(LevelObject.Type type){
+    public static ArrayList<Sprite> getAnimatedSprites(LevelObject.Type type) {
         ArrayList<Sprite> sprites = new ArrayList<Sprite>();
-        for(Texture texture: animatedTextures.get(type)){
+        for (Texture texture : animatedTextures.get(type)) {
             Sprite newSprite = new Sprite(texture);
-            newSprite.setSize(ConstantsService.getWidth(type)*ConstantsService.METERS_TO_PIXELS,
-                    ConstantsService.getHeight(type)*ConstantsService.METERS_TO_PIXELS);
+            newSprite.setSize(ConstantsService.getWidth(type) * ConstantsService.METERS_TO_PIXELS,
+                    ConstantsService.getHeight(type) * ConstantsService.METERS_TO_PIXELS);
             newSprite.setOriginCenter();
 
             sprites.add(newSprite);
@@ -126,27 +127,45 @@ public class AssetsService {
         return new Rectangle(0, 0, playerTextureDimensions.getWidth() * playerScale, playerTextureDimensions.getHeight() * playerScale);
     }
 
-    public static Rectangle getButtonDimensions(){
-        return new Rectangle(0,0,buttonTextureDimensions.getWidth()*buttonScale, buttonTextureDimensions.getHeight()*buttonScale);
+    public static Rectangle getButtonDimensions() {
+        return new Rectangle(0, 0, buttonTextureDimensions.getWidth() * buttonScale, buttonTextureDimensions.getHeight() * buttonScale);
     }
 
     public static Sprite getLevelBackground() {
         int level = LevelController.getLevel();
-        if(level <= 0 || level > ConstantsService.MAX_LEVEL)
-            throw new IllegalArgumentException("Level cannot be negative or greater than "+ConstantsService.MAX_LEVEL+". Value: "+level);
+        if (level <= 0 || level > ConstantsService.MAX_LEVEL)
+            throw new IllegalArgumentException("Level cannot be negative or greater than " + ConstantsService.MAX_LEVEL + ". Value: " + level);
 
 
-        return new Sprite(levelBackgrounds.get(level-1));
+        return new Sprite(levelBackgrounds.get(level - 1));
     }
-    
+
     public static Sprite getLevelForeground() {
         int level = LevelController.getLevel();
-        if(level <= 0 || level > ConstantsService.MAX_LEVEL)
-            throw new IllegalArgumentException("Level cannot be negative or greater than "+ConstantsService.MAX_LEVEL+". Value: "+level);
+        if (level <= 0 || level > ConstantsService.MAX_LEVEL)
+            throw new IllegalArgumentException("Level cannot be negative or greater than " + ConstantsService.MAX_LEVEL + ". Value: " + level);
 
 
-        return new Sprite(levelForegrounds.get(level-1));
+        return new Sprite(levelForegrounds.get(level - 1));
     }
 
-    public static Music getTheme(){ return theme;}
+    public static void dispose(){
+        for(LevelObject.Type type :LevelObject.Type.values()){
+            ArrayList<Texture> textures = animatedTextures.get(type);
+            if(textures != null){
+                for(Texture tex :animatedTextures.get(type)) {
+                    if (tex != null)
+                        tex.dispose();
+                }
+            }
+        }
+
+        for(LevelObject.Type type :LevelObject.Type.values()){
+            Texture tex = staticTextures.get(type);
+            if(tex != null)
+                tex.dispose();
+        }
+
+
+    }
 }
