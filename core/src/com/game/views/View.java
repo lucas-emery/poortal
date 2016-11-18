@@ -142,7 +142,7 @@ public class View {
     public void resetMusic(){
         theme.stop();
         this.theme = LevelController.getTheme();
-        theme.setLooping(true);
+        theme.setLooping(LevelController.getLevel()!=3);
         theme.play();
     }
 }
