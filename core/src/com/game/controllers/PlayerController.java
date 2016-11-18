@@ -18,7 +18,9 @@ public class PlayerController {
     private static PlayerView playerView;
     private static Player player;
 
-
+    /**
+     * Initializes the PlayerController by instantiating Player and PlayerView
+     */
     public static void initialize() {
         player = new Player();
         playerView = new PlayerView(player);
