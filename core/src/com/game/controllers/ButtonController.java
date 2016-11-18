@@ -2,7 +2,6 @@ package com.game.controllers;
 
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.game.models.Button;
-import com.game.models.Wall;
 
 import java.util.HashSet;
 

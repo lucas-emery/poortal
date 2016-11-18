@@ -1,19 +1,11 @@
 package com.game.controllers;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.badlogic.gdx.physics.box2d.joints.RevoluteJoint;
-import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
-import com.game.models.Collider;
-import com.game.models.LevelObject;
 import com.game.models.Player;
-import com.game.services.BodyService;
 import com.game.models.Portal;
 import com.game.services.ConstantsService;
 import com.game.views.PlayerView;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
 import java.math.MathContext;
 

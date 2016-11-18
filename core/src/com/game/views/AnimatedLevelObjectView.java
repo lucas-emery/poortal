@@ -3,14 +3,11 @@ package com.game.views;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.game.models.AnimatedObject;
-import com.game.models.Door;
 import com.game.models.LevelObject;
 import com.game.services.AssetsService;
 import com.game.services.ConstantsService;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-
 /**
  * Created by fdelgado on 04/11/16.
  */

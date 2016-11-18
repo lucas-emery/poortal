@@ -5,7 +5,6 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.game.services.BodyService;
-import com.game.services.ConstantsService;
 
 /**
  * Door is a class in which the physical

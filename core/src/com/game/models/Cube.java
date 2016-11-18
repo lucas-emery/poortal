@@ -2,8 +2,6 @@ package com.game.models;
 import com.badlogic.gdx.math.Vector2;
 import com.game.services.BodyService;
 import com.badlogic.gdx.physics.box2d.*;
-import com.game.services.AssetsService;
-import com.game.services.ConstantsService;
 
 /**
  * Cube is a class in which the physical properties of the

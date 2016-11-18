@@ -7,12 +7,8 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.RayCastCallback;
 import com.game.models.LevelObject;
 import com.game.models.Model;
-import com.game.models.Player;
-import com.game.models.Teleportation;
 import com.game.services.AssetsService;
-import com.game.services.ConstantsService;
 import com.game.views.LevelObjectView;
-import com.game.views.PlayerView;
 import com.game.views.View;
 
 /**

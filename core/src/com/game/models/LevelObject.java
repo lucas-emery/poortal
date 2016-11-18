@@ -3,7 +3,6 @@ package com.game.models;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.game.services.AssetsService;
 import com.game.services.BodyService;
 
 /**

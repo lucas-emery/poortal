@@ -1,6 +1,5 @@
 package com.game.controllers;
 
-import com.badlogic.gdx.physics.box2d.World;
 import com.game.models.Model;
 import com.game.models.Portal;
 import com.game.models.Teleportation;

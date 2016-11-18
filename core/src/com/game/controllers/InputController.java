@@ -6,8 +6,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.game.models.LevelObject;
 import com.game.models.Portal;
 import com.game.services.VariablesService;
-import com.game.views.PlayerView;
-import com.game.views.View;
 
 /**
  * The InputController class is tasked with handling the keyboard/mouse

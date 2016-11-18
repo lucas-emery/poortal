@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
 import com.game.models.*;
 import com.game.services.ConstantsService;
 import com.game.views.AnimatedLevelObjectView;
@@ -14,15 +13,11 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.*;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.CharBuffer;
 import java.util.HashSet;
-import java.util.IllegalFormatException;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
-import java.util.zip.CheckedOutputStream;
 
 /**
  * LevelController is a class which handles
