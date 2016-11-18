@@ -14,6 +14,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.esotericsoftware.spine.SkeletonRenderer;
 import com.game.controllers.LevelController;
 import com.game.controllers.PlayerController;
+import com.game.models.Collider;
+import com.game.models.LevelObject;
 import com.game.models.Model;
 import com.game.services.AssetsService;
 
@@ -76,17 +78,32 @@ public class View {
         levelBackground.draw(batch);
 
         for(LevelObjectView view : levelObjectsViews) {
-           if(view.getUpdatedSprite()!= null)
-                view.getUpdatedSprite().draw(batch);
+           if(view.getUpdatedSprite()!= null) {
+               if (!isDoor(view))
+                   view.getUpdatedSprite().draw(batch);
+           }
         }
 
         skeletonRenderer.draw(batch, playerView.getUpdatedSkeleton());
 
 
         levelForeground.draw(batch);
+
+        for(LevelObjectView view : levelObjectsViews) {
+            if(view.getUpdatedSprite()!= null){
+                if(isDoor(view))
+                    view.getUpdatedSprite().draw(batch);
+            }
+        }
+
         batch.end();
 
        // debugRenderer.render(model.getWorld(), camera.combined.cpy().scale(ConstantsService.METERS_TO_PIXELS, ConstantsService.METERS_TO_PIXELS, 0));
+
+    }
+
+    private boolean isDoor(LevelObjectView view) {
+        return view.model.getType().equals(LevelObject.Type.DOOR);
 
     }
 
