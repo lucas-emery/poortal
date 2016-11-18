@@ -52,7 +52,7 @@ public class BodyService {
 
         switch(type) {
             case CUBE:
-                friction = 0.7f;  density = 0.05f;   restitution = 0.2f;
+                friction = 1f;  density = 0.15f;   restitution = 0.1f;
                 break;
             case BUTTON:
                 friction = 1f;  density = 100f;   restitution = 0f;
@@ -78,7 +78,7 @@ public class BodyService {
     public static FixtureDef getPlayerFixtureDef() {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.friction= 1f;
-        fixtureDef.density = 0.5f;
+        fixtureDef.density = 0.70f;
         fixtureDef.restitution= 0f;
         return fixtureDef;
     }
