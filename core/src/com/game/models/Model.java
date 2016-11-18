@@ -128,6 +128,7 @@ public class Model {
         Vector2 gunPos = playerBody.getPosition().add(0, ConstantsService.PLAYER_GUN_OFFSET);
         Vector2 cubePos = cubeBody.getPosition();
         Vector2 jointVec = new Vector2(cubePos.x - gunPos.x, cubePos.y - gunPos.y);
+        System.out.println("gun"+gunPos+" cube"+cubePos+" joint"+jointVec);
         rDef.referenceAngle = jointVec.angleRad(ConstantsService.CARTESIAN_VERSOR_Y);
         rDef.enableMotor = true;
         rDef.maxMotorTorque = ConstantsService.MAX_MOTOR_TORQUE;
