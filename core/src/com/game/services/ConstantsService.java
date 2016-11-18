@@ -107,6 +107,6 @@ public class ConstantsService {
 
     public static final float OPENED_DOOR_HEIGHT = 0.5f;
 
-    public static final int MAX_LEVEL = 2;
+    public static final int MAX_LEVEL = 3;
 
 }

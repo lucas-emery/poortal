@@ -106,113 +106,122 @@ public class LevelController {
 
             JSONArray gravityData = (JSONArray) levelData.get("gravity");
 
-            if(gravityData.size() != 2)
-                throw new IllegalArgumentException("gravity in "+file+" represents a 2D vector and must have 2 values");
+            if(gravityData!=null) {
+                if (gravityData.size() != 2)
+                    throw new IllegalArgumentException("gravity in " + file + " represents a 2D vector and must have 2 values");
 
-            Vector2 gravity = new Vector2(((Double)gravityData.get(0)).floatValue(), ((Double)gravityData.get(1)).floatValue());
+                Vector2 gravity = new Vector2(((Double) gravityData.get(0)).floatValue(), ((Double) gravityData.get(1)).floatValue());
 
-            world = new World(gravity, false);
-            world.setContactListener(new CollisionController());
+                world = new World(gravity, false);
+                world.setContactListener(new CollisionController());
+            }
 
             
             JSONArray playerData = (JSONArray) levelData.get("player");
-            
-            if(playerData.size() != 2)
-                throw new IllegalArgumentException("player in "+file+" represents a 2D vector and must have 2 values");
-            
-            Vector2 playerPosition = new Vector2(((Double)playerData.get(0)).floatValue(), ((Double)playerData.get(1)).floatValue()).scl(ConstantsService.PIXELS_TO_METERS);
-            
-            player.setInitialPosition(playerPosition);
-            player.setBody(world.createBody(player.getBodyDef()));
+            if(playerData!=null) {
+                if (playerData.size() != 2)
+                    throw new IllegalArgumentException("player in " + file + " represents a 2D vector and must have 2 values");
+
+                Vector2 playerPosition = new Vector2(((Double) playerData.get(0)).floatValue(), ((Double) playerData.get(1)).floatValue()).scl(ConstantsService.PIXELS_TO_METERS);
+
+                player.setInitialPosition(playerPosition);
+                player.setBody(world.createBody(player.getBodyDef()));
+            }
 
 
             JSONArray levelObjectsData = (JSONArray) levelData.get("levelObjects");
 
-            Iterator<JSONObject> levelObjectsDataIt = levelObjectsData.iterator();
-
             int index = 0;
-            while(levelObjectsDataIt.hasNext()) {
-                JSONObject levelObjectData = levelObjectsDataIt.next();
-                index++;
-                
-                JSONArray positionData = (JSONArray) levelObjectData.get("position");
-                
-                if(positionData.size() != 2)
-                    throw new IllegalArgumentException("position in "+file+" at levelObject n° "+index+" represents a 2D vector and must have 2 values");
 
-                Vector2 position = new Vector2(((Double)positionData.get(0)).floatValue(), ((Double)positionData.get(1)).floatValue()).scl(ConstantsService.PIXELS_TO_METERS);
+            if(levelObjectsData!=null) {
+                Iterator<JSONObject> levelObjectsDataIt = levelObjectsData.iterator();
 
-                LevelObject newObject;
-                String type = (String) levelObjectData.get("type");
-                if(type.equals("CUBE"))
-                    newObject = new Cube(position);
-                else if(type.equals("DOOR")) {
-                    newObject = new Door(position);
-                    door = (Door) newObject;
+                while (levelObjectsDataIt.hasNext()) {
+                    JSONObject levelObjectData = levelObjectsDataIt.next();
+                    index++;
+
+                    JSONArray positionData = (JSONArray) levelObjectData.get("position");
+
+                    if (positionData.size() != 2)
+                        throw new IllegalArgumentException("position in " + file + " at levelObject n° " + index + " represents a 2D vector and must have 2 values");
+
+                    Vector2 position = new Vector2(((Double) positionData.get(0)).floatValue(), ((Double) positionData.get(1)).floatValue()).scl(ConstantsService.PIXELS_TO_METERS);
+
+                    LevelObject newObject;
+                    String type = (String) levelObjectData.get("type");
+                    if (type.equals("CUBE"))
+                        newObject = new Cube(position);
+                    else if (type.equals("DOOR")) {
+                        newObject = new Door(position);
+                        door = (Door) newObject;
+                    } else if (type.equals("BUTTON"))
+                        newObject = new Button(position, door);
+                    else
+                        throw new IllegalArgumentException("type in " + file + " at levelObject n° " + index + " is not a valid type. Possible types: CUBE, BUTTON, DOOR.");
+
+                    newObject.setBody(world.createBody(newObject.getBodyDef()));
+
+                    levelObjects.add(newObject);
+
+                    if (newObject instanceof Button)
+                        buttons.add((Button) newObject);
                 }
-                else if(type.equals("BUTTON"))
-                    newObject = new Button(position, door);
-                else
-                    throw new IllegalArgumentException("type in "+file+" at levelObject n° "+index+" is not a valid type. Possible types: CUBE, BUTTON, DOOR.");
-
-                newObject.setBody(world.createBody(newObject.getBodyDef()));
-                
-                levelObjects.add(newObject);
-
-                if(newObject instanceof Button)
-                    buttons.add((Button) newObject);
             }
 
             
             JSONArray wallsData = (JSONArray) levelData.get("walls");
-            
-            Iterator<JSONObject> wallsDataIt = wallsData.iterator();
-            
-            index = 0;
-            while(wallsDataIt.hasNext()) {
-                JSONObject wallData = wallsDataIt.next();
-                index++;
-                
-                JSONArray originData, endData;
-                Vector2 origin, end;
-                
-                originData = (JSONArray) wallData.get("origin");
 
-                if(originData.size() != 2)
-                    throw new IllegalArgumentException("origin in "+file+" at wall n° "+index+" represents a 2D vector and must have 2 values");
+            if(wallsData!=null) {
 
-                origin = new Vector2(((Double)originData.get(0)).floatValue(), ((Double)originData.get(1)).floatValue()).scl(ConstantsService.PIXELS_TO_METERS);
+                Iterator<JSONObject> wallsDataIt = wallsData.iterator();
+
+                index = 0;
+                while (wallsDataIt.hasNext()) {
+                    JSONObject wallData = wallsDataIt.next();
+                    index++;
+
+                    JSONArray originData, endData;
+                    Vector2 origin, end;
+
+                    originData = (JSONArray) wallData.get("origin");
+
+                    if (originData.size() != 2)
+                        throw new IllegalArgumentException("origin in " + file + " at wall n° " + index + " represents a 2D vector and must have 2 values");
+
+                    origin = new Vector2(((Double) originData.get(0)).floatValue(), ((Double) originData.get(1)).floatValue()).scl(ConstantsService.PIXELS_TO_METERS);
 
 
-                endData = (JSONArray) wallData.get("end");
+                    endData = (JSONArray) wallData.get("end");
 
-                if(endData.size() != 2)
-                    throw new IllegalArgumentException("end in "+file+" at wall n° "+index+" represents a 2D vector and must have 2 values");
+                    if (endData.size() != 2)
+                        throw new IllegalArgumentException("end in " + file + " at wall n° " + index + " represents a 2D vector and must have 2 values");
 
-                end = new Vector2(((Double)endData.get(0)).floatValue(), ((Double)endData.get(1)).floatValue()).scl(ConstantsService.PIXELS_TO_METERS);
+                    end = new Vector2(((Double) endData.get(0)).floatValue(), ((Double) endData.get(1)).floatValue()).scl(ConstantsService.PIXELS_TO_METERS);
 
-                Vector2 size = end.sub(origin);
+                    Vector2 size = end.sub(origin);
 
-                Boolean floor = (Boolean) wallData.get("floor");
+                    Boolean floor = (Boolean) wallData.get("floor");
 
-                Boolean portable = (Boolean) wallData.get("portable");
+                    Boolean portable = (Boolean) wallData.get("portable");
 
-                Wall newWall = new Wall(origin, portable);
-                newWall.setWall(world.createBody(newWall.getBodyDef()), size, floor);
-                walls.add(newWall);
+                    Wall newWall = new Wall(origin, portable);
+                    newWall.setWall(world.createBody(newWall.getBodyDef()), size, floor);
+                    walls.add(newWall);
+                }
             }
 
             
             JSONArray finishData = (JSONArray) levelData.get("finish");
-            
-            if(finishData.size() != 2)
-                throw new IllegalArgumentException("finish in "+file+" represents a 2D vector and must have 2 values");
+            if(finishData!=null) {
+                if (finishData.size() != 2)
+                    throw new IllegalArgumentException("finish in " + file + " represents a 2D vector and must have 2 values");
 
-            Vector2 finishPosition = new Vector2(((Double)finishData.get(0)).floatValue(), ((Double)finishData.get(1)).floatValue()).scl(ConstantsService.PIXELS_TO_METERS);
+                Vector2 finishPosition = new Vector2(((Double) finishData.get(0)).floatValue(), ((Double) finishData.get(1)).floatValue()).scl(ConstantsService.PIXELS_TO_METERS);
 
-            finish = new Finish(finishPosition);
+                finish = new Finish(finishPosition);
 
-            finish.setBody(world.createBody(finish.getBodyDef()));
+                finish.setBody(world.createBody(finish.getBodyDef()));
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
