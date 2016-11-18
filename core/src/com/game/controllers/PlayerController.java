@@ -152,7 +152,12 @@ public class PlayerController {
         else
             player.setHolding(false);
     }
-    
+
+    /**
+     * Calculates the player's aiming direction as an angle between the
+     * players y-axis and the mouse
+     * @return float representing angle in radians
+     */
     public static float getAimingAngle() {
         Vector2 gunPos = player.getPosition().add(0, ConstantsService.PLAYER_GUN_OFFSET).scl(ConstantsService.METERS_TO_PIXELS);
         Vector2 aimingPoint = playerView.getAimingPoint();
