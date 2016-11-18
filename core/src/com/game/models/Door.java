@@ -28,8 +28,8 @@ public class Door extends LevelObject implements AnimatedObject {
      */
     public Door(Vector2 position){
         this.position = position;
-        isClosed = true;
-        type = Type.DOOR;
+        this.isClosed = true;
+        this.type = Type.DOOR;
         createBodyDef();
     }
 

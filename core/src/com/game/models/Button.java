@@ -19,8 +19,8 @@ public class Button extends LevelObject implements AnimatedObject{
 
 
     private boolean active;
-    Fixture fixture;
-    Door door;
+    private Fixture fixture;
+    private Door door;
     public float timer;
 
     /**

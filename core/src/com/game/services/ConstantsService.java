@@ -11,7 +11,6 @@ public class ConstantsService {
 
     public static float FORCEINAIR = 0.1f;
 
-    //put the width in meters and it will convert to pixels in getSprite()
     public static Float getWidth(LevelObject.Type type) {
         switch (type) {
             case CUBE:
@@ -103,14 +102,6 @@ public class ConstantsService {
     public static final float BUTTON_WIDTH = 1.0f;
 
     public static final  float BUTTON_HEIGHT = 0.4f;
-
-//    public static final float CLOSED_DOOR_WIDTH = 1;
-//
-//    public static final float CLOSED_DOOR_HEIGHT = 6f;
-//
-//    public static final float OPENED_DOOR_WIDTH = 1f;
-//
-//    public static final float OPENED_DOOR_HEIGHT = 0.5f;
 
     public static final int MAX_LEVEL = 3;
 

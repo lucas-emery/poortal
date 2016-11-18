@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -34,16 +33,14 @@ public class View {
     private Viewport viewport;
     private SkeletonRenderer skeletonRenderer;
     private Box2DDebugRenderer debugRenderer;
-    private Matrix4 debugMatrix;
     private LinkedHashSet<LevelObjectView> levelObjectsViews;
     private PlayerView playerView;
     private Sprite levelBackground;
     private Sprite levelForeground;
     private Music theme;
     private BitmapFont font;
-    private ShapeRenderer shapeRenderer;
 
-    public View(Model model)/*LinkedHashSet<LevelObjectView> levelObjectsViews, PlayerView playerView, Sprite levelBackground)*/ {
+    public View(Model model){
 
         font = new BitmapFont();
         font.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -59,14 +56,12 @@ public class View {
         skeletonRenderer = new SkeletonRenderer();
         skeletonRenderer.setPremultipliedAlpha(true);
         debugRenderer = new Box2DDebugRenderer();
-        shapeRenderer = new ShapeRenderer();
 
         camera = new OrthographicCamera();
         viewport = new FitViewport(977, 550, camera);
         viewport.apply();
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0);
 
-        //PlaceHolder theme
         theme = LevelController.getTheme();
         theme.setLooping(true);
         theme.play();
@@ -101,17 +96,6 @@ public class View {
 
         debugRenderer.render(model.getWorld(), camera.combined.cpy().scale(ConstantsService.METERS_TO_PIXELS, ConstantsService.METERS_TO_PIXELS, 0));
 
-        /*shapeRenderer.setProjectionMatrix(camera.combined.cpy().scale(ConstantsService.METERS_TO_PIXELS, ConstantsService.METERS_TO_PIXELS, 0));
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.setColor(Color.BLUE);
-        Iterator i = DebugService.rays.descendingIterator();
-        while(i.hasNext())
-            shapeRenderer.line((Vector2) i.next(),(Vector2) i.next());
-        shapeRenderer.end();*/
-    }
-
-    public void mouseMove(int x, int y){
-        playerView.updateAimingPoint(x,y);
     }
 
     public void resize(int width, int height) {

@@ -25,8 +25,6 @@ public class Player {
     private boolean holding;
     private boolean wasHolding;
 
-    //TODO RESET PLAYER STATUS
-
     /**
      * Constructor which initializes player body and sets its world coordinates
      */

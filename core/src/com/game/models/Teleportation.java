@@ -5,7 +5,6 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.game.controllers.PortalController;
 import com.game.services.ConstantsService;
-import com.game.services.DebugService;
 
 /**
  * Created by lemery on 04/11/16.

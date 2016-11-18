@@ -80,10 +80,6 @@ public class LevelController {
         walls = new HashSet<Wall>();
         buttons = new HashSet<Button>();
 
-//        LevelObject newObject;
-//        door = new Door(new Vector2(928* ConstantsService.PIXELS_TO_METERS,68*ConstantsService.PIXELS_TO_METERS));
-//        door.setBody(world.createBody(door.getBodyDef()));
-
         if(level <= 0 || level > ConstantsService.MAX_LEVEL)
             throw new IllegalArgumentException("Level cannot be negative or greater than "+ConstantsService.MAX_LEVEL+". Value: "+level);
 

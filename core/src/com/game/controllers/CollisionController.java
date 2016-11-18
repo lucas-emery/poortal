@@ -5,10 +5,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.game.models.Button;
 import com.game.models.Collider;
 import com.game.models.Collider.Type;
-import com.game.models.Player;
 import com.game.models.Teleportation;
-import com.game.services.ConstantsService;
-import com.game.services.DebugService;
 
 /**
  * This controller is in charge of managing
@@ -20,23 +17,13 @@ public class CollisionController implements ContactListener {
     private static boolean playerOnGround;
     private static Fixture vicinity;
     private static int contactNumber;
-    private static boolean isButtonPressed;
     private static int pressers;
 
     public static void reset() {
         playerOnGround = false;
-        isButtonPressed = false;
         contactNumber = 0;
         vicinity = null;
         pressers = 0;
-    }
-
-    /**
-     *
-     * @param vicinity
-     */
-    public static void setVicinity(Fixture vicinity) {
-        CollisionController.vicinity = vicinity;
     }
 
     /**
@@ -73,7 +60,6 @@ public class CollisionController implements ContactListener {
         }
         if(((value & (Type.BUTTONSENSOR.val()))==Type.BUTTONSENSOR.val())){
             if(value - Type.BUTTONSENSOR.val()==Type.PSENSORFOOT.val() || value - Type.BUTTONSENSOR.val()==Type.CUBE.val()){
-//                System.out.println(c1.val() +"  "+ c2.val()+ "enters");
                 pressers++;
                 Button button = ButtonController.findButton((((Collider)f1.getUserData()).val()==Type.BUTTONSENSOR.val())?f1:f2);
                 button.setActive(true);
@@ -175,8 +161,7 @@ public class CollisionController implements ContactListener {
     }
 
     /**
-     *This method is not used within our program buy iy is a mandatory
-     * implementation of the ContactListener interface
+     *FALTA DOCUMENTACION ASDFASDFJASDJFLÑ1!!!
      * @param contact
      * @param oldManifold
      */
@@ -192,11 +177,9 @@ public class CollisionController implements ContactListener {
             int size = worldManifold.getNumberOfContactPoints();
             Vector2[] contactPoints = worldManifold.getPoints();
             boolean attendContact = true;
-//            System.out.println(size);
 
             for (int i = 0; i < size; i++) {
                 if (!c1.attendContact(contactPoints[i]) || !c2.attendContact(contactPoints[i])) {
-//                    System.out.println("ignore");
                     attendContact = false;
                     break;
                 }
