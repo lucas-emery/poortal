@@ -53,7 +53,7 @@ public class PlayerView {
         else
             player.setLookingLeft(false);
 
-        theta += 90; //Correción para simplificar los cálculos de la pose
+        theta += 90;
 
         float   deltaHead = 0,
                 deltaTorso = 0,

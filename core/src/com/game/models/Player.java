@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.esotericsoftware.spine.AnimationState;
 import com.game.services.AssetsService;
 import com.game.services.BodyService;
+import com.game.services.ConstantsService;
 
 /**
  * Player is a model type class which handles the physical rules which the player abides to
@@ -29,7 +30,7 @@ public class Player {
      */
     public Player() {
         state = new AnimationState(AssetsService.getPlayerStateData());
-        state.setTimeScale(1.5f);
+        state.setTimeScale(ConstantsService.TIMESCALE);
         bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.position.set(0,0);

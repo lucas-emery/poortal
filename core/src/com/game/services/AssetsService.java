@@ -32,7 +32,6 @@ public class AssetsService {
     private static Rectangle buttonTextureDimensions;
     private static float playerScale;
     private static float buttonScale;
-    private static Music theme;
 
 
     public static void initialize() {
@@ -86,8 +85,6 @@ public class AssetsService {
 
         playerStateData = new AnimationStateData(playerSkeletonData);
         playerStateData.setDefaultMix(0.2f);
-
-        theme = Gdx.audio.newMusic(Gdx.files.internal("Music/theme.mp3"));
     }
 
     public static Sprite getStaticSprite(LevelObject.Type type) {

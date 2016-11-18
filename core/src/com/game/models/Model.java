@@ -46,7 +46,7 @@ public class Model {
         float deltaTime = Gdx.graphics.getDeltaTime();
         accumulatedTime += deltaTime;
         while(accumulatedTime >= ConstantsService.WORLD_STEP) {
-            world.step(ConstantsService.WORLD_STEP, 8, 3);
+            world.step(ConstantsService.WORLD_STEP, 8, 3); //8 and 3 are recommended constants by box2d
             accumulatedTime -= ConstantsService.WORLD_STEP;
         }
         if(player.isHolding()!= player.wasHolding() ){
@@ -130,10 +130,11 @@ public class Model {
         Vector2 jointVec = new Vector2(cubePos.x - gunPos.x, cubePos.y - gunPos.y);
         rDef.referenceAngle = jointVec.angleRad(ConstantsService.CARTESIAN_VERSOR_Y);
         rDef.enableMotor = true;
-        rDef.maxMotorTorque = 10;
+        rDef.maxMotorTorque = ConstantsService.MAX_MOTOR_TORQUE;
         rDef.motorSpeed = 0;
 
-        jointVec.rotate(180).setLength(1.7f);
+
+        jointVec.rotate(180).setLength(ConstantsService.JOINT_LENGTH);
         rDef.localAnchorB.set(jointVec);
 
         rDef.localAnchorA.set(0,ConstantsService.PLAYER_GUN_OFFSET);
@@ -161,7 +162,7 @@ public class Model {
         float targetAngle = -PlayerController.getAimingAngle();
         if(joint != null) {
             float angle = joint.getJointAngle();
-            float vel = (targetAngle - angle)*10;
+            float vel = (targetAngle - angle)*ConstantsService.MAX_MOTOR_TORQUE;
             joint.setMotorSpeed(vel);
         }
     }

@@ -5,7 +5,6 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 import com.game.models.LevelObject;
 import com.game.models.Portal;
-import com.game.services.VariablesService;
 
 /**
  * The InputController class is tasked with handling the keyboard/mouse
@@ -124,12 +123,6 @@ public class InputController implements InputProcessor{
                 break;
             case Input.Keys.D:
                 dIsPressed = true;
-                break;
-            case Input.Keys.G:
-                VariablesService.SHOW_FPS = !VariablesService.SHOW_FPS;
-                break;
-            case Input.Keys.F:
-                VariablesService.SHOW_FULLSCREEN = !VariablesService.SHOW_FULLSCREEN;
                 break;
             case Input.Keys.E:
                 PlayerController.interact();

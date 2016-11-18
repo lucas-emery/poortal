@@ -68,6 +68,14 @@ public class ConstantsService {
 
     public static final float FORCE = 50f;
 
+    public static final float MAX_MOTOR_TORQUE = 10;
+
+    public static final float TIMESCALE = 1.5f;
+
+    public static final float PORTAL_RIM_RADIUS = 0.02f;
+
+    public static final float JOINT_LENGTH=1.7f;
+
     public static final float PIXELS_TO_METERS = 1/METERS_TO_PIXELS;
 
     public static final float RAD_TO_DEG = (float)(180/ Math.PI);
@@ -89,8 +97,6 @@ public class ConstantsService {
     public static final int WORLD_HEIGHT = MathUtils.ceil(GRAPHICS_HEIGHT * PIXELS_TO_METERS);
 
     public static final int WORLD_WIDTH = MathUtils.ceil(GRAPHICS_WIDTH * PIXELS_TO_METERS);
-
-    public static final float BUTTON_WIDTH = 1.0f;
 
     public static final  float BUTTON_HEIGHT = 0.4f;
 

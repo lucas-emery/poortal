@@ -47,7 +47,8 @@ public class Portal extends LevelObject{
 
         fixtureDef.isSensor = false;
         CircleShape rim = new CircleShape();
-        rim.setRadius(0.02f);
+        rim.setRadius(ConstantsService.PORTAL_RIM_RADIUS);
+
         fixtureDef.shape = rim;
 
         rim.setPosition(new Vector2(0, ConstantsService.getHeight(type) /2));

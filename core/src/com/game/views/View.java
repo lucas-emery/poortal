@@ -16,7 +16,6 @@ import com.game.controllers.LevelController;
 import com.game.controllers.PlayerController;
 import com.game.models.Model;
 import com.game.services.AssetsService;
-import com.game.services.VariablesService;
 
 import java.util.LinkedHashSet;
 
@@ -83,11 +82,6 @@ public class View {
 
         skeletonRenderer.draw(batch, playerView.getUpdatedSkeleton());
 
-        if (VariablesService.SHOW_FPS){
-            if ((int) System.currentTimeMillis() % 2 == 0)
-                VariablesService.FPS = (Gdx.graphics.getFramesPerSecond());
-            font.draw(batch, VariablesService.FPS + "fps", 70, 545);
-        }
 
         levelForeground.draw(batch);
         batch.end();
