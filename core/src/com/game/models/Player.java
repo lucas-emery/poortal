@@ -23,6 +23,7 @@ public class Player {
     private boolean grounded;
     private Fixture vicinity;
     private boolean holding;
+    private boolean wasHolding;
 
     //TODO RESET PLAYER STATUS
 
@@ -62,7 +63,7 @@ public class Player {
      * @param deltaTime deltaTime for the game
      */
     public void update(float deltaTime) {
-
+        wasHolding=holding;
         state.update(deltaTime);
         if(animation != null ){
             String newState;
@@ -80,6 +81,7 @@ public class Player {
             state.setAnimation(0, "idle", false);
             oldState = "idle";
         }
+
     }
 
     /**
@@ -247,5 +249,13 @@ public class Player {
             }
         }
         return false;
+    }
+
+    public boolean wasHolding() {
+        return wasHolding;
+    }
+
+    public void setWasHolding(boolean wasHolding) {
+        this.wasHolding = wasHolding;
     }
 }

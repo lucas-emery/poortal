@@ -22,8 +22,6 @@ import java.math.MathContext;
  */
 public class PlayerController {
 
-    public static Vector2 ray = new Vector2(0,0);  // sacar esto -jg
-    public static Vector2 rayPos = new Vector2(0,0); // esto tmb
     private static PlayerView playerView;
     private static Player player;
 
@@ -127,8 +125,6 @@ public class PlayerController {
         clickPos.setLength2(ConstantsService.WORLD_HEIGHT * ConstantsService.WORLD_HEIGHT +
                 ConstantsService.WORLD_WIDTH * ConstantsService.WORLD_WIDTH);
         clickPos.add(playerPos);
-        ray = clickPos.cpy();
-        rayPos = playerPos.cpy();
 
         PortalController.firePortal(playerPos, clickPos, portalType);
     }

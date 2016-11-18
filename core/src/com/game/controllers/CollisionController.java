@@ -95,9 +95,6 @@ public class CollisionController implements ContactListener {
                 Vector2 portalPos = portal.getBody().getPosition().cpy();
                 Vector2 portalPrimary = new Vector2(0,1).rotateRad(portal.getBody().getAngle());
                 ((Collider)object.getUserData()).disableContactFromVector(portalPos, portalPrimary);
-//                DebugService.rays.add(portalPos);
-//                DebugService.rays.add(portalPrimary.add(portalPos));
-                System.out.println("Add tele");
             }
         }
 
@@ -135,7 +132,6 @@ public class CollisionController implements ContactListener {
 
         if(((value & (Type.BUTTONSENSOR.val()))==Type.BUTTONSENSOR.val())){
             if(value - Type.BUTTONSENSOR.val()==Type.PSENSORFOOT.val() || value - Type.BUTTONSENSOR.val()==Type.CUBE.val()){
-                System.out.println(c1.val() +"  "+ c2.val() + "exits");
                 pressers--;
                 if(pressers==0){
                     Button button = ButtonController.findButton((((Collider)f1.getUserData()).val()==Type.BUTTONSENSOR.val())?f1:f2);

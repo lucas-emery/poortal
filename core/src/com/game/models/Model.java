@@ -23,7 +23,6 @@ public class Model {
     private Player player;
     private World world;
     private float accumulatedTime;
-    private boolean wasHolding;
     private RevoluteJoint joint;
 
     /**
@@ -33,7 +32,6 @@ public class Model {
         this.player = PlayerController.getPlayer();
         this.levelObjects = LevelController.getLevelObjects();
         this.world = LevelController.getLevelWorld();
-        wasHolding = false;
     }
 
     public Player getPlayer(){
@@ -51,8 +49,7 @@ public class Model {
             world.step(ConstantsService.WORLD_STEP, 8, 3);
             accumulatedTime -= ConstantsService.WORLD_STEP;
         }
-        if(player.isHolding()!= wasHolding ){
-            wasHolding = player.isHolding();
+        if(player.isHolding()!= player.wasHolding() ){
             if(player.isHolding()){
                 createJoint();
             }
@@ -65,7 +62,7 @@ public class Model {
     }
     public void resetHolding(boolean isholding){
         player.setHolding(isholding);
-        wasHolding=isholding;
+        player.setWasHolding(isholding);
     }
     /**
      * Method which gets size of Level Objects set
@@ -138,10 +135,6 @@ public class Model {
 
         jointVec.rotate(180).setLength(1.7f);
         rDef.localAnchorB.set(jointVec);
-        /*if (player.isLookingLeft())
-            rDef.localAnchorB.set(-1.5f,0.5f);
-        else
-            rDef.localAnchorB.set(1.5f,0.5f);*/
 
         rDef.localAnchorA.set(0,ConstantsService.PLAYER_GUN_OFFSET);
         joint = (RevoluteJoint) world.createJoint(rDef);

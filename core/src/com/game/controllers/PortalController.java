@@ -118,7 +118,6 @@ public class PortalController {
 
             Collider collider = ((Collider) fixture.getUserData());
             int type = collider.val();
-            System.out.println("Fixture found at "+point+" of type "+type);
 
             if(type == Collider.Type.WALL.val() && fraction < nearestWallFraction) {
                 Vector2 x = fixture.getBody().getPosition();

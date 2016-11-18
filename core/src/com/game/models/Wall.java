@@ -100,7 +100,6 @@ public class Wall {
      * @return boolean value of portable attribute
      */
     public boolean isPortable() {
-        System.out.println(portable);
         return portable;
     }
 }
