@@ -24,7 +24,8 @@ public class Controller extends ApplicationAdapter {
 	private static int level;
 
 	/**
-	 *
+	 * This method initializes the state of the game
+	 * starting from the first level.
      */
 	@Override
 	public void create () {
@@ -76,6 +77,7 @@ public class Controller extends ApplicationAdapter {
      */
 	@Override
 	public void dispose () {
+		AssetsService.dispose();
 	}
 
 	/**
@@ -88,9 +90,9 @@ public class Controller extends ApplicationAdapter {
 	}
 
 	/**
-	 *Method which
-	 * @param width
-	 * @param height
+	 *Method which resizes the view
+	 * @param width the width to which it will be resized
+	 * @param height the height to which it will be resized
      */
 	@Override
 	public void resize(int width, int height) {
@@ -140,7 +142,7 @@ public class Controller extends ApplicationAdapter {
 
 	/**
 	 * This method will advance the game to the next level so
-	 * it can continue
+	 * it can continue.
      */
 	public static void nextLevel() {
 		level++;

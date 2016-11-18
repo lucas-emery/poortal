@@ -7,6 +7,9 @@ import com.game.controllers.PortalController;
 import com.game.services.ConstantsService;
 
 /**
+ * A portal-object pair which is instanced whenever a
+ * object enters a portal region and stores both object's
+ * data in the transition.
  * Created by lemery on 04/11/16.
  */
 public class Teleportation {
@@ -15,6 +18,11 @@ public class Teleportation {
     private Body portal;
     private Body object;
 
+    /**
+     * Constructor for the Teleportation class
+     * @param portal the portal in question
+     * @param object the object which is being teleported
+     */
     public Teleportation(Fixture portal, Fixture object) {
         this.portal = portal.getBody();
         this.object = object.getBody();
@@ -25,6 +33,10 @@ public class Teleportation {
         return portalType;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean hasToTeleport() {
         Vector2 portalPrimary = new Vector2(0,1);
         portalPrimary.rotateRad(portal.getAngle());
@@ -65,11 +77,23 @@ public class Teleportation {
 
     }
 
+    /**
+     * This will set the hashcode for the Teleportation so that it involves
+     * both the portal and the object and it is a commutative operation meaning
+     * that the order in which the portal-object paired is enter is irrelevant.
+     * @return the hashCode of the Teleportation object.
+     */
     @Override
     public int hashCode() {
         return portal.hashCode() + object.hashCode();
     }
 
+    /**
+     * Method used to compare one Teleportation to another.
+     * @param o the Teleportation object to compare to.
+     * @returnn true if the teleportation objects are equal,
+     * fale otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if(o instanceof Teleportation) {

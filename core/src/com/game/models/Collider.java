@@ -8,7 +8,10 @@ import com.game.services.ConstantsService;
  * Created by lemery on 04/11/16.
  */
 public class Collider{
-
+    /**
+     * Enumeration of the bit value of each type of
+     * object which can be involved in a collision.
+     */
     public enum Type {
         CUBE(1<<0),
         PSENSOR(1<<1),
@@ -41,14 +44,27 @@ public class Collider{
     private Vector2 contactDisableVector;
     boolean ignore;
 
+    /**
+     * Constructor for a collider.
+     * @param type the type of collider
+     */
     public Collider(Type type) {
         this.type = type;
     }
 
+    /**
+     * This returns weather a collision should be ignored or not.
+     * @return true if the collision should be ignored,
+     * False otherwise.
+     */
     public boolean ignore(){
         return ignore;
     }
 
+    /**
+     * method to set weather a collider should be ignored.
+     * @param value true if the collider should be ignored
+     */
     public void ignore(boolean value){
         ignore =value;
     }
