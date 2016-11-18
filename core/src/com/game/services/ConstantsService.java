@@ -22,7 +22,9 @@ public class ConstantsService {
             case PORTAL_ORANGE:
                 return 2.5f;
             case DOOR:
-                return 0.5f;
+            case CLOSED_DOOR:
+            case OPENED_DOOR:
+                return 1f;
             case FINISH:
                 return 0.5f;
             default:
@@ -41,7 +43,10 @@ public class ConstantsService {
             case PORTAL_ORANGE:
                 return 2.5f;
             case DOOR:
-                return 6f;
+            case CLOSED_DOOR:
+                return 10.6f;
+            case OPENED_DOOR:
+                return 2f;
             case FINISH:
                 return 2.2f;
             default:
@@ -99,13 +104,13 @@ public class ConstantsService {
 
     public static final  float BUTTON_HEIGHT = 0.4f;
 
-    public static final float CLOSED_DOOR_WIDTH = 0.5f;
-
-    public static final float CLOSED_DOOR_HEIGHT = 6f;
-
-    public static final float OPENED_DOOR_WIDTH = 0.5f;
-
-    public static final float OPENED_DOOR_HEIGHT = 0.5f;
+//    public static final float CLOSED_DOOR_WIDTH = 1;
+//
+//    public static final float CLOSED_DOOR_HEIGHT = 6f;
+//
+//    public static final float OPENED_DOOR_WIDTH = 1f;
+//
+//    public static final float OPENED_DOOR_HEIGHT = 0.5f;
 
     public static final int MAX_LEVEL = 3;
 

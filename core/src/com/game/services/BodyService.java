@@ -11,12 +11,12 @@ public class BodyService {
             switch (type){
                 case OPENED_DOOR:
 
-                    float body_x=ConstantsService.OPENED_DOOR_HEIGHT/2, body_y=ConstantsService.OPENED_DOOR_HEIGHT;
+                    float body_x=ConstantsService.getWidth(LevelObject.Type.OPENED_DOOR)/2, body_y=ConstantsService.getHeight(LevelObject.Type.OPENED_DOOR);
                     Vector2[] vec ={
-                            new Vector2(-body_x, -body_y + ConstantsService.CLOSED_DOOR_HEIGHT/2),
-                            new Vector2(-body_x,  ConstantsService.CLOSED_DOOR_HEIGHT/2),
-                            new Vector2(body_x, -body_y + ConstantsService.CLOSED_DOOR_HEIGHT/2),
-                            new Vector2(body_x, ConstantsService.CLOSED_DOOR_HEIGHT/2)
+                            new Vector2(-body_x, -body_y + ConstantsService.getHeight(LevelObject.Type.CLOSED_DOOR)/2),
+                            new Vector2(-body_x,  ConstantsService.getHeight(LevelObject.Type.CLOSED_DOOR)/2),
+                            new Vector2(body_x, -body_y + ConstantsService.getHeight(LevelObject.Type.CLOSED_DOOR)/2),
+                            new Vector2(body_x, ConstantsService.getHeight(LevelObject.Type.CLOSED_DOOR)/2)
                     };
 
                     shape.set(vec);
@@ -24,8 +24,8 @@ public class BodyService {
                     return shape;
                 case CLOSED_DOOR:
 
-                    shape.setAsBox(ConstantsService.CLOSED_DOOR_WIDTH/2,
-                            ConstantsService.CLOSED_DOOR_HEIGHT/2);
+                    shape.setAsBox(ConstantsService.getWidth(LevelObject.Type.CLOSED_DOOR)/2,
+                            ConstantsService.getHeight(LevelObject.Type.CLOSED_DOOR)/2);
 
                     return shape;
                 case BUTTON:
