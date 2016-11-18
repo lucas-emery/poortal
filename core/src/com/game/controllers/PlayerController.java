@@ -136,7 +136,10 @@ public class PlayerController {
     }
 
     /**
-     *
+     *  Updates the player's object holding state,
+     *  the player has to be facing the object.
+     *  The player also cannot be holding
+     *  more than one object at a time.
      */
     public static void interact() {
         if(!player.isHolding()){
@@ -149,7 +152,7 @@ public class PlayerController {
         else
             player.setHolding(false);
     }
-
+    
     public static float getAimingAngle() {
         Vector2 gunPos = player.getPosition().add(0, ConstantsService.PLAYER_GUN_OFFSET).scl(ConstantsService.METERS_TO_PIXELS);
         Vector2 aimingPoint = playerView.getAimingPoint();
