@@ -95,8 +95,6 @@ public class BodyService {
             case DOOR:
             case FINISH:
                 return BodyDef.BodyType.StaticBody;
-            //case PLATFORM:
-            //    return BodyDef.BodyType.KinematicBody;
             default:
                 return null;
         }
@@ -119,9 +117,8 @@ public class BodyService {
 
     public static PolygonShape getPlayerFootSensor() {
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(0.435f, 0.2f, new Vector2(0,-0.75f),0); //el numero 0.435 es clave para que no crashee, no lo toquen.
+        shape.setAsBox(ConstantsService.PF_SENXORX, ConstantsService.PF_SENSORY, new Vector2(0,ConstantsService.PF_SENSOR_VECY),0);
         return shape;
     }
-
 
 }

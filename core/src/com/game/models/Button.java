@@ -26,7 +26,7 @@ public class Button extends LevelObject implements AnimatedObject{
      * @param position Vector2 representing the physical
      *                 position of the Button.
      */
-    public Button(Vector2 position, Door door) { //Concept
+    public Button(Vector2 position, Door door) {
 
         this.position = position;
         this.type = Type.BUTTON;

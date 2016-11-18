@@ -16,7 +16,7 @@ public class Cube extends LevelObject{
      * @param position Vector2 representing the physical
      *                 position of the Cube
      */
-    public Cube(Vector2 position) { //Concept
+    public Cube(Vector2 position) {
 
         this.position = position;
         this.type = Type.CUBE;

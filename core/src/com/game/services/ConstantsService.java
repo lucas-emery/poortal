@@ -31,7 +31,6 @@ public class ConstantsService {
         }
     }
 
-    //put the height in meters and it will convert to pixels in getSprite()
     public static Float getHeight(LevelObject.Type type) {
         switch (type) {
             case CUBE:
@@ -53,19 +52,11 @@ public class ConstantsService {
         }
     }
 
-    public static int getCantSprites(LevelObject.Type type){
-        switch (type) {
-            case BUTTON:
-            case OPENED_DOOR:
-            case CLOSED_DOOR:
-                return 1;
-            //case PLATFORM:
-            //    return BodyDef.BodyType.KinematicBody;
-            default:
-                return 1;
-        }
+    public static final float PF_SENXORX = 0.435f;
 
-    }
+    public static final float PF_SENSORY = 0.2f;
+
+    public static final float PF_SENSOR_VECY= -0.75f;
 
     public static final Vector2 CARTESIAN_VERSOR_Y = new Vector2(0, 1);
 

@@ -156,7 +156,6 @@ public class CollisionController implements ContactListener {
      * @return
      */
     public static Fixture getVicinity() {
-        //System.out.println(vicinity);
         return vicinity;
     }
 

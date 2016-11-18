@@ -16,7 +16,6 @@ import com.game.controllers.LevelController;
 import com.game.controllers.PlayerController;
 import com.game.models.Model;
 import com.game.services.AssetsService;
-import com.game.services.ConstantsService;
 import com.game.services.VariablesService;
 
 import java.util.LinkedHashSet;
@@ -93,7 +92,7 @@ public class View {
         levelForeground.draw(batch);
         batch.end();
 
-        debugRenderer.render(model.getWorld(), camera.combined.cpy().scale(ConstantsService.METERS_TO_PIXELS, ConstantsService.METERS_TO_PIXELS, 0));
+       // debugRenderer.render(model.getWorld(), camera.combined.cpy().scale(ConstantsService.METERS_TO_PIXELS, ConstantsService.METERS_TO_PIXELS, 0));
 
     }
 

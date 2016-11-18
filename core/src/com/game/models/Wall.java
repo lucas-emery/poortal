@@ -22,7 +22,7 @@ public class Wall {
      * @param position Vector2 with position coordinates
      * @param portable Boolean value for portable attribute
      */
-    public Wall(Vector2 position,boolean portable) { //Concept
+    public Wall(Vector2 position,boolean portable) {
 
         this.portable = portable;
         this.position = position;

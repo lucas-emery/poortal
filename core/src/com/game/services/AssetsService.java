@@ -86,7 +86,6 @@ public class AssetsService {
         playerStateData = new AnimationStateData(playerSkeletonData);
         playerStateData.setDefaultMix(0.2f);
 
-        //PLACEHOLDER THEME
         theme = Gdx.audio.newMusic(Gdx.files.internal("Music/theme.mp3"));
     }
 
