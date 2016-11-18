@@ -10,7 +10,7 @@ import com.game.views.PlayerView;
 import java.math.MathContext;
 
 /**
- * The InputController class is tasked with handling the Player model-view
+ * The PlayerController class is tasked with handling the Player model-view
  * interactions and sends messages to other classes in order to react to the events.
  */
 public class PlayerController {
