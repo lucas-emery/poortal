@@ -102,6 +102,7 @@ public class Controller extends ApplicationAdapter {
 	}
 
 	/**
+	 * This method is a mask used for requesting a RayCast to the model
 	 *
 	 * @param callback
 	 * @param from
@@ -112,6 +113,7 @@ public class Controller extends ApplicationAdapter {
 	}
 
 	/**
+	 * @see View getGraphicsCoords
 	 *
 	 * @param screenCoords
      * @return

@@ -7,7 +7,8 @@ import com.game.services.AssetsService;
 import com.game.services.ConstantsService;
 
 /**
- * Created by fdelgado on 04/11/16.
+ * This class represents the view of a LevelObject which has
+ * only one texture. Thus, it is considered static.
  */
 public class StaticLevelObjectView extends LevelObjectView {
 

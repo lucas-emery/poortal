@@ -70,10 +70,16 @@ public class Portal extends LevelObject{
         return fixture.equals(otherFixture);
     }
 
+    /**
+     * @return vector normal to the portal
+     */
     public Vector2 getNormal() {
         return normal.cpy();
     }
 
+    /**
+     * @return portal's primary vector
+     */
     public Vector2 getPrimary() {
         return primary.cpy();
     }

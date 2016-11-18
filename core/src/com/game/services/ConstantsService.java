@@ -5,6 +5,9 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.game.models.LevelObject;
 
+/**
+ * This service contains all the parameters used within the program
+ */
 public class ConstantsService {
 
     public static final float FORCEINGROUND = 1;

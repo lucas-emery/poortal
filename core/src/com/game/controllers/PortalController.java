@@ -109,6 +109,8 @@ public class PortalController {
     }
 
     /**
+     * This class provides an object capable of handling a raycast for surfaces
+     * where a portal can be casted.
      *
      */
     private static class PortalRayCastCallback implements RayCastCallback {
@@ -123,12 +125,14 @@ public class PortalController {
         }
 
         /**
+         * Method called by the world raycast. It receives fixtures and determines if
+         * the closest portable wall is unobstructed (if any).
          *
-         * @param fixture
-         * @param point
-         * @param normal
-         * @param fraction
-         * @return
+         * @param fixture that needs to be attended
+         * @param point where ray and fixture had contact
+         * @param normal vector to the fixture surface
+         * @param fraction of the ray length where fixture was found
+         * @return answer (1 == keep searching)
          */
         @Override
         public float reportRayFixture(Fixture fixture, Vector2 point, Vector2 normal, float fraction) {

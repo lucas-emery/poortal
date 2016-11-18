@@ -15,7 +15,9 @@ import com.badlogic.gdx.audio.Music;
 import java.util.ArrayList;
 import java.util.EnumMap;
 
-
+/**
+ * This service loads all assets and provides getters
+ */
 public class AssetsService {
 
     private static ArrayList<Texture> levelBackgrounds = new ArrayList<Texture>();
@@ -146,6 +148,9 @@ public class AssetsService {
         return new Sprite(levelForegrounds.get(level - 1));
     }
 
+    /**
+     * Frees memory allocated for textures
+     */
     public static void dispose(){
         for(LevelObject.Type type :LevelObject.Type.values()){
             ArrayList<Texture> textures = animatedTextures.get(type);

@@ -4,7 +4,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.game.models.LevelObject;
 
-
+/**
+ * This service provides shapes and fixture definitions for all objects
+ */
 public class BodyService {
         public static Shape getShape(LevelObject.Type type){
             PolygonShape shape = new PolygonShape();

@@ -160,6 +160,8 @@ public class CollisionController implements ContactListener {
     }
 
     /**
+     * This method is called for each physics calculation.
+     * We use it to disable contact with objects that are behind the portal.
      *
      * @param contact
      * @param oldManifold
@@ -189,7 +191,7 @@ public class CollisionController implements ContactListener {
     }
 
     /**
-     *his method is not used within our program buy iy is a mandatory
+     *This method is not used within our program but it is a mandatory
      *implementation of the ContactListener interface
      * @param contact
      * @param impulse

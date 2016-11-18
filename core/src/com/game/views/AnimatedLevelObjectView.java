@@ -8,8 +8,10 @@ import com.game.services.AssetsService;
 import com.game.services.ConstantsService;
 
 import java.util.ArrayList;
+
 /**
- * Created by fdelgado on 04/11/16.
+ * This class represents the view of a LevelObject which has
+ * more than one texture. Thus, it is considered Animated.
  */
 public class AnimatedLevelObjectView extends LevelObjectView{
 

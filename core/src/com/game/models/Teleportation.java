@@ -21,7 +21,7 @@ public class Teleportation {
     /**
      * Constructor for the Teleportation class
      * @param portal the portal in question
-     * @param object the object which is being teleported
+     * @param object the object which entered the portal
      */
     public Teleportation(Fixture portal, Fixture object) {
         this.portal = portal.getBody();
@@ -34,8 +34,9 @@ public class Teleportation {
     }
 
     /**
+     *  Determines if the object is half way (or more) through the portal
      *
-     * @return
+     * @return true if object is half way or more through
      */
     public boolean hasToTeleport() {
         Vector2 portalPrimary = new Vector2(0,1);
@@ -48,6 +49,13 @@ public class Teleportation {
         return false;
     }
 
+    /**
+     * Teleports the object to the specified position and rotates the velocity vector accordingly
+     *
+     * @param position Portal's position
+     * @param primary Portal's primary vector
+     * @param normal Portal's normal vector
+     */
     public void teleportObject(Vector2 position, Vector2 primary, Vector2 normal) {
         Vector2 relative = object.getPosition().cpy().sub(portal.getPosition());
         float relativeAngle = relative.angle();
@@ -77,6 +85,7 @@ public class Teleportation {
      * This will set the hashcode for the Teleportation so that it involves
      * both the portal and the object and it is a commutative operation meaning
      * that the order in which the portal-object paired is enter is irrelevant.
+     *
      * @return the hashCode of the Teleportation object.
      */
     @Override
@@ -86,6 +95,7 @@ public class Teleportation {
 
     /**
      * Method used to compare one Teleportation to another.
+     *
      * @param o the Teleportation object to compare to.
      * @returnn true if the teleportation objects are equal,
      * fale otherwise.

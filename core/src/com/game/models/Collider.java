@@ -8,8 +8,9 @@ import com.game.services.ConstantsService;
  * Created by lemery on 04/11/16.
  */
 public class Collider{
+
     /**
-     * Enumeration of the bit value of each type of
+     * Enumeration of the bit value for each type of
      * object which can be involved in a collision.
      */
     public enum Type {
@@ -73,15 +74,33 @@ public class Collider{
         return type;
     }
 
+    /**
+     * Returns Collider type value
+     *
+     * @return
+     */
     public int val() {
         return type.val();
     }
 
+    /**
+     * Sets the vectors from which contact should be ignored
+     *
+     * @param contactDisablePoint
+     * @param contactDisableVector
+     */
     public void disableContactFromVector(Vector2 contactDisablePoint, Vector2 contactDisableVector) {
         this.contactDisablePoint = contactDisablePoint;
         this.contactDisableVector = contactDisableVector;
     }
 
+    /**
+     * Determines if @contact has to be ignored based on the vector provided in
+     * disableContactFromVector(point, vector)
+     *
+     * @param contact
+     * @return
+     */
     public boolean attendContact(Vector2 contact) {
         if(contactDisablePoint != null && PortalController.bothPortalsExist()) {
             Vector2 relativeContact = contact.cpy().sub(contactDisablePoint);
@@ -93,6 +112,9 @@ public class Collider{
         return true;
     }
 
+    /**
+     * Enables all contact for this collider
+     */
     public void enableContact() {
         contactDisablePoint = null;
         contactDisableVector = null;

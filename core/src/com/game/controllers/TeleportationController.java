@@ -7,16 +7,28 @@ import com.game.models.Teleportation;
 import java.util.HashSet;
 
 /**
- * Created by lemery on 04/11/16.
+ * This class handles teleportation pairs and triggers them if necessary
+ *
  */
 public class TeleportationController {
 
     private static HashSet<Teleportation> teleports = new HashSet<Teleportation>();
 
+    /**
+     * Adds teleportation to the HashSet
+     *
+     * @param teleportation
+     */
     public static void addTeleportation(Teleportation teleportation) {
         teleports.add(teleportation);
     }
 
+
+    /**
+     * Checks if a pair has to be teleported. If so, it destroys any joints and teleports de object
+     *
+     * @param model
+     */
     public static void update(Model model) {
         for(Teleportation tele : teleports) {
             if(tele.hasToTeleport()) {
@@ -32,7 +44,11 @@ public class TeleportationController {
         }
     }
 
-
+    /**
+     * Removes teleportation from the HashSet
+     *
+     * @param teleportation
+     */
     public static void removeTeleportation(Teleportation teleportation) {
         teleports.remove(teleportation);
     }
