@@ -126,9 +126,10 @@ public class PlayerController {
     }
 
     /**
-     *
-     * @param grounded
-     * @param vicinity
+     * Updates values that determine if the player is in contact with the ground
+     * and if it is in the vicinity of an object
+     * @param grounded boolean value representing grounded state of player
+     * @param vicinity fixture of the object in vicinity
      */
     public static void updatePlayerCollisionState(boolean grounded, Fixture vicinity) {
         player.setGrounded(grounded);
